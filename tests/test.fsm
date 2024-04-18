@@ -1,0 +1,6 @@
+START=SZ
+SZ: 
+    0-9 -> S0
+S0: 
+    \n -> GOOD
+GOOD(OK):
