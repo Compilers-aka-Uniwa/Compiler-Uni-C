@@ -1,0 +1,40 @@
+START = SZ
+SZ:
+    -   ->  SN
+    0   ->  S0
+    1-9 ->  S1
+    *   ->  SF
+SN:
+    1-9 ->  S1
+    *   ->  SF
+S0:
+    .   ->  S3
+    E e ->  S2
+    *   ->  SF
+S1:
+    .   ->  S3
+    0-9 ->  S1
+    E e ->  S2
+    *   ->  SF
+S2:
+    -+  ->  S4
+    *   ->  SF
+S3:
+    0-9 ->  S6
+    *   ->  SF
+S4:
+    0-9 ->  S5
+    *   ->  SF
+S5:
+    0-9 ->  S5
+    \n  ->  GOOD
+    *   ->  SF
+S6:
+    0-9 ->  S6
+    E e ->  S2
+    \n  ->  GOOD
+    *   ->  SF
+SF:
+    *   ->  SF
+    \n  ->  BAD
+GOOD(OK):
