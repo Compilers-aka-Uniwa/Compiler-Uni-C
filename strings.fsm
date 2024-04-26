@@ -1,27 +1,25 @@
 START = SZ
 
 SZ: 
-    " -> S0
-    * -> BAD 
+    \" -> SO
+    *  -> BAD 
 
-S0:
-    " -> S1
-    \ -> S2
-    * -> S0
+SO:
+    \\ -> SS1
+    *  -> SO
+    \" -> SC
 
-S1: 
+SS1:
+    n \" \\ -> SS2
+    *       -> BAD 
+
+SS2:
+    \\ -> SS1
+    \" -> SC 
+    *  -> SS2
+
+SC:
     \n -> GOOD
     *  -> BAD
-
-S2:
-    \ -> S3
-    " -> S3
-    n -> S3
-    * -> BAD 
-
-S3:
-    \ -> S2
-    " -> S1 
-    * -> S3
  
 GOOD(OK):
