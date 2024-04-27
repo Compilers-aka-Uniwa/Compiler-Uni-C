@@ -3,38 +3,36 @@ SZ:
     -   ->  SN
     0   ->  S0
     1-9 ->  S1
-    *   ->  SF
+    *   ->  BAD
 SN:
     1-9 ->  S1
-    *   ->  SF
+    *   ->  BAD
 S0:
     .   ->  S3
     E e ->  S2
-    *   ->  SF
+    *   ->  BAD
 S1:
     .   ->  S3
     0-9 ->  S1
     E e ->  S2
-    *   ->  SF
+    *   ->  BAD
 S2:
     -+  ->  S4
-    *   ->  SF
+    *   ->  BAD
 S3:
     0-9 ->  S6
-    *   ->  SF
+    *   ->  BAD
 S4:
     0-9 ->  S5
-    *   ->  SF
+    *   ->  BAD
 S5:
     0-9 ->  S5
     \n  ->  GOOD
-    *   ->  SF
+    *   ->  BAD
 S6:
     0-9 ->  S6
     E e ->  S2
     \n  ->  GOOD
-    *   ->  SF
-SF:
-    *   ->  SF
-    \n  ->  BAD
+    *   ->  BAD
+
 GOOD(OK):
