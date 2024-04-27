@@ -1,0 +1,16 @@
+STAR = SZ
+
+SZ:
+*   -> SZ
+EOF -> BAD
+\s  -> S0
+\t  -> S0
+/n  -> S0
+S0:
+*   -> SZ
+EOF -> GOOD
+\s  -> S0
+\t  -> S0
+/n  -> S0
+GOOD(OK):
+
