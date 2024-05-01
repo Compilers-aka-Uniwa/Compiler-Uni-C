@@ -1,27 +1,27 @@
-/* Onoma arxeiou:       simple-flex-code.l
-   Perigrafh:           Ypodeigma gia anaptyksh lektikou analyth me xrhsh tou ergaleiou Flex
-   Syggrafeas:          Ergasthrio Metaglwttistwn, Tmhma Mhxanikwn Plhroforikhs kai Ypologistwn,
-                        Panepisthmio Dytikhs Attikhs
-   Sxolia:              To paron programma ylopoiei (me th xrhsh flex) enan aplo lektiko analyth
-			pou anagnwrizei kena (space kai tab) kai akeraious (dekadikou systhmatos
-			mono!) gia th glwssa Uni-C enw diaxeirizetai tous eidikous xarakthres
-			neas grammhs '\n' (new line) kai 'EOF' (end of file). Yparxoun anafores
-			gia thn anagnwrish metablhtwn, me ton pragmatiko kwdika na exei antikatastathei
-			apo to lektiko FILL ME wste na symplhrwthei apo esas. Proairetika o lektikos
-			analyths dexetai orismata arxeiwn gia eisodo kai eksodo.
-   Odhgies ekteleshs:   Dinete "make" xwris ta eisagwgika ston trexonta katalogo. Enallaktika:
-			flex -o simple-flex-code.c simple-flex-code.l
-                        gcc -o simple-flex-code simple-flex-code.c
-                        ./simple-flex-code
+/* Όνομα αρχείου:       simple-flex-code.l
+   Περιγραφή:           Υποδείγμα για ανάπτυξη λεκτικού αναλυτή με χρήση του εργαλείου Flex
+   Συγγραφέας:          Εργαστήριο Μεταγλωττιστών, Τμήμα Μηχανικών Πληροφορικής και Υπολογιστών,
+                         Πανεπιστήμιο Δυτικής Αττικής
+   Σχόλια:              Το παρόν πρόγραμμα υλοποιεί (με τη χρήση flex) έναν απλό λεκτικό αναλυτή
+                         που αναγνωρίζει κενά (διάστημα και tab) και αριθμούς (δεκαδικού συστήματος
+                         μόνο!) για τη γλώσσα Uni-C ενώ διαχειρίζεται τους ειδικούς χαρακτήρες
+                         νέας γραμμής '\n' (new line) και 'EOF' (end of file). Υπάρχουν αναφορές
+                         για την αναγνώριση μεταβλητών, με τον πραγματικό κώδικα να έχει αντικατασταθεί
+                         από τον λεκτικό FILL ME έτσι ώστε να συμπληρωθεί από εσάς. Προαιρετικά ο λεκτικός
+                         αναλυτής δέχεται ορίσματα αρχείων για είσοδο και έξοδο.
+   Οδηγίες εκτέλεσης:   Δώστε "make" χωρίς τα εισαγωγικά στον τρέχοντα κατάλογο. Εναλλακτικά:
+                         flex -o simple-flex-code.c simple-flex-code.l
+                         gcc -o simple-flex-code simple-flex-code.c
+                         ./simple-flex-code
 */
 
-/* H anagnwsh periorizetai se ena mono arxeio kai termatizei sto prwto EOF */
+/* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
 %option noyywrap
 
 
-/* Kwdikas C gia orismo twn apaitoumenwn header files kai twn metablhtwn.
-   Otidhpote anamesa sta %{ kai %} metaferetai autousio sto arxeio C pou
-   tha dhmiourghsei to Flex. */
+/* Κώδικας C για τον ορισμό των απαιτούμενων header files και των μεταβλητών.
+   Οτιδήποτε ανάμεσα στα %{ και %} μεταφέρεται αυτόματα στο αρχείο C που
+   θα δημιουργήσει το Flex. */
 
 %{
 
@@ -29,55 +29,64 @@
 #include <string.h>
 #include <stdlib.h>
 
-/* Header file pou periexei lista me ola ta tokens */
+/* Αρχείο κεφαλίδας που περιέχει λίστα με όλα τα tokens */
 #include "token.h"
 
-/* Orismos metrhth trexousas grammhs */
+/* Ορισμός μετρητή τρέχουσας γραμμής */
 int line = 1;
 
 %}
 
 
-/* Onomata kai antistoixoi orismoi (ypo morfh kanonikhs ekfrashs).
-   Meta apo auto, mporei na ginei xrhsh twn onomatwn (aristera) anti twn,
-   synhthws idiaiterws makroskelwn kai dysnohtwn, kanonikwn ekfrasewn */
+/* Ονόματα και αντίστοιχοι ορισμοί (υπό μορφή κανονικής έκφρασης).
+   Μετά από αυτό, μπορεί να γίνει χρήση των ονομάτων (αριστερά) αντί των,
+   συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
 
 DELIMITER       [ \t]+
-INTCONST        0|[1-9]+[0-9]*
-VARIABLE	FILLME
+IDENTIFIER      [a-zA-Z_][a-zA-Z0-9_]{0,31}
+STRING          \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
+INTEGER         ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
+FLOAT           (?:[1-9][0-9]*|0)(?:\.\d+)?(?:[eE](?:[-+]?[1-9][0-9]*|0))?  
+COMMENT         (?:\/\/.*\n|\/\*[\s\S]*?\*\/)
+WHITESPACE      \s+    
 
 
-/* Gia kathe pattern (aristera) pou tairiazei ekteleitai o antistoixos
-   kwdikas mesa sta agkistra. H entolh return epitrepei thn epistrofh
-   mias arithmhtikhs timhs mesw ths synarthshs yylex() */
+/* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος
+   κώδικας μέσα στα αγκίστρα. Η εντολή return επιτρέπει την επιστροφή
+   μιας αριθμητικής τιμής μέσω της συνάρτησης yylex() */
 
 %%
 
 {DELIMITER}     { return DELIMITER; }
-{INTCONST}      { return INTCONST; }
-{VARIABLE}	{ /* FILL ME */ }
+{IDENTIFIER}    { return IDENTIFIER; }
+{STRING}        { return STRING; }
+{INTEGER}       { return INTEGER; }
+{FLOAT}         { return FLOAT; }
+{COMMENT}       { return COMMENT; }
+{WHITESPACE}    { return WHITESPACE;}
+
 \n              { line++; printf("\n"); }
 <<EOF>>		{ printf("#END-OF-FILE#\n"); exit(0); }
 
 %%
 
-/* Pinakas me ola ta tokens se antistoixia me tous orismous sto token.h */
-char *tname[2] = {"DELIMITER","INTCONST" /*, FILL ME */};
+/* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT", "COMMENT", "WHITESPACE" };
 
 
-/* H synarthsh main: O kwdikas autos tha topotheththei autousios sto
-   programma C pou tha dhmiourghsei to Flex kai tha apotelesei to arxiko
-   shmeio ekteleshs ths efarmoghs tou lektikou analyth. */
+/* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο
+   πρόγραμμα C που θα δημιουργήσει το Flex και θα αποτελέσει το αρχικό
+   σημείο εκτέλεσης της εφαρμογής του λεκτικού αναλυτή. */
 
 int main(int argc, char **argv){
         int token;
 
-        /* Ginetai o elegxos twn orismatwn ths grammhs entolwn. Ean ta
-           orismata einai 3, to programma diabazei apo to arxeio tou 2ou
-           orismatos kai grafei sto arxeio tou 3ou. Ean ta orismata einai
-           2 diabazei apo to arxeio tou 2ou kai grafei sthn othonh.
-           Ypenthymizetai oti to 1o orisma (argv[0]) sth C einai to onoma
-           tou idiou tou ektelesimou arxeiou. */
+        /* Γίνεται ο έλεγχος των ορισμάτων της γραμμής εντολών. Αν τα
+           ορίσματα είναι 3, το πρόγραμμα διαβάζει από το αρχείο του 2ου
+           ορίσματος και γράφει στο αρχείο του 3ου. Αν τα ορίσματα είναι
+           2, διαβάζει από το αρχείο του 2ου ορίσματος και γράφει στην οθόνη.
+           Υποθέτεται ότι το 1ο όρισμα (argv[0]) στη C είναι το όνομα
+           του ίδιου του εκτελέσιμου αρχείου. */
 
         if(argc == 3){
                 if(!(yyin = fopen(argv[1], "r"))) {
@@ -96,16 +105,15 @@ int main(int argc, char **argv){
                 }
         }
 
-        /* H synarthsh yylex diabazei xarakthres apo thn eisodo kai prospathei
-           na angnwrisei tokens. Ta tokens pou anagnwrizei einai auta pou exoun
-           oristei sto paron arxeio, anamesa sta %% kai %%. An o kwdikas pou
-           antistoixei se kapoio pattern periexei thn entolh 'return TIMH', h
-           yylex() epistrefei thn timh auth h opoia kai apothhkeyetai sth
-           metablhth token. */
+        /* Η συνάρτηση yylex διαβάζει χαρακτήρες από την είσοδο και προσπαθεί
+           να αναγνωρίσει tokens. Τα tokens που αναγνωρίζει είναι αυτά που έχουν
+           οριστεί στο παρόν αρχείο, μεταξύ των %% και %%. Αν ο κώδικας που
+           αντιστοιχεί σε ένα πρότυπο περιέχει την εντολή 'return ΤΙΜΗ', η yylex()
+           επιστρέφει αυτή την τιμή και αποθηκεύει το αποτέλεσμα στη μεταβλητή token. */
 
         while( (token=yylex()) >= 0){
-                /* Gia kathe token pou anagnwristhke, ektypwnetai h grammh pou auto
-                   brethhke kathws kai to onoma tou mazi me thn timh tou. */
+                /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
+                   και το όνομά του μαζί με την τιμή του. */
                 fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
         }
         return 0;

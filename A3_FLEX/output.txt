@@ -1,3 +1,8 @@
-	Line=1, token=INTCONST, value="58"
-	Line=2, token=INTCONST, value="135"
-	Line=3, token=INTCONST, value="4321"
+	Line=1, token=IDENTIFIER, value="user"
+	Line=2, token=STRING, value=""theo""
+	Line=3, token=INTEGER, value="45"
+	Line=4, token=INTEGER, value="4"
+.	Line=4, token=INTEGER, value="5"
+	Line=5, token=COMMENT, value="// hi
+"
+	Line=6, token=DELIMITER, value="    "
