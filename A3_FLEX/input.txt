@@ -15,3 +15,8 @@ SPEctacular_15_
 8.88
 _AC
 /* hello world!! */
+"6\\3=2"
+1e100
+"pao"
+/*20*/
+// den pernei to /**/ gia kapoio logo

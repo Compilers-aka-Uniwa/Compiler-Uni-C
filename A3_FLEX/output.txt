@@ -23,4 +23,22 @@
 	Line=16, token=DELIMITER, value=" "
 	Line=16, token=IDENTIFIER, value="world"
 !!	Line=16, token=DELIMITER, value=" "
-*/
+*/	Line=17, token=STRING, value=""6\\3=2""
+	Line=18, token=INTEGER, value="1"
+	Line=18, token=IDENTIFIER, value="e100"
+	Line=19, token=STRING, value=""pao""
+/*	Line=20, token=INTEGER, value="20"
+*///	Line=21, token=DELIMITER, value=" "
+	Line=21, token=IDENTIFIER, value="den"
+	Line=21, token=DELIMITER, value=" "
+	Line=21, token=IDENTIFIER, value="pernei"
+	Line=21, token=DELIMITER, value=" "
+	Line=21, token=IDENTIFIER, value="to"
+	Line=21, token=DELIMITER, value=" "
+	Line=21, token=COMMENT, value="/**/"
+	Line=21, token=DELIMITER, value=" "
+	Line=21, token=IDENTIFIER, value="gia"
+	Line=21, token=DELIMITER, value=" "
+	Line=21, token=IDENTIFIER, value="kapoio"
+	Line=21, token=DELIMITER, value=" "
+	Line=21, token=IDENTIFIER, value="logo"
