@@ -1,8 +1,6 @@
 	Line=1, token=IDENTIFIER, value="user"
-	Line=2, token=STRING, value=""theo""
-	Line=3, token=INTEGER, value="45"
-	Line=4, token=INTEGER, value="4"
-.	Line=4, token=INTEGER, value="5"
-	Line=5, token=COMMENT, value="// hi
-"
-	Line=6, token=DELIMITER, value="    "
+	Line=2, token=STRING, value=""theo""
+	Line=3, token=INTEGER, value="45"
+	Line=4, token=FLOAT, value="4.8"
+//	Line=5, token=DELIMITER, value=" "
+	Line=5, token=IDENTIFIER, value="hi"
