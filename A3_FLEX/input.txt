@@ -4,3 +4,14 @@ user
 4.8
 // hi
 4.7
+"good moring"
+4e2
+good
+SPEctacular_15_
+"Mark said, \"Boo!\"\n"
+0x4F
+9e-8
+"hello, \"world!\"\n"
+8.88
+_AC
+/* hello world!! */
