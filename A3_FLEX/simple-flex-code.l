@@ -52,7 +52,7 @@ INTEGER         ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
 FLOAT           ([0-9]+[.][0-9]*|[.][0-9]+)  
 COMMENT         (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 WHITESPACE      \s+    
-
+UNKNOWN		    .*
 
 
 /* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος
@@ -67,8 +67,9 @@ WHITESPACE      \s+
 {STRING}        { return STRING; }
 {INTEGER}       { return INTEGER; }
 {FLOAT}         { return FLOAT; }
-{COMMENT}       { return COMMENT; }
+{COMMENT}       {}
 {WHITESPACE}    { return WHITESPACE;}
+{UNKNOWN}	    { return  UNKNOWN;}
 
 
 

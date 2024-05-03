@@ -7,3 +7,4 @@
 #define WHITESPACE 7
 #define KEYWORD 8
 #define OPERATOR 9
+#define UNKNOWN 10
