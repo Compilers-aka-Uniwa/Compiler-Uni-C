@@ -29,6 +29,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+
 /* Αρχείο κεφαλίδας που περιέχει λίστα με όλα τα tokens */
 #include "token.h"
 
@@ -42,6 +43,8 @@ int line = 1;
    Μετά από αυτό, μπορεί να γίνει χρήση των ονομάτων (αριστερά) αντί των,
    συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
 
+KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while)
+OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
 DELIMITER       [ \t]+
 IDENTIFIER      [a-zA-Z_][a-zA-Z0-9_]{0,31}
 STRING          \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
@@ -51,12 +54,14 @@ COMMENT         (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 WHITESPACE      \s+    
 
 
+
 /* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος
    κώδικας μέσα στα αγκίστρα. Η εντολή return επιτρέπει την επιστροφή
    μιας αριθμητικής τιμής μέσω της συνάρτησης yylex() */
 
 %%
-
+{KEYWORD}       {return KEYWORD;}
+{OPERATOR}      {return OPERATOR;}
 {DELIMITER}     { return DELIMITER; }
 {IDENTIFIER}    { return IDENTIFIER; }
 {STRING}        { return STRING; }
@@ -65,13 +70,16 @@ WHITESPACE      \s+
 {COMMENT}       { return COMMENT; }
 {WHITESPACE}    { return WHITESPACE;}
 
+
+
 \n              { line++; printf("\n"); }
 <<EOF>>		{ printf("#END-OF-FILE#\n"); exit(0); }
+
 
 %%
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT", "COMMENT", "WHITESPACE" };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","COMMENT","WHITESPACE","KEYWORD","OPERATOR" };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο

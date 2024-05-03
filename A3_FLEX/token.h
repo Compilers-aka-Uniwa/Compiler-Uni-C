@@ -5,3 +5,5 @@
 #define FLOAT 5
 #define COMMENT 6
 #define WHITESPACE 7
+#define KEYWORD 8
+#define OPERATOR 9
