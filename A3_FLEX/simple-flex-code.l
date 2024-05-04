@@ -54,7 +54,6 @@ OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=
 COMMENT         (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 WHITESPACE      (\s)+
 NEWLINE         \n 
-UNKNOWN         .
 
 
 /* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος
@@ -73,7 +72,6 @@ UNKNOWN         .
 {COMMENT}       { }
 {WHITESPACE}    { }
 {NEWLINE}       { return NEWLINE; }
-{UNKNOWN}       { }
 <<EOF>>         { return EOF; }
 
 %%
@@ -129,8 +127,9 @@ int main(int argc, char **argv){
                      case 8:
                         line++; 
                         printf("\n");
-                     case 9:
+                     case -1:
                         printf("#END-OF-FILE#\n");
+                        exit(0);
                      default:
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
                   } 

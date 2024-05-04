@@ -355,8 +355,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 12
-#define YY_END_OF_BUFFER 13
+#define YY_NUM_RULES 11
+#define YY_END_OF_BUFFER 12
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -366,7 +366,7 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[177] =
     {   0,
-        0,    0,   13,   11,    3,   10,    2,   11,    2,    2,
+        0,    0,   12,   11,    3,   10,    2,   11,    2,    2,
         2,    2,    2,   11,    2,    6,    6,    2,    2,    2,
         4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
         4,    4,    2,    3,    2,    0,    5,    0,    0,    7,
@@ -834,7 +834,7 @@ YY_DECL
 		}
 
 	{
-#line 64 "simple-flex-code.l"
+#line 63 "simple-flex-code.l"
 
 
 #line 841 "simple-flex-code.c"
@@ -896,72 +896,67 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 66 "simple-flex-code.l"
+#line 65 "simple-flex-code.l"
 { return KEYWORD; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 67 "simple-flex-code.l"
+#line 66 "simple-flex-code.l"
 { return OPERATOR; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 68 "simple-flex-code.l"
+#line 67 "simple-flex-code.l"
 { return DELIMITER; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 69 "simple-flex-code.l"
+#line 68 "simple-flex-code.l"
 { return IDENTIFIER; }
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 70 "simple-flex-code.l"
+#line 69 "simple-flex-code.l"
 { return STRING; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 71 "simple-flex-code.l"
+#line 70 "simple-flex-code.l"
 { return INTEGER; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 72 "simple-flex-code.l"
+#line 71 "simple-flex-code.l"
 { return FLOAT; }
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 73 "simple-flex-code.l"
+#line 72 "simple-flex-code.l"
 { }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 74 "simple-flex-code.l"
+#line 73 "simple-flex-code.l"
 { }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 75 "simple-flex-code.l"
+#line 74 "simple-flex-code.l"
 { return NEWLINE; }
+	YY_BREAK
+case YY_STATE_EOF(INITIAL):
+#line 75 "simple-flex-code.l"
+{ return EOF; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 76 "simple-flex-code.l"
-{ }
-	YY_BREAK
-case YY_STATE_EOF(INITIAL):
 #line 77 "simple-flex-code.l"
-{ return EOF; }
-	YY_BREAK
-case 12:
-YY_RULE_SETUP
-#line 79 "simple-flex-code.l"
 ECHO;
 	YY_BREAK
-#line 965 "simple-flex-code.c"
+#line 960 "simple-flex-code.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1964,11 +1959,11 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 79 "simple-flex-code.l"
+#line 77 "simple-flex-code.l"
 
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR", "NEWLINE", "EOF" };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT", "KEYWORD", "OPERATOR", "NEWLINE", "EOF" };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο
@@ -2018,8 +2013,7 @@ int main(int argc, char **argv){
                      case 8:
                         line++; 
                         printf("\n");
-                     case 9:
-                        printf("#END-OF-FILE#\n");
+\
                      default:
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
                   } 
