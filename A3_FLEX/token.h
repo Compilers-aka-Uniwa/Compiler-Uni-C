@@ -3,8 +3,5 @@
 #define STRING 3
 #define INTEGER 4
 #define FLOAT 5
-#define COMMENT 6
-#define WHITESPACE 7
 #define KEYWORD 8
 #define OPERATOR 9
-#define UNKNOWN 10
