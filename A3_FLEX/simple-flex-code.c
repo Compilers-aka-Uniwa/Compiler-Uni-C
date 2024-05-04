@@ -933,7 +933,7 @@ case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
 #line 71 "simple-flex-code.l"
-{}
+{ECHO; printf("\tThis is a comment\n");}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
@@ -943,7 +943,7 @@ YY_RULE_SETUP
 case 10:
 YY_RULE_SETUP
 #line 73 "simple-flex-code.l"
-{}
+{ECHO; printf("\tThis is a UNKNOWN TOKEN\n");}
 	YY_BREAK
 case 11:
 /* rule 11 can match eol */

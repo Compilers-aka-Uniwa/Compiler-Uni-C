@@ -1,30 +1,59 @@
 	Line=1, token=IDENTIFIER, value="user"
+
 	Line=2, token=STRING, value=""theo""
+
 	Line=3, token=INTEGER, value="45"
+
 	Line=4, token=FLOAT, value="4.8"
+
+//hi
 	Line=5, token=FLOAT, value="4.7"
+
 	Line=6, token=STRING, value=""good moring""
+
 	Line=7, token=INTEGER, value="4"
 	Line=7, token=IDENTIFIER, value="e2"
+
 	Line=8, token=IDENTIFIER, value="good"
+
 	Line=9, token=IDENTIFIER, value="SPEctacular_15_"
+
 	Line=10, token=STRING, value=""Mark said, \"Boo!\"\n""
+
 	Line=11, token=INTEGER, value="0x4F"
+
 	Line=12, token=INTEGER, value="9"
 	Line=12, token=IDENTIFIER, value="e"
 	Line=12, token=OPERATOR, value="-"
 	Line=12, token=INTEGER, value="8"
+
 	Line=13, token=STRING, value=""hello, \"world!\"\n""
+
 	Line=14, token=FLOAT, value="8.88"
+
 	Line=15, token=IDENTIFIER, value="_AC"
+
+/* hello world!! */
 	Line=17, token=STRING, value=""6\\3=2""
+
 	Line=18, token=INTEGER, value="1"
 	Line=18, token=IDENTIFIER, value="e100"
+
 	Line=19, token=STRING, value=""pao""
+
+/*20*/
+// den pernei to /**/ gia kapoio logo
 	Line=21, token=FLOAT, value="8.5"
+
 	Line=22, token=OPERATOR, value="+"
+
 	Line=23, token=OPERATOR, value="+"
 	Line=23, token=OPERATOR, value="--"
 	Line=23, token=OPERATOR, value="-"
+
 	Line=24, token=KEYWORD, value="break"
+
 	Line=25, token=KEYWORD, value="func"
+
+
+@#$

@@ -68,9 +68,9 @@ UNKNOWN		    .
 {STRING}        { return STRING; }
 {INTEGER}       { return INTEGER; }
 {FLOAT}         { return FLOAT; }
-{COMMENT}       {}
+{COMMENT}       {ECHO; printf("\tThis is a comment\n");}
 {WHITESPACE}    {}
-{UNKNOWN}	    {}
+{UNKNOWN}	    {ECHO; printf("\tThis is a UNKNOWN TOKEN\n");}
 
 
 
