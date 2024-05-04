@@ -52,8 +52,8 @@ FLOAT           ([0-9]+[.][0-9]*|[.][0-9]+)
 KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
 OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
 COMMENT         (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
-WHITESPACE      \s+    
-UNKNOWN		    .+
+WHITESPACE      \s+  
+UNKNOWN         .
 
 
 /* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος
@@ -69,8 +69,8 @@ UNKNOWN		    .+
 {INTEGER}       { return INTEGER; }
 {FLOAT}         { return FLOAT; }
 {COMMENT}       {ECHO; printf("\tThis is a comment\n");}
-{WHITESPACE}    {}
-{UNKNOWN}	    { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
+{WHITESPACE}    {ECHO; printf("\tThis is a WHITESPACE\n");}
+{UNKNOWN}       { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"", line, yytext); }
 
 
 
