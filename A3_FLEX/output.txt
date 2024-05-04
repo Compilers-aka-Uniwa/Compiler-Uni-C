@@ -27,3 +27,4 @@
 	Line=23, token=OPERATOR, value="--"
 	Line=23, token=OPERATOR, value="-"
 	Line=24, token=KEYWORD, value="break"
+	Line=25, token=KEYWORD, value="func"

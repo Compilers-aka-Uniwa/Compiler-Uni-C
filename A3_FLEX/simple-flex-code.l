@@ -43,7 +43,7 @@ int line = 1;
    Μετά από αυτό, μπορεί να γίνει χρήση των ονομάτων (αριστερά) αντί των,
    συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
 
-KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while)
+KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
 OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
 DELIMITER       [ \t]+
 IDENTIFIER      [a-zA-Z_][a-zA-Z0-9_]{0,31}
