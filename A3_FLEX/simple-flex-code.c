@@ -950,7 +950,7 @@ YY_RULE_SETUP
 case 11:
 YY_RULE_SETUP
 #line 76 "simple-flex-code.l"
-{ fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"", line, yytext); }
+{ }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 #line 77 "simple-flex-code.l"
@@ -1968,7 +1968,7 @@ void yyfree (void * ptr )
 
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR", "NEWLINE" };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR", "NEWLINE", EOF };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο
@@ -2011,7 +2011,10 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
-                fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                if (token) 
+                  fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                else
+                  fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"", line, yytext);
         }
         return 0;
 }
