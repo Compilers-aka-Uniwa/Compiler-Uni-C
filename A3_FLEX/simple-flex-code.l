@@ -53,7 +53,7 @@ KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|r
 OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
 COMMENT         (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 WHITESPACE      \s+    
-UNKNOWN		    .
+UNKNOWN		    .+
 
 
 /* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος
@@ -70,7 +70,7 @@ UNKNOWN		    .
 {FLOAT}         { return FLOAT; }
 {COMMENT}       {ECHO; printf("\tThis is a comment\n");}
 {WHITESPACE}    {}
-{UNKNOWN}	    {ECHO; printf("\tThis is a UNKNOWN TOKEN\n");}
+{UNKNOWN}	    { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
 
 
 
