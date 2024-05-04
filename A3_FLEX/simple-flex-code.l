@@ -43,13 +43,14 @@ int line = 1;
    Μετά από αυτό, μπορεί να γίνει χρήση των ονομάτων (αριστερά) αντί των,
    συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
 
-KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
-OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
+
 DELIMITER       [ \t]+
 IDENTIFIER      [a-zA-Z_][a-zA-Z0-9_]{0,31}
 STRING          \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
 INTEGER         ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
-FLOAT           ([0-9]+[.][0-9]*|[.][0-9]+)  
+FLOAT           ([0-9]+[.][0-9]*|[.][0-9]+)
+KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
+OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
 COMMENT         (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 WHITESPACE      \s+    
 UNKNOWN		    .
@@ -80,7 +81,7 @@ UNKNOWN		    .
 %%
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","COMMENT","WHITESPACE","KEYWORD","OPERATOR" };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR" };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο

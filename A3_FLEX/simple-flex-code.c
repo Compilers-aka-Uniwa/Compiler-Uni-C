@@ -834,7 +834,7 @@ YY_DECL
 		}
 
 	{
-#line 62 "simple-flex-code.l"
+#line 63 "simple-flex-code.l"
 
 #line 840 "simple-flex-code.c"
 
@@ -895,69 +895,69 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 63 "simple-flex-code.l"
+#line 64 "simple-flex-code.l"
 {return KEYWORD;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 64 "simple-flex-code.l"
+#line 65 "simple-flex-code.l"
 {return OPERATOR;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 65 "simple-flex-code.l"
+#line 66 "simple-flex-code.l"
 { return DELIMITER; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 66 "simple-flex-code.l"
+#line 67 "simple-flex-code.l"
 { return IDENTIFIER; }
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 67 "simple-flex-code.l"
+#line 68 "simple-flex-code.l"
 { return STRING; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 68 "simple-flex-code.l"
+#line 69 "simple-flex-code.l"
 { return INTEGER; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 69 "simple-flex-code.l"
+#line 70 "simple-flex-code.l"
 { return FLOAT; }
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 70 "simple-flex-code.l"
+#line 71 "simple-flex-code.l"
 {}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 71 "simple-flex-code.l"
+#line 72 "simple-flex-code.l"
 {}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 72 "simple-flex-code.l"
+#line 73 "simple-flex-code.l"
 {}
 	YY_BREAK
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 76 "simple-flex-code.l"
+#line 77 "simple-flex-code.l"
 { line++; printf("\n"); }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 77 "simple-flex-code.l"
+#line 78 "simple-flex-code.l"
 { printf("#END-OF-FILE#\n"); exit(0); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 80 "simple-flex-code.l"
+#line 81 "simple-flex-code.l"
 ECHO;
 	YY_BREAK
 #line 964 "simple-flex-code.c"
@@ -1963,11 +1963,11 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 80 "simple-flex-code.l"
+#line 81 "simple-flex-code.l"
 
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","COMMENT","WHITESPACE","KEYWORD","OPERATOR" };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR" };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο

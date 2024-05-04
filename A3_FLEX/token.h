@@ -3,5 +3,5 @@
 #define STRING 3
 #define INTEGER 4
 #define FLOAT 5
-#define KEYWORD 8
-#define OPERATOR 9
+#define KEYWORD 6
+#define OPERATOR 7
