@@ -70,16 +70,16 @@ UNKNOWN         .
 {STRING}        { return STRING; }
 {INTEGER}       { return INTEGER; }
 {FLOAT}         { return FLOAT; }
-{COMMENT}       { ECHO; printf("\tThis is a comment\n"); }
-{WHITESPACE}    { ECHO; printf("\tThis is a WHITESPACE\n"); }
-{NEWLINE}       { line++; printf("\n"); return NEWLINE; }
+{COMMENT}       { }
+{WHITESPACE}    { }
+{NEWLINE}       { return NEWLINE; }
 {UNKNOWN}       { }
-<<EOF>>         { printf("#END-OF-FILE#\n"); exit(0); }
+<<EOF>>         { return EOF; }
 
 %%
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR", "NEWLINE", EOF };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT", "KEYWORD", "OPERATOR", "NEWLINE", "EOF" };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο
@@ -122,8 +122,19 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
-                if (token) 
-                  fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                if (token)
+                {
+                  switch(token) 
+                  {
+                     case 8:
+                        line++; 
+                        printf("\n");
+                     case 9:
+                        printf("#END-OF-FILE#\n");
+                     default:
+                        fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                  } 
+                }
                 else
                   fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"", line, yytext);
         }

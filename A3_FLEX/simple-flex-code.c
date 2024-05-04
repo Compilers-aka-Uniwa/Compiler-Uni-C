@@ -934,18 +934,18 @@ case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
 #line 73 "simple-flex-code.l"
-{ ECHO; printf("\tThis is a comment\n"); }
+{ }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 74 "simple-flex-code.l"
-{ ECHO; printf("\tThis is a WHITESPACE\n"); }
+{ }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
 #line 75 "simple-flex-code.l"
-{ line++; printf("\n"); return NEWLINE; }
+{ return NEWLINE; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
@@ -954,7 +954,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 #line 77 "simple-flex-code.l"
-{ printf("#END-OF-FILE#\n"); exit(0); }
+{ return EOF; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
@@ -1968,7 +1968,7 @@ void yyfree (void * ptr )
 
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR", "NEWLINE", EOF };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR", "NEWLINE", "EOF" };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο
@@ -2011,8 +2011,19 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
-                if (token) 
-                  fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                if (token)
+                {
+                  switch(token) 
+                  {
+                     case 8:
+                        line++; 
+                        printf("\n");
+                     case 9:
+                        printf("#END-OF-FILE#\n");
+                     default:
+                        fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                  } 
+                }
                 else
                   fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"", line, yytext);
         }
