@@ -945,12 +945,12 @@ case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
 #line 75 "simple-flex-code.l"
-{ line++; printf("\n"); }
+{ line++; printf("\n"); return NEWLINE; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 76 "simple-flex-code.l"
-{ fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
+{ fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"", line, yytext); }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 #line 77 "simple-flex-code.l"
@@ -1968,7 +1968,7 @@ void yyfree (void * ptr )
 
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR" };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR", "NEWLINE" };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο

@@ -72,14 +72,14 @@ UNKNOWN         .
 {FLOAT}         { return FLOAT; }
 {COMMENT}       { ECHO; printf("\tThis is a comment\n"); }
 {WHITESPACE}    { ECHO; printf("\tThis is a WHITESPACE\n"); }
-{NEWLINE}       { line++; printf("\n"); }
-{UNKNOWN}       { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
+{NEWLINE}       { line++; printf("\n"); return NEWLINE; }
+{UNKNOWN}       { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"", line, yytext); }
 <<EOF>>         { printf("#END-OF-FILE#\n"); exit(0); }
 
 %%
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR" };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR", "NEWLINE" };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο
