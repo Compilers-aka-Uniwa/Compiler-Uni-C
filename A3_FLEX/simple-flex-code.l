@@ -52,7 +52,8 @@ FLOAT           ([0-9]+[.][0-9]*|[.][0-9]+)
 KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
 OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
 COMMENT         (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
-WHITESPACE      \s+  
+WHITESPACE      (\s)+
+NEWLINE         \n 
 UNKNOWN         .
 
 
@@ -61,22 +62,19 @@ UNKNOWN         .
    μιας αριθμητικής τιμής μέσω της συνάρτησης yylex() */
 
 %%
-{KEYWORD}       {return KEYWORD;}
-{OPERATOR}      {return OPERATOR;}
+
+{KEYWORD}       { return KEYWORD; }
+{OPERATOR}      { return OPERATOR; }
 {DELIMITER}     { return DELIMITER; }
 {IDENTIFIER}    { return IDENTIFIER; }
 {STRING}        { return STRING; }
 {INTEGER}       { return INTEGER; }
 {FLOAT}         { return FLOAT; }
-{COMMENT}       {ECHO; printf("\tThis is a comment\n");}
-{WHITESPACE}    {ECHO; printf("\tThis is a WHITESPACE\n");}
-{UNKNOWN}       { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"", line, yytext); }
-
-
-
-\n              { line++; printf("\n"); }
-<<EOF>>		{ printf("#END-OF-FILE#\n"); exit(0); }
-
+{COMMENT}       { ECHO; printf("\tThis is a comment\n"); }
+{WHITESPACE}    { ECHO; printf("\tThis is a WHITESPACE\n"); }
+{NEWLINE}       { line++; printf("\n"); }
+{UNKNOWN}       { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
+<<EOF>>         { printf("#END-OF-FILE#\n"); exit(0); }
 
 %%
 

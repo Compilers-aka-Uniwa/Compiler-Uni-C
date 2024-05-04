@@ -5,3 +5,4 @@
 #define FLOAT 5
 #define KEYWORD 6
 #define OPERATOR 7
+#define NEWWLINE 8
