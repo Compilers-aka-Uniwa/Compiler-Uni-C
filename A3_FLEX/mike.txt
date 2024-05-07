@@ -1,4 +1,0 @@
-flex -o simple-flex-code.c simple-flex-code.l
-gcc -o simple-flex-code simple-flex-code.c
-./simple-flex-code input.txt output.txt
-token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=8token=10token=9#END-OF-FILE#
