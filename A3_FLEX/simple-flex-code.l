@@ -74,7 +74,7 @@ UNKNOWN          .
 {WHITESPACE}    { }
 {NEWLINE}       { return NEWLINE; }
 <<EOF>>         { return EOF; }
-{UNKNOWN}       { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
+{UNKNOWN}       { return 0; }
 
 %%
 
@@ -122,6 +122,7 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
+                printf("value=\"%s\", token=%d", yytext, token);
                 if (token)
                 {
                   switch(token) 
@@ -141,6 +142,8 @@ int main(int argc, char **argv){
                         break;
                   } 
                 }
+                else
+                  fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext);
         }
         return 0;
 }
