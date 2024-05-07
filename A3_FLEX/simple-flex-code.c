@@ -395,7 +395,7 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    2,    4,    5,    1,    1,    6,    7,    1,    1,
         1,    8,    9,    1,   10,   11,   12,   13,   14,   14,
-       14,   14,   14,   14,   14,   15,   15,    1,    1,   16,
+       14,   14,   14,   14,   14,   15,   15,    1,    2,   16,
        17,   18,    1,    1,   19,   19,   19,   19,   20,   19,
        21,   21,   21,   21,   21,   21,   21,   21,   21,   21,
        21,   21,   21,   21,   21,   21,   21,   22,   21,   21,
@@ -961,7 +961,7 @@ case YY_STATE_EOF(INITIAL):
 case 11:
 YY_RULE_SETUP
 #line 77 "simple-flex-code.l"
-{ }
+{  }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
@@ -2018,16 +2018,13 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
-                printf("value=\"%s\"", yytext);
-                printf("token=%d\n", token);
                 if (token)
                 {
                   switch(token) 
                   {
                      case 8:
-                        line++;
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext); 
-                        printf("\n");
+                        line++;
                         break;
                      case 9:
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
@@ -2039,8 +2036,6 @@ int main(int argc, char **argv){
                         break;
                   } 
                 }
-                else
-                  fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext);
                 
         }
         return 0;

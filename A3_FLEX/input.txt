@@ -1,4 +1,5 @@
-user
+user;
+a = (b+c);
 "theo"
 45
 4.8
@@ -30,3 +31,4 @@ func
 8,3
 1_tzigger
 /f
+0.0

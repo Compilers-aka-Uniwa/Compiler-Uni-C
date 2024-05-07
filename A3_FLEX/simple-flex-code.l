@@ -44,7 +44,7 @@ int line = 1;
    συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
 
 
-DELIMITER        [ \t]+
+DELIMITER        [ \t;]+
 IDENTIFIER       [a-zA-Z_][a-zA-Z0-9_]{0,31}
 STRING           \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
 INTEGER          ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
@@ -74,7 +74,7 @@ UNKNOWN          .
 {WHITESPACE}    { }
 {NEWLINE}       { return NEWLINE; }
 <<EOF>>         { return EOF; }
-{UNKNOWN}       { }
+{UNKNOWN}       {  }
 
 %%
 
@@ -122,16 +122,13 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
-                printf("value=\"%s\"", yytext);
-                printf("token=%d\n", token);
                 if (token)
                 {
                   switch(token) 
                   {
                      case 8:
-                        line++;
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext); 
-                        printf("\n");
+                        line++;
                         break;
                      case 9:
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
@@ -143,8 +140,6 @@ int main(int argc, char **argv){
                         break;
                   } 
                 }
-                else
-                  fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext);
                 
         }
         return 0;
