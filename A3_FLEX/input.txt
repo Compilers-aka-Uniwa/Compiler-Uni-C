@@ -1,3 +1,133 @@
+// ====== Test case #1 IDENTIFIERS ======
+a1
+_1
+Spectacular
+a
+A1
+SPEctacular_15_
+_a
+_W
+_ _A
+a_b_c_1_2_3
+AA4_F
+1_id
+/id
+id.student
+i d student
+Ε2
+_user
+ user
+
+// ====== Test case #2 STRINGS ======
+"KALHMERA"
+""
+"hello, \"world!\"\n"
+"\"\\n\"\"\\n\""
+f"number of loops is {counter}"
+"6/3=2"
+"He said "Why Brutus?""
+"6\3=2"
+"6\\3=2"
+"\n\"\\\d"
+"Καλημέρα κόσμε"
+'La vida loca'
+"Hi Mark"
+"Tests"
+"Mark said, \"Boo!\"\n"
+"Hi/n\n"
+
+// ====== Test case #3 INTEGERS ======
+0
+3
+214748
+-50
+0x4F
+0X88AA
+063
+00
+01
+09
+0XFGA9
+01578
+00xAFB1
+-001
+-0xAF01
+0xff23
++01
++56
+0x-FF
+
+// ====== Test case #4 FLOATS ======
+9e8
+9E-8
+3.14
+10.0
+10.0001
+5e-15
+1e100
+3.1E0
+0e0
+-5.1e-100
+0
+-0.5
+5.e1
+1E1
+00.01
+0e01
+5e1.5e1
+1E1.2
+6,20
+0.0
+
+// ====== Test case #5 COMMENTS ======
+// hello world!!
+/hello world!!/
+# hello world!
+// hellο
+hello world
+/* hello world!! */
+//hello//world//!!
+\\ hello world!!
+/*
+ * hello
+ * world
+ * !!
+ */
+/* 
+hi
+*/
+\* hello world! *\
+/*//
+//hi
+//* hi *//
+%% hi
+// hi */
+/* hi //
+// Αυτό είναι ένα σχόλιο
+
+// ====== Test case #6 WHITESPACES ======
+              
+     WHITESPACES
+
+// ====== Test case #7 KEYWORDS ======
+int x = 5;
+float y;
+string str = "";
+switch x;
+case 1:
+    break;
+case 2:
+    break;
+sizeof(str);
+sizeof;
+double = 3.14;
+const int z = 5;
+struct Employee;
+if x == 0
+else x != 0
+return 0;
+
+// ====== Test case #8 FINAL ======
 user;
 a=(b+c); 
 "theo"
@@ -8,27 +138,67 @@ a=(b+c);
 "good moring"
 4e2
 good
-SPEctacular_15_
-"Mark said, \"Boo!\"\n"
-0x4F
-9e-8
-"hello, \"world!\"\n"
-8.88
-_AC
-/* hello world!! */
-"6\\3=2"
-1e100
+
+// ====== Test case #9 FINAL ======
 "pao"
 /*20*/
-// den pernei to /**/ gia kapoio logo
 8.5
 +
 +---
 break
 func
 
+// ====== Test case #10 FINAL ======
 @#$
 8,3
 1_tzigger
 /f
 0.0
+5.001
+
+// ====== Test case #11 OPERATORS ======
+x >= 5;
+5 + 3 = 8;
+6/=3;
+x++;
+x*y;
+while 1;
+void;
+TRUE && FALSE == FALSE;
+TRUE || TRUE == TRUE;
+y--;
+&bit
+
+// ====== Test case #12 CODE ======
+switch 1
+    case 1
+        break;
+    case 2
+        break;
+return 0;
+
+// ====== Test case #13 CODE ======
+int x + y = z;
+var x + y = z;
+for i = 1; i <= N; i++ do
+    if i % 2 == 0 then
+        return 0;
+    else
+        return 1;
+    end if;
+end for;
+
+// ====== Test case #14 CODE ======
+const double pi=3.14;
+struct Math m1;
+m1.count = 3.14 * 2;
+m1.length = 3.14 + 2 / 5;
+
+// ====== Test case #15 CODE/COMMENTS ======
+func calculate_perimeter_of_table void
+    int length = 5;  // Length of table
+    int width = 10;  // Width of table
+    int x;
+
+    x = length * 2 + width * 2; // Perimeter of table
+    return x; 
