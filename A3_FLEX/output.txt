@@ -1,30 +1,354 @@
-	Line=1, token=UNKNOWN TOKEN, value="user"
-	Line=2, token=UNKNOWN TOKEN, value=""theo""
-	Line=3, token=UNKNOWN TOKEN, value="45"
-	Line=4, token=UNKNOWN TOKEN, value="4.8"
+// ====== Test case #1 IDENTIFIERS ======
+	Line=2, token=IDENTIFIER, value="a1"
+	Line=3, token=IDENTIFIER, value="_1"
+	Line=4, token=IDENTIFIER, value="Spectacular"
+	Line=5, token=IDENTIFIER, value="a"
+	Line=6, token=IDENTIFIER, value="A1"
+	Line=7, token=IDENTIFIER, value="SPEctacular_15_"
+	Line=8, token=IDENTIFIER, value="_a"
+	Line=9, token=IDENTIFIER, value="_W"
+	Line=10, token=IDENTIFIER, value="_"
+	Line=10, token=IDENTIFIER, value="_A"
+	Line=11, token=IDENTIFIER, value="a_b_c_1_2_3"
+	Line=12, token=IDENTIFIER, value="AA4_F"
+	Line=13, token=UNKNOWN TOKEN, value="1_id"
+	Line=14, token=UNKNOWN TOKEN, value="/id"
+	Line=15, token=UNKNOWN TOKEN, value="id.student"
+	Line=16, token=IDENTIFIER, value="i"
+	Line=16, token=IDENTIFIER, value="d"
+	Line=16, token=IDENTIFIER, value="student"
+	Line=17, token=UNKNOWN TOKEN, value="Ε2"
+	Line=18, token=IDENTIFIER, value="_user"
+	Line=19, token=IDENTIFIER, value="user"
+// ====== Test case #2 STRINGS ======
+	Line=22, token=STRING, value=""KALHMERA""
+	Line=23, token=STRING, value=""""
+	Line=24, token=STRING, value=""hello, \"world!\"\n""
+	Line=25, token=STRING, value=""\"\\n\"\"\\n\"""
+	Line=26, token=UNKNOWN TOKEN, value="f"number"
+	Line=26, token=IDENTIFIER, value="of"
+	Line=26, token=IDENTIFIER, value="loops"
+	Line=26, token=IDENTIFIER, value="is"
+	Line=26, token=UNKNOWN TOKEN, value="{counter}""
+	Line=27, token=STRING, value=""6/3=2""
+	Line=28, token=STRING, value=""He said ""
+	Line=28, token=IDENTIFIER, value="Why"
+	Line=28, token=UNKNOWN TOKEN, value="Brutus?"""
+	Line=29, token=UNKNOWN TOKEN, value=""6\3=2""
+	Line=30, token=STRING, value=""6\\3=2""
+	Line=31, token=UNKNOWN TOKEN, value=""\n\"\\\d""
+	Line=32, token=STRING, value=""Καλημέρα κόσμε""
+	Line=33, token=UNKNOWN TOKEN, value="'La"
+	Line=33, token=IDENTIFIER, value="vida"
+	Line=33, token=UNKNOWN TOKEN, value="loca'"
+	Line=34, token=STRING, value=""Hi Mark""
+	Line=35, token=STRING, value=""Tests""
+	Line=36, token=STRING, value=""Mark said, \"Boo!\"\n""
+	Line=37, token=STRING, value=""Hi/n\n""
+// ====== Test case #3 INTEGERS ======
+	Line=40, token=INTEGER, value="0"
+	Line=41, token=INTEGER, value="3"
+	Line=42, token=INTEGER, value="214748"
+	Line=43, token=UNKNOWN TOKEN, value="-50"
+	Line=44, token=INTEGER, value="0x4F"
+	Line=45, token=INTEGER, value="0X88AA"
+	Line=46, token=INTEGER, value="063"
+	Line=47, token=INTEGER, value="00"
+	Line=48, token=INTEGER, value="01"
+	Line=49, token=UNKNOWN TOKEN, value="09"
+	Line=50, token=UNKNOWN TOKEN, value="0XFGA9"
+	Line=51, token=UNKNOWN TOKEN, value="01578"
+	Line=52, token=UNKNOWN TOKEN, value="00xAFB1"
+	Line=53, token=UNKNOWN TOKEN, value="-001"
+	Line=54, token=UNKNOWN TOKEN, value="-0xAF01"
+	Line=55, token=UNKNOWN TOKEN, value="0xff23"
+	Line=56, token=UNKNOWN TOKEN, value="+01"
+	Line=57, token=UNKNOWN TOKEN, value="+56"
+	Line=58, token=UNKNOWN TOKEN, value="0x-FF"
+// ====== Test case #4 FLOATS ======
+	Line=61, token=FLOAT, value="9e8"
+	Line=62, token=FLOAT, value="9E-8"
+	Line=63, token=FLOAT, value="3.14"
+	Line=64, token=UNKNOWN TOKEN, value="10.0"
+	Line=65, token=FLOAT, value="10.0001"
+	Line=66, token=FLOAT, value="5e-15"
+	Line=67, token=FLOAT, value="1e100"
+	Line=68, token=FLOAT, value="3.1E0"
+	Line=69, token=FLOAT, value="0e0"
+	Line=70, token=UNKNOWN TOKEN, value="-5.1e-100"
+	Line=71, token=INTEGER, value="0"
+	Line=72, token=UNKNOWN TOKEN, value="-0.5"
+	Line=73, token=UNKNOWN TOKEN, value="5.e1"
+	Line=74, token=FLOAT, value="1E1"
+	Line=75, token=UNKNOWN TOKEN, value="00.01"
+	Line=76, token=UNKNOWN TOKEN, value="0e01"
+	Line=77, token=UNKNOWN TOKEN, value="5e1.5e1"
+	Line=78, token=UNKNOWN TOKEN, value="1E1.2"
+	Line=79, token=UNKNOWN TOKEN, value="6,20"
+	Line=80, token=UNKNOWN TOKEN, value="0.0"
+// ====== Test case #5 COMMENTS ======
+// hello world!!
+	Line=84, token=UNKNOWN TOKEN, value="/hello"
+	Line=84, token=UNKNOWN TOKEN, value="world!!/"
+	Line=85, token=UNKNOWN TOKEN, value="#"
+	Line=85, token=IDENTIFIER, value="hello"
+	Line=85, token=UNKNOWN TOKEN, value="world!"
+// hellο
+	Line=87, token=IDENTIFIER, value="hello"
+	Line=87, token=IDENTIFIER, value="world"
+/* hello world!! *///hello//world//!!
+	Line=91, token=UNKNOWN TOKEN, value="\\"
+	Line=91, token=IDENTIFIER, value="hello"
+	Line=91, token=UNKNOWN TOKEN, value="world!!"
+/*
+ * hello
+ * world
+ * !!
+ *//* 
+hi
+*/	Line=96, token=UNKNOWN TOKEN, value="\*"
+	Line=96, token=IDENTIFIER, value="hello"
+	Line=96, token=UNKNOWN TOKEN, value="world!"
+	Line=96, token=UNKNOWN TOKEN, value="*\"
+/*//
 //hi
-	Line=5, token=UNKNOWN TOKEN, value="4.7"
-	Line=6, token=UNKNOWN TOKEN, value=""good moring""
-	Line=7, token=UNKNOWN TOKEN, value="4e2"
-	Line=8, token=UNKNOWN TOKEN, value="good"
-	Line=9, token=UNKNOWN TOKEN, value="SPEctacular_15_"
-	Line=10, token=UNKNOWN TOKEN, value=""Mark said, \"Boo!\"\n""
-	Line=11, token=UNKNOWN TOKEN, value="0x4F"
-	Line=12, token=UNKNOWN TOKEN, value="9e-8"
-	Line=13, token=UNKNOWN TOKEN, value=""hello, \"world!\"\n""
-	Line=14, token=UNKNOWN TOKEN, value="8.88"
-	Line=15, token=UNKNOWN TOKEN, value="_AC"
-	Line=16, token=UNKNOWN TOKEN, value="/* hello world!! */"
-	Line=17, token=UNKNOWN TOKEN, value=""6\\3=2""
-	Line=18, token=UNKNOWN TOKEN, value="1e100"
-	Line=19, token=UNKNOWN TOKEN, value=""pao""
-	Line=20, token=UNKNOWN TOKEN, value="/*20*/"
-// den pernei to /**/ gia kapoio logo
-	Line=21, token=UNKNOWN TOKEN, value="8.5"
-	Line=22, token=UNKNOWN TOKEN, value="+"
-	Line=23, token=UNKNOWN TOKEN, value="+---"
-	Line=24, token=UNKNOWN TOKEN, value="break"
-	Line=25, token=UNKNOWN TOKEN, value="func"
-	Line=26, token=UNKNOWN TOKEN, value=""
-	Line=27, token=UNKNOWN TOKEN, value="@#$"
-	Line=28, token=UNKNOWN TOKEN, value="8,3"
+//* hi */	Line=98, token=OPERATOR, value="/"
+	Line=99, token=UNKNOWN TOKEN, value="%%"
+	Line=99, token=IDENTIFIER, value="hi"
+// hi */
+/* hi //
+// Αυτό είναι ένα σχόλιο
+*/// ====== Test case #7 KEYWORDS ======
+	Line=105, token=IDENTIFIER, value="int"
+	Line=105, token=IDENTIFIER, value="x"
+	Line=105, token=OPERATOR, value="="
+	Line=105, token=INTEGER, value="5"
+	Line=105, token=DELIMITER, value=";"
+	Line=106, token=IDENTIFIER, value="float"
+	Line=106, token=IDENTIFIER, value="y"
+	Line=106, token=DELIMITER, value=";"
+	Line=107, token=IDENTIFIER, value="string"
+	Line=107, token=IDENTIFIER, value="str"
+	Line=107, token=OPERATOR, value="="
+	Line=107, token=STRING, value=""""
+	Line=107, token=DELIMITER, value=";"
+	Line=108, token=IDENTIFIER, value="switch"
+	Line=108, token=IDENTIFIER, value="x"
+	Line=108, token=DELIMITER, value=";"
+	Line=109, token=IDENTIFIER, value="case"
+	Line=109, token=UNKNOWN TOKEN, value="1:"
+	Line=110, token=IDENTIFIER, value="break"
+	Line=110, token=DELIMITER, value=";"
+	Line=111, token=IDENTIFIER, value="case"
+	Line=111, token=UNKNOWN TOKEN, value="2:"
+	Line=112, token=IDENTIFIER, value="break"
+	Line=112, token=DELIMITER, value=";"
+	Line=113, token=UNKNOWN TOKEN, value="sizeof(str)"
+	Line=113, token=DELIMITER, value=";"
+	Line=114, token=IDENTIFIER, value="sizeof"
+	Line=114, token=DELIMITER, value=";"
+	Line=115, token=IDENTIFIER, value="double"
+	Line=115, token=OPERATOR, value="="
+	Line=115, token=FLOAT, value="3.14"
+	Line=115, token=DELIMITER, value=";"
+	Line=116, token=IDENTIFIER, value="const"
+	Line=116, token=IDENTIFIER, value="int"
+	Line=116, token=IDENTIFIER, value="z"
+	Line=116, token=OPERATOR, value="="
+	Line=116, token=INTEGER, value="5"
+	Line=116, token=DELIMITER, value=";"
+	Line=117, token=IDENTIFIER, value="struct"
+	Line=117, token=IDENTIFIER, value="Employee"
+	Line=117, token=DELIMITER, value=";"
+	Line=118, token=IDENTIFIER, value="if"
+	Line=118, token=IDENTIFIER, value="x"
+	Line=118, token=OPERATOR, value="=="
+	Line=118, token=INTEGER, value="0"
+	Line=119, token=IDENTIFIER, value="else"
+	Line=119, token=IDENTIFIER, value="x"
+	Line=119, token=OPERATOR, value="!="
+	Line=119, token=INTEGER, value="0"
+	Line=120, token=IDENTIFIER, value="return"
+	Line=120, token=INTEGER, value="0"
+	Line=120, token=DELIMITER, value=";"
+// ====== Test case #8 FINAL ======
+	Line=123, token=IDENTIFIER, value="user"
+	Line=123, token=DELIMITER, value=";"
+	Line=124, token=UNKNOWN TOKEN, value="a=(b+c)"
+	Line=124, token=DELIMITER, value=";"
+	Line=125, token=STRING, value=""theo""
+	Line=126, token=INTEGER, value="45"
+	Line=127, token=FLOAT, value="4.8"
+//hi
+	Line=129, token=FLOAT, value="4.7"
+	Line=130, token=STRING, value=""good moring""
+	Line=131, token=FLOAT, value="4e2"
+	Line=132, token=IDENTIFIER, value="good"
+// ====== Test case #9 FINAL ======
+	Line=135, token=STRING, value=""pao""
+/*20*/	Line=138, token=FLOAT, value="8.5"
+	Line=139, token=OPERATOR, value="+"
+	Line=140, token=UNKNOWN TOKEN, value="+---"
+	Line=141, token=IDENTIFIER, value="break"
+	Line=142, token=IDENTIFIER, value="func"
+// ====== Test case #10 FINAL ======
+	Line=145, token=UNKNOWN TOKEN, value="@#$"
+	Line=146, token=UNKNOWN TOKEN, value="8,3"
+	Line=147, token=UNKNOWN TOKEN, value="1_tzigger"
+	Line=148, token=UNKNOWN TOKEN, value="/f"
+	Line=149, token=UNKNOWN TOKEN, value="0.0"
+	Line=150, token=FLOAT, value="5.001"
+// ====== Test case #11 OPERATORS ======
+	Line=153, token=IDENTIFIER, value="x"
+	Line=153, token=OPERATOR, value=">="
+	Line=153, token=INTEGER, value="5"
+	Line=153, token=DELIMITER, value=";"
+	Line=154, token=INTEGER, value="5"
+	Line=154, token=OPERATOR, value="+"
+	Line=154, token=INTEGER, value="3"
+	Line=154, token=OPERATOR, value="="
+	Line=154, token=INTEGER, value="8"
+	Line=154, token=DELIMITER, value=";"
+	Line=155, token=UNKNOWN TOKEN, value="6/=3"
+	Line=155, token=DELIMITER, value=";"
+	Line=156, token=UNKNOWN TOKEN, value="x++"
+	Line=156, token=DELIMITER, value=";"
+	Line=157, token=UNKNOWN TOKEN, value="x*y"
+	Line=157, token=DELIMITER, value=";"
+	Line=158, token=IDENTIFIER, value="while"
+	Line=158, token=INTEGER, value="1"
+	Line=158, token=DELIMITER, value=";"
+	Line=159, token=IDENTIFIER, value="void"
+	Line=159, token=DELIMITER, value=";"
+	Line=160, token=IDENTIFIER, value="TRUE"
+	Line=160, token=OPERATOR, value="&&"
+	Line=160, token=IDENTIFIER, value="FALSE"
+	Line=160, token=OPERATOR, value="=="
+	Line=160, token=IDENTIFIER, value="FALSE"
+	Line=160, token=DELIMITER, value=";"
+	Line=161, token=IDENTIFIER, value="TRUE"
+	Line=161, token=OPERATOR, value="||"
+	Line=161, token=IDENTIFIER, value="TRUE"
+	Line=161, token=OPERATOR, value="=="
+	Line=161, token=IDENTIFIER, value="TRUE"
+	Line=161, token=DELIMITER, value=";"
+	Line=162, token=UNKNOWN TOKEN, value="y--"
+	Line=162, token=DELIMITER, value=";"
+	Line=163, token=UNKNOWN TOKEN, value="&bit"
+// ====== Test case #12 CODE ======
+	Line=166, token=IDENTIFIER, value="switch"
+	Line=166, token=INTEGER, value="1"
+	Line=167, token=IDENTIFIER, value="case"
+	Line=167, token=INTEGER, value="1"
+	Line=168, token=IDENTIFIER, value="break"
+	Line=168, token=DELIMITER, value=";"
+	Line=169, token=IDENTIFIER, value="case"
+	Line=169, token=INTEGER, value="2"
+	Line=170, token=IDENTIFIER, value="break"
+	Line=170, token=DELIMITER, value=";"
+	Line=171, token=IDENTIFIER, value="return"
+	Line=171, token=INTEGER, value="0"
+	Line=171, token=DELIMITER, value=";"
+// ====== Test case #13 CODE ======
+	Line=174, token=IDENTIFIER, value="int"
+	Line=174, token=IDENTIFIER, value="x"
+	Line=174, token=OPERATOR, value="+"
+	Line=174, token=IDENTIFIER, value="y"
+	Line=174, token=OPERATOR, value="="
+	Line=174, token=IDENTIFIER, value="z"
+	Line=174, token=DELIMITER, value=";"
+	Line=175, token=IDENTIFIER, value="var"
+	Line=175, token=IDENTIFIER, value="x"
+	Line=175, token=OPERATOR, value="+"
+	Line=175, token=IDENTIFIER, value="y"
+	Line=175, token=OPERATOR, value="="
+	Line=175, token=IDENTIFIER, value="z"
+	Line=175, token=DELIMITER, value=";"
+	Line=176, token=IDENTIFIER, value="for"
+	Line=176, token=IDENTIFIER, value="i"
+	Line=176, token=OPERATOR, value="="
+	Line=176, token=INTEGER, value="1"
+	Line=176, token=DELIMITER, value=";"
+	Line=176, token=IDENTIFIER, value="i"
+	Line=176, token=OPERATOR, value="<="
+	Line=176, token=IDENTIFIER, value="N"
+	Line=176, token=DELIMITER, value=";"
+	Line=176, token=UNKNOWN TOKEN, value="i++"
+	Line=176, token=IDENTIFIER, value="do"
+	Line=177, token=IDENTIFIER, value="if"
+	Line=177, token=IDENTIFIER, value="i"
+	Line=177, token=OPERATOR, value="%"
+	Line=177, token=INTEGER, value="2"
+	Line=177, token=OPERATOR, value="=="
+	Line=177, token=INTEGER, value="0"
+	Line=177, token=IDENTIFIER, value="then"
+	Line=178, token=IDENTIFIER, value="return"
+	Line=178, token=INTEGER, value="0"
+	Line=178, token=DELIMITER, value=";"
+	Line=179, token=IDENTIFIER, value="else"
+	Line=180, token=IDENTIFIER, value="return"
+	Line=180, token=INTEGER, value="1"
+	Line=180, token=DELIMITER, value=";"
+	Line=181, token=IDENTIFIER, value="end"
+	Line=181, token=IDENTIFIER, value="if"
+	Line=181, token=DELIMITER, value=";"
+	Line=182, token=IDENTIFIER, value="end"
+	Line=182, token=IDENTIFIER, value="for"
+	Line=182, token=DELIMITER, value=";"
+// ====== Test case #14 CODE ======
+	Line=185, token=IDENTIFIER, value="const"
+	Line=185, token=IDENTIFIER, value="double"
+	Line=185, token=UNKNOWN TOKEN, value="pi=3.14"
+	Line=185, token=DELIMITER, value=";"
+	Line=186, token=IDENTIFIER, value="struct"
+	Line=186, token=IDENTIFIER, value="Math"
+	Line=186, token=IDENTIFIER, value="m1"
+	Line=186, token=DELIMITER, value=";"
+	Line=187, token=UNKNOWN TOKEN, value="m1.count"
+	Line=187, token=OPERATOR, value="="
+	Line=187, token=FLOAT, value="3.14"
+	Line=187, token=OPERATOR, value="*"
+	Line=187, token=INTEGER, value="2"
+	Line=187, token=DELIMITER, value=";"
+	Line=188, token=UNKNOWN TOKEN, value="m1.length"
+	Line=188, token=OPERATOR, value="="
+	Line=188, token=FLOAT, value="3.14"
+	Line=188, token=OPERATOR, value="+"
+	Line=188, token=INTEGER, value="2"
+	Line=188, token=OPERATOR, value="/"
+	Line=188, token=INTEGER, value="5"
+	Line=188, token=DELIMITER, value=";"
+// ====== Test case #15 CODE/COMMENTS ======
+	Line=191, token=IDENTIFIER, value="func"
+	Line=191, token=IDENTIFIER, value="calculate_perimeter_of_table"
+	Line=191, token=IDENTIFIER, value="void"
+	Line=192, token=IDENTIFIER, value="int"
+	Line=192, token=IDENTIFIER, value="length"
+	Line=192, token=OPERATOR, value="="
+	Line=192, token=INTEGER, value="5"
+	Line=192, token=DELIMITER, value=";"
+// Length of table
+	Line=193, token=IDENTIFIER, value="int"
+	Line=193, token=IDENTIFIER, value="width"
+	Line=193, token=OPERATOR, value="="
+	Line=193, token=INTEGER, value="10"
+	Line=193, token=DELIMITER, value=";"
+// Width of table
+	Line=194, token=IDENTIFIER, value="int"
+	Line=194, token=IDENTIFIER, value="x"
+	Line=194, token=DELIMITER, value=";"
+	Line=196, token=IDENTIFIER, value="x"
+	Line=196, token=OPERATOR, value="="
+	Line=196, token=IDENTIFIER, value="length"
+	Line=196, token=OPERATOR, value="*"
+	Line=196, token=INTEGER, value="2"
+	Line=196, token=OPERATOR, value="+"
+	Line=196, token=IDENTIFIER, value="width"
+	Line=196, token=OPERATOR, value="*"
+	Line=196, token=INTEGER, value="2"
+	Line=196, token=DELIMITER, value=";"
+// Perimeter of table
+	Line=197, token=IDENTIFIER, value="return"
+	Line=197, token=IDENTIFIER, value="x"
+	Line=197, token=DELIMITER, value=";"
+	Line=198, token=END_OF_FILE, value=""

@@ -44,16 +44,17 @@ int line = 1;
    συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
 
 
-DELIMITER       [ \t]+
-IDENTIFIER      [a-zA-Z_][a-zA-Z0-9_]{0,31}
-STRING          \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
-INTEGER         ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
-FLOAT           ([0-9]+[.][0-9]*|[.][0-9]+)
-KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
-OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
-COMMENT         (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
-WHITESPACE      \s+    
-UNKNOWN		    .+
+DELIMITER        [;]
+IDENTIFIER       [a-zA-Z_][a-zA-Z0-9_]{0,31}
+STRING           \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
+INTEGER          ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
+FLOAT            (?:[1-9][0-9]*|0)(?:\.(?:[1-9][0-9]*|0*[1-9]+))?(?:[eE](?:-?[1-9][0-9]*|0))?
+KEYWORD          (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
+OPERATOR         (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
+COMMENT          (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
+WHITESPACE       [ \t]+
+NEWLINE          [\n]
+UNKNOWN          [^ \t\r\n;]+
 
 
 /* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος
@@ -61,27 +62,35 @@ UNKNOWN		    .+
    μιας αριθμητικής τιμής μέσω της συνάρτησης yylex() */
 
 %%
-{KEYWORD}       {return KEYWORD;}
-{OPERATOR}      {return OPERATOR;}
+
 {DELIMITER}     { return DELIMITER; }
 {IDENTIFIER}    { return IDENTIFIER; }
 {STRING}        { return STRING; }
 {INTEGER}       { return INTEGER; }
 {FLOAT}         { return FLOAT; }
-{COMMENT}       {ECHO; printf("\tThis is a comment\n");}
-{WHITESPACE}    {}
-{UNKNOWN}	    { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
-
-
-
-\n              { line++; printf("\n"); }
-<<EOF>>		{ printf("#END-OF-FILE#\n"); exit(0); }
-
+{KEYWORD}       { return KEYWORD; }
+{OPERATOR}      { return OPERATOR; }
+{COMMENT}       { ECHO; line++; }
+{WHITESPACE}    { }
+{NEWLINE}       { return NEWLINE; }
+<<EOF>>         { return END_OF_FILE; }
+{UNKNOWN}       { return UNKNOWN; }
 
 %%
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT","KEYWORD","OPERATOR" };
+char *tname[] = {
+   "DELIMITER", 
+   "IDENTIFIER", 
+   "STRING", 
+   "INTEGER", 
+   "FLOAT", 
+   "KEYWORD", 
+   "OPERATOR", 
+   "NEWLINE", 
+   "END_OF_FILE", 
+   "UNKNOWN" 
+};
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο
@@ -124,7 +133,27 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
-                fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                if (token)
+                {
+                  switch(token) 
+                  {
+                     case NEWLINE: 
+                        line++;
+                        break;
+                     case END_OF_FILE:
+                        fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                        printf("#END-OF-FILE#\n");
+                        exit(0);
+                        break;
+                     case UNKNOWN:
+                        fprintf(yyout, "\tLine=%d, token=%s TOKEN, value=\"%s\"\n", line, tname[token-1], yytext);
+                        break;
+                     default:
+                        fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                        break;
+                  } 
+                }
+                
         }
         return 0;
 }

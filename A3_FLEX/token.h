@@ -5,3 +5,6 @@
 #define FLOAT 5
 #define KEYWORD 6
 #define OPERATOR 7
+#define NEWLINE 8
+#define END_OF_FILE 9
+#define UNKNOWN 10
