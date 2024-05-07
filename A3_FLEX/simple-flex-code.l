@@ -70,8 +70,8 @@ UNKNOWN          [^ \t;\n\r/]+
 {STRING}        { return STRING; }
 {INTEGER}       { return INTEGER; }
 {FLOAT}         { return FLOAT; }
-{COMMENT}       { }
-{WHITESPACE}    { }
+{COMMENT}       { line++; }
+{WHITESPACE}    { line++; }
 {NEWLINE}       { return NEWLINE; }
 <<EOF>>         { return EOF; }
 {UNKNOWN}       { return UNKNOWN; }
@@ -122,7 +122,6 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
-                printf("token=%d\n", token);
                 if (token)
                 {
                   switch(token) 

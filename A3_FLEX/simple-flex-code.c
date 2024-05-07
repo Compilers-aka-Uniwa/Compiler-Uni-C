@@ -1533,12 +1533,12 @@ case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
 #line 73 "simple-flex-code.l"
-{ }
+{ line++; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 74 "simple-flex-code.l"
-{ }
+{ line++; }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
@@ -2610,7 +2610,6 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
-                printf("token=%d\n", token);
                 if (token)
                 {
                   switch(token) 
