@@ -54,7 +54,7 @@ OPERATOR         (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|
 COMMENT          (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 WHITESPACE       (\s)+
 NEWLINE          \n
-UNKNOWN          .
+UNKNOWN          [^ \t;\n\r/]+
 
 
 /* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος
@@ -74,12 +74,12 @@ UNKNOWN          .
 {WHITESPACE}    { }
 {NEWLINE}       { return NEWLINE; }
 <<EOF>>         { return EOF; }
-{UNKNOWN}       {  }
+{UNKNOWN}       { return UNKNOWN; }
 
 %%
 
 /* Πίνακας με όλα τα tokens αντίστοιχα με τους ορισμούς στο token.h */
-char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT", "KEYWORD", "OPERATOR", "NEWLINE", "EOF" };
+char *tname[] = {"DELIMITER", "IDENTIFIER", "STRING", "INTEGER", "FLOAT", "KEYWORD", "OPERATOR", "NEWLINE", "EOF", "UNKNOWN" };
 
 
 /* Η συνάρτηση main: Ο παρακάτω κώδικας θα τοποθετηθεί αυτόματα στο
@@ -122,18 +122,22 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
+                printf("token=%d\n", token);
                 if (token)
                 {
                   switch(token) 
                   {
-                     case 8:
+                     case NEWLINE:
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext); 
                         line++;
                         break;
-                     case 9:
+                     case EOF:
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
                         printf("#END-OF-FILE#\n");
                         exit(0);
+                        break;
+                     case UNKNOWN:
+                        fprintf(yyout, "\tLine=%d, token=%s TOKEN, value=\"%s\"\n", line, tname[token-1], yytext);
                         break;
                      default:
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);

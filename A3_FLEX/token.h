@@ -7,3 +7,4 @@
 #define OPERATOR 7
 #define NEWLINE 8
 #define EOF 9
+#define UNKNOWN 10
