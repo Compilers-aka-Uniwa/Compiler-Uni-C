@@ -1,331 +1,34 @@
+	Line=1, token=IDENTIFIER, value="user"
+	Line=1, token=NEWLINE, value="
+"
+	Line=2, token=STRING, value=""user""
 	Line=2, token=NEWLINE, value="
 "
+	Line=3, token=INTEGER, value="0"
+	Line=3, token=NEWLINE, value="
+"
+	Line=4, token=INTEGER, value="15"
 	Line=4, token=NEWLINE, value="
 "
-	Line=5, token=IDENTIFIER, value="x"
+	Line=5, token=INTEGER, value="007"
 	Line=5, token=NEWLINE, value="
 "
-	Line=6, token=STRING, value=""y""
+	Line=6, token=INTEGER, value="0x56AF"
 	Line=6, token=NEWLINE, value="
 "
-	Line=7, token=INTEGER, value="1"
+	Line=7, token=FLOAT, value="3.14"
 	Line=7, token=NEWLINE, value="
 "
-	Line=8, token=FLOAT, value="1.1"
+	Line=8, token=FLOAT, value="0e0"
 	Line=8, token=NEWLINE, value="
 "
-	Line=10, token=DELIMITER, value="    "
-	Line=10, token=IDENTIFIER, value="hi"
+	Line=9, token=FLOAT, value="2.71E1"
+	Line=9, token=NEWLINE, value="
+"
+	Line=10, token=FLOAT, value="4E0"
 	Line=10, token=NEWLINE, value="
 "
-	Line=11, token=UNKNOWN TOKEN, value="1_user"
-	Line=11, token=NEWLINE, value="
-"
-	Line=12, token=STRING, value=""user
-one
-""
-	Line=12, token=NEWLINE, value="
-"
-	Line=13, token=IDENTIFIER, value="E012"
 	Line=13, token=NEWLINE, value="
 "
-	Line=20, token=NEWLINE, value="
-"
-	Line=21, token=UNKNOWN TOKEN, value="-0"
-	Line=21, token=NEWLINE, value="
-"
-	Line=22, token=STRING, value=""-0""
-	Line=22, token=NEWLINE, value="
-"
-	Line=24, token=STRING, value=""\"this is a string""
-	Line=24, token=STRING, value=""
-""
-	Line=24, token=IDENTIFIER, value="this"
-	Line=24, token=DELIMITER, value=" "
-	Line=24, token=IDENTIFIER, value="is"
-	Line=24, token=DELIMITER, value=" "
-	Line=24, token=IDENTIFIER, value="a"
-	Line=24, token=DELIMITER, value=" "
-	Line=24, token=UNKNOWN TOKEN, value="string\0""
-	Line=24, token=NEWLINE, value="
-"
-	Line=25, token=UNKNOWN TOKEN, value="1-Id"
-	Line=25, token=NEWLINE, value="
-"
-	Line=26, token=UNKNOWN TOKEN, value="2-Str"
-	Line=26, token=NEWLINE, value="
-"
-	Line=27, token=UNKNOWN TOKEN, value="3-Int"
-	Line=27, token=NEWLINE, value="
-"
-	Line=28, token=UNKNOWN TOKEN, value="4-Fl"
-	Line=28, token=NEWLINE, value="
-"
-	Line=29, token=UNKNOWN TOKEN, value="5-Com"
-	Line=29, token=NEWLINE, value="
-"
-	Line=30, token=UNKNOWN TOKEN, value="6-Wh"
-	Line=30, token=NEWLINE, value="
-"
-	Line=31, token=DELIMITER, value="    "
-	Line=31, token=IDENTIFIER, value="tab"
-	Line=31, token=NEWLINE, value="
-"
-	Line=32, token=DELIMITER, value=" "
-	Line=32, token=IDENTIFIER, value="space"
-	Line=32, token=NEWLINE, value="
-"
-	Line=33, token=IDENTIFIER, value="newline"
-	Line=33, token=NEWLINE, value="
-"
-	Line=34, token=INTEGER, value="007"
-	Line=34, token=NEWLINE, value="
-"
-	Line=35, token=INTEGER, value="0"
-	Line=35, token=NEWLINE, value="
-"
-	Line=36, token=INTEGER, value="123"
-	Line=36, token=NEWLINE, value="
-"
-	Line=37, token=UNKNOWN TOKEN, value="0xAf"
-	Line=37, token=NEWLINE, value="
-"
-	Line=38, token=INTEGER, value="0"
-	Line=38, token=NEWLINE, value="
-"
-	Line=39, token=INTEGER, value="007"
-	Line=39, token=NEWLINE, value="
-"
-	Line=40, token=INTEGER, value="123"
-	Line=40, token=NEWLINE, value="
-"
-	Line=41, token=INTEGER, value="0xAF01"
-	Line=41, token=NEWLINE, value="
-"
-	Line=42, token=FLOAT, value="3.14"
-	Line=42, token=NEWLINE, value="
-"
-	Line=43, token=FLOAT, value="1E-1"
-	Line=43, token=NEWLINE, value="
-"
-	Line=44, token=FLOAT, value="1.45E0"
-	Line=44, token=NEWLINE, value="
-"
-	Line=45, token=FLOAT, value="0e0"
-	Line=45, token=NEWLINE, value="
-"
-	Line=48, token=NEWLINE, value="
-"
-	Line=49, token=UNKNOWN TOKEN, value="#"
-	Line=49, token=DELIMITER, value=" "
-	Line=49, token=IDENTIFIER, value="Python"
-	Line=49, token=NEWLINE, value="
-"
-	Line=50, token=STRING, value=""# Python""
-	Line=50, token=NEWLINE, value="
-"
-	Line=51, token=UNKNOWN TOKEN, value="\*"
-	Line=51, token=NEWLINE, value="
-"
-	Line=52, token=OPERATOR, value="*"
-	Line=52, token=NEWLINE, value="
-"
-	Line=53, token=UNKNOWN TOKEN, value="*\"
-	Line=53, token=NEWLINE, value="
-"
-	Line=54, token=UNKNOWN TOKEN, value="4e-0"
-	Line=54, token=NEWLINE, value="
-"
-	Line=55, token=FLOAT, value="1.5"
-	Line=55, token=NEWLINE, value="
-"
-	Line=56, token=INTEGER, value="0"
-	Line=56, token=NEWLINE, value="
-"
-	Line=57, token=FLOAT, value="4e0"
-	Line=57, token=NEWLINE, value="
-"
-	Line=58, token=STRING, value=""he said \"this is a string\"\n""
-	Line=58, token=NEWLINE, value="
-"
-	Line=59, token=STRING, value=""he said ""
-	Line=59, token=UNKNOWN TOKEN, value="\"this"
-	Line=59, token=DELIMITER, value=" "
-	Line=59, token=IDENTIFIER, value="is"
-	Line=59, token=DELIMITER, value=" "
-	Line=59, token=IDENTIFIER, value="a"
-	Line=59, token=DELIMITER, value=" "
-	Line=59, token=UNKNOWN TOKEN, value="string\"\"""
-	Line=59, token=NEWLINE, value="
-"
-	Line=60, token=STRING, value=""he said ""
-	Line=60, token=UNKNOWN TOKEN, value="6\3=2"""
-	Line=60, token=NEWLINE, value="
-"
-	Line=64, token=NEWLINE, value="
-"
-	Line=65, token=UNKNOWN TOKEN, value="4exp0"
-	Line=65, token=DELIMITER, value=" "
-	Line=65, token=NEWLINE, value="
-"
-	Line=66, token=FLOAT, value="4e0"
-	Line=66, token=NEWLINE, value="
-"
-	Line=67, token=IDENTIFIER, value="_us_"
-	Line=67, token=DELIMITER, value=" "
-	Line=67, token=NEWLINE, value="
-"
-	Line=68, token=IDENTIFIER, value="er_"
-	Line=68, token=NEWLINE, value="
-"
-	Line=69, token=UNKNOWN TOKEN, value="_service."
-	Line=69, token=NEWLINE, value="
-"
-	Line=70, token=UNKNOWN TOKEN, value=""\n\n"
-	Line=70, token=DELIMITER, value=" "
-	Line=70, token=UNKNOWN TOKEN, value="\'This"
-	Line=70, token=DELIMITER, value=" "
-	Line=70, token=IDENTIFIER, value="is"
-	Line=70, token=DELIMITER, value=" "
-	Line=70, token=IDENTIFIER, value="a"
-	Line=70, token=DELIMITER, value=" "
-	Line=70, token=UNKNOWN TOKEN, value="string\'""
-	Line=70, token=NEWLINE, value="
-"
-	Line=71, token=STRING, value=""\n\n""
-	Line=71, token=NEWLINE, value="
-"
-	Line=72, token=STRING, value=""
-""
-	Line=72, token=NEWLINE, value="
-"
-	Line=73, token=IDENTIFIER, value="Hello"
-	Line=73, token=DELIMITER, value=" "
-	Line=73, token=IDENTIFIER, value="World"
-	Line=73, token=NEWLINE, value="
-"
-	Line=74, token=OPERATOR, value="/"
-	Line=74, token=NEWLINE, value="
-"
-	Line=75, token=OPERATOR, value="/"
-	Line=75, token=NEWLINE, value="
-"
-	Line=77, token=INTEGER, value="0017"
-	Line=77, token=NEWLINE, value="
-"
-	Line=78, token=UNKNOWN TOKEN, value="089"
-	Line=78, token=NEWLINE, value="
-"
-	Line=79, token=INTEGER, value="0xAF"
-	Line=79, token=NEWLINE, value="
-"
-	Line=80, token=UNKNOWN TOKEN, value="01EF"
-	Line=80, token=NEWLINE, value="
-"
-	Line=81, token=IDENTIFIER, value="A356"
-	Line=81, token=NEWLINE, value="
-"
-	Line=82, token=STRING, value=""-0x1135
-1-0
-001
-1.56
-1,56
-""
-	Line=82, token=NEWLINE, value="
-"
-	Line=84, token=UNKNOWN TOKEN, value="\\\\\\\\\\\\\\\\\\\\\\\\"
-	Line=84, token=NEWLINE, value="
-"
-	Line=85, token=UNKNOWN TOKEN, value="uni-c"
-	Line=85, token=NEWLINE, value="
-"
-	Line=86, token=IDENTIFIER, value="uni_c"
-	Line=86, token=NEWLINE, value="
-"
-	Line=87, token=DELIMITER, value="        "
-	Line=87, token=IDENTIFIER, value="tab"
-	Line=87, token=NEWLINE, value="
-"
-	Line=88, token=DELIMITER, value="        "
-	Line=88, token=IDENTIFIER, value="tab"
-	Line=88, token=NEWLINE, value="
-"
-	Line=89, token=DELIMITER, value="        "
-	Line=89, token=IDENTIFIER, value="tab"
-	Line=89, token=NEWLINE, value="
-"
-	Line=90, token=IDENTIFIER, value="uni_c"
-	Line=90, token=NEWLINE, value="
-"
-	Line=91, token=DELIMITER, value="        "
-	Line=91, token=IDENTIFIER, value="tab"
-	Line=91, token=NEWLINE, value="
-"
-	Line=92, token=STRING, value=""\\\"\"\n""
-	Line=92, token=NEWLINE, value="
-"
-	Line=93, token=STRING, value=""
-\\\\""
-	Line=93, token=NEWLINE, value="
-"
-	Line=94, token=UNKNOWN TOKEN, value="\\"
-	Line=94, token=DELIMITER, value=" "
-	Line=94, token=IDENTIFIER, value="hey"
-	Line=94, token=NEWLINE, value="
-"
-	Line=95, token=UNKNOWN TOKEN, value="\*"
-	Line=95, token=DELIMITER, value=" "
-	Line=95, token=UNKNOWN TOKEN, value="*\"
-	Line=95, token=NEWLINE, value="
-"
-	Line=96, token=OPERATOR, value="/"
-	Line=96, token=OPERATOR, value="*"
-	Line=96, token=NEWLINE, value="
-"
-	Line=97, token=IDENTIFIER, value="this"
-	Line=97, token=NEWLINE, value="
-"
-	Line=98, token=IDENTIFIER, value="is"
-	Line=98, token=DELIMITER, value=" "
-	Line=98, token=NEWLINE, value="
-"
-	Line=99, token=IDENTIFIER, value="a"
-	Line=99, token=DELIMITER, value=" "
-	Line=99, token=NEWLINE, value="
-"
-	Line=100, token=IDENTIFIER, value="comment"
-	Line=100, token=NEWLINE, value="
-"
-	Line=101, token=OPERATOR, value="/"
-	Line=101, token=OPERATOR, value="*"
-	Line=101, token=NEWLINE, value="
-"
-	Line=102, token=UNKNOWN TOKEN, value="\*._."
-	Line=102, token=NEWLINE, value="
-"
-	Line=103, token=INTEGER, value="123456910"
-	Line=103, token=NEWLINE, value="
-"
-	Line=104, token=UNKNOWN TOKEN, value="*\"
-	Line=104, token=NEWLINE, value="
-"
-	Line=105, token=UNKNOWN TOKEN, value="(.)"
-	Line=105, token=NEWLINE, value="
-"
-	Line=106, token=IDENTIFIER, value="OK"
-	Line=106, token=NEWLINE, value="
-"
-	Line=107, token=INTEGER, value="12345"
-	Line=107, token=NEWLINE, value="
-"
-	Line=108, token=FLOAT, value="3.45"
-	Line=108, token=NEWLINE, value="
-"
-	Line=109, token=FLOAT, value="3E-1"
-	Line=109, token=NEWLINE, value="
-"
-	Line=110, token=UNKNOWN TOKEN, value="SURE?"
-	Line=110, token=NEWLINE, value="
-"
-	Line=111, token=IDENTIFIER, value="YES"
-	Line=111, token=EOF, value=""
+	Line=14, token=DELIMITER, value="     "
+	Line=14, token=EOF, value=""
