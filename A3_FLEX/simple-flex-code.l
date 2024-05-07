@@ -122,7 +122,8 @@ int main(int argc, char **argv){
         while( (token=yylex()) >= 0){
                 /* Για κάθε αναγνωρισμένο token, εκτυπώνεται η γραμμή στην οποία βρέθηκε
                    και το όνομά του μαζί με την τιμή του. */
-                printf("value=\"%s\", token=%d", yytext, token);
+                printf("value=\"%s\"", yytext);
+                printf("token=%d\n", token);
                 if (token)
                 {
                   switch(token) 
