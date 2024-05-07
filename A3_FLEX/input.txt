@@ -104,10 +104,7 @@ hi
 // hi */
 /* hi //
 // Αυτό είναι ένα σχόλιο
-
-// ====== Test case #6 WHITESPACES ======
-              
-     WHITESPACES
+*/
 
 // ====== Test case #7 KEYWORDS ======
 int x = 5;

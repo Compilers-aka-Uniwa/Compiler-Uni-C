@@ -72,7 +72,7 @@ UNKNOWN          [^ \t\r\n;]+
 {OPERATOR}      { return OPERATOR; }
 {COMMENT}       { ECHO; line++; }
 {WHITESPACE}    { }
-{NEWLINE}       { line++; return NEWLINE; }
+{NEWLINE}       { return NEWLINE; }
 <<EOF>>         { return END_OF_FILE; }
 {UNKNOWN}       { return UNKNOWN; }
 

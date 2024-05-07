@@ -1318,7 +1318,7 @@ case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
 #line 75 "simple-flex-code.l"
-{ line++; return NEWLINE; }
+{ return NEWLINE; }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 #line 76 "simple-flex-code.l"
