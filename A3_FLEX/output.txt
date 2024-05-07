@@ -1,2 +1,86 @@
-	Line=1, token=IDENTIFIER, value="user"
-
+	Line=1, token=UNKNOWN TOKEN, value="user"
+	Line=2, token=NEWLINE, value="
+"
+	Line=2, token=UNKNOWN TOKEN, value=""theo""
+	Line=3, token=NEWLINE, value="
+"
+	Line=3, token=UNKNOWN TOKEN, value="45"
+	Line=4, token=NEWLINE, value="
+"
+	Line=4, token=UNKNOWN TOKEN, value="4.8"
+	Line=5, token=NEWLINE, value="
+"
+	Line=5, token=UNKNOWN TOKEN, value="4.7"
+	Line=6, token=NEWLINE, value="
+"
+	Line=6, token=UNKNOWN TOKEN, value=""good moring""
+	Line=7, token=NEWLINE, value="
+"
+	Line=7, token=UNKNOWN TOKEN, value="4e2"
+	Line=8, token=NEWLINE, value="
+"
+	Line=8, token=UNKNOWN TOKEN, value="good"
+	Line=9, token=NEWLINE, value="
+"
+	Line=9, token=UNKNOWN TOKEN, value="SPEctacular_15_"
+	Line=10, token=NEWLINE, value="
+"
+	Line=10, token=UNKNOWN TOKEN, value=""Mark said, \"Boo!\"\n""
+	Line=11, token=NEWLINE, value="
+"
+	Line=11, token=UNKNOWN TOKEN, value="0x4F"
+	Line=12, token=NEWLINE, value="
+"
+	Line=12, token=UNKNOWN TOKEN, value="9e-8"
+	Line=13, token=NEWLINE, value="
+"
+	Line=13, token=UNKNOWN TOKEN, value=""hello, \"world!\"\n""
+	Line=14, token=NEWLINE, value="
+"
+	Line=14, token=UNKNOWN TOKEN, value="8.88"
+	Line=15, token=NEWLINE, value="
+"
+	Line=15, token=UNKNOWN TOKEN, value="_AC"
+	Line=16, token=NEWLINE, value="
+"
+	Line=16, token=UNKNOWN TOKEN, value="/* hello world!! */"
+	Line=17, token=NEWLINE, value="
+"
+	Line=17, token=UNKNOWN TOKEN, value=""6\\3=2""
+	Line=18, token=NEWLINE, value="
+"
+	Line=18, token=UNKNOWN TOKEN, value="1e100"
+	Line=19, token=NEWLINE, value="
+"
+	Line=19, token=UNKNOWN TOKEN, value=""pao""
+	Line=20, token=NEWLINE, value="
+"
+	Line=20, token=UNKNOWN TOKEN, value="/*20*/"
+	Line=21, token=NEWLINE, value="
+"
+	Line=21, token=UNKNOWN TOKEN, value="8.5"
+	Line=22, token=NEWLINE, value="
+"
+	Line=22, token=UNKNOWN TOKEN, value="+"
+	Line=23, token=NEWLINE, value="
+"
+	Line=23, token=UNKNOWN TOKEN, value="+---"
+	Line=24, token=NEWLINE, value="
+"
+	Line=24, token=UNKNOWN TOKEN, value="break"
+	Line=25, token=NEWLINE, value="
+"
+	Line=25, token=UNKNOWN TOKEN, value="func"
+	Line=26, token=NEWLINE, value="
+"
+	Line=26, token=UNKNOWN TOKEN, value=""
+	Line=27, token=NEWLINE, value="
+"
+	Line=27, token=UNKNOWN TOKEN, value="@#$"
+	Line=28, token=NEWLINE, value="
+"
+	Line=28, token=UNKNOWN TOKEN, value="8,3"
+	Line=29, token=NEWLINE, value="
+"
+	Line=29, token=UNKNOWN TOKEN, value="1_tzigger"
+	Line=29, token=EOF, value=""

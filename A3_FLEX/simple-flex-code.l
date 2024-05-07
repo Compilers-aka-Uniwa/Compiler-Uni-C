@@ -44,16 +44,17 @@ int line = 1;
    συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
 
 
-DELIMITER       [ \t]+
-IDENTIFIER      [a-zA-Z_][a-zA-Z0-9_]{0,31}
-STRING          \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
-INTEGER         ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
-FLOAT           (?:[1-9][0-9]*|0)(?:\.(?:[1-9][0-9]*|0*[1-9]+))?(?:[eE](?:-?[1-9][0-9]*|0))?
-KEYWORD        (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
-OPERATOR       (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
-COMMENT         (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
-WHITESPACE      (\s)+
-NEWLINE         \n 
+DELIMITER        [ \t]+
+IDENTIFIER       [a-zA-Z_][a-zA-Z0-9_]{0,31}
+STRING           \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
+INTEGER          ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
+FLOAT            (?:[1-9][0-9]*|0)(?:\.(?:[1-9][0-9]*|0*[1-9]+))?(?:[eE](?:-?[1-9][0-9]*|0))?
+KEYWORD          (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
+OPERATOR         (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
+COMMENT          (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
+WHITESPACE       \s+
+NEWLINE          \n
+UNKNOWN          .
 
 
 /* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος
@@ -73,6 +74,7 @@ NEWLINE         \n
 {WHITESPACE}    { }
 {NEWLINE}       { return NEWLINE; }
 <<EOF>>         { return EOF; }
+{UNKNOWN}       { fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext); }
 
 %%
 
@@ -125,17 +127,20 @@ int main(int argc, char **argv){
                   switch(token) 
                   {
                      case 8:
-                        line++; 
+                        line++;
+                        fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext); 
                         printf("\n");
-                     case -1:
+                        break;
+                     case 9:
+                        fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
                         printf("#END-OF-FILE#\n");
                         exit(0);
+                        break;
                      default:
                         fprintf(yyout, "\tLine=%d, token=%s, value=\"%s\"\n", line, tname[token-1], yytext);
+                        break;
                   } 
                 }
-                else
-                  fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"", line, yytext);
         }
         return 0;
 }
