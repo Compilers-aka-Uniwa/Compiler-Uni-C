@@ -52,7 +52,7 @@ FLOAT            (?:[1-9][0-9]*|0)(?:\.(?:[1-9][0-9]*|0*[1-9]+))?(?:[eE](?:-?[1-
 KEYWORD          (break|case|const|continue|do|double|else|float|for|if|int|long|return|sizeof|struct|switch|void|while|func)
 OPERATOR         (\+|-|\*|\/|%|=|\+=|-=-|\*=|\/=|!|&&|\|\||==|!=|\+\+|--|<|>|<=|>=|&|\||\^|<<|>>|&)
 COMMENT          (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
-WHITESPACE       \s+
+WHITESPACE       (\s)+
 NEWLINE          \n
 UNKNOWN          .
 
@@ -74,7 +74,7 @@ UNKNOWN          .
 {WHITESPACE}    { }
 {NEWLINE}       { return NEWLINE; }
 <<EOF>>         { return EOF; }
-{UNKNOWN}       { return 0; }
+{UNKNOWN}       { }
 
 %%
 
@@ -145,6 +145,7 @@ int main(int argc, char **argv){
                 }
                 else
                   fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext);
+                
         }
         return 0;
 }

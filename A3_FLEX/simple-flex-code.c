@@ -961,7 +961,7 @@ case YY_STATE_EOF(INITIAL):
 case 11:
 YY_RULE_SETUP
 #line 77 "simple-flex-code.l"
-{ return 0; }
+{ }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
@@ -2041,6 +2041,7 @@ int main(int argc, char **argv){
                 }
                 else
                   fprintf(yyout, "\tLine=%d, token=UNKNOWN TOKEN, value=\"%s\"\n", line, yytext);
+                
         }
         return 0;
 }
