@@ -31,7 +31,7 @@
 
 
 /* Αρχείο κεφαλίδας που περιέχει λίστα με όλα τα tokens */
-#include "token.h"
+#include "simple-bison-code.tab.h"
 
 /* Ορισμός μετρητή τρέχουσας γραμμής */
 int line = 1;

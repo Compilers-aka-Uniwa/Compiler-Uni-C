@@ -23,6 +23,12 @@
 	#include <stdlib.h>
         int yylex(void);
         void yyerror(char *);
+	/* === ΠΙΝΑΚΑΣ ΣΥΜΒΟΛΩΝ === */
+	char* sym[] = 
+	{ "break", "do", "if", "sizeof", "case", "double", "int", "struct", "func", "else", 
+	  "long", "switch", "const", "float", "return", "void", "continue", "for", "short", "while", 
+	  "+", "*=", "--", "-", "/=", "<", "*", "!", ">", "/", "&&", "<=", "%", "||", ">=", "=", "==", 
+	  "&", "+=", "!=", "-=", "++" };
 %}
 
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
@@ -49,86 +55,7 @@ expr:
         ;
 %%
 
-/* Η συνάρτηση yylex υλοποιεί έναν αυτόνομο λεκτικό αναλυτή. Εδώ αναγνωρίζονται
-   οι λεκτικές μονάδες της γλώσσας Uni-C */
-int yylex() {
-	char buf[100];
-	char num = 0;
-	int zero = 0;
-        char c;
 
-	// Διάβασε έναν χαρακτήρα από την είσοδο
-        c = getchar();
-
-        // Εάν ο χαρακτήρας είναι κενό ή tab, αγνόησέ τον και διάβασε τον επόμενο
-        while (c == ' ' || c == '\t') { yylval = 0; c = getchar(); }
-
-	// Αν βρεθεί ένας χαρακτήρας A-Z, a-z ή _ τότε πρόκειται για μεταβλητή
-	if ((c >= 'A' && c <= 'Z') ||
-	    (c >= 'a' && c <= 'z') ||
-	    (c == '_'))
-	{
-		sprintf(buf, "%c", c);
-		c = getchar();
-		// Ο επόμενος χαρακτήρας μετά τον πρώτο μπορεί να είναι και ψηφίο 0-9
-		while((c >= 'A' && c <= 'Z') ||
-		      (c >= 'a' && c <= 'z') ||
-		      (c >= '0' && c <= '9') ||
-		      (c == '_'))
-		{
-			sprintf(buf, "%s%c", buf, c);
-			c = getchar();
-		}
-		ungetc(c, stdin);
-		yylval = 0;
-		printf("\tScanner returned: VARIABLE (%s)\n", buf);
-		return VARIABLE;
-	}
-
-        // Για κάθε χαρακτήρα που είναι αριθμός γίνεται η τοποθέτησή του στην yylval
-        while (c >= '0' && c <= '9')
-        {
-		if (zero > 0) { zero = 0; yyerror("integer starting with zero"); exit(1); }
-		if (c == '0') zero++;
-		if (num == 0) yylval = 0;
-                yylval = (yylval * 10) + (c - '0');
-		num = 1;
-		c = getchar();
-        }
-        if (num)
-	{
-		ungetc(c, stdin);
-		printf("\tScanner returned: INTCONST (%d)\n", yylval);
-		return INTCONST;
-	}
-
-	// Εάν ο χαρακτήρας είναι το σύμβολο + πρόκειται για πρόσθεση
-        if (c == '+')
-	{
-		printf("\tScanner returned: PLUS (%c)\n", c);
-		return PLUS;
-	}
-
-	// Εάν πρόκειται για τον ειδικό χαρακτήρα νέας γραμμής
-        if (c == '\n')
-	{
-		yylval = 0;
-		printf("\tScanner returned: NEWLINE (\\n)\n");
-		return NEWLINE;
-	}
-
-	// Εάν πρόκειται για τον ειδικό χαρακτήρα τέλους αρχείου
-	if (c == EOF)
-	{
-		printf("\tScanner returned: EOF (EOF)\n");
-		exit(0);
-	}
-
-	/* FILL ME */
-
-	// Για οτιδήποτε άλλο κάλεσε την yyerror με μήνυμα λάθους
-	yyerror("invalid character");
-}
 
 
 /* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
