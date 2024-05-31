@@ -37,6 +37,8 @@
 extern int line;
 extern int flag;
 
+void prn(const char *token);
+
 %}
 
 
@@ -45,14 +47,14 @@ extern int flag;
    συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
 
 
-DELIMITER        [;]
+DELIMITER        \;
 IDENTIFIER       [a-zA-Z_][a-zA-Z0-9_]{0,31}
 STRING           \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
 INTEGER          ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
 FLOAT            (?:[1-9][0-9]*|0)(?:\.(?:[1-9][0-9]*|0*[1-9]+))?(?:[eE](?:-?[1-9][0-9]*|0))?
 COMMENT          (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 WHITESPACE       [ \t]+
-NEWLINE          [\n]
+NEWLINE          \n
 UNKNOWN          [^ \t\r\n;]+
 
 
@@ -62,11 +64,6 @@ UNKNOWN          [^ \t\r\n;]+
 
 %%
 
-{DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
-{IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }
-{STRING}        { prn("STRING"); return STRING; }
-{INTEGER}       { prn("INTEGER"); return INTEGER; }
-{FLOAT}         { prn("FLOAT"); return FLOAT; }
 "break"         { prn("KEYWORD"); return BREAK; }
 "case"          { prn("KEYWORD"); return CASE; }
 "const"         { prn("KEYWORD"); return CONST; }
@@ -108,9 +105,14 @@ UNKNOWN          [^ \t\r\n;]+
 "!="            { prn("OPERATOR"); return NOT_EQ; }
 "-="            { prn("OPERATOR"); return MIN_EQ; }
 "++"            { prn("OPERATOR"); return POST_PLUS_EQ; }
+{DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
+{IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }
+{STRING}        { prn("STRING"); return STRING; }
+{INTEGER}       { prn("INTEGER"); return INTEGER; }
+{FLOAT}         { prn("FLOAT"); return FLOAT; }
 {COMMENT}       { ECHO; line++; }
 {WHITESPACE}    { }
-{NEWLINE}       { line++;  prn("NEWLINE"); return NEWLINE; }
+{NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { prn("EOF"); return END_OF_FILE; }
 {UNKNOWN}       { prn("UNKNOWN TOKEN"); return UNKNOWN; }
 

@@ -43,7 +43,8 @@
 %token INTEGER FLOAT
 %token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT_KEY RETURN VOID CONTINUE FOR SHORT WHILE 
 %token PLUS MUL_EQ POST_MIN_EQ MINUS DIV_EQ LESS MUL NOT GREATER DIV AND LESS_EQ MOD OR GREATER_EQ ASSIGN_OP EQUAL ADDR_OP PLUS_EQ NOT_EQ MIN_EQ POST_PLUS_EQ
-%token SEMI
+%token DELIMITER
+%token NEWLINE END_OF_FILE
 %token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
@@ -70,26 +71,8 @@ program:
         |
         ;
 expr: 
-        INTCONST         { $$ = $1; }
-	| VARIABLE	 { $$ = $1; }
+        INTEGER         { $$ = $1; }
         | expr PLUS expr { $$ = $1 + $3; } 
-arithm_ops:
-        5 + 3 { $$ = $1 + $3 }
-        a - b { $$ = $1 - $3 }
-        5 * b { $$ = $1 * $3 }
-logical_ops:
-        5 || 3 { $$ = $1 || $3 }
-        5 && 3
-        !5     { $$ = !$2 }
-        A || B 
-relational_ops:
-        5 > 3
-        4 == 5
-        A <= B 
-strings:
-identifiers:
-        a = expr
-/* FILL ME */
         ;
 %%
 
@@ -107,11 +90,12 @@ void yyerror(char *s) {
    του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
 
 extern FILE *yyin;
+extern FILE *yyout;
 
 /* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
    Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
    για να ξεκινήσει η συντακτική ανάλυση. */
-int main(void)  
+int main(int argc, char **argv)  
 {       
         yydebug = 0;
 
