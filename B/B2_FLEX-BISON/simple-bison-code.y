@@ -22,6 +22,7 @@
     #include <stdio.h>
 	#include <stdlib.h>
 	#define YYSTATE char*
+        #define YYDEBUG 1
 	
 	int line = 1;
 	int errflag = 0;
@@ -109,31 +110,38 @@ extern FILE *yyin;
 /* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
    Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
    για να ξεκινήσει η συντακτική ανάλυση. */
-int main(void)  {
-        
-		if(argc == 3){
-                if(!(yyin = fopen(argv[1], "r"))) {
+int main(void)  
+{       
+        yydebug = 0;
+
+	if (argc == 3)
+        {
+                if (!(yyin = fopen(argv[1], "r"))) 
+                {
                         fprintf(stderr, "Cannot read file: %s\n", argv[1]);
                         return 1;
                 }
-                if(!(yyout = fopen(argv[2], "w"))) {
+                if (!(yyout = fopen(argv[2], "w"))) 
+                {
                         fprintf(stderr, "Cannot create file: %s\n", argv[2]);
                         return 1;
                 }
         }
-        else if(argc == 2){
-                if(!(yyin = fopen(argv[1], "r"))) {
+        else if (argc == 2)
+        {
+                if (!(yyin = fopen(argv[1], "r"))) 
+                {
                         fprintf(stderr, "Cannot read file: %s\n", argv[1]);
                         return 1;
                 }
         }
 		
-		int parse = yyparse();
+	int parse = yyparse();
 
-		if (errflag == 0 && parse == 0)
-			printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\n", parse);
-		else
-			printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\n", parse);
+	if (errflag == 0 && parse == 0)
+		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\n", parse);
+        else
+		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\n", parse);
 
-		return 0;
+	return 0;
 }
