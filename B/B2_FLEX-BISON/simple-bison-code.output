@@ -1,0 +1,197 @@
+Terminals unused in grammar
+
+    IDENTIFIER
+    STRING
+    FLOAT
+    BREAK
+    DO
+    IF
+    SIZEOF
+    CASE
+    DOUBLE
+    INT
+    STRUCT
+    FUNC
+    ELSE
+    LONG
+    SWITCH
+    CONST
+    FLOAT_KEY
+    RETURN
+    VOID
+    CONTINUE
+    FOR
+    SHORT
+    WHILE
+    MUL_EQ
+    POST_MIN_EQ
+    MINUS
+    DIV_EQ
+    LESS
+    MUL
+    NOT
+    GREATER
+    DIV
+    AND
+    LESS_EQ
+    MOD
+    OR
+    GREATER_EQ
+    ASSIGN_OP
+    EQUAL
+    ADDR_OP
+    PLUS_EQ
+    NOT_EQ
+    MIN_EQ
+    POST_PLUS_EQ
+    DELIMITER
+    END_OF_FILE
+    UNKNOWN
+    MULT
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: program expr NEWLINE
+    2        | ε
+
+    3 expr: INTEGER
+    4     | expr PLUS expr
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    IDENTIFIER (258)
+    STRING (259)
+    INTEGER (260) 3
+    FLOAT (261)
+    BREAK (262)
+    DO (263)
+    IF (264)
+    SIZEOF (265)
+    CASE (266)
+    DOUBLE (267)
+    INT (268)
+    STRUCT (269)
+    FUNC (270)
+    ELSE (271)
+    LONG (272)
+    SWITCH (273)
+    CONST (274)
+    FLOAT_KEY (275)
+    RETURN (276)
+    VOID (277)
+    CONTINUE (278)
+    FOR (279)
+    SHORT (280)
+    WHILE (281)
+    PLUS (282) 4
+    MUL_EQ (283)
+    POST_MIN_EQ (284)
+    MINUS (285)
+    DIV_EQ (286)
+    LESS (287)
+    MUL (288)
+    NOT (289)
+    GREATER (290)
+    DIV (291)
+    AND (292)
+    LESS_EQ (293)
+    MOD (294)
+    OR (295)
+    GREATER_EQ (296)
+    ASSIGN_OP (297)
+    EQUAL (298)
+    ADDR_OP (299)
+    PLUS_EQ (300)
+    NOT_EQ (301)
+    MIN_EQ (302)
+    POST_PLUS_EQ (303)
+    DELIMITER (304)
+    NEWLINE (305) 1
+    END_OF_FILE (306)
+    UNKNOWN (307)
+    MULT (308)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (54)
+        on left: 0
+    program (55)
+        on left: 1 2
+        on right: 0 1
+    expr (56)
+        on left: 3 4
+        on right: 1 4
+
+
+State 0
+
+    0 $accept: • program $end
+
+    $default  reduce using rule 2 (program)
+
+    program  go to state 1
+
+
+State 1
+
+    0 $accept: program • $end
+    1 program: program • expr NEWLINE
+
+    $end     shift, and go to state 2
+    INTEGER  shift, and go to state 3
+
+    expr  go to state 4
+
+
+State 2
+
+    0 $accept: program $end •
+
+    $default  accept
+
+
+State 3
+
+    3 expr: INTEGER •
+
+    $default  reduce using rule 3 (expr)
+
+
+State 4
+
+    1 program: program expr • NEWLINE
+    4 expr: expr • PLUS expr
+
+    PLUS     shift, and go to state 5
+    NEWLINE  shift, and go to state 6
+
+
+State 5
+
+    4 expr: expr PLUS • expr
+
+    INTEGER  shift, and go to state 3
+
+    expr  go to state 7
+
+
+State 6
+
+    1 program: program expr NEWLINE •
+
+    $default  reduce using rule 1 (program)
+
+
+State 7
+
+    4 expr: expr • PLUS expr
+    4     | expr PLUS expr •
+
+    $default  reduce using rule 4 (expr)

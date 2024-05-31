@@ -19,17 +19,47 @@
 %{
 /* Ορισμοί και δηλώσεις γλώσσας C. Οτιδήποτε έχει να κάνει με ορισμό ή αρχικοποίηση
    μεταβλητών & συναρτήσεων, αρχεία header και δηλώσεις #define μπαίνει σε αυτό το σημείο */
+        
         #include <stdio.h>
 	#include <stdlib.h>
-        int yylex(void);
-        void yyerror(char *);
+	#define YYSTATE char*
+        #define YYDEBUG 1
+	
+	int line = 1;
+	int errflag = 0;
+	extern char *yytext;
+	
+	/* === ΠΙΝΑΚΑΣ ΣΥΜΒΟΛΩΝ === */
+	char* sym[] = 
+	{ "break", "do", "if", "sizeof", "case", "double", "int", "struct", "func", "else", 
+	  "long", "switch", "const", "float", "return", "void", "continue", "for", "short", "while", 
+	  "+", "*=", "--", "-", "/=", "<", "*", "!", ">", "/", "&&", "<=", "%", "||", ">=", "=", "==", 
+	  "&", "+=", "!=", "-=", "++" };
+	
+	void yyerror(char *);
 %}
 
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
-%token INTCONST VARIABLE PLUS NEWLINE /* FILL ME */
+%token IDENTIFIER STRING 
+%token INTEGER FLOAT
+%token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT_KEY RETURN VOID CONTINUE FOR SHORT WHILE 
+%token PLUS MUL_EQ POST_MIN_EQ MINUS DIV_EQ LESS MUL NOT GREATER DIV AND LESS_EQ MOD OR GREATER_EQ ASSIGN_OP EQUAL ADDR_OP PLUS_EQ NOT_EQ MIN_EQ POST_PLUS_EQ
+%token DELIMITER
+%token NEWLINE END_OF_FILE
+%token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
-%left PLUS
+%right MUL_EQ DIV_EQ PLUS_EQ MIN_EQ ASSIGN_OP 
+%left OR 
+%left AND 
+%left EQUAL NOT_EQ 
+%left LESS GREATER LESS_EQ GREATER_EQ     
+%left PLUS MINUS                   
+%left MULT DIV MOD 
+%right ADDR_OP NOT 
+%left POST_PLUS_EQ POST_MIN_EQ
+
+
 
 %%
 
@@ -38,97 +68,16 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        program expr NEWLINE { printf("%d\n", $2); }
+        program expr NEWLINE { printf("[BISON] %d\n", $2); }
         |
         ;
-expr:
-        INTCONST         { $$ = $1; }
-	| VARIABLE	 { $$ = $1; }
-        | expr PLUS expr { $$ = $1 + $3; }
-/* FILL ME */
+expr: 
+        INTEGER          { $$ = $1; }
+        | expr PLUS expr { $$ = $1 + $3; } 
         ;
 %%
 
-/* Η συνάρτηση yylex υλοποιεί έναν αυτόνομο λεκτικό αναλυτή. Εδώ αναγνωρίζονται
-   οι λεκτικές μονάδες της γλώσσας Uni-C */
-int yylex() {
-	char buf[100];
-	char num = 0;
-	int zero = 0;
-        char c;
 
-	// Διάβασε έναν χαρακτήρα από την είσοδο
-        c = getchar();
-
-        // Εάν ο χαρακτήρας είναι κενό ή tab, αγνόησέ τον και διάβασε τον επόμενο
-        while (c == ' ' || c == '\t') { yylval = 0; c = getchar(); }
-
-	// Αν βρεθεί ένας χαρακτήρας A-Z, a-z ή _ τότε πρόκειται για μεταβλητή
-	if ((c >= 'A' && c <= 'Z') ||
-	    (c >= 'a' && c <= 'z') ||
-	    (c == '_'))
-	{
-		sprintf(buf, "%c", c);
-		c = getchar();
-		// Ο επόμενος χαρακτήρας μετά τον πρώτο μπορεί να είναι και ψηφίο 0-9
-		while((c >= 'A' && c <= 'Z') ||
-		      (c >= 'a' && c <= 'z') ||
-		      (c >= '0' && c <= '9') ||
-		      (c == '_'))
-		{
-			sprintf(buf, "%s%c", buf, c);
-			c = getchar();
-		}
-		ungetc(c, stdin);
-		yylval = 0;
-		printf("\tScanner returned: VARIABLE (%s)\n", buf);
-		return VARIABLE;
-	}
-
-        // Για κάθε χαρακτήρα που είναι αριθμός γίνεται η τοποθέτησή του στην yylval
-        while (c >= '0' && c <= '9')
-        {
-		if (zero > 0) { zero = 0; yyerror("integer starting with zero"); exit(1); }
-		if (c == '0') zero++;
-		if (num == 0) yylval = 0;
-                yylval = (yylval * 10) + (c - '0');
-		num = 1;
-		c = getchar();
-        }
-        if (num)
-	{
-		ungetc(c, stdin);
-		printf("\tScanner returned: INTCONST (%d)\n", yylval);
-		return INTCONST;
-	}
-
-	// Εάν ο χαρακτήρας είναι το σύμβολο + πρόκειται για πρόσθεση
-        if (c == '+')
-	{
-		printf("\tScanner returned: PLUS (%c)\n", c);
-		return PLUS;
-	}
-
-	// Εάν πρόκειται για τον ειδικό χαρακτήρα νέας γραμμής
-        if (c == '\n')
-	{
-		yylval = 0;
-		printf("\tScanner returned: NEWLINE (\\n)\n");
-		return NEWLINE;
-	}
-
-	// Εάν πρόκειται για τον ειδικό χαρακτήρα τέλους αρχείου
-	if (c == EOF)
-	{
-		printf("\tScanner returned: EOF (EOF)\n");
-		exit(0);
-	}
-
-	/* FILL ME */
-
-	// Για οτιδήποτε άλλο κάλεσε την yyerror με μήνυμα λάθους
-	yyerror("invalid character");
-}
 
 
 /* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
@@ -138,11 +87,47 @@ void yyerror(char *s) {
         fprintf(stderr, "Error: %s\n", s);
 }
 
+/* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
+   του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
+
+extern FILE *yyin;
+extern FILE *yyout;
 
 /* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
    Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
    για να ξεκινήσει η συντακτική ανάλυση. */
-int main(void)  {
-        yyparse();
-        return 0;
+int main(int argc, char **argv)  
+{       
+        yydebug = 0;
+
+	if (argc == 3)
+        {
+                if (!(yyin = fopen(argv[1], "r"))) 
+                {
+                        fprintf(stderr, "Cannot read file: %s\n", argv[1]);
+                        return 1;
+                }
+                if (!(yyout = fopen(argv[2], "w"))) 
+                {
+                        fprintf(stderr, "Cannot create file: %s\n", argv[2]);
+                        return 1;
+                }
+        }
+        else if (argc == 2)
+        {
+                if (!(yyin = fopen(argv[1], "r"))) 
+                {
+                        fprintf(stderr, "Cannot read file: %s\n", argv[1]);
+                        return 1;
+                }
+        }
+		
+	int parse = yyparse();
+
+	if (errflag == 0 && parse == 0)
+		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\n", parse);
+        else
+		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\n", parse);
+
+	return 0;
 }
