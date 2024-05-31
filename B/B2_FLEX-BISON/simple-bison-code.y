@@ -38,8 +38,9 @@
 %}
 
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
-%token IDENTIFIER KEYWORD STRING 
-%token INTEGER FLOAT 
+%token IDENTIFIER STRING 
+%token INTEGER FLOAT
+%token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT RETURN VOID CONTINUE FOR SHORT WHILE 
 %token PLUS MUL_EQ POST_MIN_EQ MINUS DIV_EQ LESS MUL NOT GREATER DIV AND LESS_EQ MOD OR GREATER_EQ ASSIGN_OP EQUAL ADDR_OP PLUS_EQ NOT_EQ MIN_EQ POST_PLUS_EQ
 %token SEMI
 
@@ -53,6 +54,7 @@
 %left MULT DIV MOD
 %right ADDR_OP NOT
 %left POST_PLUS_EQ POST_MIN_EQ
+
 
 
 %%
@@ -69,6 +71,22 @@ expr:
         INTCONST         { $$ = $1; }
 	| VARIABLE	 { $$ = $1; }
         | expr PLUS expr { $$ = $1 + $3; }
+arithm_ops:
+        5 + 3 { $$ = $1 + $3 }
+        a - b { $$ = $1 - $3 }
+        5 * b { $$ = $1 * $3 }
+logical_ops:
+        5 || 3 { $$ = $1 || $3 }
+        5 && 3
+        !5     { $$ = !$2 }
+        A || B 
+relational_ops:
+        5 > 3
+        4 == 5
+        A <= B 
+strings:
+identifiers:
+        a = expr
 /* FILL ME */
         ;
 %%
