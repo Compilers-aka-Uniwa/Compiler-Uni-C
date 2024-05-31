@@ -41,19 +41,20 @@
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
 %token IDENTIFIER STRING 
 %token INTEGER FLOAT
-%token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT RETURN VOID CONTINUE FOR SHORT WHILE 
+%token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT_KEY RETURN VOID CONTINUE FOR SHORT WHILE 
 %token PLUS MUL_EQ POST_MIN_EQ MINUS DIV_EQ LESS MUL NOT GREATER DIV AND LESS_EQ MOD OR GREATER_EQ ASSIGN_OP EQUAL ADDR_OP PLUS_EQ NOT_EQ MIN_EQ POST_PLUS_EQ
 %token SEMI
+%token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
-%right MUL_EQ DIV_EQ PLUS_EQ MIN_EQ ASSIGN_OP
+%right MUL_EQ DIV_EQ PLUS_EQ MIN_EQ ASSIGN_OP 
 %left OR 
-%left AND
-%left EQUAL NOT_EQ
-%left LESS GREATER LESS_EQ GREATER_EQ
-%left PLUS MINUS
-%left MULT DIV MOD
-%right ADDR_OP NOT
+%left AND 
+%left EQUAL NOT_EQ 
+%left LESS GREATER LESS_EQ GREATER_EQ     
+%left PLUS MINUS                   
+%left MULT DIV MOD 
+%right ADDR_OP NOT 
 %left POST_PLUS_EQ POST_MIN_EQ
 
 
@@ -68,10 +69,10 @@ program:
         program expr NEWLINE { printf("%d\n", $2); }
         |
         ;
-expr:
+expr: 
         INTCONST         { $$ = $1; }
 	| VARIABLE	 { $$ = $1; }
-        | expr PLUS expr { $$ = $1 + $3; }
+        | expr PLUS expr { $$ = $1 + $3; } 
 arithm_ops:
         5 + 3 { $$ = $1 + $3 }
         a - b { $$ = $1 - $3 }
