@@ -1491,12 +1491,12 @@ YY_RULE_SETUP
 case 45:
 YY_RULE_SETUP
 #line 111 "simple-flex-code.l"
-{ prn("INTEGER"); return INTEGER; }
+{ yylval = atoi(yytext); prn("INTEGER"); return INTEGER; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 112 "simple-flex-code.l"
-{ prn("FLOAT"); return FLOAT; }
+{ yylval = atof(yytext); prn("FLOAT"); return FLOAT; }
 	YY_BREAK
 case 47:
 /* rule 47 can match eol */
@@ -2544,7 +2544,7 @@ void prn(const char *token)
 {
    int isEOF = strcmp(token, "EOF");
    
-   printf("\tLine=%d, token=%s, value=\"%s\"\n", line, token, yytext);
+   printf("\t[FLEX] Line=%d, token=%s(%s)\n", line, token, yytext);
    
    if (!isEOF)
       exit(0);

@@ -23,6 +23,7 @@
 	#include <stdlib.h>
         int yylex(void);
         void yyerror(char *);
+	#define YYDEBUG 1
 %}
 
 /* Orismos twn anagnwrisimwn lektikwn monadwn. */
@@ -143,6 +144,7 @@ void yyerror(char *s) {
    Sthn sygkekrimenh periptwsh apla kalei thn synarthsh yyparse tou Bison
    gia na ksekinhsei h syntaktikh analysh. */
 int main(void)  {
+		yydebug = 1;
         yyparse();
         return 0;
 }

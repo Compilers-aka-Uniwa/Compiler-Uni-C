@@ -19,7 +19,8 @@
 %{
 /* Ορισμοί και δηλώσεις γλώσσας C. Οτιδήποτε έχει να κάνει με ορισμό ή αρχικοποίηση
    μεταβλητών & συναρτήσεων, αρχεία header και δηλώσεις #define μπαίνει σε αυτό το σημείο */
-    #include <stdio.h>
+        
+        #include <stdio.h>
 	#include <stdlib.h>
 	#define YYSTATE char*
         #define YYDEBUG 1
@@ -67,11 +68,11 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        program expr NEWLINE { printf("%d\n", $2); }
+        program expr NEWLINE { printf("[BISON] %d\n", $2); }
         |
         ;
 expr: 
-        INTEGER         { $$ = $1; }
+        INTEGER          { $$ = $1; }
         | expr PLUS expr { $$ = $1 + $3; } 
         ;
 %%

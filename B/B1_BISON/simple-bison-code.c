@@ -69,28 +69,15 @@
 /* First part of user prologue.  */
 #line 19 "simple-bison-code.y"
 
-/* Ορισμοί και δηλώσεις γλώσσας C. Οτιδήποτε έχει να κάνει με ορισμό ή αρχικοποίηση
-   μεταβλητών & συναρτήσεων, αρχεία header και δηλώσεις #define μπαίνει σε αυτό το σημείο */
-        
+/* Orismoi kai dhlwseis glwssas C. Otidhpote exei na kanei me orismo h arxikopoihsh
+   metablhtwn & synarthsewn, arxeia header kai dhlwseis #define mpainei se auto to shmeio */
         #include <stdio.h>
 	#include <stdlib.h>
-	#define YYSTATE char*
-        #define YYDEBUG 1
-	
-	int line = 1;
-	int errflag = 0;
-	extern char *yytext;
-	
-	/* === ΠΙΝΑΚΑΣ ΣΥΜΒΟΛΩΝ === */
-	char* sym[] = 
-	{ "break", "do", "if", "sizeof", "case", "double", "int", "struct", "func", "else", 
-	  "long", "switch", "const", "float", "return", "void", "continue", "for", "short", "while", 
-	  "+", "*=", "--", "-", "/=", "<", "*", "!", ">", "/", "&&", "<=", "%", "||", ">=", "=", "==", 
-	  "&", "+=", "!=", "-=", "++" };
-	
-	void yyerror(char *);
+        int yylex(void);
+        void yyerror(char *);
+	#define YYDEBUG 1
 
-#line 94 "simple-bison-code.tab.c"
+#line 81 "simple-bison-code.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -113,7 +100,47 @@
 #  endif
 # endif
 
-#include "simple-bison-code.tab.h"
+
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token kinds.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+  enum yytokentype
+  {
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    INTCONST = 258,                /* INTCONST  */
+    VARIABLE = 259,                /* VARIABLE  */
+    PLUS = 260,                    /* PLUS  */
+    NEWLINE = 261                  /* NEWLINE  */
+  };
+  typedef enum yytokentype yytoken_kind_t;
+#endif
+
+/* Value type.  */
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+typedef int YYSTYPE;
+# define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
+#endif
+
+
+extern YYSTYPE yylval;
+
+
+int yyparse (void);
+
+
+
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -121,60 +148,13 @@ enum yysymbol_kind_t
   YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
   YYSYMBOL_YYerror = 1,                    /* error  */
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
-  YYSYMBOL_IDENTIFIER = 3,                 /* IDENTIFIER  */
-  YYSYMBOL_STRING = 4,                     /* STRING  */
-  YYSYMBOL_INTEGER = 5,                    /* INTEGER  */
-  YYSYMBOL_FLOAT = 6,                      /* FLOAT  */
-  YYSYMBOL_BREAK = 7,                      /* BREAK  */
-  YYSYMBOL_DO = 8,                         /* DO  */
-  YYSYMBOL_IF = 9,                         /* IF  */
-  YYSYMBOL_SIZEOF = 10,                    /* SIZEOF  */
-  YYSYMBOL_CASE = 11,                      /* CASE  */
-  YYSYMBOL_DOUBLE = 12,                    /* DOUBLE  */
-  YYSYMBOL_INT = 13,                       /* INT  */
-  YYSYMBOL_STRUCT = 14,                    /* STRUCT  */
-  YYSYMBOL_FUNC = 15,                      /* FUNC  */
-  YYSYMBOL_ELSE = 16,                      /* ELSE  */
-  YYSYMBOL_LONG = 17,                      /* LONG  */
-  YYSYMBOL_SWITCH = 18,                    /* SWITCH  */
-  YYSYMBOL_CONST = 19,                     /* CONST  */
-  YYSYMBOL_FLOAT_KEY = 20,                 /* FLOAT_KEY  */
-  YYSYMBOL_RETURN = 21,                    /* RETURN  */
-  YYSYMBOL_VOID = 22,                      /* VOID  */
-  YYSYMBOL_CONTINUE = 23,                  /* CONTINUE  */
-  YYSYMBOL_FOR = 24,                       /* FOR  */
-  YYSYMBOL_SHORT = 25,                     /* SHORT  */
-  YYSYMBOL_WHILE = 26,                     /* WHILE  */
-  YYSYMBOL_PLUS = 27,                      /* PLUS  */
-  YYSYMBOL_MUL_EQ = 28,                    /* MUL_EQ  */
-  YYSYMBOL_POST_MIN_EQ = 29,               /* POST_MIN_EQ  */
-  YYSYMBOL_MINUS = 30,                     /* MINUS  */
-  YYSYMBOL_DIV_EQ = 31,                    /* DIV_EQ  */
-  YYSYMBOL_LESS = 32,                      /* LESS  */
-  YYSYMBOL_MUL = 33,                       /* MUL  */
-  YYSYMBOL_NOT = 34,                       /* NOT  */
-  YYSYMBOL_GREATER = 35,                   /* GREATER  */
-  YYSYMBOL_DIV = 36,                       /* DIV  */
-  YYSYMBOL_AND = 37,                       /* AND  */
-  YYSYMBOL_LESS_EQ = 38,                   /* LESS_EQ  */
-  YYSYMBOL_MOD = 39,                       /* MOD  */
-  YYSYMBOL_OR = 40,                        /* OR  */
-  YYSYMBOL_GREATER_EQ = 41,                /* GREATER_EQ  */
-  YYSYMBOL_ASSIGN_OP = 42,                 /* ASSIGN_OP  */
-  YYSYMBOL_EQUAL = 43,                     /* EQUAL  */
-  YYSYMBOL_ADDR_OP = 44,                   /* ADDR_OP  */
-  YYSYMBOL_PLUS_EQ = 45,                   /* PLUS_EQ  */
-  YYSYMBOL_NOT_EQ = 46,                    /* NOT_EQ  */
-  YYSYMBOL_MIN_EQ = 47,                    /* MIN_EQ  */
-  YYSYMBOL_POST_PLUS_EQ = 48,              /* POST_PLUS_EQ  */
-  YYSYMBOL_DELIMITER = 49,                 /* DELIMITER  */
-  YYSYMBOL_NEWLINE = 50,                   /* NEWLINE  */
-  YYSYMBOL_END_OF_FILE = 51,               /* END_OF_FILE  */
-  YYSYMBOL_UNKNOWN = 52,                   /* UNKNOWN  */
-  YYSYMBOL_MULT = 53,                      /* MULT  */
-  YYSYMBOL_YYACCEPT = 54,                  /* $accept  */
-  YYSYMBOL_program = 55,                   /* program  */
-  YYSYMBOL_expr = 56                       /* expr  */
+  YYSYMBOL_INTCONST = 3,                   /* INTCONST  */
+  YYSYMBOL_VARIABLE = 4,                   /* VARIABLE  */
+  YYSYMBOL_PLUS = 5,                       /* PLUS  */
+  YYSYMBOL_NEWLINE = 6,                    /* NEWLINE  */
+  YYSYMBOL_YYACCEPT = 7,                   /* $accept  */
+  YYSYMBOL_program = 8,                    /* program  */
+  YYSYMBOL_expr = 9                        /* expr  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -502,19 +482,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   23
+#define YYLAST   7
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  54
+#define YYNTOKENS  7
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  5
+#define YYNRULES  6
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  8
+#define YYNSTATES  9
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   308
+#define YYMAXUTOK   261
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -554,18 +534,14 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47,    48,    49,    50,    51,    52,    53
+       5,     6
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    71,    71,    72,    75,    76
+       0,    42,    42,    43,    46,    47,    48
 };
 #endif
 
@@ -581,15 +557,8 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "IDENTIFIER", "STRING",
-  "INTEGER", "FLOAT", "BREAK", "DO", "IF", "SIZEOF", "CASE", "DOUBLE",
-  "INT", "STRUCT", "FUNC", "ELSE", "LONG", "SWITCH", "CONST", "FLOAT_KEY",
-  "RETURN", "VOID", "CONTINUE", "FOR", "SHORT", "WHILE", "PLUS", "MUL_EQ",
-  "POST_MIN_EQ", "MINUS", "DIV_EQ", "LESS", "MUL", "NOT", "GREATER", "DIV",
-  "AND", "LESS_EQ", "MOD", "OR", "GREATER_EQ", "ASSIGN_OP", "EQUAL",
-  "ADDR_OP", "PLUS_EQ", "NOT_EQ", "MIN_EQ", "POST_PLUS_EQ", "DELIMITER",
-  "NEWLINE", "END_OF_FILE", "UNKNOWN", "MULT", "$accept", "program",
-  "expr", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "INTCONST", "VARIABLE",
+  "PLUS", "NEWLINE", "$accept", "program", "expr", YY_NULLPTR
 };
 
 static const char *
@@ -599,7 +568,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-28)
+#define YYPACT_NINF (-5)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -613,7 +582,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -28,     1,   -28,   -28,   -27,    -3,   -28,   -28
+      -5,     0,    -5,    -5,    -5,    -4,     2,    -5,    -5
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -621,19 +590,19 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       3,     0,     1,     4,     0,     0,     2,     5
+       3,     0,     1,     4,     5,     0,     0,     2,     6
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -28,   -28,    -2
+      -5,    -5,     1
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,     4
+       0,     1,     5
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -641,35 +610,31 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       5,     2,     3,     7,     0,     0,     3,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     6
+       2,     6,     7,     3,     4,     3,     4,     8
 };
 
 static const yytype_int8 yycheck[] =
 {
-      27,     0,     5,     5,    -1,    -1,     5,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    50
+       0,     5,     6,     3,     4,     3,     4,     6
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    55,     0,     5,    56,    27,    50,    56
+       0,     8,     0,     3,     4,     9,     5,     6,     9
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    54,    55,    55,    56,    56
+       0,     7,     8,     8,     9,     9,     9
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     3,     0,     1,     3
+       0,     2,     3,     0,     1,     1,     3
 };
 
 
@@ -1133,25 +1098,31 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: program expr NEWLINE  */
-#line 71 "simple-bison-code.y"
-                             { printf("[BISON] %d\n", yyvsp[-1]); }
-#line 1139 "simple-bison-code.tab.c"
+#line 42 "simple-bison-code.y"
+                             { printf("%d\n", yyvsp[-1]); }
+#line 1104 "simple-bison-code.c"
     break;
 
-  case 4: /* expr: INTEGER  */
-#line 75 "simple-bison-code.y"
+  case 4: /* expr: INTCONST  */
+#line 46 "simple-bison-code.y"
                          { yyval = yyvsp[0]; }
-#line 1145 "simple-bison-code.tab.c"
+#line 1110 "simple-bison-code.c"
     break;
 
-  case 5: /* expr: expr PLUS expr  */
-#line 76 "simple-bison-code.y"
+  case 5: /* expr: VARIABLE  */
+#line 47 "simple-bison-code.y"
+                         { yyval = yyvsp[0]; }
+#line 1116 "simple-bison-code.c"
+    break;
+
+  case 6: /* expr: expr PLUS expr  */
+#line 48 "simple-bison-code.y"
                          { yyval = yyvsp[-2] + yyvsp[0]; }
-#line 1151 "simple-bison-code.tab.c"
+#line 1122 "simple-bison-code.c"
     break;
 
 
-#line 1155 "simple-bison-code.tab.c"
+#line 1126 "simple-bison-code.c"
 
       default: break;
     }
@@ -1344,60 +1315,104 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 78 "simple-bison-code.y"
+#line 51 "simple-bison-code.y"
 
 
+/* H synarthsh yylex ylopoiei enan autonomo lektiko analyth. Edw anagnwrizontai
+   oi lektikes monades ths glwssas Uni-C */
+int yylex() {
+	char buf[100];
+	char num = 0;
+	int zero = 0;
+        char c;
+
+	// Diabase enan xarakthra apo thn eisodo
+        c = getchar();
+
+        // Ean o xarakthras einai keno h tab, agnohse ton kai diabase ton epomeno
+        while (c == ' ' || c == '\t') { yylval = 0; c = getchar(); }
+
+	// An brethei enas xarakthras A-Z, a-z h _ tote prokeitai gia metablhth
+	if ((c >= 'A' && c <= 'Z') ||
+	    (c >= 'a' && c <= 'z') ||
+	    (c == '_'))
+	{
+		sprintf(buf, "%c", c);
+		c = getchar();
+		// O epomenos xarakthras meta ton prwto mporei na einai kai pshfio 0-9
+		while((c >= 'A' && c <= 'Z') ||
+		      (c >= 'a' && c <= 'z') ||
+		      (c >= '0' && c <= '9') ||
+		      (c == '_'))
+		{
+			sprintf(buf, "%s%c", buf, c);
+			c = getchar();
+		}
+		ungetc(c, stdin);
+		yylval = 0;
+		printf("\tScanner returned: VARIABLE (%s)\n", buf);
+		return VARIABLE;
+	}
+
+        // Gia kathe xarakthra pou einai arithmos ginetai h topothethsh tou sthn yylval
+        while (c >= '0' && c <= '9')
+        {
+		if (zero > 0) { zero = 0; yyerror("integer starting with zero"); exit(1); }
+		if (c == '0') zero++;
+		if (num == 0) yylval = 0;
+                yylval = (yylval * 10) + (c - '0');
+		num = 1;
+		c = getchar();
+        }
+        if (num)
+	{
+		ungetc(c, stdin);
+		printf("\tScanner returned: INTCONST (%d)\n", yylval);
+		return INTCONST;
+	}
+
+	// Ean o xarakthras einai to symbolo + prokeitai gia prosthesh
+        if (c == '+')
+	{
+		printf("\tScanner returned: PLUS (%c)\n", c);
+		return PLUS;
+	}
+
+	// Ean prokeitai gia ton eidiko xarakthra neas grammhs
+        if (c == '\n')
+	{
+		yylval = 0;
+		printf("\tScanner returned: NEWLINE (\\n)\n");
+		return NEWLINE;
+	}
+
+	// Ean prokeitai gia ton eidiko xarakthra telous arxeiou
+	if (c == EOF)
+	{
+		printf("\tScanner returned: EOF (EOF)\n");
+		exit(0);
+	}
+
+	/* FILL ME */
+
+	// Gia otidhpote allo kalese thn yyerror me mhnyma lathous
+	yyerror("invalid character");
+}
 
 
-
-/* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
-   από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
-   συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
+/* H synarthsh yyerror xrhsimopoieitai gia thn anafora sfalmatwn. Sygkekrimena kaleitai
+   apo thn yyparse otan yparksei kapoio syntaktiko lathos. Sthn parakatw periptwsh h
+   synarthsh epi ths ousias typwnei mhnyma lathous sthn othonh. */
 void yyerror(char *s) {
         fprintf(stderr, "Error: %s\n", s);
 }
 
-/* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
-   του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
 
-extern FILE *yyin;
-extern FILE *yyout;
-
-/* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
-   Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
-   για να ξεκινήσει η συντακτική ανάλυση. */
-int main(int argc, char **argv)  
-{       
-        yydebug = 0;
-
-	if (argc == 3)
-        {
-                if (!(yyin = fopen(argv[1], "r"))) 
-                {
-                        fprintf(stderr, "Cannot read file: %s\n", argv[1]);
-                        return 1;
-                }
-                if (!(yyout = fopen(argv[2], "w"))) 
-                {
-                        fprintf(stderr, "Cannot create file: %s\n", argv[2]);
-                        return 1;
-                }
-        }
-        else if (argc == 2)
-        {
-                if (!(yyin = fopen(argv[1], "r"))) 
-                {
-                        fprintf(stderr, "Cannot read file: %s\n", argv[1]);
-                        return 1;
-                }
-        }
-		
-	int parse = yyparse();
-
-	if (errflag == 0 && parse == 0)
-		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\n", parse);
-        else
-		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\n", parse);
-
-	return 0;
+/* H synarthsh main pou apotelei kai to shmeio ekkinhshs tou programmatos.
+   Sthn sygkekrimenh periptwsh apla kalei thn synarthsh yyparse tou Bison
+   gia na ksekinhsei h syntaktikh analysh. */
+int main(void)  {
+		yydebug = 1;
+        yyparse();
+        return 0;
 }

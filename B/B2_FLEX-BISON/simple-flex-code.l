@@ -108,8 +108,8 @@ UNKNOWN          [^ \t\r\n;]+
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
 {IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }
 {STRING}        { prn("STRING"); return STRING; }
-{INTEGER}       { prn("INTEGER"); return INTEGER; }
-{FLOAT}         { prn("FLOAT"); return FLOAT; }
+{INTEGER}       { yylval = atoi(yytext); prn("INTEGER"); return INTEGER; }
+{FLOAT}         { yylval = atof(yytext); prn("FLOAT"); return FLOAT; }
 {COMMENT}       { ECHO; line++; }
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
@@ -127,7 +127,7 @@ void prn(const char *token)
 {
    int isEOF = strcmp(token, "EOF");
    
-   printf("\tLine=%d, token=%s, value=\"%s\"\n", line, token, yytext);
+   printf("\t[FLEX] Line=%d, token=%s(%s)\n", line, token, yytext);
    
    if (!isEOF)
       exit(0);
