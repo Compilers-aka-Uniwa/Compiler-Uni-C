@@ -322,6 +322,9 @@ void yyfree ( void *  );
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
+
+#define yywrap() (/*CONSTCOND*/1)
+#define YY_SKIP_YYWRAP
 typedef flex_uint8_t YY_CHAR;
 
 FILE *yyin = NULL, *yyout = NULL;
@@ -927,16 +930,50 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "simple-flex-code.l"
-#line 2 "simple-flex-code.l"
+/* Όνομα αρχείου:       simple-flex-code.l
+   Περιγραφή:           Υποδείγμα για ανάπτυξη λεκτικού αναλυτή με χρήση του εργαλείου Flex
+   Συγγραφέας:          Εργαστήριο Μεταγλωττιστών, Τμήμα Μηχανικών Πληροφορικής και Υπολογιστών,
+                         Πανεπιστήμιο Δυτικής Αττικής
+   Σχόλια:              Το παρόν πρόγραμμα υλοποιεί (με τη χρήση flex) έναν απλό λεκτικό αναλυτή
+                         που αναγνωρίζει κενά (διάστημα και tab) και αριθμούς (δεκαδικού συστήματος
+                         μόνο!) για τη γλώσσα Uni-C ενώ διαχειρίζεται τους ειδικούς χαρακτήρες
+                         νέας γραμμής '\n' (new line) και 'EOF' (end of file). Υπάρχουν αναφορές
+                         για την αναγνώριση μεταβλητών, με τον πραγματικό κώδικα να έχει αντικατασταθεί
+                         από τον λεκτικό FILL ME έτσι ώστε να συμπληρωθεί από εσάς. Προαιρετικά ο λεκτικός
+                         αναλυτής δέχεται ορίσματα αρχείων για είσοδο και έξοδο.
+   Οδηγίες εκτέλεσης:   Δώστε "make" χωρίς τα εισαγωγικά στον τρέχοντα κατάλογο. Εναλλακτικά:
+                         flex -o simple-flex-code.c simple-flex-code.l
+                         gcc -o simple-flex-code simple-flex-code.c
+                         ./simple-flex-code
+*/
+/* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
+/* Κώδικας C για τον ορισμό των απαιτούμενων header files και των μεταβλητών.
+   Οτιδήποτε ανάμεσα στα %{ και %} μεταφέρεται αυτόματα στο αρχείο C που
+   θα δημιουργήσει το Flex. */
+#line 27 "simple-flex-code.l"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+
+/* Αρχείο κεφαλίδας που περιέχει λίστα με όλα τα tokens */
 #include "simple-bison-code.tab.h"
+
+/* Ορισμός μετρητή τρέχουσας γραμμής */
 extern int line;
 extern int flag;
+
 void prn(const char *token);
-#line 939 "lex.yy.c"
-#line 940 "lex.yy.c"
+
+#line 970 "lex.yy.c"
+/* Ονόματα και αντίστοιχοι ορισμοί (υπό μορφή κανονικής έκφρασης).
+   Μετά από αυτό, μπορεί να γίνει χρήση των ονομάτων (αριστερά) αντί των,
+   συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
+/* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος 
+   κώδικας μέσα στα αγκίστρα. Η εντολή return επιτρέπει την επιστροφή
+   μιας αριθμητικής τιμής μέσω της συνάρτησης yylex() */
+#line 977 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -1153,9 +1190,10 @@ YY_DECL
 		}
 
 	{
-#line 21 "simple-flex-code.l"
+#line 65 "simple-flex-code.l"
 
-#line 1159 "lex.yy.c"
+
+#line 1197 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1214,302 +1252,302 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 22 "simple-flex-code.l"
+#line 67 "simple-flex-code.l"
 { prn("KEYWORD"); return BREAK; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 23 "simple-flex-code.l"
+#line 68 "simple-flex-code.l"
 { prn("KEYWORD"); return CASE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 24 "simple-flex-code.l"
+#line 69 "simple-flex-code.l"
 { prn("KEYWORD"); return CONST; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 25 "simple-flex-code.l"
+#line 70 "simple-flex-code.l"
 { prn("KEYWORD"); return CONTINUE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 26 "simple-flex-code.l"
+#line 71 "simple-flex-code.l"
 { prn("KEYWORD"); return DO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 27 "simple-flex-code.l"
+#line 72 "simple-flex-code.l"
 { prn("KEYWORD"); return DOUBLE; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 28 "simple-flex-code.l"
+#line 73 "simple-flex-code.l"
 { prn("KEYWORD"); return ELSE; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 29 "simple-flex-code.l"
+#line 74 "simple-flex-code.l"
 { prn("KEYWORD"); return FLOAT_KEY; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 30 "simple-flex-code.l"
+#line 75 "simple-flex-code.l"
 { prn("KEYWORD"); return FOR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 31 "simple-flex-code.l"
+#line 76 "simple-flex-code.l"
 { prn("KEYWORD"); return IF; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 32 "simple-flex-code.l"
+#line 77 "simple-flex-code.l"
 { prn("KEYWORD"); return INT; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 33 "simple-flex-code.l"
+#line 78 "simple-flex-code.l"
 { prn("KEYWORD"); return LONG; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 34 "simple-flex-code.l"
+#line 79 "simple-flex-code.l"
 { prn("KEYWORD"); return RETURN; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 35 "simple-flex-code.l"
+#line 80 "simple-flex-code.l"
 { prn("KEYWORD"); return SIZEOF; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 36 "simple-flex-code.l"
+#line 81 "simple-flex-code.l"
 { prn("KEYWORD"); return STRUCT; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 37 "simple-flex-code.l"
+#line 82 "simple-flex-code.l"
 { prn("KEYWORD"); return SWITCH; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 38 "simple-flex-code.l"
+#line 83 "simple-flex-code.l"
 { prn("KEYWORD"); return VOID; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 39 "simple-flex-code.l"
+#line 84 "simple-flex-code.l"
 { prn("KEYWORD"); return WHILE; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 40 "simple-flex-code.l"
+#line 85 "simple-flex-code.l"
 { prn("KEYWORD"); return FUNC; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 41 "simple-flex-code.l"
+#line 86 "simple-flex-code.l"
 { prn("KEYWORD"); return SHORT;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 42 "simple-flex-code.l"
+#line 87 "simple-flex-code.l"
 { prn("OPERATOR"); return PLUS; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 43 "simple-flex-code.l"
+#line 88 "simple-flex-code.l"
 { prn("OPERATOR"); return MUL_EQ; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 44 "simple-flex-code.l"
+#line 89 "simple-flex-code.l"
 { prn("OPERATOR"); return POST_MIN_EQ; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 45 "simple-flex-code.l"
+#line 90 "simple-flex-code.l"
 { prn("OPERATOR"); return MINUS; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 46 "simple-flex-code.l"
+#line 91 "simple-flex-code.l"
 { prn("OPERATOR"); return DIV_EQ; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 47 "simple-flex-code.l"
+#line 92 "simple-flex-code.l"
 { prn("OPERATOR"); return LESS; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 48 "simple-flex-code.l"
+#line 93 "simple-flex-code.l"
 { prn("OPERATOR"); return MUL; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 49 "simple-flex-code.l"
+#line 94 "simple-flex-code.l"
 { prn("OPERATOR"); return NOT; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 50 "simple-flex-code.l"
+#line 95 "simple-flex-code.l"
 { prn("OPERATOR"); return GREATER; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 51 "simple-flex-code.l"
+#line 96 "simple-flex-code.l"
 { prn("OPERATOR"); return DIV; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 52 "simple-flex-code.l"
+#line 97 "simple-flex-code.l"
 { prn("OPERATOR"); return AND; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 53 "simple-flex-code.l"
+#line 98 "simple-flex-code.l"
 { prn("OPERATOR"); return LESS_EQ; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 54 "simple-flex-code.l"
+#line 99 "simple-flex-code.l"
 { prn("OPERATOR"); return MOD; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 55 "simple-flex-code.l"
+#line 100 "simple-flex-code.l"
 { prn("OPERATOR"); return OR; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 56 "simple-flex-code.l"
+#line 101 "simple-flex-code.l"
 { prn("OPERATOR"); return GREATER_EQ; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 57 "simple-flex-code.l"
+#line 102 "simple-flex-code.l"
 { prn("OPERATOR"); return ASSIGN_OP; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 58 "simple-flex-code.l"
+#line 103 "simple-flex-code.l"
 { prn("OPERATOR"); return EQUAL; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 59 "simple-flex-code.l"
+#line 104 "simple-flex-code.l"
 { prn("OPERATOR"); return ADDR_OP; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 60 "simple-flex-code.l"
+#line 105 "simple-flex-code.l"
 { prn("OPERATOR"); return PLUS_EQ; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 61 "simple-flex-code.l"
+#line 106 "simple-flex-code.l"
 { prn("OPERATOR"); return NOT_EQ; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 62 "simple-flex-code.l"
+#line 107 "simple-flex-code.l"
 { prn("OPERATOR"); return MIN_EQ; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 63 "simple-flex-code.l"
+#line 108 "simple-flex-code.l"
 { prn("OPERATOR"); return POST_PLUS_EQ; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 64 "simple-flex-code.l"
+#line 109 "simple-flex-code.l"
 { prn("SPECIAL CHARACTER"); return OPEN_SQ_BRACKETS; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 65 "simple-flex-code.l"
+#line 110 "simple-flex-code.l"
 { prn("SPECIAL CHARACTER"); return CLOSE_SQ_BRACKETS; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 66 "simple-flex-code.l"
+#line 111 "simple-flex-code.l"
 { prn("SPECIAL CHARACTER"); return OPEN_CURLY_BRACKETS; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 67 "simple-flex-code.l"
+#line 112 "simple-flex-code.l"
 { prn("SPECIAL CHARACTER"); return CLOSE_CURLY_BRACKETS; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 68 "simple-flex-code.l"
+#line 113 "simple-flex-code.l"
 { prn("SPECIAL CHARACTER"); return COMMA; } 
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 69 "simple-flex-code.l"
+#line 114 "simple-flex-code.l"
 { prn("SPECIAL CHARACTER"); return BACKSLASH; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 70 "simple-flex-code.l"
+#line 115 "simple-flex-code.l"
 { prn("DELIMITER"); return DELIMITER; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 71 "simple-flex-code.l"
+#line 116 "simple-flex-code.l"
 { prn("IDENTIFIER"); return IDENTIFIER; }
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 72 "simple-flex-code.l"
+#line 117 "simple-flex-code.l"
 { prn("STRING"); return STRING; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 73 "simple-flex-code.l"
+#line 118 "simple-flex-code.l"
 { yylval = atoi(yytext); prn("INTEGER"); return INTEGER; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 74 "simple-flex-code.l"
+#line 119 "simple-flex-code.l"
 { yylval = atof(yytext); prn("FLOAT"); return FLOAT; }
 	YY_BREAK
 case 54:
 /* rule 54 can match eol */
 YY_RULE_SETUP
-#line 75 "simple-flex-code.l"
+#line 120 "simple-flex-code.l"
 { ECHO; line++; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 76 "simple-flex-code.l"
+#line 121 "simple-flex-code.l"
 { }
 	YY_BREAK
 case 56:
 /* rule 56 can match eol */
 YY_RULE_SETUP
-#line 77 "simple-flex-code.l"
+#line 122 "simple-flex-code.l"
 { line++; return NEWLINE; }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 78 "simple-flex-code.l"
+#line 123 "simple-flex-code.l"
 { prn("EOF"); return END_OF_FILE; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 79 "simple-flex-code.l"
+#line 124 "simple-flex-code.l"
 { prn("UNKNOWN TOKEN"); return UNKNOWN; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 81 "simple-flex-code.l"
+#line 126 "simple-flex-code.l"
 ECHO;
 	YY_BREAK
-#line 1513 "lex.yy.c"
+#line 1551 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2512,14 +2550,22 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 81 "simple-flex-code.l"
+#line 126 "simple-flex-code.l"
+
+
+/* Η συνάρτηση prn τυπώνει στην οθόνη τον τύπο του αναγνωριστικού (πχ. ASSIGNOP)
+   που έγινε match καθώς και το ίδιο το κείμενο (πχ. =) του αναγνωριστικού. Ο
+   λόγος ύπαρξής της είναι καθαρά για καλύτερη κατανόηση του κώδικα και για
+   γενικότερη διευκόλυνση στο debugging της εφαρμογής */
 
 void prn(const char *token)
 {
    int isEOF = strcmp(token, "EOF");
+   
    printf("\t[FLEX] Line=%d, token=%s(%s)\n", line, token, yytext);
+   
    if (!isEOF)
       exit(0);
-   return;
+	return;
 }
 
