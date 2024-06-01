@@ -74,6 +74,27 @@ program:
         program decl_arr NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ ΤΗΝ ΔΗΛΩΣΗ ΠΙΝΑΚΑ!!\n"); }
         |
         ;
+/* === ΠΙΝΑΚΕΣ === */
+decl_arr:
+        IDENTIFIER ASSIGN_OP elements DELIMITER { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
+        ;
+elements:
+        OPEN_SQ_BRACKETS value CLOSE_SQ_BRACKETS {}
+        ; 
+value:
+        type_int { $$ = $1; }
+        | type_fl { $$ = $1; }
+        | type_str { $$ = strdup(yytext); }
+        ;  
+type_int:
+        INTEGER       { $$ = $1; }
+        ;
+type_fl:
+        FLOAT       { $$ = $1; }
+        ;
+type_str:
+        STRING      { $$ = strdup(yytext); }  
+
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
 decl_var:
         type var DELIMITER { printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
@@ -88,27 +109,7 @@ type:
 var:
         IDENTIFIER              { $$ = strdup(yytext); }
         | var COMMA IDENTIFIER  { $$ = $1; }
-        ;
-/* === ΠΙΝΑΚΕΣ === */
-decl_arr:
-        IDENTIFIER ASSIGN_OP elements DELIMITER { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
-        ;
-elements:
-        OPEN_SQ_BRACKETS value CLOSE_SQ_BRACKETS {} 
-value:
-        type_int { $$ = $1; }
-        | type_fl { $$ = $1; }
-        | type_str { $$ = strdup(yytext); }
-        | value COMMA value
-        ;  
-type_int:
-        INTEGER       { $$ = $1; }
-        ;
-type_fl:
-        FLOAT       { $$ = $1; }
-        ;
-type_str:
-        STRING      { $$ = strdup(yytext); }    
+        ; 
 
 
 

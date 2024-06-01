@@ -1,7 +1,5 @@
 Terminals unused in grammar
 
-    STRING
-    FLOAT
     BREAK
     DO
     IF
@@ -31,7 +29,6 @@ Terminals unused in grammar
     MOD
     OR
     GREATER_EQ
-    ASSIGN_OP
     EQUAL
     ADDR_OP
     PLUS_EQ
@@ -39,8 +36,6 @@ Terminals unused in grammar
     MIN_EQ
     POST_PLUS_EQ
     END_OF_FILE
-    OPEN_SQ_BRACKETS
-    CLOSE_SQ_BRACKETS
     OPEN_CURLY_BRACKETS
     CLOSE_CURLY_BRACKETS
     BACKSLASH
@@ -54,53 +49,69 @@ Grammar
 
     1 $@1: ε
 
-    2 program: program expr NEWLINE $@1 program decl NEWLINE
-    3        | ε
+    2 $@2: ε
 
-    4 decl: type var DELIMITER
+    3 program: program expr NEWLINE $@1 program decl_var NEWLINE $@2 program decl_arr NEWLINE
+    4        | ε
 
-    5 type: INT
-    6     | FLOAT_KEY
-    7     | DOUBLE
-    8     | SHORT
-    9     | LONG
+    5 decl_arr: IDENTIFIER ASSIGN_OP elements DELIMITER
 
-   10 var: IDENTIFIER
-   11    | var COMMA IDENTIFIER
+    6 elements: OPEN_SQ_BRACKETS value CLOSE_SQ_BRACKETS
 
-   12 expr: INTEGER
-   13     | expr PLUS expr
+    7 value: type_int
+    8      | type_fl
+    9      | type_str
+
+   10 type_int: INTEGER
+
+   11 type_fl: FLOAT
+
+   12 type_str: STRING
+
+   13 decl_var: type var DELIMITER
+
+   14 type: INT
+   15     | FLOAT_KEY
+   16     | DOUBLE
+   17     | SHORT
+   18     | LONG
+
+   19 var: IDENTIFIER
+   20    | var COMMA IDENTIFIER
+
+   21 expr: INTEGER
+   22     | expr PLUS expr
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256)
-    IDENTIFIER (258) 10 11
-    STRING (259)
-    INTEGER (260) 12
-    FLOAT (261)
+    IDENTIFIER (258) 5 19 20
+    STRING (259) 12
+    INTEGER (260) 10 21
+    FLOAT (261) 11
     BREAK (262)
     DO (263)
     IF (264)
     SIZEOF (265)
     CASE (266)
-    DOUBLE (267) 7
-    INT (268) 5
+    DOUBLE (267) 16
+    INT (268) 14
     STRUCT (269)
     FUNC (270)
     ELSE (271)
-    LONG (272) 9
+    LONG (272) 18
     SWITCH (273)
     CONST (274)
-    FLOAT_KEY (275) 6
+    FLOAT_KEY (275) 15
     RETURN (276)
     VOID (277)
     CONTINUE (278)
     FOR (279)
-    SHORT (280) 8
+    SHORT (280) 17
     WHILE (281)
-    PLUS (282) 13
+    PLUS (282) 22
     MUL_EQ (283)
     POST_MIN_EQ (284)
     MINUS (285)
@@ -115,21 +126,21 @@ Terminals, with rules where they appear
     MOD (294)
     OR (295)
     GREATER_EQ (296)
-    ASSIGN_OP (297)
+    ASSIGN_OP (297) 5
     EQUAL (298)
     ADDR_OP (299)
     PLUS_EQ (300)
     NOT_EQ (301)
     MIN_EQ (302)
     POST_PLUS_EQ (303)
-    DELIMITER (304) 4
-    NEWLINE (305) 2
+    DELIMITER (304) 5 13
+    NEWLINE (305) 3
     END_OF_FILE (306)
-    OPEN_SQ_BRACKETS (307)
-    CLOSE_SQ_BRACKETS (308)
+    OPEN_SQ_BRACKETS (307) 6
+    CLOSE_SQ_BRACKETS (308) 6
     OPEN_CURLY_BRACKETS (309)
     CLOSE_CURLY_BRACKETS (310)
-    COMMA (311) 11
+    COMMA (311) 20
     BACKSLASH (312)
     UNKNOWN (313)
     MULT (314)
@@ -140,30 +151,51 @@ Nonterminals, with rules where they appear
     $accept (60)
         on left: 0
     program (61)
-        on left: 2 3
-        on right: 0 2
+        on left: 3 4
+        on right: 0 3
     $@1 (62)
         on left: 1
-        on right: 2
-    decl (63)
-        on left: 4
-        on right: 2
-    type (64)
-        on left: 5 6 7 8 9
-        on right: 4
-    var (65)
-        on left: 10 11
-        on right: 4 11
-    expr (66)
-        on left: 12 13
-        on right: 2 13
+        on right: 3
+    $@2 (63)
+        on left: 2
+        on right: 3
+    decl_arr (64)
+        on left: 5
+        on right: 3
+    elements (65)
+        on left: 6
+        on right: 5
+    value (66)
+        on left: 7 8 9
+        on right: 6
+    type_int (67)
+        on left: 10
+        on right: 7
+    type_fl (68)
+        on left: 11
+        on right: 8
+    type_str (69)
+        on left: 12
+        on right: 9
+    decl_var (70)
+        on left: 13
+        on right: 3
+    type (71)
+        on left: 14 15 16 17 18
+        on right: 13
+    var (72)
+        on left: 19 20
+        on right: 13 20
+    expr (73)
+        on left: 21 22
+        on right: 3 22
 
 
 State 0
 
     0 $accept: • program $end
 
-    $default  reduce using rule 3 (program)
+    $default  reduce using rule 4 (program)
 
     program  go to state 1
 
@@ -171,7 +203,7 @@ State 0
 State 1
 
     0 $accept: program • $end
-    2 program: program • expr NEWLINE $@1 program decl NEWLINE
+    3 program: program • expr NEWLINE $@1 program decl_var NEWLINE $@2 program decl_arr NEWLINE
 
     $end     shift, and go to state 2
     INTEGER  shift, and go to state 3
@@ -188,15 +220,15 @@ State 2
 
 State 3
 
-   12 expr: INTEGER •
+   21 expr: INTEGER •
 
-    $default  reduce using rule 12 (expr)
+    $default  reduce using rule 21 (expr)
 
 
 State 4
 
-    2 program: program expr • NEWLINE $@1 program decl NEWLINE
-   13 expr: expr • PLUS expr
+    3 program: program expr • NEWLINE $@1 program decl_var NEWLINE $@2 program decl_arr NEWLINE
+   22 expr: expr • PLUS expr
 
     PLUS     shift, and go to state 5
     NEWLINE  shift, and go to state 6
@@ -204,7 +236,7 @@ State 4
 
 State 5
 
-   13 expr: expr PLUS • expr
+   22 expr: expr PLUS • expr
 
     INTEGER  shift, and go to state 3
 
@@ -213,7 +245,7 @@ State 5
 
 State 6
 
-    2 program: program expr NEWLINE • $@1 program decl NEWLINE
+    3 program: program expr NEWLINE • $@1 program decl_var NEWLINE $@2 program decl_arr NEWLINE
 
     $default  reduce using rule 1 ($@1)
 
@@ -222,25 +254,25 @@ State 6
 
 State 7
 
-   13 expr: expr • PLUS expr
-   13     | expr PLUS expr •
+   22 expr: expr • PLUS expr
+   22     | expr PLUS expr •
 
-    $default  reduce using rule 13 (expr)
+    $default  reduce using rule 22 (expr)
 
 
 State 8
 
-    2 program: program expr NEWLINE $@1 • program decl NEWLINE
+    3 program: program expr NEWLINE $@1 • program decl_var NEWLINE $@2 program decl_arr NEWLINE
 
-    $default  reduce using rule 3 (program)
+    $default  reduce using rule 4 (program)
 
     program  go to state 9
 
 
 State 9
 
-    2 program: program • expr NEWLINE $@1 program decl NEWLINE
-    2        | program expr NEWLINE $@1 program • decl NEWLINE
+    3 program: program • expr NEWLINE $@1 program decl_var NEWLINE $@2 program decl_arr NEWLINE
+    3        | program expr NEWLINE $@1 program • decl_var NEWLINE $@2 program decl_arr NEWLINE
 
     INTEGER    shift, and go to state 3
     DOUBLE     shift, and go to state 10
@@ -249,56 +281,56 @@ State 9
     FLOAT_KEY  shift, and go to state 13
     SHORT      shift, and go to state 14
 
-    decl  go to state 15
-    type  go to state 16
-    expr  go to state 4
+    decl_var  go to state 15
+    type      go to state 16
+    expr      go to state 4
 
 
 State 10
 
-    7 type: DOUBLE •
+   16 type: DOUBLE •
 
-    $default  reduce using rule 7 (type)
+    $default  reduce using rule 16 (type)
 
 
 State 11
 
-    5 type: INT •
+   14 type: INT •
 
-    $default  reduce using rule 5 (type)
+    $default  reduce using rule 14 (type)
 
 
 State 12
 
-    9 type: LONG •
+   18 type: LONG •
 
-    $default  reduce using rule 9 (type)
+    $default  reduce using rule 18 (type)
 
 
 State 13
 
-    6 type: FLOAT_KEY •
+   15 type: FLOAT_KEY •
 
-    $default  reduce using rule 6 (type)
+    $default  reduce using rule 15 (type)
 
 
 State 14
 
-    8 type: SHORT •
+   17 type: SHORT •
 
-    $default  reduce using rule 8 (type)
+    $default  reduce using rule 17 (type)
 
 
 State 15
 
-    2 program: program expr NEWLINE $@1 program decl • NEWLINE
+    3 program: program expr NEWLINE $@1 program decl_var • NEWLINE $@2 program decl_arr NEWLINE
 
     NEWLINE  shift, and go to state 17
 
 
 State 16
 
-    4 decl: type • var DELIMITER
+   13 decl_var: type • var DELIMITER
 
     IDENTIFIER  shift, and go to state 18
 
@@ -307,43 +339,180 @@ State 16
 
 State 17
 
-    2 program: program expr NEWLINE $@1 program decl NEWLINE •
+    3 program: program expr NEWLINE $@1 program decl_var NEWLINE • $@2 program decl_arr NEWLINE
 
-    $default  reduce using rule 2 (program)
+    $default  reduce using rule 2 ($@2)
+
+    $@2  go to state 20
 
 
 State 18
 
-   10 var: IDENTIFIER •
+   19 var: IDENTIFIER •
 
-    $default  reduce using rule 10 (var)
+    $default  reduce using rule 19 (var)
 
 
 State 19
 
-    4 decl: type var • DELIMITER
-   11 var: var • COMMA IDENTIFIER
+   13 decl_var: type var • DELIMITER
+   20 var: var • COMMA IDENTIFIER
 
-    DELIMITER  shift, and go to state 20
-    COMMA      shift, and go to state 21
+    DELIMITER  shift, and go to state 21
+    COMMA      shift, and go to state 22
 
 
 State 20
 
-    4 decl: type var DELIMITER •
+    3 program: program expr NEWLINE $@1 program decl_var NEWLINE $@2 • program decl_arr NEWLINE
 
-    $default  reduce using rule 4 (decl)
+    $default  reduce using rule 4 (program)
+
+    program  go to state 23
 
 
 State 21
 
-   11 var: var COMMA • IDENTIFIER
+   13 decl_var: type var DELIMITER •
 
-    IDENTIFIER  shift, and go to state 22
+    $default  reduce using rule 13 (decl_var)
 
 
 State 22
 
-   11 var: var COMMA IDENTIFIER •
+   20 var: var COMMA • IDENTIFIER
 
-    $default  reduce using rule 11 (var)
+    IDENTIFIER  shift, and go to state 24
+
+
+State 23
+
+    3 program: program • expr NEWLINE $@1 program decl_var NEWLINE $@2 program decl_arr NEWLINE
+    3        | program expr NEWLINE $@1 program decl_var NEWLINE $@2 program • decl_arr NEWLINE
+
+    IDENTIFIER  shift, and go to state 25
+    INTEGER     shift, and go to state 3
+
+    decl_arr  go to state 26
+    expr      go to state 4
+
+
+State 24
+
+   20 var: var COMMA IDENTIFIER •
+
+    $default  reduce using rule 20 (var)
+
+
+State 25
+
+    5 decl_arr: IDENTIFIER • ASSIGN_OP elements DELIMITER
+
+    ASSIGN_OP  shift, and go to state 27
+
+
+State 26
+
+    3 program: program expr NEWLINE $@1 program decl_var NEWLINE $@2 program decl_arr • NEWLINE
+
+    NEWLINE  shift, and go to state 28
+
+
+State 27
+
+    5 decl_arr: IDENTIFIER ASSIGN_OP • elements DELIMITER
+
+    OPEN_SQ_BRACKETS  shift, and go to state 29
+
+    elements  go to state 30
+
+
+State 28
+
+    3 program: program expr NEWLINE $@1 program decl_var NEWLINE $@2 program decl_arr NEWLINE •
+
+    $default  reduce using rule 3 (program)
+
+
+State 29
+
+    6 elements: OPEN_SQ_BRACKETS • value CLOSE_SQ_BRACKETS
+
+    STRING   shift, and go to state 31
+    INTEGER  shift, and go to state 32
+    FLOAT    shift, and go to state 33
+
+    value     go to state 34
+    type_int  go to state 35
+    type_fl   go to state 36
+    type_str  go to state 37
+
+
+State 30
+
+    5 decl_arr: IDENTIFIER ASSIGN_OP elements • DELIMITER
+
+    DELIMITER  shift, and go to state 38
+
+
+State 31
+
+   12 type_str: STRING •
+
+    $default  reduce using rule 12 (type_str)
+
+
+State 32
+
+   10 type_int: INTEGER •
+
+    $default  reduce using rule 10 (type_int)
+
+
+State 33
+
+   11 type_fl: FLOAT •
+
+    $default  reduce using rule 11 (type_fl)
+
+
+State 34
+
+    6 elements: OPEN_SQ_BRACKETS value • CLOSE_SQ_BRACKETS
+
+    CLOSE_SQ_BRACKETS  shift, and go to state 39
+
+
+State 35
+
+    7 value: type_int •
+
+    $default  reduce using rule 7 (value)
+
+
+State 36
+
+    8 value: type_fl •
+
+    $default  reduce using rule 8 (value)
+
+
+State 37
+
+    9 value: type_str •
+
+    $default  reduce using rule 9 (value)
+
+
+State 38
+
+    5 decl_arr: IDENTIFIER ASSIGN_OP elements DELIMITER •
+
+    $default  reduce using rule 5 (decl_arr)
+
+
+State 39
+
+    6 elements: OPEN_SQ_BRACKETS value CLOSE_SQ_BRACKETS •
+
+    $default  reduce using rule 6 (elements)
