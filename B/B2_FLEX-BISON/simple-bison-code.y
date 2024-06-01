@@ -109,7 +109,7 @@ type:
         ;
 var:
         IDENTIFIER              { $$ = strdup(yytext); }
-        | var COMMA var         { printf("var COMMA var\n"); }
+        | var COMMA var        { printf("var COMMA var\n"); }
         ; 
 
 /* === ΠΡΟΣΘΕΣΗ === 

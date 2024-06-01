@@ -83,7 +83,7 @@ UNKNOWN          [^ \t\r\n;]+
 "void"          { prn("KEYWORD"); return VOID; }
 "while"         { prn("KEYWORD"); return WHILE; }
 "func"          { prn("KEYWORD"); return FUNC; }
-"short"         { prn("KEYWORD"); return SHORT; }
+"short"         { prn("KEYWORD"); return SHORT;}
 "+"             { prn("OPERATOR"); return PLUS; }
 "*="            { prn("OPERATOR"); return MUL_EQ; }
 "--"            { prn("OPERATOR"); return POST_MIN_EQ; }
@@ -106,11 +106,11 @@ UNKNOWN          [^ \t\r\n;]+
 "!="            { prn("OPERATOR"); return NOT_EQ; }
 "-="            { prn("OPERATOR"); return MIN_EQ; }
 "++"            { prn("OPERATOR"); return POST_PLUS_EQ; }
-"["             { prn("SPECIAL CHARACTER"); return OPEN_SQ_BRACKETS; }
-"]"             { prn("SPECIAL CHARACTER"); return CLOSE_SQ_BRACKETS; }
-"{"             { prn("SPECIAL CHARACTER"); return OPEN_CURLY_BRACKETS; }
-"}"             { prn("SPECIAL CHARACTER"); return CLOSE_CURLY_BRACKETS; }
-","             { prn("SPECIAL CHARACTER"); return COMMA; } 
+"\["            { prn("SPECIAL CHARACTER"); return OPEN_SQ_BRACKETS; }
+"\]"            { prn("SPECIAL CHARACTER"); return CLOSE_SQ_BRACKETS; }
+"\{"            { prn("SPECIAL CHARACTER"); return OPEN_CURLY_BRACKETS; }
+"\}"            { prn("SPECIAL CHARACTER"); return CLOSE_CURLY_BRACKETS; }
+"\,"             { prn("SPECIAL CHARACTER"); return COMMA; } 
 "\\"            { prn("SPECIAL CHARACTER"); return BACKSLASH; }
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
 {IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }

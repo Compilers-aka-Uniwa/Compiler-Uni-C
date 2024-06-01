@@ -67,30 +67,24 @@
 
 
 /* First part of user prologue.  */
-#line 19 "simple-bison-code.y"
+#line 1 "simple-bison-code.y"
 
-/* Ορισμοί και δηλώσεις γλώσσας C. Οτιδήποτε έχει να κάνει με ορισμό ή αρχικοποίηση
-   μεταβλητών & συναρτήσεων, αρχεία header και δηλώσεις #define μπαίνει σε αυτό το σημείο */
-        
-        #include <stdio.h>
-	#include <stdlib.h>
-	#define YYSTATE char*
-        #define YYDEBUG 1
-	
-	int line = 1;
-	int errflag = 0;
-	extern char *yytext;
-	
-	/* === ΠΙΝΑΚΑΣ ΣΥΜΒΟΛΩΝ === */
-	char* sym[] = 
-	{ "break", "do", "if", "sizeof", "case", "double", "int", "struct", "func", "else", 
-	  "long", "switch", "const", "float", "return", "void", "continue", "for", "short", "while", 
-	  "+", "*=", "--", "-", "/=", "<", "*", "!", ">", "/", "&&", "<=", "%", "||", ">=", "=", "==", 
-	  "&", "+=", "!=", "-=", "++" };
-	
-	void yyerror(char *);
+#include <stdio.h>
+#include <stdlib.h>
+#define YYSTATE char*
+#define YYDEBUG 1
+int line = 1;
+int errflag = 0;
+extern char *yytext;
 
-#line 94 "simple-bison-code.tab.c"
+char* sym[] = 
+{ "break", "do", "if", "sizeof", "case", "double", "int", "struct", "func", "else", 
+  "long", "switch", "const", "float", "return", "void", "continue", "for", "short", "while", 
+  "+", "*=", "--", "-", "/=", "<", "*", "!", ">", "/", "&&", "<=", "%", "||", ">=", "=", "==", 
+  "&", "+=", "!=", "-=", "++" };
+void yyerror(char *);
+
+#line 88 "simple-bison-code.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -581,9 +575,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    73,    73,    73,    75,    79,    82,    85,    86,    87,
-      90,    93,    96,   101,   104,   105,   106,   107,   108,   111,
-     112
+       0,    40,    40,    40,    42,    45,    48,    51,    52,    53,
+      56,    59,    62,    65,    68,    69,    70,    71,    72,    75,
+      76
 };
 #endif
 
@@ -1168,115 +1162,115 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* $@1: %empty  */
-#line 73 "simple-bison-code.y"
+#line 40 "simple-bison-code.y"
                                  { printf("Ο BISON ΕΓΚΡΙΝΕΙ ΤΗΝ ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ!!\n"); }
-#line 1174 "simple-bison-code.tab.c"
+#line 1168 "simple-bison-code.tab.c"
     break;
 
   case 3: /* program: program decl_var NEWLINE $@1 program decl_arr NEWLINE  */
-#line 74 "simple-bison-code.y"
+#line 41 "simple-bison-code.y"
                                  { printf("Ο BISON ΕΓΚΡΙΝΕΙ ΤΗΝ ΔΗΛΩΣΗ ΠΙΝΑΚΑ!!\n"); }
-#line 1180 "simple-bison-code.tab.c"
+#line 1174 "simple-bison-code.tab.c"
     break;
 
   case 5: /* decl_arr: IDENTIFIER ASSIGN_OP elements DELIMITER  */
-#line 79 "simple-bison-code.y"
+#line 45 "simple-bison-code.y"
                                                 { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
-#line 1186 "simple-bison-code.tab.c"
+#line 1180 "simple-bison-code.tab.c"
     break;
 
   case 6: /* elements: OPEN_SQ_BRACKETS value CLOSE_SQ_BRACKETS  */
-#line 82 "simple-bison-code.y"
+#line 48 "simple-bison-code.y"
                                                  {}
-#line 1192 "simple-bison-code.tab.c"
+#line 1186 "simple-bison-code.tab.c"
     break;
 
   case 7: /* value: type_int  */
-#line 85 "simple-bison-code.y"
+#line 51 "simple-bison-code.y"
                  { yyval = yyvsp[0]; }
-#line 1198 "simple-bison-code.tab.c"
+#line 1192 "simple-bison-code.tab.c"
     break;
 
   case 8: /* value: type_fl  */
-#line 86 "simple-bison-code.y"
+#line 52 "simple-bison-code.y"
                   { yyval = yyvsp[0]; }
-#line 1204 "simple-bison-code.tab.c"
+#line 1198 "simple-bison-code.tab.c"
     break;
 
   case 9: /* value: type_str  */
-#line 87 "simple-bison-code.y"
+#line 53 "simple-bison-code.y"
                    { yyval = strdup(yytext); }
-#line 1210 "simple-bison-code.tab.c"
+#line 1204 "simple-bison-code.tab.c"
     break;
 
   case 10: /* type_int: INTEGER  */
-#line 90 "simple-bison-code.y"
-                      { yyval = yyvsp[0]; }
-#line 1216 "simple-bison-code.tab.c"
+#line 56 "simple-bison-code.y"
+                { yyval = yyvsp[0]; }
+#line 1210 "simple-bison-code.tab.c"
     break;
 
   case 11: /* type_fl: FLOAT  */
-#line 93 "simple-bison-code.y"
-                    { yyval = yyvsp[0]; }
-#line 1222 "simple-bison-code.tab.c"
+#line 59 "simple-bison-code.y"
+              { yyval = yyvsp[0]; }
+#line 1216 "simple-bison-code.tab.c"
     break;
 
   case 12: /* type_str: STRING  */
-#line 96 "simple-bison-code.y"
-                    { yyval = strdup(yytext); }
-#line 1228 "simple-bison-code.tab.c"
+#line 62 "simple-bison-code.y"
+               { yyval = strdup(yytext); }
+#line 1222 "simple-bison-code.tab.c"
     break;
 
   case 13: /* decl_var: type var DELIMITER  */
-#line 101 "simple-bison-code.y"
+#line 65 "simple-bison-code.y"
                            { printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
-#line 1234 "simple-bison-code.tab.c"
+#line 1228 "simple-bison-code.tab.c"
     break;
 
   case 14: /* type: INT  */
-#line 104 "simple-bison-code.y"
+#line 68 "simple-bison-code.y"
             { yyval = strdup(yytext); }
-#line 1240 "simple-bison-code.tab.c"
+#line 1234 "simple-bison-code.tab.c"
     break;
 
   case 15: /* type: FLOAT_KEY  */
-#line 105 "simple-bison-code.y"
+#line 69 "simple-bison-code.y"
                     { yyval = strdup(yytext); }
-#line 1246 "simple-bison-code.tab.c"
+#line 1240 "simple-bison-code.tab.c"
     break;
 
   case 16: /* type: DOUBLE  */
-#line 106 "simple-bison-code.y"
+#line 70 "simple-bison-code.y"
                  { yyval = strdup(yytext); }
-#line 1252 "simple-bison-code.tab.c"
+#line 1246 "simple-bison-code.tab.c"
     break;
 
   case 17: /* type: SHORT  */
-#line 107 "simple-bison-code.y"
+#line 71 "simple-bison-code.y"
                 { yyval = strdup(yytext); }
-#line 1258 "simple-bison-code.tab.c"
+#line 1252 "simple-bison-code.tab.c"
     break;
 
   case 18: /* type: LONG  */
-#line 108 "simple-bison-code.y"
-                { yyval = strdup(yytext); }
-#line 1264 "simple-bison-code.tab.c"
+#line 72 "simple-bison-code.y"
+               { yyval = strdup(yytext); }
+#line 1258 "simple-bison-code.tab.c"
     break;
 
   case 19: /* var: IDENTIFIER  */
-#line 111 "simple-bison-code.y"
-                                { yyval = strdup(yytext); }
-#line 1270 "simple-bison-code.tab.c"
+#line 75 "simple-bison-code.y"
+                   { yyval = strdup(yytext); }
+#line 1264 "simple-bison-code.tab.c"
     break;
 
   case 20: /* var: var COMMA var  */
-#line 112 "simple-bison-code.y"
-                                { printf("var COMMA var\n"); }
-#line 1276 "simple-bison-code.tab.c"
+#line 76 "simple-bison-code.y"
+                        {}
+#line 1270 "simple-bison-code.tab.c"
     break;
 
 
-#line 1280 "simple-bison-code.tab.c"
+#line 1274 "simple-bison-code.tab.c"
 
       default: break;
     }
@@ -1469,60 +1463,13 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 120 "simple-bison-code.y"
+#line 78 "simple-bison-code.y"
 
 
-
-
-
-/* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
-   από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
-   συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
 void yyerror(char *s) {
-        fprintf(stderr, "Error: %s\n", s);
+   fprintf(stderr, "error: %s\n", s);
 }
 
-/* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
-   του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
-
-extern FILE *yyin;
-extern FILE *yyout;
-
-/* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
-   Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
-   για να ξεκινήσει η συντακτική ανάλυση. */
-int main(int argc, char **argv)  
-{       
-        yydebug = 0;
-
-	if (argc == 3)
-        {
-                if (!(yyin = fopen(argv[1], "r"))) 
-                {
-                        fprintf(stderr, "Cannot read file: %s\n", argv[1]);
-                        return 1;
-                }
-                if (!(yyout = fopen(argv[2], "w"))) 
-                {
-                        fprintf(stderr, "Cannot create file: %s\n", argv[2]);
-                        return 1;
-                }
-        }
-        else if (argc == 2)
-        {
-                if (!(yyin = fopen(argv[1], "r"))) 
-                {
-                        fprintf(stderr, "Cannot read file: %s\n", argv[1]);
-                        return 1;
-                }
-        }
-		
-	int parse = yyparse();
-
-	if (errflag == 0 && parse == 0)
-		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\n", parse);
-        else
-		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\n", parse);
-
-	return 0;
+int main(void) {
+   return yyparse();
 }
