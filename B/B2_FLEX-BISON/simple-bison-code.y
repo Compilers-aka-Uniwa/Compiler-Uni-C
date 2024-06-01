@@ -41,11 +41,12 @@
 
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
 %token IDENTIFIER STRING 
-%token INTEGER FLOAT
+%token INTEGER FLOAT 
 %token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT_KEY RETURN VOID CONTINUE FOR SHORT WHILE 
 %token PLUS MUL_EQ POST_MIN_EQ MINUS DIV_EQ LESS MUL NOT GREATER DIV AND LESS_EQ MOD OR GREATER_EQ ASSIGN_OP EQUAL ADDR_OP PLUS_EQ NOT_EQ MIN_EQ POST_PLUS_EQ
 %token DELIMITER
 %token NEWLINE END_OF_FILE
+%token OPEN_SQ_BRACKETS CLOSE_SQ_BRACKETS OPEN_CURLY_BRACKETS CLOSE_CURLY_BRACKETS COMMA BACKSLASH
 %token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
@@ -69,8 +70,25 @@
 				όνομα : κανόνας { κώδικας C } */
 program:
         program expr NEWLINE { printf("[BISON] %d\n", $2); }
+        program decl NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ!!\n"); }
+        NEWLINE { printf("NEWLINE"); }
         |
         ;
+decl:
+        type var DELIMITER {  printf("\t[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
+        ;
+type: 
+        INT { $$ = strdup(yytext); }
+        | FLOAT_KEY { $$ = strdup(yytext); }
+        | DOUBLE { $$ = strdup(yytext); }
+        | SHORT { $$ = strdup(yytext); }
+        | LONG  { $$ = strdup(yytext); }
+        ;
+var:
+        IDENTIFIER              { $$ = strdup(yytext); }
+        | var COMMA IDENTIFIER  { $$ = $1; }
+        ;
+
 expr: 
         INTEGER          { $$ = $1; }
         | expr PLUS expr { $$ = $1 + $3; } 
@@ -98,7 +116,7 @@ extern FILE *yyout;
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 0;
+        yydebug = 1;
 
 	if (argc == 3)
         {

@@ -1,6 +1,5 @@
 Terminals unused in grammar
 
-    IDENTIFIER
     STRING
     FLOAT
     BREAK
@@ -8,20 +7,15 @@ Terminals unused in grammar
     IF
     SIZEOF
     CASE
-    DOUBLE
-    INT
     STRUCT
     FUNC
     ELSE
-    LONG
     SWITCH
     CONST
-    FLOAT_KEY
     RETURN
     VOID
     CONTINUE
     FOR
-    SHORT
     WHILE
     MUL_EQ
     POST_MIN_EQ
@@ -44,8 +38,12 @@ Terminals unused in grammar
     NOT_EQ
     MIN_EQ
     POST_PLUS_EQ
-    DELIMITER
     END_OF_FILE
+    OPEN_SQ_BRACKETS
+    CLOSE_SQ_BRACKETS
+    OPEN_CURLY_BRACKETS
+    CLOSE_CURLY_BRACKETS
+    BACKSLASH
     UNKNOWN
     MULT
 
@@ -54,42 +52,57 @@ Grammar
 
     0 $accept: program $end
 
-    1 program: program expr NEWLINE
-    2        | ε
+    1 $@1: ε
 
-    3 expr: INTEGER
-    4     | expr PLUS expr
+    2 $@2: ε
+
+    3 program: program expr NEWLINE $@1 program decl NEWLINE $@2 NEWLINE
+    4        | ε
+
+    5 decl: type var DELIMITER
+
+    6 type: INT
+    7     | FLOAT_KEY
+    8     | DOUBLE
+    9     | SHORT
+   10     | LONG
+
+   11 var: IDENTIFIER
+   12    | var COMMA IDENTIFIER
+
+   13 expr: INTEGER
+   14     | expr PLUS expr
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256)
-    IDENTIFIER (258)
+    IDENTIFIER (258) 11 12
     STRING (259)
-    INTEGER (260) 3
+    INTEGER (260) 13
     FLOAT (261)
     BREAK (262)
     DO (263)
     IF (264)
     SIZEOF (265)
     CASE (266)
-    DOUBLE (267)
-    INT (268)
+    DOUBLE (267) 8
+    INT (268) 6
     STRUCT (269)
     FUNC (270)
     ELSE (271)
-    LONG (272)
+    LONG (272) 10
     SWITCH (273)
     CONST (274)
-    FLOAT_KEY (275)
+    FLOAT_KEY (275) 7
     RETURN (276)
     VOID (277)
     CONTINUE (278)
     FOR (279)
-    SHORT (280)
+    SHORT (280) 9
     WHILE (281)
-    PLUS (282) 4
+    PLUS (282) 14
     MUL_EQ (283)
     POST_MIN_EQ (284)
     MINUS (285)
@@ -111,30 +124,51 @@ Terminals, with rules where they appear
     NOT_EQ (301)
     MIN_EQ (302)
     POST_PLUS_EQ (303)
-    DELIMITER (304)
-    NEWLINE (305) 1
+    DELIMITER (304) 5
+    NEWLINE (305) 3
     END_OF_FILE (306)
-    UNKNOWN (307)
-    MULT (308)
+    OPEN_SQ_BRACKETS (307)
+    CLOSE_SQ_BRACKETS (308)
+    OPEN_CURLY_BRACKETS (309)
+    CLOSE_CURLY_BRACKETS (310)
+    COMMA (311) 12
+    BACKSLASH (312)
+    UNKNOWN (313)
+    MULT (314)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (54)
+    $accept (60)
         on left: 0
-    program (55)
-        on left: 1 2
-        on right: 0 1
-    expr (56)
+    program (61)
         on left: 3 4
-        on right: 1 4
+        on right: 0 3
+    $@1 (62)
+        on left: 1
+        on right: 3
+    $@2 (63)
+        on left: 2
+        on right: 3
+    decl (64)
+        on left: 5
+        on right: 3
+    type (65)
+        on left: 6 7 8 9 10
+        on right: 5
+    var (66)
+        on left: 11 12
+        on right: 5 12
+    expr (67)
+        on left: 13 14
+        on right: 3 14
 
 
 State 0
 
     0 $accept: • program $end
 
-    $default  reduce using rule 2 (program)
+    $default  reduce using rule 4 (program)
 
     program  go to state 1
 
@@ -142,7 +176,7 @@ State 0
 State 1
 
     0 $accept: program • $end
-    1 program: program • expr NEWLINE
+    3 program: program • expr NEWLINE $@1 program decl NEWLINE $@2 NEWLINE
 
     $end     shift, and go to state 2
     INTEGER  shift, and go to state 3
@@ -159,15 +193,15 @@ State 2
 
 State 3
 
-    3 expr: INTEGER •
+   13 expr: INTEGER •
 
-    $default  reduce using rule 3 (expr)
+    $default  reduce using rule 13 (expr)
 
 
 State 4
 
-    1 program: program expr • NEWLINE
-    4 expr: expr • PLUS expr
+    3 program: program expr • NEWLINE $@1 program decl NEWLINE $@2 NEWLINE
+   14 expr: expr • PLUS expr
 
     PLUS     shift, and go to state 5
     NEWLINE  shift, and go to state 6
@@ -175,7 +209,7 @@ State 4
 
 State 5
 
-    4 expr: expr PLUS • expr
+   14 expr: expr PLUS • expr
 
     INTEGER  shift, and go to state 3
 
@@ -184,14 +218,153 @@ State 5
 
 State 6
 
-    1 program: program expr NEWLINE •
+    3 program: program expr NEWLINE • $@1 program decl NEWLINE $@2 NEWLINE
 
-    $default  reduce using rule 1 (program)
+    $default  reduce using rule 1 ($@1)
+
+    $@1  go to state 8
 
 
 State 7
 
-    4 expr: expr • PLUS expr
-    4     | expr PLUS expr •
+   14 expr: expr • PLUS expr
+   14     | expr PLUS expr •
 
-    $default  reduce using rule 4 (expr)
+    $default  reduce using rule 14 (expr)
+
+
+State 8
+
+    3 program: program expr NEWLINE $@1 • program decl NEWLINE $@2 NEWLINE
+
+    $default  reduce using rule 4 (program)
+
+    program  go to state 9
+
+
+State 9
+
+    3 program: program • expr NEWLINE $@1 program decl NEWLINE $@2 NEWLINE
+    3        | program expr NEWLINE $@1 program • decl NEWLINE $@2 NEWLINE
+
+    INTEGER    shift, and go to state 3
+    DOUBLE     shift, and go to state 10
+    INT        shift, and go to state 11
+    LONG       shift, and go to state 12
+    FLOAT_KEY  shift, and go to state 13
+    SHORT      shift, and go to state 14
+
+    decl  go to state 15
+    type  go to state 16
+    expr  go to state 4
+
+
+State 10
+
+    8 type: DOUBLE •
+
+    $default  reduce using rule 8 (type)
+
+
+State 11
+
+    6 type: INT •
+
+    $default  reduce using rule 6 (type)
+
+
+State 12
+
+   10 type: LONG •
+
+    $default  reduce using rule 10 (type)
+
+
+State 13
+
+    7 type: FLOAT_KEY •
+
+    $default  reduce using rule 7 (type)
+
+
+State 14
+
+    9 type: SHORT •
+
+    $default  reduce using rule 9 (type)
+
+
+State 15
+
+    3 program: program expr NEWLINE $@1 program decl • NEWLINE $@2 NEWLINE
+
+    NEWLINE  shift, and go to state 17
+
+
+State 16
+
+    5 decl: type • var DELIMITER
+
+    IDENTIFIER  shift, and go to state 18
+
+    var  go to state 19
+
+
+State 17
+
+    3 program: program expr NEWLINE $@1 program decl NEWLINE • $@2 NEWLINE
+
+    $default  reduce using rule 2 ($@2)
+
+    $@2  go to state 20
+
+
+State 18
+
+   11 var: IDENTIFIER •
+
+    $default  reduce using rule 11 (var)
+
+
+State 19
+
+    5 decl: type var • DELIMITER
+   12 var: var • COMMA IDENTIFIER
+
+    DELIMITER  shift, and go to state 21
+    COMMA      shift, and go to state 22
+
+
+State 20
+
+    3 program: program expr NEWLINE $@1 program decl NEWLINE $@2 • NEWLINE
+
+    NEWLINE  shift, and go to state 23
+
+
+State 21
+
+    5 decl: type var DELIMITER •
+
+    $default  reduce using rule 5 (decl)
+
+
+State 22
+
+   12 var: var COMMA • IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 24
+
+
+State 23
+
+    3 program: program expr NEWLINE $@1 program decl NEWLINE $@2 NEWLINE •
+
+    $default  reduce using rule 3 (program)
+
+
+State 24
+
+   12 var: var COMMA IDENTIFIER •
+
+    $default  reduce using rule 12 (var)

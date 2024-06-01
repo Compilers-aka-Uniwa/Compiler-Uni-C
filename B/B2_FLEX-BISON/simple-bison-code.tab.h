@@ -103,8 +103,14 @@ extern int yydebug;
     DELIMITER = 304,               /* DELIMITER  */
     NEWLINE = 305,                 /* NEWLINE  */
     END_OF_FILE = 306,             /* END_OF_FILE  */
-    UNKNOWN = 307,                 /* UNKNOWN  */
-    MULT = 308                     /* MULT  */
+    OPEN_SQ_BRACKETS = 307,        /* OPEN_SQ_BRACKETS  */
+    CLOSE_SQ_BRACKETS = 308,       /* CLOSE_SQ_BRACKETS  */
+    OPEN_CURLY_BRACKETS = 309,     /* OPEN_CURLY_BRACKETS  */
+    CLOSE_CURLY_BRACKETS = 310,    /* CLOSE_CURLY_BRACKETS  */
+    COMMA = 311,                   /* COMMA  */
+    BACKSLASH = 312,               /* BACKSLASH  */
+    UNKNOWN = 313,                 /* UNKNOWN  */
+    MULT = 314                     /* MULT  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
