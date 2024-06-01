@@ -70,11 +70,12 @@
 				όνομα : κανόνας { κώδικας C } */
 program:
         program expr NEWLINE { printf("[BISON] %d\n", $2); }
-        program decl NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ!!\n"); }
+        program decl_var NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ!!\n"); }
         |
         ;
-decl:
-        type var DELIMITER {  printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
+/* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
+decl_var:
+        type var DELIMITER { printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
         ;
 type: 
         INT { $$ = strdup(yytext); }
@@ -87,6 +88,30 @@ var:
         IDENTIFIER              { $$ = strdup(yytext); }
         | var COMMA IDENTIFIER  { $$ = $1; }
         ;
+/* === ΠΙΝΑΚΕΣ === */
+decl_arr:
+        arr DELIMITER { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
+arr:
+        IDENTIFIER  { $$ = strdup(yytext); }
+        | arr ASSIGN_OP OPEN_SQ_BRACKETS CLOSE_SQ_BRACKETS
+        | arr ASSIGN_OP  
+type_int:
+        INTEGER       { $$ = $1; }
+        ;
+type_fl:
+        FLOAT       { $$ = $1; }
+        ;
+type_str:
+        STRING      { $$ = strdup(yytext); }
+        ;
+        
+
+
+
+
+
+
+
 
 expr: 
         INTEGER          { $$ = $1; }
