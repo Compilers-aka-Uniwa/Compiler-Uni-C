@@ -1,3 +1,2 @@
-// ====== Test case #9 ARITHMETIC-OPERATIONS ======
-// ====== Test case #2 VARIABLES-STATEMENT ======
-
+// ====== Test case #2 VARIABLES-STATEMENT ======
+

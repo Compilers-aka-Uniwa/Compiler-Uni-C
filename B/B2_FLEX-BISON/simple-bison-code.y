@@ -69,7 +69,7 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        program expr NEWLINE { printf("[BISON] %d\n", $2); }
+        /*program expr NEWLINE { printf("[BISON] %d\n", $2); }*/
         program decl_var NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ ΤΗΝ ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ!!\n"); }
         program decl_arr NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ ΤΗΝ ΔΗΛΩΣΗ ΠΙΝΑΚΑ!!\n"); }
         |
@@ -94,6 +94,7 @@ type_fl:
         ;
 type_str:
         STRING      { $$ = strdup(yytext); }  
+        ;
 
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
 decl_var:
@@ -108,39 +109,14 @@ type:
         ;
 var:
         IDENTIFIER              { $$ = strdup(yytext); }
-        | var COMMA IDENTIFIER  { $$ = $1; }
+        | var COMMA var         { printf("var COMMA var\n"); }
         ; 
 
-
-
-/*decl_arr:
-        arr DELIMITER { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
-arr:
-        IDENTIFIER  { $$ = strdup(yytext); }
-        | arr ASSIGN_OP OPEN_SQ_BRACKETS CLOSE_SQ_BRACKETS
-        | arr ASSIGN_OP  
-type_int:
-        INTEGER       { $$ = $1; }
-        ;
-type_fl:
-        FLOAT       { $$ = $1; }
-        ;
-type_str:
-        STRING      { $$ = strdup(yytext); }
-        ;*/
-        
-
-
-
-
-
-
-
-
+/* === ΠΡΟΣΘΕΣΗ === 
 expr: 
         INTEGER          { $$ = $1; }
         | expr PLUS expr { $$ = $1 + $3; } 
-        ;
+        ;*/
 %%
 
 

@@ -1,8 +1,3 @@
-// ====== Test case #9 ARITHMETIC-OPERATIONS ======
-5 + 10
-15 + 20 
-4 + 1
-0 + 5
 // ====== Test case #2 VARIABLES-STATEMENT ======
 int a;
 double var;
