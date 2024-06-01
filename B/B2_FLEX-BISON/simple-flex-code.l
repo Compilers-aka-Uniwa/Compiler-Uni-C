@@ -115,7 +115,7 @@ UNKNOWN          [^ \t\r\n;]+
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
 {IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }
 {STRING}        { prn("STRING"); return STRING; }
-{INTEGER}       { yylval = atoi(yytext); prn("INTEGER"); return INTEGER; }
+{INTEGER}       { yylval = atoi(yytext); prn("INTEGER"); return INTEGER; } 
 {FLOAT}         { yylval = atof(yytext); prn("FLOAT"); return FLOAT; }
 {COMMENT}       { ECHO; line++; }
 {WHITESPACE}    { }

@@ -1509,7 +1509,7 @@ YY_RULE_SETUP
 case 52:
 YY_RULE_SETUP
 #line 118 "simple-flex-code.l"
-{ yylval = atoi(yytext); prn("INTEGER"); return INTEGER; }
+{ yylval = atoi(yytext); prn("INTEGER"); return INTEGER; } 
 	YY_BREAK
 case 53:
 YY_RULE_SETUP

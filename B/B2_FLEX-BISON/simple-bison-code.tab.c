@@ -1271,7 +1271,7 @@ yyreduce:
 
   case 20: /* var: var COMMA var  */
 #line 112 "simple-bison-code.y"
-                               { printf("var COMMA var\n"); }
+                               {  }
 #line 1276 "simple-bison-code.tab.c"
     break;
 
