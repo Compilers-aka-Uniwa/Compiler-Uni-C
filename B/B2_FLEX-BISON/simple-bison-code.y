@@ -71,11 +71,10 @@
 program:
         program expr NEWLINE { printf("[BISON] %d\n", $2); }
         program decl NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ!!\n"); }
-        NEWLINE { printf("NEWLINE"); }
         |
         ;
 decl:
-        type var DELIMITER {  printf("\t[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
+        type var DELIMITER {  printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
         ;
 type: 
         INT { $$ = strdup(yytext); }
@@ -116,7 +115,7 @@ extern FILE *yyout;
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 1;
+        yydebug = 0;
 
 	if (argc == 3)
         {
