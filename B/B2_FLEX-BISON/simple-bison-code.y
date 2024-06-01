@@ -70,7 +70,8 @@
 				όνομα : κανόνας { κώδικας C } */
 program:
         program expr NEWLINE { printf("[BISON] %d\n", $2); }
-        program decl_var NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ!!\n"); }
+        program decl_var NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ ΤΗΝ ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ!!\n"); }
+        program decl_arr NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ ΤΗΝ ΔΗΛΩΣΗ ΠΙΝΑΚΑ!!\n"); }
         |
         ;
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
@@ -90,6 +91,28 @@ var:
         ;
 /* === ΠΙΝΑΚΕΣ === */
 decl_arr:
+        IDENTIFIER ASSIGN_OP elements DELIMITER { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
+        ;
+elements:
+        OPEN_SQ_BRACKETS value CLOSE_SQ_BRACKETS {} 
+value:
+        type_int { $$ = $1; }
+        | type_fl { $$ = $1; }
+        | type_str { $$ = strdup(yytext); }
+        | value COMMA value
+        ;  
+type_int:
+        INTEGER       { $$ = $1; }
+        ;
+type_fl:
+        FLOAT       { $$ = $1; }
+        ;
+type_str:
+        STRING      { $$ = strdup(yytext); }    
+
+
+
+/*decl_arr:
         arr DELIMITER { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
 arr:
         IDENTIFIER  { $$ = strdup(yytext); }
@@ -103,7 +126,7 @@ type_fl:
         ;
 type_str:
         STRING      { $$ = strdup(yytext); }
-        ;
+        ;*/
         
 
 
