@@ -2,8 +2,9 @@
 int a;
 double var;
 float c;
-int a , b , c;
+int a, b, c;
+
 // ====== Test case #3 ARRAYS-STATEMENT ======
-pin1 = [ 1 ]; 
-pin2 = [ 3.5 ];
-pin3 = [ "hello" ];
+pin1 = [1];
+pin2 = [3.5];
+pin3 = ["hello"];
