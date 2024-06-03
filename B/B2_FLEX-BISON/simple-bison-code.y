@@ -43,24 +43,50 @@
 %token IDENTIFIER STRING 
 %token INTEGER FLOAT 
 %token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT_KEY RETURN VOID CONTINUE FOR SHORT WHILE 
-%token PLUS MUL_EQ POST_MIN_EQ MINUS DIV_EQ LESS MUL NOT GREATER DIV AND LESS_EQ MOD OR GREATER_EQ ASSIGN_OP EQUAL ADDR_OP PLUS_EQ NOT_EQ MIN_EQ POST_PLUS_EQ
-%token DELIMITER
+%token PLUS "+"
+%token MULEQ "*="
+%token PMINEQ "--"
+%token MINUS "-"
+%token DIVEQ "/="
+%token LT "<"
+%token MUL "*"
+%token NOT "!"
+%token GT ">" 
+%token DIV "/"
+%token AND "&&"
+%token LEQ "<="
+%token MOD "%"
+%token OR "||"
+%token GREQ ">="
+%token ASSIGNOP "="
+%token EQUAL "=="
+%token ADDROP "&"
+%token PLUSEQ "+="
+%token NOTEQ "!="
+%token MINEQ "-="
+%token PPLUSEQ "++"
+%token OPEN_SQ_BRACKET "["
+%token CLOSE_SQ_BRACKET "]"
+%token OPEN_CU_BRACKET "{"
+%token CLOSE_CU_BRACKET "}"
+%token COMMA ","
+%token BACKSLASH "\\"
+%token DELIMITER ";"
 %token NEWLINE END_OF_FILE
-%token OPEN_SQ_BRACKETS CLOSE_SQ_BRACKETS OPEN_CURLY_BRACKETS CLOSE_CURLY_BRACKETS COMMA BACKSLASH
 %token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
-%right MUL_EQ DIV_EQ PLUS_EQ MIN_EQ ASSIGN_OP 
-%left OR 
-%left AND 
-%left EQUAL NOT_EQ 
-%left LESS GREATER LESS_EQ GREATER_EQ     
-%left PLUS MINUS                   
-%left MULT DIV MOD 
-%right ADDR_OP NOT 
-%left POST_PLUS_EQ POST_MIN_EQ
+%right "*=" "/=" "+=" "-=" "="
+%left "||" 
+%left "&&" 
+%left "==" "!=" 
+%left "<" ">" "<=" ">="  
+%left "+" "-"                   
+%left "*" "/" "%"
+%right "&" "!" 
+%left "++" "--"
 
-
+%start program
 
 %%
 
@@ -70,16 +96,17 @@
 				όνομα : κανόνας { κώδικας C } */
 program:
         /*program expr NEWLINE { printf("[BISON] %d\n", $2); }*/
-        program decl_var NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ ΤΗΝ ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ!!\n"); }
-        program decl_arr NEWLINE { printf("Ο BISON ΕΓΚΡΙΝΕΙ ΤΗΝ ΔΗΛΩΣΗ ΠΙΝΑΚΑ!!\n"); }
-        |
+        program decl_var NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
+        program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
+        | NEWLINE                { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
+        |                        { }
         ;
 /* === ΠΙΝΑΚΕΣ === */
 decl_arr:
-        IDENTIFIER ASSIGN_OP elements DELIMITER { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
+        IDENTIFIER "=" elements ";" { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
         ;
 elements:
-        OPEN_SQ_BRACKETS value CLOSE_SQ_BRACKETS {}
+        "[" value "]" {}
         ; 
 value:
         type_int { $$ = $1; }
@@ -98,7 +125,7 @@ type_str:
 
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
 decl_var:
-        type var DELIMITER { printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
+        type var ";" { printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
         ;
 type: 
         INT { $$ = strdup(yytext); }
@@ -109,7 +136,7 @@ type:
         ;
 var:
         IDENTIFIER              { $$ = strdup(yytext); }
-        | var COMMA var        {  }
+        | var "," var           { $$ = strdup(yytext); }
         ; 
 
 /* === ΠΡΟΣΘΕΣΗ === 

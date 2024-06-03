@@ -18,7 +18,6 @@
 /* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
 %option noyywrap
 
-
 /* Κώδικας C για τον ορισμό των απαιτούμενων header files και των μεταβλητών.
    Οτιδήποτε ανάμεσα στα %{ και %} μεταφέρεται αυτόματα στο αρχείο C που
    θα δημιουργήσει το Flex. */
@@ -46,21 +45,17 @@ void prn(const char *token);
    Μετά από αυτό, μπορεί να γίνει χρήση των ονομάτων (αριστερά) αντί των,
    συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
 
-
-DELIMITER        \;
 IDENTIFIER       [a-zA-Z_][a-zA-Z0-9_]{0,31}
 STRING           \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
 INTEGER          ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
 FLOAT            (?:[1-9][0-9]*|0)(?:\.(?:[1-9][0-9]*|0*[1-9]+))?(?:[eE](?:-?[1-9][0-9]*|0))?
 COMMENT          (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
-WHITESPACE       [ \t]+
+DELIMITER        \;
+WHITESPACE       [ \t]+  
 NEWLINE          \n
-UNKNOWN          [^ \t\r\n;]+
-
-
-/* Για κάθε πρότυπο (αριστερά) που ταιριάζει, εκτελείται ο αντίστοιχος 
-   κώδικας μέσα στα αγκίστρα. Η εντολή return επιτρέπει την επιστροφή
-   μιας αριθμητικής τιμής μέσω της συνάρτησης yylex() */
+UNKNOWN          [^ \t\r\n;] 
+/* ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+%x UNKNOWN_STATE 
 
 %%
 
@@ -83,34 +78,34 @@ UNKNOWN          [^ \t\r\n;]+
 "void"          { prn("KEYWORD"); return VOID; }
 "while"         { prn("KEYWORD"); return WHILE; }
 "func"          { prn("KEYWORD"); return FUNC; }
-"short"         { prn("KEYWORD"); return SHORT;}
+"short"         { prn("KEYWORD"); return SHORT; }
 "+"             { prn("OPERATOR"); return PLUS; }
-"*="            { prn("OPERATOR"); return MUL_EQ; }
-"--"            { prn("OPERATOR"); return POST_MIN_EQ; }
+"*="            { prn("OPERATOR"); return MULEQ; }
+"--"            { prn("OPERATOR"); return PMINEQ; }
 "-"             { prn("OPERATOR"); return MINUS; }
-"/="            { prn("OPERATOR"); return DIV_EQ; }
-"<"             { prn("OPERATOR"); return LESS; }
+"/="            { prn("OPERATOR"); return DIVEQ; }
+"<"             { prn("OPERATOR"); return LT; }
 "*"             { prn("OPERATOR"); return MUL; }
 "!"             { prn("OPERATOR"); return NOT; }
-">"             { prn("OPERATOR"); return GREATER; }
+">"             { prn("OPERATOR"); return GT; }
 "/"             { prn("OPERATOR"); return DIV; }
 "&&"            { prn("OPERATOR"); return AND; }
-"<="            { prn("OPERATOR"); return LESS_EQ; }
+"<="            { prn("OPERATOR"); return LEQ; }
 "%"             { prn("OPERATOR"); return MOD; }
 "||"            { prn("OPERATOR"); return OR; }
-">="            { prn("OPERATOR"); return GREATER_EQ; }
-"="             { prn("OPERATOR"); return ASSIGN_OP; }
+">="            { prn("OPERATOR"); return GREQ; }
+"="             { prn("OPERATOR"); return ASSIGNOP; }
 "=="            { prn("OPERATOR"); return EQUAL; }
-"&"             { prn("OPERATOR"); return ADDR_OP; }
-"+="            { prn("OPERATOR"); return PLUS_EQ; }
-"!="            { prn("OPERATOR"); return NOT_EQ; }
-"-="            { prn("OPERATOR"); return MIN_EQ; }
-"++"            { prn("OPERATOR"); return POST_PLUS_EQ; }
-"\["            { prn("SPECIAL CHARACTER"); return OPEN_SQ_BRACKETS; }
-"\]"            { prn("SPECIAL CHARACTER"); return CLOSE_SQ_BRACKETS; }
-"\{"            { prn("SPECIAL CHARACTER"); return OPEN_CURLY_BRACKETS; }
-"\}"            { prn("SPECIAL CHARACTER"); return CLOSE_CURLY_BRACKETS; }
-"\,"             { prn("SPECIAL CHARACTER"); return COMMA; } 
+"&"             { prn("OPERATOR"); return ADDROP; }
+"+="            { prn("OPERATOR"); return PLUSEQ; }
+"!="            { prn("OPERATOR"); return NOTEQ; }
+"-="            { prn("OPERATOR"); return MINEQ; }
+"++"            { prn("OPERATOR"); return PPLUSEQ; }
+"["             { prn("SPECIAL CHARACTER"); return OPEN_SQ_BRACKET; }
+"]"              { prn("SPECIAL CHARACTER"); return CLOSE_SQ_BRACKET; }
+"{"             { prn("SPECIAL CHARACTER"); return OPEN_CU_BRACKET; }
+"}"             { prn("SPECIAL CHARACTER"); return CLOSE_SQ_BRACKET; }
+","             { prn("SPECIAL CHARACTER"); return COMMA; }
 "\\"            { prn("SPECIAL CHARACTER"); return BACKSLASH; }
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
 {IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }
@@ -121,14 +116,10 @@ UNKNOWN          [^ \t\r\n;]+
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { prn("EOF"); return END_OF_FILE; }
-{UNKNOWN}       { prn("UNKNOWN TOKEN"); return UNKNOWN; }
+{UNKNOWN}       { BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+<UNKNOWN_STATE>{UNKNOWN}+ { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
 
 %%
-
-/* Η συνάρτηση prn τυπώνει στην οθόνη τον τύπο του αναγνωριστικού (πχ. ASSIGNOP)
-   που έγινε match καθώς και το ίδιο το κείμενο (πχ. =) του αναγνωριστικού. Ο
-   λόγος ύπαρξής της είναι καθαρά για καλύτερη κατανόηση του κώδικα και για
-   γενικότερη διευκόλυνση στο debugging της εφαρμογής */
 
 void prn(const char *token)
 {
@@ -138,5 +129,6 @@ void prn(const char *token)
    
    if (!isEOF)
       exit(0);
-	return;
+   return;
 }
+
