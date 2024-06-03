@@ -1281,7 +1281,7 @@ yyreduce:
 
   case 21: /* var: var "," var  */
 #line 139 "simple-bison-code.y"
-                                {  }
+                                { yyval = strdup(yytext); }
 #line 1286 "simple-bison-code.tab.c"
     break;
 

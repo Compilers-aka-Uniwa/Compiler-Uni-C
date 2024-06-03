@@ -3,6 +3,8 @@ int a;
 double var;
 float c;
 int a, b, c;
+long var1,var2,var3,var4;
+short sh1;
 
 // ====== Test case #3 ARRAYS-STATEMENT ======
 pin1 = [1];

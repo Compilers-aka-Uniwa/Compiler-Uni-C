@@ -136,7 +136,7 @@ type:
         ;
 var:
         IDENTIFIER              { $$ = strdup(yytext); }
-        | var "," var           {  }
+        | var "," var           { $$ = strdup(yytext); }
         ; 
 
 /* === ΠΡΟΣΘΕΣΗ === 
