@@ -8,5 +8,5 @@ short sh1;
 
 // ====== Test case #3 ARRAYS-STATEMENT ======
 pin1 = [1];
-pin2 = [3.5];
+pin2 = [ 3.5 ];
 pin3 = ["hello"];
