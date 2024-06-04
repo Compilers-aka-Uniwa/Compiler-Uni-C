@@ -103,19 +103,22 @@ program:
         /*program expr NEWLINE { printf("[BISON] %d\n", $2); }*/
         program decl_var NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
         | program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
+        | program decl_arr  { printf("[BISON] ΘΕΣΗ ΠΙΝΑΚΑ\n"); }
         | program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
         | program NEWLINE              { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
         |                        { }
         ;
 /* === ΠΙΝΑΚΕΣ === */
 decl_arr:
-        IDENTIFIER "=" elements ";" { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); } 
+        IDENTIFIER "=" elements ";" { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
         ;
+pos_elem:
+        IDENTIFIER "[" INTEGER "]" { $$ = strdup(yytext); }
 elements:
         "[" "]" {$$ = strdup(yytext); }
         | "[" arr_int "]" { $$ = strdup(yytext); }
         | "[" arr_fl "]" { $$ = strdup(yytext); }
-        | "[" arr_str "]" { $$ = strdup(yytext); }
+        | "[" arr_str "]" { $$ = strdup(yytext); }       
         ;  
 arr_int:
         INTEGER       { $$ = $1; }
@@ -157,6 +160,7 @@ print_params:
         | IDENTIFIER { $$ = strdup(yytext); }
         | INTEGER { $$ = strdup(yytext);}
         | func { $$ = strdup(yytext); }
+        | pos_elem { $$ = strdup(yytext); }
         | print_params "," print_params { $$ = strdup(yytext); }
         ;
 
@@ -204,7 +208,7 @@ extern FILE *yyout;
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 1;
+        yydebug = 0;
 
 	if (argc == 3)
         {

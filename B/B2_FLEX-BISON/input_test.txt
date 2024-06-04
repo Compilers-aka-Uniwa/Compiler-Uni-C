@@ -30,3 +30,4 @@ print("Hello World");
 print(x, "=", 100);
 print(cmp(str1, str2));
 print(len("This is a string"));
+print(pin[0]);
