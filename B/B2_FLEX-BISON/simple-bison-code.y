@@ -104,7 +104,8 @@ program:
         program decl_var NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
         | program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
         | program decl_arr  { printf("[BISON] ΘΕΣΗ ΠΙΝΑΚΑ\n"); }
-        | program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
+        | program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n");}
+        |program decl_func   NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ ΧΡΗΣΤΗ \n");}
         | program NEWLINE              { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
         |                        { }
         ;
@@ -179,6 +180,31 @@ var:
         IDENTIFIER              { $$ = strdup(yytext); }
         | var "," var           { $$ = strdup(yytext); }
         ; 
+/* === Δήλωση συναρτήσεων χρήστη === */
+
+decl_func:
+	func ";" { printf("[BISON] line=%d, Δήλωση Συνάρτηση χρήστη \n", line); }
+	;
+func: 
+        IDENTIFIER{$$=strdup(yytext);}
+        |FUNC func params{$$=strdup(yytext);}
+        ;
+params:
+        "(" ")"{$$=strdup(yytext);}
+        |"(" type_params ")"{$$=strdup(yytext);}
+        ;
+type_params:
+        type IDENTIFIER {$$=strdup(yytext);}
+        |type_params "," type_params {$$=strdup(yytext);}
+        ;
+
+
+
+
+
+
+
+
 
 /* === ΠΡΟΣΘΕΣΗ === 
 expr: 
