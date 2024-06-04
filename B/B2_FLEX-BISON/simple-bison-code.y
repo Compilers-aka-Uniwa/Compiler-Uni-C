@@ -66,6 +66,8 @@
 %token NOTEQ "!="
 %token MINEQ "-="
 %token PPLUSEQ "++"
+%token OPEN_PARENTHESIS "("
+%token CLOSE_PARENTHESIS ")"
 %token OPEN_SQ_BRACKET "["
 %token CLOSE_SQ_BRACKET "]"
 %token OPEN_CU_BRACKET "{"
@@ -73,6 +75,7 @@
 %token COMMA ","
 %token BACKSLASH "\\"
 %token DELIMITER ";"
+%token SCAN PRINT LEN CMP
 %token NEWLINE END_OF_FILE
 %token UNKNOWN
 
@@ -108,21 +111,22 @@ decl_arr:
         IDENTIFIER "=" elements ";" { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
         ;
 elements:
-        "[" value "]" {}
-        ; 
-value:
-        type_int { $$ = $1; }
-        | type_fl { $$ = $1; }
-        | type_str { $$ = strdup(yytext); }
+        "[" "]" {$$ = strdup(yytext); }
+        | "[" arr_int "]" { $$ = strdup(yytext); }
+        | "[" arr_fl "]" { $$ = strdup(yytext); }
+        | "[" arr_str "]" { $$ = strdup(yytext); }
         ;  
-type_int:
+arr_int:
         INTEGER       { $$ = $1; }
+        | arr_int "," arr_int { $$ = strdup(yytext); }
         ;
-type_fl:
+arr_fl:
         FLOAT       { $$ = $1; }
+        | arr_fl "," arr_fl { $$ = strdup(yytext); }
         ;
-type_str:
+arr_str:
         STRING      { $$ = strdup(yytext); }  
+        | arr_str "," arr_str { $$ = strdup(yytext); }
         ;
 /* === ΣΥΝΑΡΤΗΣΕΙΣ === */
 func:

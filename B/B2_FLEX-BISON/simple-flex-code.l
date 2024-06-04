@@ -101,12 +101,18 @@ UNKNOWN          [^ \t\r\n;]
 "!="            { prn("OPERATOR"); return NOTEQ; }
 "-="            { prn("OPERATOR"); return MINEQ; }
 "++"            { prn("OPERATOR"); return PPLUSEQ; }
-"["             { prn("SPECIAL CHARACTER"); return OPEN_SQ_BRACKET; }
-"]"              { prn("SPECIAL CHARACTER"); return CLOSE_SQ_BRACKET; }
-"{"             { prn("SPECIAL CHARACTER"); return OPEN_CU_BRACKET; }
-"}"             { prn("SPECIAL CHARACTER"); return CLOSE_SQ_BRACKET; }
-","             { prn("SPECIAL CHARACTER"); return COMMA; }
-"\\"            { prn("SPECIAL CHARACTER"); return BACKSLASH; }
+"("             { prn("SPECIAL"); return OPEN_PARENTHESIS; }
+")"             { prn("SPECIAL"); return CLOSE_PARENTHESIS; }
+"["             { prn("SPECIAL"); return OPEN_SQ_BRACKET; }
+"]"             { prn("SPECIAL"); return CLOSE_SQ_BRACKET; }
+"{"             { prn("SPECIAL"); return OPEN_CU_BRACKET; }
+"}"             { prn("SPECIAL"); return CLOSE_SQ_BRACKET; }
+","             { prn("SPECIAL"); return COMMA; }
+"\\"            { prn("SPECIAL"); return BACKSLASH; }
+"scan"          { prn("FUNCTION"); return SCAN; }
+"len"           { prn("FUNCTION"); return LEN; }
+"print"         { prn("FUNCTION"); return PRINT; }
+"cmp"           { prn("FUNCTION"); return CMP; }
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
 {IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }
 {STRING}        { prn("STRING"); return STRING; }
