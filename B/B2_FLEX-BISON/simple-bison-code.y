@@ -80,6 +80,7 @@
 %token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
+%left ","
 %right "*=" "/=" "+=" "-=" "="
 %left "||" 
 %left "&&" 

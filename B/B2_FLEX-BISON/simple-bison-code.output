@@ -43,13 +43,6 @@ Terminals unused in grammar
     UNKNOWN
 
 
-State 18 conflicts: 1 shift/reduce
-State 47 conflicts: 1 shift/reduce
-State 48 conflicts: 1 shift/reduce
-State 49 conflicts: 1 shift/reduce
-State 74 conflicts: 1 shift/reduce
-
-
 Grammar
 
     0 $accept: program $end
@@ -402,9 +395,6 @@ State 18
    39 var: var • "," var
    39    | var "," var •
 
-    ","  shift, and go to state 15
-
-    ","       [reduce using rule 39 (var)]
     $default  reduce using rule 39 (var)
 
 
@@ -653,9 +643,6 @@ State 47
    12 arr_int: arr_int • "," arr_int
    12        | arr_int "," arr_int •
 
-    ","  shift, and go to state 36
-
-    ","       [reduce using rule 12 (arr_int)]
     $default  reduce using rule 12 (arr_int)
 
 
@@ -664,9 +651,6 @@ State 48
    14 arr_fl: arr_fl • "," arr_fl
    14       | arr_fl "," arr_fl •
 
-    ","  shift, and go to state 38
-
-    ","       [reduce using rule 14 (arr_fl)]
     $default  reduce using rule 14 (arr_fl)
 
 
@@ -675,9 +659,6 @@ State 49
    16 arr_str: arr_str • "," arr_str
    16        | arr_str "," arr_str •
 
-    ","  shift, and go to state 40
-
-    ","       [reduce using rule 16 (arr_str)]
     $default  reduce using rule 16 (arr_str)
 
 
@@ -877,7 +858,4 @@ State 74
    28 cmp_params: cmp_params • "," cmp_params
    28           | cmp_params "," cmp_params •
 
-    ","  shift, and go to state 72
-
-    ","       [reduce using rule 28 (cmp_params)]
     $default  reduce using rule 28 (cmp_params)
