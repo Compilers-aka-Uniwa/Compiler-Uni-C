@@ -102,7 +102,7 @@ program:
         /*program expr NEWLINE { printf("[BISON] %d\n", $2); }*/
         program decl_var NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
         program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
-        program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
+        program decl_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
         | NEWLINE                { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
         |                        { }
         ;
@@ -130,15 +130,26 @@ arr_str:
         ;
 /* === ΣΥΝΑΡΤΗΣΕΙΣ === */
 decl_func:
-	name "(" params ")" ";" { printf("[BISON] line=%d, Δήλωση Συνάρτησης\n", line); }
+	name params ";" { printf("[BISON] line=%d, Δήλωση Συνάρτησης\n", line); }
 	;
+name:
+        SCAN { $$ = strdup(yytext); }
+        | LEN { $$ = strdup(yytext); }
+        | CMP { $$ = strdup(yytext); }
+        | PRINT { $$ = strdup(yytext); }
+        ;
+params:
+        "(" scan_params ")" { $$ = strdup(yytext); }
+        | "(" len_params ")" { $$ = strdup(yytext); }
+        | "(" cmp_params ")" { $$ = strdup(yytext); }
+        | "(" print_params ")" { $$ = strdup(yytext); }
+        ;
 scan_params:
         IDENTIFIER { $$ = strdup(yytext); }
         ;
 len_params:
         IDENTIFIER { $$ = strdup(yytext); }
         | STRING { $$ = strdup(yytext); }
-        | decl_arr { $$ = strdup(yytext); }
         ;
 cmp_params:
         IDENTIFIER { $$ = strdup(yytext); }
@@ -146,7 +157,11 @@ cmp_params:
         | cmp_params "," cmp_params { $$ = strdup(yytext); }
         ;
 print_params:
+        IDENTIFIER { $$ = strdup(yytext); }
+        | STRING { $$ = strdup(yytext); }
+        | print_params "," print_params { $$ = strdup(yytext); }
         
+
 
 
 
