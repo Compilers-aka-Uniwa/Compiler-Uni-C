@@ -31,5 +31,10 @@ print(x, "=", 100);
 print(cmp(str1, str2));
 print(len("This is a string"));
 print(pin[0]);
+
 //====Test case #5 FUNCTION-USER ====
-func MixalhGamiesai(int paramA, float paramB, long paramC);
+func myfunc(int varA, int varB)
+{
+print("a = ", varA);
+print("b = ", varB);
+}

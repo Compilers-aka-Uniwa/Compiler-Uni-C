@@ -181,13 +181,12 @@ var:
         | var "," var           { $$ = strdup(yytext); }
         ; 
 /* === Δήλωση συναρτήσεων χρήστη === */
-
 decl_func:
-	func ";" { printf("[BISON] line=%d, Δήλωση Συνάρτηση χρήστη \n", line); }
+        name_func code_func { printf("[BISON] line=%d, Δήλωση Συνάρτηση χρήστη με κώδικα\n", line); }
 	;
-func: 
-        IDENTIFIER{$$=strdup(yytext);}
-        |FUNC func params{$$=strdup(yytext);}
+name_func: 
+        IDENTIFIER              { $$=strdup(yytext); }
+        | FUNC name_func params { $$=strdup(yytext); }
         ;
 params:
         "(" ")"{$$=strdup(yytext);}
@@ -195,7 +194,15 @@ params:
         ;
 type_params:
         type IDENTIFIER {$$=strdup(yytext);}
-        |type_params "," type_params {$$=strdup(yytext);}
+        | type_params "," type_params {$$=strdup(yytext);}
+        ;
+code_func:
+        "{" "}" {$$=strdup(yytext);}
+        | "{" code "}" {$$=strdup(yytext);}
+        ;
+code:
+        build_func {$$=strdup(yytext);}
+        | code NEWLINE code {$$=strdup(yytext);} 
         ;
 
 
@@ -234,7 +241,7 @@ extern FILE *yyout;
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 0;
+        yydebug = 1;
 
 	if (argc == 3)
         {
