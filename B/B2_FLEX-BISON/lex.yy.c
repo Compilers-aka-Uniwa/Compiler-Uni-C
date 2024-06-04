@@ -2257,7 +2257,7 @@ void yyfree (void * ptr )
 void prn(const char *token)
 {
    int isEOF = strcmp(token, "EOF");
-   
+
    printf("\t[FLEX] Line=%d, token=%s(%s)\n", line, token, yytext);
    
    if (!isEOF)

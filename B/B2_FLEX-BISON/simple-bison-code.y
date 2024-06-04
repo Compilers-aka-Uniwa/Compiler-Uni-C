@@ -108,7 +108,7 @@ program:
         ;
 /* === ΠΙΝΑΚΕΣ === */
 decl_arr:
-        IDENTIFIER "=" elements ";" { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
+        IDENTIFIER "=" elements ";" { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); } 
         ;
 elements:
         "[" "]" {$$ = strdup(yytext); }
@@ -129,15 +129,26 @@ arr_str:
         | arr_str "," arr_str { $$ = strdup(yytext); }
         ;
 /* === ΣΥΝΑΡΤΗΣΕΙΣ === */
-func:
-	type func ";" { printf("[BISON] line=%d, Δήλωση Συνάρτησης\n", line); }
+decl_func:
+	name "(" params ")" ";" { printf("[BISON] line=%d, Δήλωση Συνάρτησης\n", line); }
 	;
-type:
-	SCAN "(" ")" { $$ = $1; } 
-	| LEN "(" ")" { $$ = $1; } 
-	| CMP "(" ")" { $$ = $1; } 
-	| PRINT "(" ")" { $$ = strdup(yytext); }
-	;
+scan_params:
+        IDENTIFIER { $$ = strdup(yytext); }
+        ;
+len_params:
+        IDENTIFIER { $$ = strdup(yytext); }
+        | STRING { $$ = strdup(yytext); }
+        | decl_arr { $$ = strdup(yytext); }
+        ;
+cmp_params:
+        IDENTIFIER { $$ = strdup(yytext); }
+        | STRING { $$ = strdup(yytext); }
+        | cmp_params "," cmp_params { $$ = strdup(yytext); }
+        ;
+print_params:
+        
+
+
 
 
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
