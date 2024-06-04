@@ -102,7 +102,7 @@ program:
         /*program expr NEWLINE { printf("[BISON] %d\n", $2); }*/
         program decl_var NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
         program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
-        program decl_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
+        program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
         | NEWLINE                { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
         |                        { }
         ;
@@ -129,38 +129,33 @@ arr_str:
         | arr_str "," arr_str { $$ = strdup(yytext); }
         ;
 /* === ΣΥΝΑΡΤΗΣΕΙΣ === */
-decl_func:
-	name params ";" { printf("[BISON] line=%d, Δήλωση Συνάρτησης\n", line); }
+build_func:
+	func ";" { printf("[BISON] line=%d, Build-in Συνάρτηση\n", line); }
 	;
-name:
-        SCAN { $$ = strdup(yytext); }
-        | LEN { $$ = strdup(yytext); }
-        | CMP { $$ = strdup(yytext); }
-        | PRINT { $$ = strdup(yytext); }
-        ;
-params:
-        "(" scan_params ")" { $$ = strdup(yytext); }
-        | "(" len_params ")" { $$ = strdup(yytext); }
-        | "(" cmp_params ")" { $$ = strdup(yytext); }
-        | "(" print_params ")" { $$ = strdup(yytext); }
+func:
+        SCAN "(" scan_params ")" { $$ = strdup(yytext); }        
+        | LEN "(" len_params ")" { $$ = strdup(yytext); }
+        | CMP "(" cmp_params ")" { $$ = strdup(yytext); }
+        | PRINT "(" print_params ")" { $$ = strdup(yytext); }
         ;
 scan_params:
         IDENTIFIER { $$ = strdup(yytext); }
         ;
 len_params:
-        IDENTIFIER { $$ = strdup(yytext); }
+        elements { $$ = strdup(yytext); }
         | STRING { $$ = strdup(yytext); }
+        | IDENTIFIER { $$ = strdup(yytext); }
         ;
 cmp_params:
-        IDENTIFIER { $$ = strdup(yytext); }
-        | STRING { $$ = strdup(yytext); }
+        STRING { $$ = strdup(yytext); }
+        | IDENTIFIER { $$ = strdup(yytext); }
         | cmp_params "," cmp_params { $$ = strdup(yytext); }
         ;
 print_params:
-        IDENTIFIER { $$ = strdup(yytext); }
-        | STRING { $$ = strdup(yytext); }
-        | print_params "," print_params { $$ = strdup(yytext); }
-        
+        STRING { $$ = strdup(yytext); }
+        | IDENTIFIER { $$ = strdup(yytext); }
+        | func { $$ = strdup(yytext); }
+        ;
 
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
 decl_var:
