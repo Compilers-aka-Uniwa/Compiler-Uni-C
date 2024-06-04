@@ -186,7 +186,7 @@ decl_func:
 	;
 name_func: 
         IDENTIFIER              { $$=strdup(yytext); }
-        | FUNC name_func params { $$=strdup(yytext); }
+        | FUNC name_func params NEWLINE { $$=strdup(yytext); }
         ;
 params:
         "(" ")"{$$=strdup(yytext);}
@@ -197,12 +197,12 @@ type_params:
         | type_params "," type_params {$$=strdup(yytext);}
         ;
 code_func:
-        "{" "}" {$$=strdup(yytext);}
-        | "{" code "}" {$$=strdup(yytext);}
+        "{" code "}" {$$=strdup(yytext);}
         ;
 code:
         build_func {$$=strdup(yytext);}
-        | code NEWLINE code {$$=strdup(yytext);} 
+        | code NEWLINE code {$$=strdup(yytext);}
+        | NEWLINE {}
         ;
 
 
