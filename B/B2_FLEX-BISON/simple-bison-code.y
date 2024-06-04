@@ -40,6 +40,7 @@
 %}
 
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
+%token SCAN LEN CMP PRINT
 %token IDENTIFIER STRING 
 %token INTEGER FLOAT 
 %token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT_KEY RETURN VOID CONTINUE FOR SHORT WHILE 
@@ -98,6 +99,7 @@ program:
         /*program expr NEWLINE { printf("[BISON] %d\n", $2); }*/
         program decl_var NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
         program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
+        program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
         | NEWLINE                { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
         |                        { }
         ;
@@ -122,6 +124,17 @@ type_fl:
 type_str:
         STRING      { $$ = strdup(yytext); }  
         ;
+/* === ΣΥΝΑΡΤΗΣΕΙΣ === */
+func:
+	type func ";" { printf("[BISON] line=%d, Δήλωση Συνάρτησης\n", line); }
+	;
+type:
+	SCAN "(" ")" { $$ = $1; } 
+	| LEN "(" ")" { $$ = $1; } 
+	| CMP "(" ")" { $$ = $1; } 
+	| PRINT "(" ")" { $$ = strdup(yytext); }
+	;
+
 
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
 decl_var:
