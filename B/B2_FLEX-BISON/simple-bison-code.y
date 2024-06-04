@@ -102,9 +102,9 @@
 program:
         /*program expr NEWLINE { printf("[BISON] %d\n", $2); }*/
         program decl_var NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
-        program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
-        program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
-        | NEWLINE                { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
+        | program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
+        | program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
+        | program NEWLINE              { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
         |                        { }
         ;
 /* === ΠΙΝΑΚΕΣ === */
@@ -155,7 +155,9 @@ cmp_params:
 print_params:
         STRING { $$ = strdup(yytext); }
         | IDENTIFIER { $$ = strdup(yytext); }
+        | INTEGER { $$ = strdup(yytext);}
         | func { $$ = strdup(yytext); }
+        | print_params "," print_params { $$ = strdup(yytext); }
         ;
 
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
@@ -202,7 +204,7 @@ extern FILE *yyout;
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 0;
+        yydebug = 1;
 
 	if (argc == 3)
         {
