@@ -40,6 +40,7 @@
 %}
 
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
+%token SCAN LEN CMP PRINT
 %token IDENTIFIER STRING 
 %token INTEGER FLOAT 
 %token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT_KEY RETURN VOID CONTINUE FOR SHORT WHILE 
@@ -65,6 +66,8 @@
 %token NOTEQ "!="
 %token MINEQ "-="
 %token PPLUSEQ "++"
+%token OPEN_PARENTHESIS "("
+%token CLOSE_PARENTHESIS ")"
 %token OPEN_SQ_BRACKET "["
 %token CLOSE_SQ_BRACKET "]"
 %token OPEN_CU_BRACKET "{"
@@ -72,10 +75,12 @@
 %token COMMA ","
 %token BACKSLASH "\\"
 %token DELIMITER ";"
+%token SCAN PRINT LEN CMP
 %token NEWLINE END_OF_FILE
 %token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
+%left ","
 %right "*=" "/=" "+=" "-=" "="
 %left "||" 
 %left "&&" 
@@ -97,30 +102,66 @@
 program:
         /*program expr NEWLINE { printf("[BISON] %d\n", $2); }*/
         program decl_var NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
-        program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
-        | NEWLINE                { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
+        | program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
+        | program decl_arr  { printf("[BISON] ΘΕΣΗ ΠΙΝΑΚΑ\n"); }
+        | program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
+        | program NEWLINE              { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
         |                        { }
         ;
 /* === ΠΙΝΑΚΕΣ === */
 decl_arr:
         IDENTIFIER "=" elements ";" { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
         ;
+pos_elem:
+        IDENTIFIER "[" INTEGER "]" { $$ = strdup(yytext); }
 elements:
-        "[" value "]" {}
-        ; 
-value:
-        type_int { $$ = $1; }
-        | type_fl { $$ = $1; }
-        | type_str { $$ = strdup(yytext); }
+        "[" "]" {$$ = strdup(yytext); }
+        | "[" arr_int "]" { $$ = strdup(yytext); }
+        | "[" arr_fl "]" { $$ = strdup(yytext); }
+        | "[" arr_str "]" { $$ = strdup(yytext); }       
         ;  
-type_int:
+arr_int:
         INTEGER       { $$ = $1; }
+        | arr_int "," arr_int { $$ = strdup(yytext); }
         ;
-type_fl:
+arr_fl:
         FLOAT       { $$ = $1; }
+        | arr_fl "," arr_fl { $$ = strdup(yytext); }
         ;
-type_str:
+arr_str:
         STRING      { $$ = strdup(yytext); }  
+        | arr_str "," arr_str { $$ = strdup(yytext); }
+        ;
+/* === ΣΥΝΑΡΤΗΣΕΙΣ === */
+build_func:
+	func ";" { printf("[BISON] line=%d, Build-in Συνάρτηση\n", line); }
+	;
+func:
+        SCAN "(" scan_params ")" { $$ = strdup(yytext); }        
+        | LEN "(" len_params ")" { $$ = strdup(yytext); }
+        | CMP "(" cmp_params ")" { $$ = strdup(yytext); }
+        | PRINT "(" print_params ")" { $$ = strdup(yytext); }
+        ;
+scan_params:
+        IDENTIFIER { $$ = strdup(yytext); }
+        ;
+len_params:
+        elements { $$ = strdup(yytext); }
+        | STRING { $$ = strdup(yytext); }
+        | IDENTIFIER { $$ = strdup(yytext); }
+        ;
+cmp_params:
+        STRING { $$ = strdup(yytext); }
+        | IDENTIFIER { $$ = strdup(yytext); }
+        | cmp_params "," cmp_params { $$ = strdup(yytext); }
+        ;
+print_params:
+        STRING { $$ = strdup(yytext); }
+        | IDENTIFIER { $$ = strdup(yytext); }
+        | INTEGER { $$ = strdup(yytext);}
+        | func { $$ = strdup(yytext); }
+        | pos_elem { $$ = strdup(yytext); }
+        | print_params "," print_params { $$ = strdup(yytext); }
         ;
 
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
@@ -199,4 +240,4 @@ int main(int argc, char **argv)
 		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\n", parse);
 
 	return 0;
-}
+} 
