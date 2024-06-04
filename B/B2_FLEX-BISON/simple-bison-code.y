@@ -162,10 +162,6 @@ print_params:
         | print_params "," print_params { $$ = strdup(yytext); }
         
 
-
-
-
-
 /* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
 decl_var:
         type var ";" { printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
@@ -242,4 +238,4 @@ int main(int argc, char **argv)
 		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\n", parse);
 
 	return 0;
-}
+} 
