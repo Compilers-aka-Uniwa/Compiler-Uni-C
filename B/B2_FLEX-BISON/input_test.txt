@@ -36,8 +36,6 @@ print(pin[0]);
 func myfunc()
 {
 }
-func myfunc2(int paramA, float paramB, long paramC) 
+func myfunc2(int paramA, long paramB, short paramC)
 {
-    print("a = ", varA);
-    print("b = ", varB);
 }

@@ -200,7 +200,6 @@ code_func:
         "{" code NEWLINE "}" {$$=strdup(yytext);}
         ;
 code:
-        build_func {$$=strdup(yytext);}
         | {} 
         ;
 
@@ -240,7 +239,7 @@ extern FILE *yyout;
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 1;
+        yydebug = 0;
 
 	if (argc == 3)
         {
