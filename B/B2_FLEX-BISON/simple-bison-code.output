@@ -1,3 +1,8 @@
+Nonterminals useless in grammar
+
+    expr
+
+
 Terminals unused in grammar
 
     BREAK
@@ -15,16 +20,12 @@ Terminals unused in grammar
     CONTINUE
     FOR
     WHILE
-    "+"
     "*="
     "--"
-    "-"
     "/="
     "<"
-    "*"
     "!"
     ">"
-    "/"
     "&&"
     "<="
     "%"
@@ -43,7 +44,16 @@ Terminals unused in grammar
     UNKNOWN
 
 
-State 14 conflicts: 1 shift/reduce
+Rules useless in grammar
+
+   83 expr: INTEGER
+   84     | expr "+" expr
+   85     | expr "-" expr
+   86     | expr "*" expr
+   87     | expr "/" expr
+
+
+State 16 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -56,125 +66,165 @@ Grammar
     4        | program build_func NEWLINE
     5        | program NEWLINE
     6        | ε
+    7        | program decl_operations NEWLINE
 
-    7 decl_arr: IDENTIFIER "=" elements ";"
+    8 decl_arr: IDENTIFIER "=" elements ";"
 
-    8 pos_elem: IDENTIFIER "[" INTEGER "]"
+    9 pos_elem: IDENTIFIER "[" INTEGER "]"
 
-    9 elements: "[" "]"
-   10         | "[" arr_int "]"
-   11         | "[" arr_fl "]"
-   12         | "[" arr_str "]"
+   10 elements: "[" "]"
+   11         | "[" arr_int "]"
+   12         | "[" arr_fl "]"
+   13         | "[" arr_str "]"
 
-   13 arr_int: INTEGER
-   14        | arr_int "," arr_int
+   14 arr_int: INTEGER
+   15        | arr_int "," arr_int
 
-   15 arr_fl: FLOAT
-   16       | arr_fl "," arr_fl
+   16 arr_fl: FLOAT
+   17       | arr_fl "," arr_fl
 
-   17 arr_str: STRING
-   18        | arr_str "," arr_str
+   18 arr_str: STRING
+   19        | arr_str "," arr_str
 
-   19 build_func: func ";"
+   20 build_func: func ";"
 
-   20 func: SCAN "(" scan_params ")"
-   21     | LEN "(" len_params ")"
-   22     | CMP "(" cmp_params ")"
-   23     | PRINT "(" print_params ")"
+   21 func: SCAN "(" scan_params ")"
+   22     | LEN "(" len_params ")"
+   23     | CMP "(" cmp_params ")"
+   24     | PRINT "(" print_params ")"
 
-   24 scan_params: IDENTIFIER
+   25 scan_params: IDENTIFIER
 
-   25 len_params: elements
-   26           | STRING
-   27           | IDENTIFIER
+   26 len_params: elements
+   27           | STRING
+   28           | IDENTIFIER
 
-   28 cmp_params: STRING
-   29           | IDENTIFIER
-   30           | cmp_params "," cmp_params
+   29 cmp_params: STRING
+   30           | IDENTIFIER
+   31           | cmp_params "," cmp_params
 
-   31 print_params: STRING
-   32             | IDENTIFIER
-   33             | INTEGER
-   34             | func
-   35             | pos_elem
-   36             | print_params "," print_params
+   32 print_params: STRING
+   33             | IDENTIFIER
+   34             | INTEGER
+   35             | func
+   36             | pos_elem
+   37             | print_params "," print_params
 
-   37 decl_var: type var ";"
+   38 decl_var: type var ";"
 
-   38 type: INT
-   39     | FLOAT_KEY
-   40     | DOUBLE
-   41     | SHORT
-   42     | LONG
+   39 type: INT
+   40     | FLOAT_KEY
+   41     | DOUBLE
+   42     | SHORT
+   43     | LONG
 
-   43 var: IDENTIFIER
-   44    | var "," var
+   44 var: IDENTIFIER
+   45    | var "," var
+
+   46 decl_operations: type_of_op ";"
+
+   47 type_of_op: INTEGER "+" INTEGER
+   48           | INTEGER "-" INTEGER
+   49           | INTEGER "*" INTEGER
+   50           | INTEGER "/" INTEGER
+   51           | FLOAT "+" FLOAT
+   52           | FLOAT "-" FLOAT
+   53           | FLOAT "*" FLOAT
+   54           | FLOAT "/" FLOAT
+   55           | IDENTIFIER "+" IDENTIFIER
+   56           | IDENTIFIER "-" IDENTIFIER
+   57           | IDENTIFIER "*" IDENTIFIER
+   58           | IDENTIFIER "/" IDENTIFIER
+   59           | INTEGER "+" FLOAT
+   60           | INTEGER "-" FLOAT
+   61           | INTEGER "*" FLOAT
+   62           | INTEGER "/" FLOAT
+   63           | FLOAT "+" INTEGER
+   64           | FLOAT "-" INTEGER
+   65           | FLOAT "*" INTEGER
+   66           | FLOAT "/" INTEGER
+   67           | IDENTIFIER "+" INTEGER
+   68           | IDENTIFIER "-" INTEGER
+   69           | IDENTIFIER "*" INTEGER
+   70           | IDENTIFIER "/" INTEGER
+   71           | INTEGER "+" IDENTIFIER
+   72           | INTEGER "-" IDENTIFIER
+   73           | INTEGER "*" IDENTIFIER
+   74           | INTEGER "/" IDENTIFIER
+   75           | FLOAT "+" IDENTIFIER
+   76           | FLOAT "-" IDENTIFIER
+   77           | FLOAT "*" IDENTIFIER
+   78           | FLOAT "/" IDENTIFIER
+   79           | IDENTIFIER "+" FLOAT
+   80           | IDENTIFIER "-" FLOAT
+   81           | IDENTIFIER "*" FLOAT
+   82           | IDENTIFIER "/" FLOAT
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256)
-    SCAN (258) 20
-    LEN (259) 21
-    CMP (260) 22
-    PRINT (261) 23
-    IDENTIFIER (262) 7 8 24 27 29 32 43
-    STRING (263) 17 26 28 31
-    INTEGER (264) 8 13 33
-    FLOAT (265) 15
+    SCAN (258) 21
+    LEN (259) 22
+    CMP (260) 23
+    PRINT (261) 24
+    IDENTIFIER (262) 8 9 25 28 30 33 44 55 56 57 58 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82
+    STRING (263) 18 27 29 32
+    INTEGER (264) 9 14 34 47 48 49 50 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74
+    FLOAT (265) 16 51 52 53 54 59 60 61 62 63 64 65 66 75 76 77 78 79 80 81 82
     BREAK (266)
     DO (267)
     IF (268)
     SIZEOF (269)
     CASE (270)
-    DOUBLE (271) 40
-    INT (272) 38
+    DOUBLE (271) 41
+    INT (272) 39
     STRUCT (273)
     FUNC (274)
     ELSE (275)
-    LONG (276) 42
+    LONG (276) 43
     SWITCH (277)
     CONST (278)
-    FLOAT_KEY (279) 39
+    FLOAT_KEY (279) 40
     RETURN (280)
     VOID (281)
     CONTINUE (282)
     FOR (283)
-    SHORT (284) 41
+    SHORT (284) 42
     WHILE (285)
-    "+" (286)
+    "+" (286) 47 51 55 59 63 67 71 75 79
     "*=" (287)
     "--" (288)
-    "-" (289)
+    "-" (289) 48 52 56 60 64 68 72 76 80
     "/=" (290)
     "<" (291)
-    "*" (292)
+    "*" (292) 49 53 57 61 65 69 73 77 81
     "!" (293)
     ">" (294)
-    "/" (295)
+    "/" (295) 50 54 58 62 66 70 74 78 82
     "&&" (296)
     "<=" (297)
     "%" (298)
     "||" (299)
     ">=" (300)
-    "=" (301) 7
+    "=" (301) 8
     "==" (302)
     "&" (303)
     "+=" (304)
     "!=" (305)
     "-=" (306)
     "++" (307)
-    "(" (308) 20 21 22 23
-    ")" (309) 20 21 22 23
-    "[" (310) 8 9 10 11 12
-    "]" (311) 8 9 10 11 12
+    "(" (308) 21 22 23 24
+    ")" (309) 21 22 23 24
+    "[" (310) 9 10 11 12 13
+    "]" (311) 9 10 11 12 13
     "{" (312)
     "}" (313)
-    "," (314) 14 16 18 30 36 44
+    "," (314) 15 17 19 31 37 45
     "\\" (315)
-    ";" (316) 7 19 37
-    NEWLINE (317) 1 2 4 5
+    ";" (316) 8 20 38 46
+    NEWLINE (317) 1 2 4 5 7
     END_OF_FILE (318)
     UNKNOWN (319)
 
@@ -184,53 +234,59 @@ Nonterminals, with rules where they appear
     $accept (65)
         on left: 0
     program (66)
-        on left: 1 2 3 4 5 6
-        on right: 0 1 2 3 4 5
+        on left: 1 2 3 4 5 6 7
+        on right: 0 1 2 3 4 5 7
     decl_arr (67)
-        on left: 7
+        on left: 8
         on right: 2 3
     pos_elem (68)
-        on left: 8
-        on right: 35
+        on left: 9
+        on right: 36
     elements (69)
-        on left: 9 10 11 12
-        on right: 7 25
+        on left: 10 11 12 13
+        on right: 8 26
     arr_int (70)
-        on left: 13 14
-        on right: 10 14
+        on left: 14 15
+        on right: 11 15
     arr_fl (71)
-        on left: 15 16
-        on right: 11 16
+        on left: 16 17
+        on right: 12 17
     arr_str (72)
-        on left: 17 18
-        on right: 12 18
+        on left: 18 19
+        on right: 13 19
     build_func (73)
-        on left: 19
+        on left: 20
         on right: 4
     func (74)
-        on left: 20 21 22 23
-        on right: 19 34
+        on left: 21 22 23 24
+        on right: 20 35
     scan_params (75)
-        on left: 24
-        on right: 20
-    len_params (76)
-        on left: 25 26 27
+        on left: 25
         on right: 21
+    len_params (76)
+        on left: 26 27 28
+        on right: 22
     cmp_params (77)
-        on left: 28 29 30
-        on right: 22 30
+        on left: 29 30 31
+        on right: 23 31
     print_params (78)
-        on left: 31 32 33 34 35 36
-        on right: 23 36
+        on left: 32 33 34 35 36 37
+        on right: 24 37
     decl_var (79)
-        on left: 37
+        on left: 38
         on right: 1
     type (80)
-        on left: 38 39 40 41 42
-        on right: 37
+        on left: 39 40 41 42 43
+        on right: 38
     var (81)
-        on left: 43 44
-        on right: 37 44
+        on left: 44 45
+        on right: 38 45
+    decl_operations (82)
+        on left: 46
+        on right: 7
+    type_of_op (83)
+        on left: 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82
+        on right: 46
 
 
 State 0
@@ -250,6 +306,7 @@ State 1
     3        | program • decl_arr
     4        | program • build_func NEWLINE
     5        | program • NEWLINE
+    7        | program • decl_operations NEWLINE
 
     $end        shift, and go to state 2
     SCAN        shift, and go to state 3
@@ -257,18 +314,22 @@ State 1
     CMP         shift, and go to state 5
     PRINT       shift, and go to state 6
     IDENTIFIER  shift, and go to state 7
-    DOUBLE      shift, and go to state 8
-    INT         shift, and go to state 9
-    LONG        shift, and go to state 10
-    FLOAT_KEY   shift, and go to state 11
-    SHORT       shift, and go to state 12
-    NEWLINE     shift, and go to state 13
+    INTEGER     shift, and go to state 8
+    FLOAT       shift, and go to state 9
+    DOUBLE      shift, and go to state 10
+    INT         shift, and go to state 11
+    LONG        shift, and go to state 12
+    FLOAT_KEY   shift, and go to state 13
+    SHORT       shift, and go to state 14
+    NEWLINE     shift, and go to state 15
 
-    decl_arr    go to state 14
-    build_func  go to state 15
-    func        go to state 16
-    decl_var    go to state 17
-    type        go to state 18
+    decl_arr         go to state 16
+    build_func       go to state 17
+    func             go to state 18
+    decl_var         go to state 19
+    type             go to state 20
+    decl_operations  go to state 21
+    type_of_op       go to state 22
 
 
 State 2
@@ -280,604 +341,1074 @@ State 2
 
 State 3
 
-   20 func: SCAN • "(" scan_params ")"
+   21 func: SCAN • "(" scan_params ")"
 
-    "("  shift, and go to state 19
+    "("  shift, and go to state 23
 
 
 State 4
 
-   21 func: LEN • "(" len_params ")"
+   22 func: LEN • "(" len_params ")"
 
-    "("  shift, and go to state 20
+    "("  shift, and go to state 24
 
 
 State 5
 
-   22 func: CMP • "(" cmp_params ")"
+   23 func: CMP • "(" cmp_params ")"
 
-    "("  shift, and go to state 21
+    "("  shift, and go to state 25
 
 
 State 6
 
-   23 func: PRINT • "(" print_params ")"
+   24 func: PRINT • "(" print_params ")"
 
-    "("  shift, and go to state 22
+    "("  shift, and go to state 26
 
 
 State 7
 
-    7 decl_arr: IDENTIFIER • "=" elements ";"
+    8 decl_arr: IDENTIFIER • "=" elements ";"
+   55 type_of_op: IDENTIFIER • "+" IDENTIFIER
+   56           | IDENTIFIER • "-" IDENTIFIER
+   57           | IDENTIFIER • "*" IDENTIFIER
+   58           | IDENTIFIER • "/" IDENTIFIER
+   67           | IDENTIFIER • "+" INTEGER
+   68           | IDENTIFIER • "-" INTEGER
+   69           | IDENTIFIER • "*" INTEGER
+   70           | IDENTIFIER • "/" INTEGER
+   79           | IDENTIFIER • "+" FLOAT
+   80           | IDENTIFIER • "-" FLOAT
+   81           | IDENTIFIER • "*" FLOAT
+   82           | IDENTIFIER • "/" FLOAT
 
-    "="  shift, and go to state 23
+    "+"  shift, and go to state 27
+    "-"  shift, and go to state 28
+    "*"  shift, and go to state 29
+    "/"  shift, and go to state 30
+    "="  shift, and go to state 31
 
 
 State 8
 
-   40 type: DOUBLE •
+   47 type_of_op: INTEGER • "+" INTEGER
+   48           | INTEGER • "-" INTEGER
+   49           | INTEGER • "*" INTEGER
+   50           | INTEGER • "/" INTEGER
+   59           | INTEGER • "+" FLOAT
+   60           | INTEGER • "-" FLOAT
+   61           | INTEGER • "*" FLOAT
+   62           | INTEGER • "/" FLOAT
+   71           | INTEGER • "+" IDENTIFIER
+   72           | INTEGER • "-" IDENTIFIER
+   73           | INTEGER • "*" IDENTIFIER
+   74           | INTEGER • "/" IDENTIFIER
 
-    $default  reduce using rule 40 (type)
+    "+"  shift, and go to state 32
+    "-"  shift, and go to state 33
+    "*"  shift, and go to state 34
+    "/"  shift, and go to state 35
 
 
 State 9
 
-   38 type: INT •
+   51 type_of_op: FLOAT • "+" FLOAT
+   52           | FLOAT • "-" FLOAT
+   53           | FLOAT • "*" FLOAT
+   54           | FLOAT • "/" FLOAT
+   63           | FLOAT • "+" INTEGER
+   64           | FLOAT • "-" INTEGER
+   65           | FLOAT • "*" INTEGER
+   66           | FLOAT • "/" INTEGER
+   75           | FLOAT • "+" IDENTIFIER
+   76           | FLOAT • "-" IDENTIFIER
+   77           | FLOAT • "*" IDENTIFIER
+   78           | FLOAT • "/" IDENTIFIER
 
-    $default  reduce using rule 38 (type)
+    "+"  shift, and go to state 36
+    "-"  shift, and go to state 37
+    "*"  shift, and go to state 38
+    "/"  shift, and go to state 39
 
 
 State 10
 
-   42 type: LONG •
+   41 type: DOUBLE •
 
-    $default  reduce using rule 42 (type)
+    $default  reduce using rule 41 (type)
 
 
 State 11
 
-   39 type: FLOAT_KEY •
+   39 type: INT •
 
     $default  reduce using rule 39 (type)
 
 
 State 12
 
-   41 type: SHORT •
+   43 type: LONG •
 
-    $default  reduce using rule 41 (type)
+    $default  reduce using rule 43 (type)
 
 
 State 13
+
+   40 type: FLOAT_KEY •
+
+    $default  reduce using rule 40 (type)
+
+
+State 14
+
+   42 type: SHORT •
+
+    $default  reduce using rule 42 (type)
+
+
+State 15
 
     5 program: program NEWLINE •
 
     $default  reduce using rule 5 (program)
 
 
-State 14
+State 16
 
     2 program: program decl_arr • NEWLINE
     3        | program decl_arr •
 
-    NEWLINE  shift, and go to state 24
+    NEWLINE  shift, and go to state 40
 
     NEWLINE   [reduce using rule 3 (program)]
     $default  reduce using rule 3 (program)
 
 
-State 15
+State 17
 
     4 program: program build_func • NEWLINE
 
-    NEWLINE  shift, and go to state 25
-
-
-State 16
-
-   19 build_func: func • ";"
-
-    ";"  shift, and go to state 26
-
-
-State 17
-
-    1 program: program decl_var • NEWLINE
-
-    NEWLINE  shift, and go to state 27
+    NEWLINE  shift, and go to state 41
 
 
 State 18
 
-   37 decl_var: type • var ";"
+   20 build_func: func • ";"
 
-    IDENTIFIER  shift, and go to state 28
-
-    var  go to state 29
+    ";"  shift, and go to state 42
 
 
 State 19
 
-   20 func: SCAN "(" • scan_params ")"
+    1 program: program decl_var • NEWLINE
 
-    IDENTIFIER  shift, and go to state 30
-
-    scan_params  go to state 31
+    NEWLINE  shift, and go to state 43
 
 
 State 20
 
-   21 func: LEN "(" • len_params ")"
+   38 decl_var: type • var ";"
 
-    IDENTIFIER  shift, and go to state 32
-    STRING      shift, and go to state 33
-    "["         shift, and go to state 34
+    IDENTIFIER  shift, and go to state 44
 
-    elements    go to state 35
-    len_params  go to state 36
+    var  go to state 45
 
 
 State 21
 
-   22 func: CMP "(" • cmp_params ")"
+    7 program: program decl_operations • NEWLINE
 
-    IDENTIFIER  shift, and go to state 37
-    STRING      shift, and go to state 38
-
-    cmp_params  go to state 39
+    NEWLINE  shift, and go to state 46
 
 
 State 22
 
-   23 func: PRINT "(" • print_params ")"
+   46 decl_operations: type_of_op • ";"
+
+    ";"  shift, and go to state 47
+
+
+State 23
+
+   21 func: SCAN "(" • scan_params ")"
+
+    IDENTIFIER  shift, and go to state 48
+
+    scan_params  go to state 49
+
+
+State 24
+
+   22 func: LEN "(" • len_params ")"
+
+    IDENTIFIER  shift, and go to state 50
+    STRING      shift, and go to state 51
+    "["         shift, and go to state 52
+
+    elements    go to state 53
+    len_params  go to state 54
+
+
+State 25
+
+   23 func: CMP "(" • cmp_params ")"
+
+    IDENTIFIER  shift, and go to state 55
+    STRING      shift, and go to state 56
+
+    cmp_params  go to state 57
+
+
+State 26
+
+   24 func: PRINT "(" • print_params ")"
 
     SCAN        shift, and go to state 3
     LEN         shift, and go to state 4
     CMP         shift, and go to state 5
     PRINT       shift, and go to state 6
-    IDENTIFIER  shift, and go to state 40
-    STRING      shift, and go to state 41
-    INTEGER     shift, and go to state 42
+    IDENTIFIER  shift, and go to state 58
+    STRING      shift, and go to state 59
+    INTEGER     shift, and go to state 60
 
-    pos_elem      go to state 43
-    func          go to state 44
-    print_params  go to state 45
-
-
-State 23
-
-    7 decl_arr: IDENTIFIER "=" • elements ";"
-
-    "["  shift, and go to state 34
-
-    elements  go to state 46
+    pos_elem      go to state 61
+    func          go to state 62
+    print_params  go to state 63
 
 
-State 24
+State 27
+
+   55 type_of_op: IDENTIFIER "+" • IDENTIFIER
+   67           | IDENTIFIER "+" • INTEGER
+   79           | IDENTIFIER "+" • FLOAT
+
+    IDENTIFIER  shift, and go to state 64
+    INTEGER     shift, and go to state 65
+    FLOAT       shift, and go to state 66
+
+
+State 28
+
+   56 type_of_op: IDENTIFIER "-" • IDENTIFIER
+   68           | IDENTIFIER "-" • INTEGER
+   80           | IDENTIFIER "-" • FLOAT
+
+    IDENTIFIER  shift, and go to state 67
+    INTEGER     shift, and go to state 68
+    FLOAT       shift, and go to state 69
+
+
+State 29
+
+   57 type_of_op: IDENTIFIER "*" • IDENTIFIER
+   69           | IDENTIFIER "*" • INTEGER
+   81           | IDENTIFIER "*" • FLOAT
+
+    IDENTIFIER  shift, and go to state 70
+    INTEGER     shift, and go to state 71
+    FLOAT       shift, and go to state 72
+
+
+State 30
+
+   58 type_of_op: IDENTIFIER "/" • IDENTIFIER
+   70           | IDENTIFIER "/" • INTEGER
+   82           | IDENTIFIER "/" • FLOAT
+
+    IDENTIFIER  shift, and go to state 73
+    INTEGER     shift, and go to state 74
+    FLOAT       shift, and go to state 75
+
+
+State 31
+
+    8 decl_arr: IDENTIFIER "=" • elements ";"
+
+    "["  shift, and go to state 52
+
+    elements  go to state 76
+
+
+State 32
+
+   47 type_of_op: INTEGER "+" • INTEGER
+   59           | INTEGER "+" • FLOAT
+   71           | INTEGER "+" • IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 77
+    INTEGER     shift, and go to state 78
+    FLOAT       shift, and go to state 79
+
+
+State 33
+
+   48 type_of_op: INTEGER "-" • INTEGER
+   60           | INTEGER "-" • FLOAT
+   72           | INTEGER "-" • IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 80
+    INTEGER     shift, and go to state 81
+    FLOAT       shift, and go to state 82
+
+
+State 34
+
+   49 type_of_op: INTEGER "*" • INTEGER
+   61           | INTEGER "*" • FLOAT
+   73           | INTEGER "*" • IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 83
+    INTEGER     shift, and go to state 84
+    FLOAT       shift, and go to state 85
+
+
+State 35
+
+   50 type_of_op: INTEGER "/" • INTEGER
+   62           | INTEGER "/" • FLOAT
+   74           | INTEGER "/" • IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 86
+    INTEGER     shift, and go to state 87
+    FLOAT       shift, and go to state 88
+
+
+State 36
+
+   51 type_of_op: FLOAT "+" • FLOAT
+   63           | FLOAT "+" • INTEGER
+   75           | FLOAT "+" • IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 89
+    INTEGER     shift, and go to state 90
+    FLOAT       shift, and go to state 91
+
+
+State 37
+
+   52 type_of_op: FLOAT "-" • FLOAT
+   64           | FLOAT "-" • INTEGER
+   76           | FLOAT "-" • IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 92
+    INTEGER     shift, and go to state 93
+    FLOAT       shift, and go to state 94
+
+
+State 38
+
+   53 type_of_op: FLOAT "*" • FLOAT
+   65           | FLOAT "*" • INTEGER
+   77           | FLOAT "*" • IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 95
+    INTEGER     shift, and go to state 96
+    FLOAT       shift, and go to state 97
+
+
+State 39
+
+   54 type_of_op: FLOAT "/" • FLOAT
+   66           | FLOAT "/" • INTEGER
+   78           | FLOAT "/" • IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 98
+    INTEGER     shift, and go to state 99
+    FLOAT       shift, and go to state 100
+
+
+State 40
 
     2 program: program decl_arr NEWLINE •
 
     $default  reduce using rule 2 (program)
 
 
-State 25
+State 41
 
     4 program: program build_func NEWLINE •
 
     $default  reduce using rule 4 (program)
 
 
-State 26
+State 42
 
-   19 build_func: func ";" •
+   20 build_func: func ";" •
 
-    $default  reduce using rule 19 (build_func)
+    $default  reduce using rule 20 (build_func)
 
 
-State 27
+State 43
 
     1 program: program decl_var NEWLINE •
 
     $default  reduce using rule 1 (program)
 
 
-State 28
-
-   43 var: IDENTIFIER •
-
-    $default  reduce using rule 43 (var)
-
-
-State 29
-
-   37 decl_var: type var • ";"
-   44 var: var • "," var
-
-    ","  shift, and go to state 47
-    ";"  shift, and go to state 48
-
-
-State 30
-
-   24 scan_params: IDENTIFIER •
-
-    $default  reduce using rule 24 (scan_params)
-
-
-State 31
-
-   20 func: SCAN "(" scan_params • ")"
-
-    ")"  shift, and go to state 49
-
-
-State 32
-
-   27 len_params: IDENTIFIER •
-
-    $default  reduce using rule 27 (len_params)
-
-
-State 33
-
-   26 len_params: STRING •
-
-    $default  reduce using rule 26 (len_params)
-
-
-State 34
-
-    9 elements: "[" • "]"
-   10         | "[" • arr_int "]"
-   11         | "[" • arr_fl "]"
-   12         | "[" • arr_str "]"
-
-    STRING   shift, and go to state 50
-    INTEGER  shift, and go to state 51
-    FLOAT    shift, and go to state 52
-    "]"      shift, and go to state 53
-
-    arr_int  go to state 54
-    arr_fl   go to state 55
-    arr_str  go to state 56
-
-
-State 35
-
-   25 len_params: elements •
-
-    $default  reduce using rule 25 (len_params)
-
-
-State 36
-
-   21 func: LEN "(" len_params • ")"
-
-    ")"  shift, and go to state 57
-
-
-State 37
-
-   29 cmp_params: IDENTIFIER •
-
-    $default  reduce using rule 29 (cmp_params)
-
-
-State 38
-
-   28 cmp_params: STRING •
-
-    $default  reduce using rule 28 (cmp_params)
-
-
-State 39
-
-   22 func: CMP "(" cmp_params • ")"
-   30 cmp_params: cmp_params • "," cmp_params
-
-    ")"  shift, and go to state 58
-    ","  shift, and go to state 59
-
-
-State 40
-
-    8 pos_elem: IDENTIFIER • "[" INTEGER "]"
-   32 print_params: IDENTIFIER •
-
-    "["  shift, and go to state 60
-
-    $default  reduce using rule 32 (print_params)
-
-
-State 41
-
-   31 print_params: STRING •
-
-    $default  reduce using rule 31 (print_params)
-
-
-State 42
-
-   33 print_params: INTEGER •
-
-    $default  reduce using rule 33 (print_params)
-
-
-State 43
-
-   35 print_params: pos_elem •
-
-    $default  reduce using rule 35 (print_params)
-
-
 State 44
 
-   34 print_params: func •
+   44 var: IDENTIFIER •
 
-    $default  reduce using rule 34 (print_params)
+    $default  reduce using rule 44 (var)
 
 
 State 45
 
-   23 func: PRINT "(" print_params • ")"
-   36 print_params: print_params • "," print_params
+   38 decl_var: type var • ";"
+   45 var: var • "," var
 
-    ")"  shift, and go to state 61
-    ","  shift, and go to state 62
+    ","  shift, and go to state 101
+    ";"  shift, and go to state 102
 
 
 State 46
 
-    7 decl_arr: IDENTIFIER "=" elements • ";"
+    7 program: program decl_operations NEWLINE •
 
-    ";"  shift, and go to state 63
+    $default  reduce using rule 7 (program)
 
 
 State 47
 
-   44 var: var "," • var
+   46 decl_operations: type_of_op ";" •
 
-    IDENTIFIER  shift, and go to state 28
-
-    var  go to state 64
+    $default  reduce using rule 46 (decl_operations)
 
 
 State 48
 
-   37 decl_var: type var ";" •
+   25 scan_params: IDENTIFIER •
 
-    $default  reduce using rule 37 (decl_var)
+    $default  reduce using rule 25 (scan_params)
 
 
 State 49
 
-   20 func: SCAN "(" scan_params ")" •
+   21 func: SCAN "(" scan_params • ")"
 
-    $default  reduce using rule 20 (func)
+    ")"  shift, and go to state 103
 
 
 State 50
 
-   17 arr_str: STRING •
+   28 len_params: IDENTIFIER •
 
-    $default  reduce using rule 17 (arr_str)
+    $default  reduce using rule 28 (len_params)
 
 
 State 51
 
-   13 arr_int: INTEGER •
+   27 len_params: STRING •
 
-    $default  reduce using rule 13 (arr_int)
+    $default  reduce using rule 27 (len_params)
 
 
 State 52
 
-   15 arr_fl: FLOAT •
+   10 elements: "[" • "]"
+   11         | "[" • arr_int "]"
+   12         | "[" • arr_fl "]"
+   13         | "[" • arr_str "]"
 
-    $default  reduce using rule 15 (arr_fl)
+    STRING   shift, and go to state 104
+    INTEGER  shift, and go to state 105
+    FLOAT    shift, and go to state 106
+    "]"      shift, and go to state 107
+
+    arr_int  go to state 108
+    arr_fl   go to state 109
+    arr_str  go to state 110
 
 
 State 53
 
-    9 elements: "[" "]" •
+   26 len_params: elements •
 
-    $default  reduce using rule 9 (elements)
+    $default  reduce using rule 26 (len_params)
 
 
 State 54
 
-   10 elements: "[" arr_int • "]"
-   14 arr_int: arr_int • "," arr_int
+   22 func: LEN "(" len_params • ")"
 
-    "]"  shift, and go to state 65
-    ","  shift, and go to state 66
+    ")"  shift, and go to state 111
 
 
 State 55
 
-   11 elements: "[" arr_fl • "]"
-   16 arr_fl: arr_fl • "," arr_fl
+   30 cmp_params: IDENTIFIER •
 
-    "]"  shift, and go to state 67
-    ","  shift, and go to state 68
+    $default  reduce using rule 30 (cmp_params)
 
 
 State 56
 
-   12 elements: "[" arr_str • "]"
-   18 arr_str: arr_str • "," arr_str
+   29 cmp_params: STRING •
 
-    "]"  shift, and go to state 69
-    ","  shift, and go to state 70
+    $default  reduce using rule 29 (cmp_params)
 
 
 State 57
 
-   21 func: LEN "(" len_params ")" •
+   23 func: CMP "(" cmp_params • ")"
+   31 cmp_params: cmp_params • "," cmp_params
 
-    $default  reduce using rule 21 (func)
+    ")"  shift, and go to state 112
+    ","  shift, and go to state 113
 
 
 State 58
 
-   22 func: CMP "(" cmp_params ")" •
+    9 pos_elem: IDENTIFIER • "[" INTEGER "]"
+   33 print_params: IDENTIFIER •
 
-    $default  reduce using rule 22 (func)
+    "["  shift, and go to state 114
+
+    $default  reduce using rule 33 (print_params)
 
 
 State 59
 
-   30 cmp_params: cmp_params "," • cmp_params
+   32 print_params: STRING •
 
-    IDENTIFIER  shift, and go to state 37
-    STRING      shift, and go to state 38
-
-    cmp_params  go to state 71
+    $default  reduce using rule 32 (print_params)
 
 
 State 60
 
-    8 pos_elem: IDENTIFIER "[" • INTEGER "]"
+   34 print_params: INTEGER •
 
-    INTEGER  shift, and go to state 72
+    $default  reduce using rule 34 (print_params)
 
 
 State 61
 
-   23 func: PRINT "(" print_params ")" •
+   36 print_params: pos_elem •
 
-    $default  reduce using rule 23 (func)
+    $default  reduce using rule 36 (print_params)
 
 
 State 62
 
-   36 print_params: print_params "," • print_params
+   35 print_params: func •
+
+    $default  reduce using rule 35 (print_params)
+
+
+State 63
+
+   24 func: PRINT "(" print_params • ")"
+   37 print_params: print_params • "," print_params
+
+    ")"  shift, and go to state 115
+    ","  shift, and go to state 116
+
+
+State 64
+
+   55 type_of_op: IDENTIFIER "+" IDENTIFIER •
+
+    $default  reduce using rule 55 (type_of_op)
+
+
+State 65
+
+   67 type_of_op: IDENTIFIER "+" INTEGER •
+
+    $default  reduce using rule 67 (type_of_op)
+
+
+State 66
+
+   79 type_of_op: IDENTIFIER "+" FLOAT •
+
+    $default  reduce using rule 79 (type_of_op)
+
+
+State 67
+
+   56 type_of_op: IDENTIFIER "-" IDENTIFIER •
+
+    $default  reduce using rule 56 (type_of_op)
+
+
+State 68
+
+   68 type_of_op: IDENTIFIER "-" INTEGER •
+
+    $default  reduce using rule 68 (type_of_op)
+
+
+State 69
+
+   80 type_of_op: IDENTIFIER "-" FLOAT •
+
+    $default  reduce using rule 80 (type_of_op)
+
+
+State 70
+
+   57 type_of_op: IDENTIFIER "*" IDENTIFIER •
+
+    $default  reduce using rule 57 (type_of_op)
+
+
+State 71
+
+   69 type_of_op: IDENTIFIER "*" INTEGER •
+
+    $default  reduce using rule 69 (type_of_op)
+
+
+State 72
+
+   81 type_of_op: IDENTIFIER "*" FLOAT •
+
+    $default  reduce using rule 81 (type_of_op)
+
+
+State 73
+
+   58 type_of_op: IDENTIFIER "/" IDENTIFIER •
+
+    $default  reduce using rule 58 (type_of_op)
+
+
+State 74
+
+   70 type_of_op: IDENTIFIER "/" INTEGER •
+
+    $default  reduce using rule 70 (type_of_op)
+
+
+State 75
+
+   82 type_of_op: IDENTIFIER "/" FLOAT •
+
+    $default  reduce using rule 82 (type_of_op)
+
+
+State 76
+
+    8 decl_arr: IDENTIFIER "=" elements • ";"
+
+    ";"  shift, and go to state 117
+
+
+State 77
+
+   71 type_of_op: INTEGER "+" IDENTIFIER •
+
+    $default  reduce using rule 71 (type_of_op)
+
+
+State 78
+
+   47 type_of_op: INTEGER "+" INTEGER •
+
+    $default  reduce using rule 47 (type_of_op)
+
+
+State 79
+
+   59 type_of_op: INTEGER "+" FLOAT •
+
+    $default  reduce using rule 59 (type_of_op)
+
+
+State 80
+
+   72 type_of_op: INTEGER "-" IDENTIFIER •
+
+    $default  reduce using rule 72 (type_of_op)
+
+
+State 81
+
+   48 type_of_op: INTEGER "-" INTEGER •
+
+    $default  reduce using rule 48 (type_of_op)
+
+
+State 82
+
+   60 type_of_op: INTEGER "-" FLOAT •
+
+    $default  reduce using rule 60 (type_of_op)
+
+
+State 83
+
+   73 type_of_op: INTEGER "*" IDENTIFIER •
+
+    $default  reduce using rule 73 (type_of_op)
+
+
+State 84
+
+   49 type_of_op: INTEGER "*" INTEGER •
+
+    $default  reduce using rule 49 (type_of_op)
+
+
+State 85
+
+   61 type_of_op: INTEGER "*" FLOAT •
+
+    $default  reduce using rule 61 (type_of_op)
+
+
+State 86
+
+   74 type_of_op: INTEGER "/" IDENTIFIER •
+
+    $default  reduce using rule 74 (type_of_op)
+
+
+State 87
+
+   50 type_of_op: INTEGER "/" INTEGER •
+
+    $default  reduce using rule 50 (type_of_op)
+
+
+State 88
+
+   62 type_of_op: INTEGER "/" FLOAT •
+
+    $default  reduce using rule 62 (type_of_op)
+
+
+State 89
+
+   75 type_of_op: FLOAT "+" IDENTIFIER •
+
+    $default  reduce using rule 75 (type_of_op)
+
+
+State 90
+
+   63 type_of_op: FLOAT "+" INTEGER •
+
+    $default  reduce using rule 63 (type_of_op)
+
+
+State 91
+
+   51 type_of_op: FLOAT "+" FLOAT •
+
+    $default  reduce using rule 51 (type_of_op)
+
+
+State 92
+
+   76 type_of_op: FLOAT "-" IDENTIFIER •
+
+    $default  reduce using rule 76 (type_of_op)
+
+
+State 93
+
+   64 type_of_op: FLOAT "-" INTEGER •
+
+    $default  reduce using rule 64 (type_of_op)
+
+
+State 94
+
+   52 type_of_op: FLOAT "-" FLOAT •
+
+    $default  reduce using rule 52 (type_of_op)
+
+
+State 95
+
+   77 type_of_op: FLOAT "*" IDENTIFIER •
+
+    $default  reduce using rule 77 (type_of_op)
+
+
+State 96
+
+   65 type_of_op: FLOAT "*" INTEGER •
+
+    $default  reduce using rule 65 (type_of_op)
+
+
+State 97
+
+   53 type_of_op: FLOAT "*" FLOAT •
+
+    $default  reduce using rule 53 (type_of_op)
+
+
+State 98
+
+   78 type_of_op: FLOAT "/" IDENTIFIER •
+
+    $default  reduce using rule 78 (type_of_op)
+
+
+State 99
+
+   66 type_of_op: FLOAT "/" INTEGER •
+
+    $default  reduce using rule 66 (type_of_op)
+
+
+State 100
+
+   54 type_of_op: FLOAT "/" FLOAT •
+
+    $default  reduce using rule 54 (type_of_op)
+
+
+State 101
+
+   45 var: var "," • var
+
+    IDENTIFIER  shift, and go to state 44
+
+    var  go to state 118
+
+
+State 102
+
+   38 decl_var: type var ";" •
+
+    $default  reduce using rule 38 (decl_var)
+
+
+State 103
+
+   21 func: SCAN "(" scan_params ")" •
+
+    $default  reduce using rule 21 (func)
+
+
+State 104
+
+   18 arr_str: STRING •
+
+    $default  reduce using rule 18 (arr_str)
+
+
+State 105
+
+   14 arr_int: INTEGER •
+
+    $default  reduce using rule 14 (arr_int)
+
+
+State 106
+
+   16 arr_fl: FLOAT •
+
+    $default  reduce using rule 16 (arr_fl)
+
+
+State 107
+
+   10 elements: "[" "]" •
+
+    $default  reduce using rule 10 (elements)
+
+
+State 108
+
+   11 elements: "[" arr_int • "]"
+   15 arr_int: arr_int • "," arr_int
+
+    "]"  shift, and go to state 119
+    ","  shift, and go to state 120
+
+
+State 109
+
+   12 elements: "[" arr_fl • "]"
+   17 arr_fl: arr_fl • "," arr_fl
+
+    "]"  shift, and go to state 121
+    ","  shift, and go to state 122
+
+
+State 110
+
+   13 elements: "[" arr_str • "]"
+   19 arr_str: arr_str • "," arr_str
+
+    "]"  shift, and go to state 123
+    ","  shift, and go to state 124
+
+
+State 111
+
+   22 func: LEN "(" len_params ")" •
+
+    $default  reduce using rule 22 (func)
+
+
+State 112
+
+   23 func: CMP "(" cmp_params ")" •
+
+    $default  reduce using rule 23 (func)
+
+
+State 113
+
+   31 cmp_params: cmp_params "," • cmp_params
+
+    IDENTIFIER  shift, and go to state 55
+    STRING      shift, and go to state 56
+
+    cmp_params  go to state 125
+
+
+State 114
+
+    9 pos_elem: IDENTIFIER "[" • INTEGER "]"
+
+    INTEGER  shift, and go to state 126
+
+
+State 115
+
+   24 func: PRINT "(" print_params ")" •
+
+    $default  reduce using rule 24 (func)
+
+
+State 116
+
+   37 print_params: print_params "," • print_params
 
     SCAN        shift, and go to state 3
     LEN         shift, and go to state 4
     CMP         shift, and go to state 5
     PRINT       shift, and go to state 6
-    IDENTIFIER  shift, and go to state 40
-    STRING      shift, and go to state 41
-    INTEGER     shift, and go to state 42
+    IDENTIFIER  shift, and go to state 58
+    STRING      shift, and go to state 59
+    INTEGER     shift, and go to state 60
 
-    pos_elem      go to state 43
-    func          go to state 44
-    print_params  go to state 73
-
-
-State 63
-
-    7 decl_arr: IDENTIFIER "=" elements ";" •
-
-    $default  reduce using rule 7 (decl_arr)
+    pos_elem      go to state 61
+    func          go to state 62
+    print_params  go to state 127
 
 
-State 64
+State 117
 
-   44 var: var • "," var
-   44    | var "," var •
+    8 decl_arr: IDENTIFIER "=" elements ";" •
 
-    $default  reduce using rule 44 (var)
-
-
-State 65
-
-   10 elements: "[" arr_int "]" •
-
-    $default  reduce using rule 10 (elements)
+    $default  reduce using rule 8 (decl_arr)
 
 
-State 66
+State 118
 
-   14 arr_int: arr_int "," • arr_int
+   45 var: var • "," var
+   45    | var "," var •
 
-    INTEGER  shift, and go to state 51
-
-    arr_int  go to state 74
+    $default  reduce using rule 45 (var)
 
 
-State 67
+State 119
 
-   11 elements: "[" arr_fl "]" •
+   11 elements: "[" arr_int "]" •
 
     $default  reduce using rule 11 (elements)
 
 
-State 68
+State 120
 
-   16 arr_fl: arr_fl "," • arr_fl
+   15 arr_int: arr_int "," • arr_int
 
-    FLOAT  shift, and go to state 52
+    INTEGER  shift, and go to state 105
 
-    arr_fl  go to state 75
+    arr_int  go to state 128
 
 
-State 69
+State 121
 
-   12 elements: "[" arr_str "]" •
+   12 elements: "[" arr_fl "]" •
 
     $default  reduce using rule 12 (elements)
 
 
-State 70
+State 122
 
-   18 arr_str: arr_str "," • arr_str
+   17 arr_fl: arr_fl "," • arr_fl
 
-    STRING  shift, and go to state 50
+    FLOAT  shift, and go to state 106
 
-    arr_str  go to state 76
-
-
-State 71
-
-   30 cmp_params: cmp_params • "," cmp_params
-   30           | cmp_params "," cmp_params •
-
-    $default  reduce using rule 30 (cmp_params)
+    arr_fl  go to state 129
 
 
-State 72
+State 123
 
-    8 pos_elem: IDENTIFIER "[" INTEGER • "]"
+   13 elements: "[" arr_str "]" •
 
-    "]"  shift, and go to state 77
-
-
-State 73
-
-   36 print_params: print_params • "," print_params
-   36             | print_params "," print_params •
-
-    $default  reduce using rule 36 (print_params)
+    $default  reduce using rule 13 (elements)
 
 
-State 74
+State 124
 
-   14 arr_int: arr_int • "," arr_int
-   14        | arr_int "," arr_int •
+   19 arr_str: arr_str "," • arr_str
 
-    $default  reduce using rule 14 (arr_int)
+    STRING  shift, and go to state 104
 
-
-State 75
-
-   16 arr_fl: arr_fl • "," arr_fl
-   16       | arr_fl "," arr_fl •
-
-    $default  reduce using rule 16 (arr_fl)
+    arr_str  go to state 130
 
 
-State 76
+State 125
 
-   18 arr_str: arr_str • "," arr_str
-   18        | arr_str "," arr_str •
+   31 cmp_params: cmp_params • "," cmp_params
+   31           | cmp_params "," cmp_params •
 
-    $default  reduce using rule 18 (arr_str)
+    $default  reduce using rule 31 (cmp_params)
 
 
-State 77
+State 126
 
-    8 pos_elem: IDENTIFIER "[" INTEGER "]" •
+    9 pos_elem: IDENTIFIER "[" INTEGER • "]"
 
-    $default  reduce using rule 8 (pos_elem)
+    "]"  shift, and go to state 131
+
+
+State 127
+
+   37 print_params: print_params • "," print_params
+   37             | print_params "," print_params •
+
+    $default  reduce using rule 37 (print_params)
+
+
+State 128
+
+   15 arr_int: arr_int • "," arr_int
+   15        | arr_int "," arr_int •
+
+    $default  reduce using rule 15 (arr_int)
+
+
+State 129
+
+   17 arr_fl: arr_fl • "," arr_fl
+   17       | arr_fl "," arr_fl •
+
+    $default  reduce using rule 17 (arr_fl)
+
+
+State 130
+
+   19 arr_str: arr_str • "," arr_str
+   19        | arr_str "," arr_str •
+
+    $default  reduce using rule 19 (arr_str)
+
+
+State 131
+
+    9 pos_elem: IDENTIFIER "[" INTEGER "]" •
+
+    $default  reduce using rule 9 (pos_elem)
