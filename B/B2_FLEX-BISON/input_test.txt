@@ -31,3 +31,11 @@ print(x, "=", 100);
 print(cmp(str1, str2));
 print(len("This is a string"));
 print(pin[0]);
+
+//====Test case #5 FUNCTION-USER ====
+func myfunc()
+{
+}
+func myfunc2(int paramA, long paramB, short paramC)
+{
+}

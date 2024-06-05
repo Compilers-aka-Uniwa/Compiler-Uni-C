@@ -199,7 +199,13 @@ enum yysymbol_kind_t
   YYSYMBOL_print_params = 78,              /* print_params  */
   YYSYMBOL_decl_var = 79,                  /* decl_var  */
   YYSYMBOL_type = 80,                      /* type  */
-  YYSYMBOL_var = 81                        /* var  */
+  YYSYMBOL_var = 81,                       /* var  */
+  YYSYMBOL_decl_func = 82,                 /* decl_func  */
+  YYSYMBOL_name_func = 83,                 /* name_func  */
+  YYSYMBOL_params = 84,                    /* params  */
+  YYSYMBOL_type_params = 85,               /* type_params  */
+  YYSYMBOL_code_func = 86,                 /* code_func  */
+  YYSYMBOL_code = 87                       /* code  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -527,16 +533,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   73
+#define YYLAST   98
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  65
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  17
+#define YYNNTS  23
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  45
+#define YYNRULES  56
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  78
+#define YYNSTATES  99
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   319
@@ -591,11 +597,12 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   104,   104,   105,   106,   107,   108,   109,   113,   116,
-     118,   119,   120,   121,   124,   125,   128,   129,   132,   133,
-     137,   140,   141,   142,   143,   146,   149,   150,   151,   154,
-     155,   156,   159,   160,   161,   162,   163,   164,   169,   172,
-     173,   174,   175,   176,   179,   180
+       0,   104,   104,   105,   106,   107,   108,   109,   110,   114,
+     117,   119,   120,   121,   122,   125,   126,   129,   130,   133,
+     134,   138,   141,   142,   143,   144,   147,   150,   151,   152,
+     155,   156,   157,   160,   161,   162,   163,   164,   165,   170,
+     173,   174,   175,   176,   177,   180,   181,   185,   188,   189,
+     192,   193,   196,   197,   200,   202,   203
 };
 #endif
 
@@ -622,7 +629,8 @@ static const char *const yytname[] =
   "\",\"", "\"\\\\\"", "\";\"", "NEWLINE", "END_OF_FILE", "UNKNOWN",
   "$accept", "program", "decl_arr", "pos_elem", "elements", "arr_int",
   "arr_fl", "arr_str", "build_func", "func", "scan_params", "len_params",
-  "cmp_params", "print_params", "decl_var", "type", "var", YY_NULLPTR
+  "cmp_params", "print_params", "decl_var", "type", "var", "decl_func",
+  "name_func", "params", "type_params", "code_func", "code", YY_NULLPTR
 };
 
 static const char *
@@ -646,14 +654,16 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -47,     0,   -47,   -35,   -26,   -14,   -13,    -5,   -47,   -47,
-     -47,   -47,   -47,   -47,   -20,   -19,   -17,   -16,    38,    40,
-      -6,    30,    27,    -7,   -47,   -47,   -47,   -47,   -47,   -33,
-     -47,    -4,   -47,   -47,     1,   -47,    -3,   -47,   -47,   -46,
-      -2,   -47,   -47,   -47,   -47,   -40,    -9,    38,   -47,   -47,
-     -47,   -47,   -47,   -47,   -44,   -36,   -34,   -47,   -47,    30,
-      45,   -47,    27,   -47,   -47,   -47,    46,   -47,    48,   -47,
-      51,   -47,     4,   -47,   -47,   -47,   -47,   -47
+     -47,     0,   -47,   -41,   -35,   -28,   -11,     2,   -47,   -47,
+       7,   -47,   -47,   -47,   -47,    -1,     3,   -15,     4,    56,
+       5,    11,    57,    -6,    51,    47,    14,   -47,    17,   -47,
+     -47,   -47,   -47,   -47,   -14,   -47,   -47,   -47,   -47,    18,
+     -47,   -47,     1,   -47,    19,   -47,   -47,   -46,    16,   -47,
+     -47,   -47,   -47,   -39,    13,     6,    20,    56,   -47,    21,
+     -47,   -47,   -47,   -47,   -47,   -22,   -18,   -16,   -47,   -47,
+      51,    66,   -47,    47,   -47,   -47,    69,   -26,   -47,   -47,
+      22,   -47,    68,   -47,    71,   -47,    70,   -47,    23,   -47,
+     -47,   -47,    15,   -47,   -47,   -47,   -47,   -47,   -47
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -661,28 +671,32 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       7,     0,     1,     0,     0,     0,     0,     0,    41,    39,
-      43,    40,    42,     6,     4,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     3,     5,    20,     2,    44,     0,
-      25,     0,    28,    27,     0,    26,     0,    30,    29,     0,
-      33,    32,    34,    36,    35,     0,     0,     0,    38,    21,
-      18,    14,    16,    10,     0,     0,     0,    22,    23,     0,
-       0,    24,     0,     8,    45,    11,     0,    12,     0,    13,
-       0,    31,     0,    37,    15,    17,    19,     9
+       8,     0,     1,     0,     0,     0,     0,    48,    42,    40,
+       0,    44,    41,    43,     7,     4,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    48,     0,     3,
+       5,    21,     2,    45,     0,     6,    55,    47,    26,     0,
+      29,    28,     0,    27,     0,    31,    30,     0,    34,    33,
+      35,    37,    36,     0,     0,     0,     0,     0,    39,     0,
+      22,    19,    15,    17,    11,     0,     0,     0,    23,    24,
+       0,     0,    25,     0,     9,    50,     0,     0,    49,    46,
+       0,    12,     0,    13,     0,    14,     0,    32,     0,    38,
+      52,    51,     0,    54,    16,    18,    20,    10,    53
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -47,   -47,   -47,   -47,    33,    -1,     2,     3,   -47,    60,
-     -47,   -47,     5,     6,   -47,   -47,    16
+     -47,   -47,   -47,   -47,    58,     8,     9,    10,   -47,    84,
+     -47,   -47,    24,    25,   -47,    85,    30,   -47,    78,   -47,
+      -3,   -47,   -47
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,    14,    43,    35,    54,    55,    56,    15,    44,
-      31,    36,    39,    45,    17,    18,    29
+       0,     1,    15,    51,    43,    65,    66,    67,    16,    52,
+      39,    44,    47,    53,    18,    76,    34,    20,    21,    56,
+      77,    37,    59
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -690,26 +704,30 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       2,    32,    33,     3,     4,     5,     6,     7,    58,    50,
-      51,    52,    65,    59,    61,    66,     8,     9,    19,    62,
-      67,    10,    69,    68,    11,    70,    47,    20,    48,    12,
-       3,     4,     5,     6,    40,    41,    42,    37,    38,    21,
-      22,    23,    24,    25,    26,    28,    27,    30,    34,    34,
-      49,    57,    63,    60,    72,    51,    46,    53,    52,    50,
-      77,    16,    13,    64,    71,    74,     0,     0,    73,     0,
-      75,     0,     0,    76
+       2,    40,    41,     3,     4,     5,     6,     7,    69,    61,
+      62,    63,    22,    70,    27,    72,     8,     9,    23,    10,
+      73,    11,     8,     9,    12,    24,    10,    11,    91,    13,
+      12,     8,     9,    92,    81,    13,    11,    82,    83,    12,
+      85,    84,    25,    86,    13,    57,    31,    58,    26,    42,
+       3,     4,     5,     6,    48,    49,    50,    64,    45,    46,
+      75,    29,    14,    33,    38,    30,    32,    35,    36,    42,
+      55,    71,    60,    68,    74,    88,    90,    62,    61,    97,
+      93,    63,    78,    80,    54,    17,    19,    79,    28,    98,
+      94,     0,     0,    95,    87,     0,    96,     0,    89
 };
 
 static const yytype_int8 yycheck[] =
 {
        0,     7,     8,     3,     4,     5,     6,     7,    54,     8,
-       9,    10,    56,    59,    54,    59,    16,    17,    53,    59,
-      56,    21,    56,    59,    24,    59,    59,    53,    61,    29,
-       3,     4,     5,     6,     7,     8,     9,     7,     8,    53,
-      53,    46,    62,    62,    61,     7,    62,     7,    55,    55,
-      54,    54,    61,    55,     9,     9,    23,    56,    10,     8,
-      56,     1,    62,    47,    59,    66,    -1,    -1,    62,    -1,
-      68,    -1,    -1,    70
+       9,    10,    53,    59,     7,    54,    16,    17,    53,    19,
+      59,    21,    16,    17,    24,    53,    19,    21,    54,    29,
+      24,    16,    17,    59,    56,    29,    21,    59,    56,    24,
+      56,    59,    53,    59,    29,    59,    61,    61,    46,    55,
+       3,     4,     5,     6,     7,     8,     9,    56,     7,     8,
+      54,    62,    62,     7,     7,    62,    62,    62,    57,    55,
+      53,    55,    54,    54,    61,     9,     7,     9,     8,    56,
+      58,    10,    62,    62,    26,     1,     1,    57,    10,    92,
+      82,    -1,    -1,    84,    70,    -1,    86,    -1,    73
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -717,33 +735,37 @@ static const yytype_int8 yycheck[] =
 static const yytype_int8 yystos[] =
 {
        0,    66,     0,     3,     4,     5,     6,     7,    16,    17,
-      21,    24,    29,    62,    67,    73,    74,    79,    80,    53,
-      53,    53,    53,    46,    62,    62,    61,    62,     7,    81,
-       7,    75,     7,     8,    55,    69,    76,     7,     8,    77,
-       7,     8,     9,    68,    74,    78,    69,    59,    61,    54,
-       8,     9,    10,    56,    70,    71,    72,    54,    54,    59,
-      55,    54,    59,    61,    81,    56,    59,    56,    59,    56,
-      59,    77,     9,    78,    70,    71,    72,    56
+      19,    21,    24,    29,    62,    67,    73,    74,    79,    80,
+      82,    83,    53,    53,    53,    53,    46,     7,    83,    62,
+      62,    61,    62,     7,    81,    62,    57,    86,     7,    75,
+       7,     8,    55,    69,    76,     7,     8,    77,     7,     8,
+       9,    68,    74,    78,    69,    53,    84,    59,    61,    87,
+      54,     8,     9,    10,    56,    70,    71,    72,    54,    54,
+      59,    55,    54,    59,    61,    54,    80,    85,    62,    81,
+      62,    56,    59,    56,    59,    56,    59,    77,     9,    78,
+       7,    54,    59,    58,    70,    71,    72,    56,    85
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    65,    66,    66,    66,    66,    66,    66,    67,    68,
-      69,    69,    69,    69,    70,    70,    71,    71,    72,    72,
-      73,    74,    74,    74,    74,    75,    76,    76,    76,    77,
-      77,    77,    78,    78,    78,    78,    78,    78,    79,    80,
-      80,    80,    80,    80,    81,    81
+       0,    65,    66,    66,    66,    66,    66,    66,    66,    67,
+      68,    69,    69,    69,    69,    70,    70,    71,    71,    72,
+      72,    73,    74,    74,    74,    74,    75,    76,    76,    76,
+      77,    77,    77,    78,    78,    78,    78,    78,    78,    79,
+      80,    80,    80,    80,    80,    81,    81,    82,    83,    83,
+      84,    84,    85,    85,    86,    87,    87
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     3,     3,     2,     3,     2,     0,     4,     4,
-       2,     3,     3,     3,     1,     3,     1,     3,     1,     3,
-       2,     4,     4,     4,     4,     1,     1,     1,     1,     1,
-       1,     3,     1,     1,     1,     1,     1,     3,     3,     1,
-       1,     1,     1,     1,     1,     3
+       0,     2,     3,     3,     2,     3,     3,     2,     0,     4,
+       4,     2,     3,     3,     3,     1,     3,     1,     3,     1,
+       3,     2,     4,     4,     4,     4,     1,     1,     1,     1,
+       1,     1,     3,     1,     1,     1,     1,     1,     3,     3,
+       1,     1,     1,     1,     1,     1,     3,     2,     1,     4,
+       2,     3,     2,     3,     4,     0,     0
 };
 
 
@@ -1209,269 +1231,329 @@ yyreduce:
   case 2: /* program: program decl_var NEWLINE  */
 #line 104 "simple-bison-code.y"
                                  { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
-#line 1213 "simple-bison-code.tab.c"
+#line 1235 "simple-bison-code.tab.c"
     break;
 
   case 3: /* program: program decl_arr NEWLINE  */
 #line 105 "simple-bison-code.y"
                                    { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
-#line 1219 "simple-bison-code.tab.c"
+#line 1241 "simple-bison-code.tab.c"
     break;
 
   case 4: /* program: program decl_arr  */
 #line 106 "simple-bison-code.y"
                             { printf("[BISON] ΘΕΣΗ ΠΙΝΑΚΑ\n"); }
-#line 1225 "simple-bison-code.tab.c"
+#line 1247 "simple-bison-code.tab.c"
     break;
 
   case 5: /* program: program build_func NEWLINE  */
 #line 107 "simple-bison-code.y"
-                                     { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
-#line 1231 "simple-bison-code.tab.c"
+                                     { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n");}
+#line 1253 "simple-bison-code.tab.c"
     break;
 
-  case 6: /* program: program NEWLINE  */
+  case 6: /* program: program decl_func NEWLINE  */
 #line 108 "simple-bison-code.y"
-                                       { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
-#line 1237 "simple-bison-code.tab.c"
+                                     { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ ΧΡΗΣΤΗ \n");}
+#line 1259 "simple-bison-code.tab.c"
     break;
 
-  case 7: /* program: %empty  */
+  case 7: /* program: program NEWLINE  */
 #line 109 "simple-bison-code.y"
+                                       { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
+#line 1265 "simple-bison-code.tab.c"
+    break;
+
+  case 8: /* program: %empty  */
+#line 110 "simple-bison-code.y"
                                  { }
-#line 1243 "simple-bison-code.tab.c"
+#line 1271 "simple-bison-code.tab.c"
     break;
 
-  case 8: /* decl_arr: IDENTIFIER "=" elements ";"  */
-#line 113 "simple-bison-code.y"
+  case 9: /* decl_arr: IDENTIFIER "=" elements ";"  */
+#line 114 "simple-bison-code.y"
                                     { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
-#line 1249 "simple-bison-code.tab.c"
+#line 1277 "simple-bison-code.tab.c"
     break;
 
-  case 9: /* pos_elem: IDENTIFIER "[" INTEGER "]"  */
-#line 116 "simple-bison-code.y"
+  case 10: /* pos_elem: IDENTIFIER "[" INTEGER "]"  */
+#line 117 "simple-bison-code.y"
                                    { yyval = strdup(yytext); }
-#line 1255 "simple-bison-code.tab.c"
+#line 1283 "simple-bison-code.tab.c"
     break;
 
-  case 10: /* elements: "[" "]"  */
-#line 118 "simple-bison-code.y"
-                {yyval = strdup(yytext); }
-#line 1261 "simple-bison-code.tab.c"
-    break;
-
-  case 11: /* elements: "[" arr_int "]"  */
+  case 11: /* elements: "[" "]"  */
 #line 119 "simple-bison-code.y"
-                          { yyval = strdup(yytext); }
-#line 1267 "simple-bison-code.tab.c"
+                {yyval = strdup(yytext); }
+#line 1289 "simple-bison-code.tab.c"
     break;
 
-  case 12: /* elements: "[" arr_fl "]"  */
+  case 12: /* elements: "[" arr_int "]"  */
 #line 120 "simple-bison-code.y"
-                         { yyval = strdup(yytext); }
-#line 1273 "simple-bison-code.tab.c"
-    break;
-
-  case 13: /* elements: "[" arr_str "]"  */
-#line 121 "simple-bison-code.y"
                           { yyval = strdup(yytext); }
-#line 1279 "simple-bison-code.tab.c"
+#line 1295 "simple-bison-code.tab.c"
     break;
 
-  case 14: /* arr_int: INTEGER  */
-#line 124 "simple-bison-code.y"
-                      { yyval = yyvsp[0]; }
-#line 1285 "simple-bison-code.tab.c"
+  case 13: /* elements: "[" arr_fl "]"  */
+#line 121 "simple-bison-code.y"
+                         { yyval = strdup(yytext); }
+#line 1301 "simple-bison-code.tab.c"
     break;
 
-  case 15: /* arr_int: arr_int "," arr_int  */
+  case 14: /* elements: "[" arr_str "]"  */
+#line 122 "simple-bison-code.y"
+                          { yyval = strdup(yytext); }
+#line 1307 "simple-bison-code.tab.c"
+    break;
+
+  case 15: /* arr_int: INTEGER  */
 #line 125 "simple-bison-code.y"
+                      { yyval = yyvsp[0]; }
+#line 1313 "simple-bison-code.tab.c"
+    break;
+
+  case 16: /* arr_int: arr_int "," arr_int  */
+#line 126 "simple-bison-code.y"
                               { yyval = strdup(yytext); }
-#line 1291 "simple-bison-code.tab.c"
+#line 1319 "simple-bison-code.tab.c"
     break;
 
-  case 16: /* arr_fl: FLOAT  */
-#line 128 "simple-bison-code.y"
-                    { yyval = yyvsp[0]; }
-#line 1297 "simple-bison-code.tab.c"
-    break;
-
-  case 17: /* arr_fl: arr_fl "," arr_fl  */
+  case 17: /* arr_fl: FLOAT  */
 #line 129 "simple-bison-code.y"
+                    { yyval = yyvsp[0]; }
+#line 1325 "simple-bison-code.tab.c"
+    break;
+
+  case 18: /* arr_fl: arr_fl "," arr_fl  */
+#line 130 "simple-bison-code.y"
                             { yyval = strdup(yytext); }
-#line 1303 "simple-bison-code.tab.c"
+#line 1331 "simple-bison-code.tab.c"
     break;
 
-  case 18: /* arr_str: STRING  */
-#line 132 "simple-bison-code.y"
-                    { yyval = strdup(yytext); }
-#line 1309 "simple-bison-code.tab.c"
-    break;
-
-  case 19: /* arr_str: arr_str "," arr_str  */
+  case 19: /* arr_str: STRING  */
 #line 133 "simple-bison-code.y"
+                    { yyval = strdup(yytext); }
+#line 1337 "simple-bison-code.tab.c"
+    break;
+
+  case 20: /* arr_str: arr_str "," arr_str  */
+#line 134 "simple-bison-code.y"
                               { yyval = strdup(yytext); }
-#line 1315 "simple-bison-code.tab.c"
+#line 1343 "simple-bison-code.tab.c"
     break;
 
-  case 20: /* build_func: func ";"  */
-#line 137 "simple-bison-code.y"
+  case 21: /* build_func: func ";"  */
+#line 138 "simple-bison-code.y"
                  { printf("[BISON] line=%d, Build-in Συνάρτηση\n", line); }
-#line 1321 "simple-bison-code.tab.c"
+#line 1349 "simple-bison-code.tab.c"
     break;
 
-  case 21: /* func: SCAN "(" scan_params ")"  */
-#line 140 "simple-bison-code.y"
-                                 { yyval = strdup(yytext); }
-#line 1327 "simple-bison-code.tab.c"
-    break;
-
-  case 22: /* func: LEN "(" len_params ")"  */
+  case 22: /* func: SCAN "(" scan_params ")"  */
 #line 141 "simple-bison-code.y"
                                  { yyval = strdup(yytext); }
-#line 1333 "simple-bison-code.tab.c"
+#line 1355 "simple-bison-code.tab.c"
     break;
 
-  case 23: /* func: CMP "(" cmp_params ")"  */
+  case 23: /* func: LEN "(" len_params ")"  */
 #line 142 "simple-bison-code.y"
                                  { yyval = strdup(yytext); }
-#line 1339 "simple-bison-code.tab.c"
+#line 1361 "simple-bison-code.tab.c"
     break;
 
-  case 24: /* func: PRINT "(" print_params ")"  */
+  case 24: /* func: CMP "(" cmp_params ")"  */
 #line 143 "simple-bison-code.y"
+                                 { yyval = strdup(yytext); }
+#line 1367 "simple-bison-code.tab.c"
+    break;
+
+  case 25: /* func: PRINT "(" print_params ")"  */
+#line 144 "simple-bison-code.y"
                                      { yyval = strdup(yytext); }
-#line 1345 "simple-bison-code.tab.c"
+#line 1373 "simple-bison-code.tab.c"
     break;
 
-  case 25: /* scan_params: IDENTIFIER  */
-#line 146 "simple-bison-code.y"
+  case 26: /* scan_params: IDENTIFIER  */
+#line 147 "simple-bison-code.y"
                    { yyval = strdup(yytext); }
-#line 1351 "simple-bison-code.tab.c"
+#line 1379 "simple-bison-code.tab.c"
     break;
 
-  case 26: /* len_params: elements  */
-#line 149 "simple-bison-code.y"
-                 { yyval = strdup(yytext); }
-#line 1357 "simple-bison-code.tab.c"
-    break;
-
-  case 27: /* len_params: STRING  */
+  case 27: /* len_params: elements  */
 #line 150 "simple-bison-code.y"
                  { yyval = strdup(yytext); }
-#line 1363 "simple-bison-code.tab.c"
+#line 1385 "simple-bison-code.tab.c"
     break;
 
-  case 28: /* len_params: IDENTIFIER  */
+  case 28: /* len_params: STRING  */
 #line 151 "simple-bison-code.y"
-                     { yyval = strdup(yytext); }
-#line 1369 "simple-bison-code.tab.c"
-    break;
-
-  case 29: /* cmp_params: STRING  */
-#line 154 "simple-bison-code.y"
-               { yyval = strdup(yytext); }
-#line 1375 "simple-bison-code.tab.c"
-    break;
-
-  case 30: /* cmp_params: IDENTIFIER  */
-#line 155 "simple-bison-code.y"
-                     { yyval = strdup(yytext); }
-#line 1381 "simple-bison-code.tab.c"
-    break;
-
-  case 31: /* cmp_params: cmp_params "," cmp_params  */
-#line 156 "simple-bison-code.y"
-                                    { yyval = strdup(yytext); }
-#line 1387 "simple-bison-code.tab.c"
-    break;
-
-  case 32: /* print_params: STRING  */
-#line 159 "simple-bison-code.y"
-               { yyval = strdup(yytext); }
-#line 1393 "simple-bison-code.tab.c"
-    break;
-
-  case 33: /* print_params: IDENTIFIER  */
-#line 160 "simple-bison-code.y"
-                     { yyval = strdup(yytext); }
-#line 1399 "simple-bison-code.tab.c"
-    break;
-
-  case 34: /* print_params: INTEGER  */
-#line 161 "simple-bison-code.y"
-                  { yyval = strdup(yytext);}
-#line 1405 "simple-bison-code.tab.c"
-    break;
-
-  case 35: /* print_params: func  */
-#line 162 "simple-bison-code.y"
-               { yyval = strdup(yytext); }
-#line 1411 "simple-bison-code.tab.c"
-    break;
-
-  case 36: /* print_params: pos_elem  */
-#line 163 "simple-bison-code.y"
-                   { yyval = strdup(yytext); }
-#line 1417 "simple-bison-code.tab.c"
-    break;
-
-  case 37: /* print_params: print_params "," print_params  */
-#line 164 "simple-bison-code.y"
-                                        { yyval = strdup(yytext); }
-#line 1423 "simple-bison-code.tab.c"
-    break;
-
-  case 38: /* decl_var: type var ";"  */
-#line 169 "simple-bison-code.y"
-                     { printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
-#line 1429 "simple-bison-code.tab.c"
-    break;
-
-  case 39: /* type: INT  */
-#line 172 "simple-bison-code.y"
-            { yyval = strdup(yytext); }
-#line 1435 "simple-bison-code.tab.c"
-    break;
-
-  case 40: /* type: FLOAT_KEY  */
-#line 173 "simple-bison-code.y"
-                    { yyval = strdup(yytext); }
-#line 1441 "simple-bison-code.tab.c"
-    break;
-
-  case 41: /* type: DOUBLE  */
-#line 174 "simple-bison-code.y"
                  { yyval = strdup(yytext); }
-#line 1447 "simple-bison-code.tab.c"
+#line 1391 "simple-bison-code.tab.c"
     break;
 
-  case 42: /* type: SHORT  */
+  case 29: /* len_params: IDENTIFIER  */
+#line 152 "simple-bison-code.y"
+                     { yyval = strdup(yytext); }
+#line 1397 "simple-bison-code.tab.c"
+    break;
+
+  case 30: /* cmp_params: STRING  */
+#line 155 "simple-bison-code.y"
+               { yyval = strdup(yytext); }
+#line 1403 "simple-bison-code.tab.c"
+    break;
+
+  case 31: /* cmp_params: IDENTIFIER  */
+#line 156 "simple-bison-code.y"
+                     { yyval = strdup(yytext); }
+#line 1409 "simple-bison-code.tab.c"
+    break;
+
+  case 32: /* cmp_params: cmp_params "," cmp_params  */
+#line 157 "simple-bison-code.y"
+                                    { yyval = strdup(yytext); }
+#line 1415 "simple-bison-code.tab.c"
+    break;
+
+  case 33: /* print_params: STRING  */
+#line 160 "simple-bison-code.y"
+               { yyval = strdup(yytext); }
+#line 1421 "simple-bison-code.tab.c"
+    break;
+
+  case 34: /* print_params: IDENTIFIER  */
+#line 161 "simple-bison-code.y"
+                     { yyval = strdup(yytext); }
+#line 1427 "simple-bison-code.tab.c"
+    break;
+
+  case 35: /* print_params: INTEGER  */
+#line 162 "simple-bison-code.y"
+                  { yyval = strdup(yytext);}
+#line 1433 "simple-bison-code.tab.c"
+    break;
+
+  case 36: /* print_params: func  */
+#line 163 "simple-bison-code.y"
+               { yyval = strdup(yytext); }
+#line 1439 "simple-bison-code.tab.c"
+    break;
+
+  case 37: /* print_params: pos_elem  */
+#line 164 "simple-bison-code.y"
+                   { yyval = strdup(yytext); }
+#line 1445 "simple-bison-code.tab.c"
+    break;
+
+  case 38: /* print_params: print_params "," print_params  */
+#line 165 "simple-bison-code.y"
+                                        { yyval = strdup(yytext); }
+#line 1451 "simple-bison-code.tab.c"
+    break;
+
+  case 39: /* decl_var: type var ";"  */
+#line 170 "simple-bison-code.y"
+                     { printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
+#line 1457 "simple-bison-code.tab.c"
+    break;
+
+  case 40: /* type: INT  */
+#line 173 "simple-bison-code.y"
+            { yyval = strdup(yytext); }
+#line 1463 "simple-bison-code.tab.c"
+    break;
+
+  case 41: /* type: FLOAT_KEY  */
+#line 174 "simple-bison-code.y"
+                    { yyval = strdup(yytext); }
+#line 1469 "simple-bison-code.tab.c"
+    break;
+
+  case 42: /* type: DOUBLE  */
 #line 175 "simple-bison-code.y"
-                { yyval = strdup(yytext); }
-#line 1453 "simple-bison-code.tab.c"
+                 { yyval = strdup(yytext); }
+#line 1475 "simple-bison-code.tab.c"
     break;
 
-  case 43: /* type: LONG  */
+  case 43: /* type: SHORT  */
 #line 176 "simple-bison-code.y"
                 { yyval = strdup(yytext); }
-#line 1459 "simple-bison-code.tab.c"
+#line 1481 "simple-bison-code.tab.c"
     break;
 
-  case 44: /* var: IDENTIFIER  */
-#line 179 "simple-bison-code.y"
-                                { yyval = strdup(yytext); }
-#line 1465 "simple-bison-code.tab.c"
+  case 44: /* type: LONG  */
+#line 177 "simple-bison-code.y"
+                { yyval = strdup(yytext); }
+#line 1487 "simple-bison-code.tab.c"
     break;
 
-  case 45: /* var: var "," var  */
+  case 45: /* var: IDENTIFIER  */
 #line 180 "simple-bison-code.y"
                                 { yyval = strdup(yytext); }
-#line 1471 "simple-bison-code.tab.c"
+#line 1493 "simple-bison-code.tab.c"
+    break;
+
+  case 46: /* var: var "," var  */
+#line 181 "simple-bison-code.y"
+                                { yyval = strdup(yytext); }
+#line 1499 "simple-bison-code.tab.c"
+    break;
+
+  case 47: /* decl_func: name_func code_func  */
+#line 185 "simple-bison-code.y"
+                            { printf("[BISON] line=%d, Δήλωση Συνάρτηση χρήστη με κώδικα\n", line); }
+#line 1505 "simple-bison-code.tab.c"
+    break;
+
+  case 48: /* name_func: IDENTIFIER  */
+#line 188 "simple-bison-code.y"
+                                { yyval=strdup(yytext); }
+#line 1511 "simple-bison-code.tab.c"
+    break;
+
+  case 49: /* name_func: FUNC name_func params NEWLINE  */
+#line 189 "simple-bison-code.y"
+                                        { yyval=strdup(yytext); }
+#line 1517 "simple-bison-code.tab.c"
+    break;
+
+  case 50: /* params: "(" ")"  */
+#line 192 "simple-bison-code.y"
+               {yyval=strdup(yytext);}
+#line 1523 "simple-bison-code.tab.c"
+    break;
+
+  case 51: /* params: "(" type_params ")"  */
+#line 193 "simple-bison-code.y"
+                            {yyval=strdup(yytext);}
+#line 1529 "simple-bison-code.tab.c"
+    break;
+
+  case 52: /* type_params: type IDENTIFIER  */
+#line 196 "simple-bison-code.y"
+                        {yyval=strdup(yytext);}
+#line 1535 "simple-bison-code.tab.c"
+    break;
+
+  case 53: /* type_params: type_params "," type_params  */
+#line 197 "simple-bison-code.y"
+                                      {yyval=strdup(yytext);}
+#line 1541 "simple-bison-code.tab.c"
+    break;
+
+  case 54: /* code_func: "{" code NEWLINE "}"  */
+#line 200 "simple-bison-code.y"
+                             {yyval=strdup(yytext);}
+#line 1547 "simple-bison-code.tab.c"
+    break;
+
+  case 56: /* code: %empty  */
+#line 203 "simple-bison-code.y"
+          {}
+#line 1553 "simple-bison-code.tab.c"
     break;
 
 
-#line 1475 "simple-bison-code.tab.c"
+#line 1557 "simple-bison-code.tab.c"
 
       default: break;
     }
@@ -1664,7 +1746,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 188 "simple-bison-code.y"
+#line 219 "simple-bison-code.y"
 
 
 

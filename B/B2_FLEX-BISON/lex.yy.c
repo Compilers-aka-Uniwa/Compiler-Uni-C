@@ -1153,7 +1153,7 @@ YY_RULE_SETUP
 case 48:
 YY_RULE_SETUP
 #line 109 "simple-flex-code.l"
-{ prn("SPECIAL"); return CLOSE_SQ_BRACKET; }
+{ prn("SPECIAL"); return CLOSE_CU_BRACKET; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP

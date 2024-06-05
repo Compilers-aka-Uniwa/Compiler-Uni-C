@@ -106,7 +106,7 @@ UNKNOWN          [^ \t\r\n;]
 "["             { prn("SPECIAL"); return OPEN_SQ_BRACKET; }
 "]"             { prn("SPECIAL"); return CLOSE_SQ_BRACKET; }
 "{"             { prn("SPECIAL"); return OPEN_CU_BRACKET; }
-"}"             { prn("SPECIAL"); return CLOSE_SQ_BRACKET; }
+"}"             { prn("SPECIAL"); return CLOSE_CU_BRACKET; }
 ","             { prn("SPECIAL"); return COMMA; }
 "\\"            { prn("SPECIAL"); return BACKSLASH; }
 "scan"          { prn("FUNCTION"); return SCAN; }
