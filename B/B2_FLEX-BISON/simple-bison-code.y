@@ -197,12 +197,11 @@ type_params:
         | type_params "," type_params {$$=strdup(yytext);}
         ;
 code_func:
-        "{" code "}" {$$=strdup(yytext);}
+        "{" code NEWLINE "}" {$$=strdup(yytext);}
         ;
 code:
         build_func {$$=strdup(yytext);}
-        | code NEWLINE code {$$=strdup(yytext);}
-        | NEWLINE {}
+        | {} 
         ;
 
 

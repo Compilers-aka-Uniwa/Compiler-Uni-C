@@ -33,8 +33,11 @@ print(len("This is a string"));
 print(pin[0]);
 
 //====Test case #5 FUNCTION-USER ====
-func myfunc(int varA, int varB)
+func myfunc()
 {
-print("a = ", varA);
-print("b = ", varB);
+}
+func myfunc2(int paramA, float paramB, long paramC) 
+{
+    print("a = ", varA);
+    print("b = ", varB);
 }

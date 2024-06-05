@@ -1,0 +1,5 @@
+func myfunc2(int paramA, float paramB, long paramC) 
+{
+    print("a = ", varA);
+    print("b = ", varB);
+}
