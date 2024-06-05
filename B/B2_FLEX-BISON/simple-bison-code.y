@@ -105,7 +105,8 @@ program:
         | program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
         | program decl_arr  { printf("[BISON] ΘΕΣΗ ΠΙΝΑΚΑ\n"); }
         | program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n");}
-        |program decl_func   NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ ΧΡΗΣΤΗ \n");}
+        | program decl_func   NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ ΧΡΗΣΤΗ \n");}
+        | program decl_operations NEWLINE { printf("[BISON] ΕΚΦΡΑΣΕΙΣ\n"); }
         | program NEWLINE              { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
         |                        { }
         ;
@@ -201,6 +202,27 @@ code_func:
         ;
 code:
         | {} 
+        ;
+
+/* === ΠΡΑΞΕΙΣ === */
+decl_operations:
+        arithm_expr             { printf("[BISON] Line=%d, Αριθμητική έκφραση\n", line); }
+    /*    | init_vars ";"         { printf("[BISON] Line=%d, Ανάθεση μεταβλητής\n", line); }
+        | cmp_expr              { printf("[BISON] Line=%d, Σύγκριση\n", line); }
+        | merge_arr             { printf("[BISON] Line=%d, Συνένωση Πινάκων\n", line); }*/
+        ;
+sign:
+        INTEGER { $$ = $1; }
+        | "+" sign { $$ = strdup(yytext); }
+        | "-" sign { $$ = strdup(yytext); }
+        ;
+arithm_expr:
+        sign { $$ = strdup(yytext); }
+        | IDENTIFIER { $$ = strdup(yytext); }
+        | arithm_expr "+" arithm_expr { $$ = strdup(yytext); }
+        | arithm_expr "-" arithm_expr { $$ = strdup(yytext); }
+        | arithm_expr "*" arithm_expr { $$ = strdup(yytext); }
+        | arithm_expr "/" arithm_expr { $$ = strdup(yytext); }
         ;
 
 
