@@ -106,8 +106,8 @@ program:
         | program decl_arr  { printf("[BISON] ΘΕΣΗ ΠΙΝΑΚΑ\n"); }
         | program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n"); }
         | program NEWLINE              { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
-        |                        { }
         | program decl_operations NEWLINE { printf("[BISON] ΠΡΑΞΕΙΣ\n"); }
+        |                        { }
         ;
 /* === ΠΙΝΑΚΕΣ === */
 decl_arr:
@@ -183,25 +183,14 @@ var:
 
 /* === ΠΡΑΞΕΙΣ === */
 decl_operations:
-        type_of_op ";" { printf("[BISON] Line=%d, Πρόσθεση\n", line); }
-type_of_op:
-        INTEGER PLUS INTEGER { $$ = $1 + $3; } | INTEGER MINUS INTEGER { $$ = $1 - $3; } | INTEGER MUL INTEGER { $$ = $1 * $3; } | INTEGER DIV INTEGER { $$ = $1 / $3; }
-        | FLOAT PLUS FLOAT { $$ = $1 + $3; } | FLOAT MINUS FLOAT { $$ = $1 - $3; } | FLOAT MUL FLOAT { $$ = $1 * $3; } | FLOAT DIV FLOAT { $$ = $1 / $3; }
-        | IDENTIFIER PLUS IDENTIFIER { $$ = $1 + $3; } | IDENTIFIER MINUS IDENTIFIER { $$ = $1 - $3; } | IDENTIFIER MUL IDENTIFIER { $$ = $1 * $3; } | IDENTIFIER DIV IDENTIFIER { $$ = $1 / $3; }
-        | INTEGER PLUS FLOAT { $$ = $1 + $3; } | INTEGER MINUS FLOAT { $$ = $1 - $3; } | INTEGER MUL FLOAT { $$ = $1 * $3; } | INTEGER DIV FLOAT { $$ = $1 / $3; }
-        | FLOAT PLUS INTEGER { $$ = $1 + $3; } | FLOAT MINUS INTEGER { $$ = $1 - $3; } | FLOAT MUL INTEGER { $$ = $1 * $3; } | FLOAT DIV INTEGER { $$ = $1 / $3; }
-        | IDENTIFIER PLUS INTEGER { $$ = $1 + $3; } | IDENTIFIER MINUS INTEGER { $$ = $1 - $3; } | IDENTIFIER MUL INTEGER { $$ = $1 * $3; } | IDENTIFIER DIV INTEGER { $$ = $1 / $3; }
-        | INTEGER PLUS IDENTIFIER { $$ = $1 + $3; } | INTEGER MINUS IDENTIFIER { $$ = $1 - $3; } | INTEGER MUL IDENTIFIER { $$ = $1 * $3; } | INTEGER DIV IDENTIFIER { $$ = $1 / $3; }
-        | FLOAT PLUS IDENTIFIER { $$ = $1 + $3; } | FLOAT MINUS IDENTIFIER { $$ = $1 - $3; } | FLOAT MUL IDENTIFIER { $$ = $1 * $3; } | FLOAT DIV IDENTIFIER { $$ = $1 / $3; }
-        | IDENTIFIER PLUS FLOAT { $$ = $1 + $3; } | IDENTIFIER MINUS FLOAT { $$ = $1 - $3; } | IDENTIFIER MUL FLOAT { $$ = $1 * $3; } | IDENTIFIER DIV FLOAT { $$ = $1 / $3; }
+        arithm_expr { printf("[BISON] Line=%d, Αριθμητική έκφραση\n", line); }
+        | init_vars ";" { printf("[BISON] Line=%d, Ανάθεση μεταβλητής\n", line); }
+        | cmp_expr { printf("[BISON] Line=%d, Σύγκριση\n", line); }
+        | merge_arr { printf("[BISON] Line=%d, Συνένωση Πινάκων\n", line); }
         ;
-expr: 
-        INTEGER          { $$ = $1; }
-        | expr PLUS expr { $$ = $1 + $3; }
-        | expr MINUS expr { $$ = $1 - $3; }
-        | expr MUL expr { $$ = $1 * $3; }
-        | expr DIV expr { $$ = $1 / $3; }
-        ;
+arithm_expr:
+        
+
 %%
 
 
