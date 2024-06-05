@@ -32,6 +32,8 @@ print(cmp(str1, str2));
 print(len("This is a string"));
 print(pin[0]);
 
-// ====== Test case #5 2.6 ========
-a3 + a4;
-
+// ====== Test case #5 EXPRESSIONS ======
+a1 * a2
+a3 + a4
+-5 + 10
+15 + a5 - 9
