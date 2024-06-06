@@ -1231,7 +1231,7 @@ YY_RULE_SETUP
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(UNKNOWN_STATE):
 #line 124 "simple-flex-code.l"
-{ prn("EOF"); return END_OF_FILE; }
+{ return EOF; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
@@ -2256,12 +2256,7 @@ void yyfree (void * ptr )
 
 void prn(const char *token)
 {
-   int isEOF = strcmp(token, "EOF");
-
-   printf("\t[FLEX] Line=%d, token=%s(%s)\n", line, token, yytext);
-   
-   if (!isEOF)
-      exit(0);
+   fprintf(yyout, "\t[FLEX] Line=%d, token=%s, value=\"%s\"\n", line, token, yytext);   
    return;
 }
 

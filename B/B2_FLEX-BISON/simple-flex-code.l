@@ -121,7 +121,7 @@ UNKNOWN          [^ \t\r\n;]
 {COMMENT}       { ECHO; line++; }
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
-<<EOF>>         { prn("EOF"); return END_OF_FILE; }
+<<EOF>>         { return EOF; }
 {UNKNOWN}       { BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
 <UNKNOWN_STATE>{UNKNOWN}+ { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
 
@@ -129,12 +129,7 @@ UNKNOWN          [^ \t\r\n;]
 
 void prn(const char *token)
 {
-   int isEOF = strcmp(token, "EOF");
-
-   printf("\t[FLEX] Line=%d, token=%s(%s)\n", line, token, yytext);
-   
-   if (!isEOF)
-      exit(0);
+   fprintf(yyout, "\t[FLEX] Line=%d, token=%s, value=\"%s\"\n", line, token, yytext);   
    return;
 }
 

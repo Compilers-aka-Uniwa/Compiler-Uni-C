@@ -22,25 +22,25 @@
         
         #include <stdio.h>
 	#include <stdlib.h>
-	#define YYSTATE char*
+        #define YYSTYPE char*
         #define YYDEBUG 1
 	
 	int line = 1;
 	int errflag = 0;
 	extern char *yytext;
 	
-	/* === ΠΙΝΑΚΑΣ ΣΥΜΒΟΛΩΝ === */
-	char* sym[] = 
-	{ "break", "do", "if", "sizeof", "case", "double", "int", "struct", "func", "else", 
-	  "long", "switch", "const", "float", "return", "void", "continue", "for", "short", "while", 
-	  "+", "*=", "--", "-", "/=", "<", "*", "!", ">", "/", "&&", "<=", "%", "||", ">=", "=", "==", 
-	  "&", "+=", "!=", "-=", "++" };
-	
 	void yyerror(char *);
+
+        /* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
+   του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
+
+        extern FILE *yyin;
+        extern FILE *yyout;
 %}
 
+
+
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
-%token SCAN LEN CMP PRINT
 %token IDENTIFIER STRING 
 %token INTEGER FLOAT 
 %token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT_KEY RETURN VOID CONTINUE FOR SHORT WHILE 
@@ -76,7 +76,7 @@
 %token BACKSLASH "\\"
 %token DELIMITER ";"
 %token SCAN PRINT LEN CMP
-%token NEWLINE END_OF_FILE
+%token NEWLINE
 %token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
@@ -100,144 +100,139 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        /*program expr NEWLINE { printf("[BISON] %d\n", $2); }*/
-        program decl_var NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΗΣ\n"); }
-        | program decl_arr NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΠΙΝΑΚΑ\n"); }
-        | program decl_arr  { printf("[BISON] ΘΕΣΗ ΠΙΝΑΚΑ\n"); }
-        | program build_func NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ\n");}
-        | program decl_func   NEWLINE { printf("[BISON] ΔΗΛΩΣΗ ΣΥΝΑΡΤΗΣΗΣ ΧΡΗΣΤΗ \n");}
-        | program decl_operations NEWLINE { printf("[BISON] ΕΚΦΡΑΣΕΙΣ\n"); }
-        | program NEWLINE              { printf("[BISON] ΑΛΛΑΓΗ ΓΡΑΜΜΗΣ\n"); }
-        |                        { }
+        program decl_var NEWLINE                { fprintf(yyout, "[BISON] [2.2] Δηλώσεις Μεταβλητών\n\n"); }
+        | program decl_arr NEWLINE              { fprintf(yyout, "[BISON] [2.3] Πίνακες\n\n"); }
+        | program build_func NEWLINE            { fprintf(yyout, "[BISON] [2.4] Ενσωματωμένες απλές συναρτήσεις\n\n");}
+        | program decl_func NEWLINE             { fprintf(yyout, "[BISON] [2.5] Δήλωση συναρτήσεων χρήστη\n\n");}
+        | program decl_operations NEWLINE       { fprintf(yyout, "[BISON] [2.6] Δηλώσεις απλών εκφράσεων\n\n"); }
+        | program NEWLINE                       { }
+        |                                      
         ;
-/* === ΠΙΝΑΚΕΣ === */
+
+/* === [2.1] Δομή Πηγαίου Κώδικα === */
+
+/* === [2.2] Δηλώσεις Μεταβλητών === */
+decl_var:
+        type var ";" { fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση Μεταβλητής\"", line); }
+        ;
+type: 
+        INT             { $$ = strdup(yytext); }
+        | FLOAT_KEY     { $$ = strdup(yytext); }
+        | DOUBLE        { $$ = strdup(yytext); }
+        | SHORT         { $$ = strdup(yytext); }
+        | LONG          { $$ = strdup(yytext); }
+        ;
+var:
+        IDENTIFIER              { $$ = strdup(yytext); }
+        | var "," var           { $$ = strdup(yytext); }
+        ;
+
+/* === [2.3] Πίνακες === */
 decl_arr:
-        IDENTIFIER "=" elements ";" { printf("[BISON] Line=%d, Δήλωση Πίνακα\n", line); }
+        IDENTIFIER "=" elements ";" { fprintf(yyout, "[BISON] Line= %d, expression=\"Δήλωση Πίνακα\"", line); }
         ;
 pos_elem:
-        IDENTIFIER "[" INTEGER "]" { $$ = strdup(yytext); }
+        IDENTIFIER "[" INTEGER "]"  { $$ = strdup(yytext); }
 elements:
-        "[" "]" {$$ = strdup(yytext); }
-        | "[" arr_int "]" { $$ = strdup(yytext); }
-        | "[" arr_fl "]" { $$ = strdup(yytext); }
-        | "[" arr_str "]" { $$ = strdup(yytext); }       
+        "[" "]"                 {$$ = strdup(yytext); }
+        | "[" arr_int "]"       { $$ = strdup(yytext); }
+        | "[" arr_fl "]"        { $$ = strdup(yytext); }
+        | "[" arr_str "]"       { $$ = strdup(yytext); }       
         ;  
 arr_int:
-        INTEGER       { $$ = $1; }
-        | arr_int "," arr_int { $$ = strdup(yytext); }
+        INTEGER                 { $$ = $1; }
+        | arr_int "," arr_int   { $$ = strdup(yytext); }
         ;
 arr_fl:
-        FLOAT       { $$ = $1; }
-        | arr_fl "," arr_fl { $$ = strdup(yytext); }
+        FLOAT                   { $$ = $1; }
+        | arr_fl "," arr_fl     { $$ = strdup(yytext); }
         ;
 arr_str:
-        STRING      { $$ = strdup(yytext); }  
-        | arr_str "," arr_str { $$ = strdup(yytext); }
+        STRING                  { $$ = strdup(yytext); }  
+        | arr_str "," arr_str   { $$ = strdup(yytext); }
         ;
-/* === ΣΥΝΑΡΤΗΣΕΙΣ === */
+
+/* === [2.4] Ενσωματωμένες απλές συναρτήσεις === */
 build_func:
-	func ";" { printf("[BISON] line=%d, Build-in Συνάρτηση\n", line); }
+	func ";" { fprintf(yyout, "[BISON] Line=%d, expression=\"Ενσωματωμένη απλή συνάρτηση\"", line); }
 	;
 func:
-        SCAN "(" scan_params ")" { $$ = strdup(yytext); }        
-        | LEN "(" len_params ")" { $$ = strdup(yytext); }
-        | CMP "(" cmp_params ")" { $$ = strdup(yytext); }
-        | PRINT "(" print_params ")" { $$ = strdup(yytext); }
+        SCAN "(" scan_params ")"        { $$ = strdup(yytext); }        
+        | LEN "(" len_params ")"        { $$ = strdup(yytext); }
+        | CMP "(" cmp_params ")"        { $$ = strdup(yytext); }
+        | PRINT "(" print_params ")"    { $$ = strdup(yytext); }
         ;
 scan_params:
         IDENTIFIER { $$ = strdup(yytext); }
         ;
 len_params:
-        elements { $$ = strdup(yytext); }
-        | STRING { $$ = strdup(yytext); }
-        | IDENTIFIER { $$ = strdup(yytext); }
+        elements        { $$ = strdup(yytext); }
+        | STRING        { $$ = strdup(yytext); }
+        | IDENTIFIER    { $$ = strdup(yytext); }
         ;
 cmp_params:
-        STRING { $$ = strdup(yytext); }
-        | IDENTIFIER { $$ = strdup(yytext); }
-        | cmp_params "," cmp_params { $$ = strdup(yytext); }
+        STRING                          { $$ = strdup(yytext); }
+        | IDENTIFIER                    { $$ = strdup(yytext); }
+        | cmp_params "," cmp_params     { $$ = strdup(yytext); }
         ;
 print_params:
-        STRING { $$ = strdup(yytext); }
-        | IDENTIFIER { $$ = strdup(yytext); }
-        | INTEGER { $$ = strdup(yytext);}
-        | func { $$ = strdup(yytext); }
-        | pos_elem { $$ = strdup(yytext); }
+        STRING                          { $$ = strdup(yytext); }
+        | IDENTIFIER                    { $$ = strdup(yytext); }
+        | INTEGER                       { $$ = strdup(yytext);}
+        | func                          { $$ = strdup(yytext); }
+        | pos_elem                      { $$ = strdup(yytext); }
         | print_params "," print_params { $$ = strdup(yytext); }
         ;
 
-/* === ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ === */
-decl_var:
-        type var ";" { printf("[BISON] Line=%d, Δήλωση Μεταβλητής\n", line); }
-        ;
-type: 
-        INT { $$ = strdup(yytext); }
-        | FLOAT_KEY { $$ = strdup(yytext); }
-        | DOUBLE { $$ = strdup(yytext); }
-        | SHORT { $$ = strdup(yytext); }
-        | LONG  { $$ = strdup(yytext); }
-        ;
-var:
-        IDENTIFIER              { $$ = strdup(yytext); }
-        | var "," var           { $$ = strdup(yytext); }
-        ; 
-/* === Δήλωση συναρτήσεων χρήστη === */
+/* === [2.5] Δήλωση συναρτήσεων χρήστη === */
 decl_func:
-        name_func code_func { printf("[BISON] line=%d, Δήλωση Συνάρτηση χρήστη με κώδικα\n", line); }
+        name_func code_func { fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση συναρτήσεων χρήστη\"", line); }
 	;
 name_func: 
-        IDENTIFIER              { $$=strdup(yytext); }
+        IDENTIFIER                      { $$=strdup(yytext); }
         | FUNC name_func params NEWLINE { $$=strdup(yytext); }
         ;
 params:
-        "(" ")"{$$=strdup(yytext);}
-        |"(" type_params ")"{$$=strdup(yytext);}
+        "(" ")"                 { $$ = strdup(yytext); }
+        |"(" type_params ")"    { $$ = strdup(yytext); }
         ;
 type_params:
-        type IDENTIFIER {$$=strdup(yytext);}
-        | type_params "," type_params {$$=strdup(yytext);}
+        type IDENTIFIER                 { $$ = strdup(yytext); }
+        | type_params "," type_params   { $$ = strdup(yytext); }
         ;
 code_func:
         "{" code NEWLINE "}" {$$=strdup(yytext);}
         ;
 code:
-        | {} 
+        /* ΕΔΩ ΘΑ ΠΡΟΣΘΕΣΟΥΜΕ ΣΤΟ ΤΕΛΟΣ ΟΠΟΙΟΝΔΗΠΟΤΕ ΚΩΔΙΚΑ ΘΕΛΕΙ Ο ΧΡΗΣΤΗΣ ΣΤΗ ΣΥΝΑΡΤΗΣΗ ΤΟΥ
+
         ;
 
-/* === ΠΡΑΞΕΙΣ === */
+/* === [2.6] Δηλώσεις απλών εκφράσεων === */
 decl_operations:
-        arithm_expr             { printf("[BISON] Line=%d, Αριθμητική έκφραση\n", line); }
-    /*    | init_vars ";"         { printf("[BISON] Line=%d, Ανάθεση μεταβλητής\n", line); }
-        | cmp_expr              { printf("[BISON] Line=%d, Σύγκριση\n", line); }
-        | merge_arr             { printf("[BISON] Line=%d, Συνένωση Πινάκων\n", line); }*/
+        arithm_expr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Αριθμητική έκφραση\"\n", line); }
+    /*  | init_vars ";"         { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); }
+        | cmp_expr              { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύγκριση\"\n", line); }
+        | merge_arr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Συνένωση Πινάκων\"\n", line); }*/
         ;
 sign:
-        INTEGER { $$ = $1; }
-        | "+" sign { $$ = strdup(yytext); }
-        | "-" sign { $$ = strdup(yytext); }
+        INTEGER         { $$ = $1; }
+        | "+" sign      { $$ = strdup(yytext); }
+        | "-" sign      { $$ = strdup(yytext); }
         ;
 arithm_expr:
-        sign { $$ = strdup(yytext); }
-        | IDENTIFIER { $$ = strdup(yytext); }
-        | arithm_expr "+" arithm_expr { $$ = strdup(yytext); }
-        | arithm_expr "-" arithm_expr { $$ = strdup(yytext); }
-        | arithm_expr "*" arithm_expr { $$ = strdup(yytext); }
-        | arithm_expr "/" arithm_expr { $$ = strdup(yytext); }
+        sign                            { $$ = strdup(yytext); }
+        | IDENTIFIER                    { $$ = strdup(yytext); }
+        | arithm_expr "+" arithm_expr   { $$ = strdup(yytext); }
+        | arithm_expr "-" arithm_expr   { $$ = strdup(yytext); }
+        | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
+        | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         ;
 
+/* === [2.7] Σύνθετες δηλώσεις === */
 
+ 
 
-
-
-
-
-
-
-/* === ΠΡΟΣΘΕΣΗ === 
-expr: 
-        INTEGER          { $$ = $1; }
-        | expr PLUS expr { $$ = $1 + $3; } 
-        ;*/
 %%
 
 
@@ -249,12 +244,6 @@ expr:
 void yyerror(char *s) {
         fprintf(stderr, "Error: %s\n", s);
 }
-
-/* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
-   του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
-
-extern FILE *yyin;
-extern FILE *yyout;
 
 /* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
    Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
@@ -276,21 +265,13 @@ int main(int argc, char **argv)
                         return 1;
                 }
         }
-        else if (argc == 2)
-        {
-                if (!(yyin = fopen(argv[1], "r"))) 
-                {
-                        fprintf(stderr, "Cannot read file: %s\n", argv[1]);
-                        return 1;
-                }
-        }
 		
 	int parse = yyparse();
 
 	if (errflag == 0 && parse == 0)
-		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\n", parse);
+		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\n", parse);
         else
-		printf("\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\n", parse);
+		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\n", parse);
 
 	return 0;
 } 
