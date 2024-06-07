@@ -213,7 +213,7 @@ decl_operations:
         arithm_expr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Αριθμητική έκφραση\"\n", line); }
     /*  | init_vars ";"         { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); } */
         | cmp_expr              { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύγκριση\"\n", line); }
-    /*  | merge_arr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Συνένωση Πινάκων\"\n", line); }*/
+        | merge_arr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Συνένωση Πινάκων\"\n", line); }
         ;
 sign:
         INTEGER         { $$ = strdup(yytext); }
@@ -241,6 +241,11 @@ cmp_expr:
         | cmp_expr "==" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "!=" cmp_expr  { $$ = strdup(yytext); }
         ;
+
+merge_arr:
+        elements "+" elements { $$ = strdup(yytext); }
+        ;
+        
 /* === [2.7] Σύνθετες δηλώσεις === */
 
  
