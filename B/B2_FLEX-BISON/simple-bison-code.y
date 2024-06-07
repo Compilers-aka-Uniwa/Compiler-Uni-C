@@ -228,7 +228,15 @@ arithm_expr:
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         ;
-
+/* === [2.6.3] Συγκρίσεις === */
+cmp_expr:
+        arithm_expr ">" arithm_expr     { $$ = strdup(yytext); }
+        | arithm_expr "<" arithm_expr   { $$ = strdup(yytext); }
+        | arithm_expr "<=" arithm_expr  { $$ = strdup(yytext); }
+        | arithm_expr ">=" arithm_expr  { $$ = strdup(yytext); }
+        | arithm_expr "==" arithm_expr  { $$ = strdup(yytext); }
+        | arithm_expr "!=" arithm_expr  { $$ = strdup(yytext); }
+        ;
 /* === [2.7] Σύνθετες δηλώσεις === */
 
  
