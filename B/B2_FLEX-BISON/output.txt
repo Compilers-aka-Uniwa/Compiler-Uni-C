@@ -342,5 +342,8 @@
 [BISON] Line=50, expression="Αριθμητική έκφραση"
 [BISON] [2.6] Δηλώσεις απλών εκφράσεων
 
+	[FLEX] Line=50, token=IDENTIFIER, value="x1"
+	[FLEX] Line=50, token=OPERATOR, value=">"
+[BISON] Line=50, expression="Αριθμητική έκφραση"
 
-ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.
+ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.
