@@ -1,3 +1,10 @@
+Nonterminals useless in grammar
+
+    assign_statement
+    identifier_list
+    value_list
+
+
 Terminals unused in grammar
 
     BREAK
@@ -33,6 +40,18 @@ Terminals unused in grammar
     "++"
     "\\"
     UNKNOWN
+
+
+Rules useless in grammar
+
+   65 assign_statement: IDENTIFIER "=" arithm_expr ";"
+   66                 | identifier_list "=" value_list ";"
+
+   67 identifier_list: IDENTIFIER
+   68                | identifier_list "," IDENTIFIER
+
+   69 value_list: arithm_expr
+   70           | value_list "," arithm_expr
 
 
 Grammar
