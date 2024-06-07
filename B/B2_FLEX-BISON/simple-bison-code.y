@@ -211,12 +211,13 @@ code:
 /* === [2.6] Δηλώσεις απλών εκφράσεων === */
 decl_operations:
         arithm_expr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Αριθμητική έκφραση\"\n", line); }
-    /*  | init_vars ";"         { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); }
+    /*  | init_vars ";"         { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); } */
         | cmp_expr              { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύγκριση\"\n", line); }
-        | merge_arr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Συνένωση Πινάκων\"\n", line); }*/
+    /*  | merge_arr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Συνένωση Πινάκων\"\n", line); }*/
         ;
 sign:
-        INTEGER         { $$ = $1; }
+        INTEGER         { $$ = strdup(yytext); }
+        | FLOAT         { $$ = strdup(yytext); }
         | "+" sign      { $$ = strdup(yytext); }
         | "-" sign      { $$ = strdup(yytext); }
         ;
@@ -229,6 +230,17 @@ arithm_expr:
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         ;
 
+cmp_expr:
+	INTEGER    		  { $$ = strdup(yytext); }
+        | FLOAT                   { $$ = strdup(yytext); }
+	| IDENTIFIER              { $$ = strdup(yytext); }
+	| cmp_expr ">"  cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "<"  cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "<=" cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr ">=" cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "==" cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "!=" cmp_expr  { $$ = strdup(yytext); }
+        ;
 /* === [2.7] Σύνθετες δηλώσεις === */
 
  

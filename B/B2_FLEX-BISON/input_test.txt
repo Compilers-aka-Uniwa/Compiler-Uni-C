@@ -47,3 +47,6 @@ a3 + a4
 15 + a5 - 9
 +5 - a1 -16
 +10 -5 + myvar - myvar2
+x1 > x2
+a <= b
+myvar == 52
