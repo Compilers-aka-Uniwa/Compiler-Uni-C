@@ -43,7 +43,7 @@ Grammar
     2        | program decl_arr NEWLINE
     3        | program build_func NEWLINE
     4        | program decl_func NEWLINE
-    5        | program decl_operations
+    5        | program decl_operations NEWLINE
     6        | program NEWLINE
     7        | ε
 
@@ -115,7 +115,7 @@ Grammar
 
    54 code: ε
 
-   55 decl_operations: arithm_expr NEWLINE
+   55 decl_operations: arithm_expr
 
    56 sign: INTEGER
    57     | "+" sign
@@ -192,7 +192,7 @@ Terminals, with rules where they appear
     PRINT (314) 32
     LEN (315) 30
     CMP (316) 31
-    NEWLINE (317) 1 2 3 4 6 48 53 55
+    NEWLINE (317) 1 2 3 4 5 6 48 53
     UNKNOWN (318)
 
 
@@ -293,7 +293,7 @@ State 1
     2        | program • decl_arr NEWLINE
     3        | program • build_func NEWLINE
     4        | program • decl_func NEWLINE
-    5        | program • decl_operations
+    5        | program • decl_operations NEWLINE
     6        | program • NEWLINE
 
     $end        shift, and go to state 2
@@ -508,9 +508,9 @@ State 24
 
 State 25
 
-    5 program: program decl_operations •
+    5 program: program decl_operations • NEWLINE
 
-    $default  reduce using rule 5 (program)
+    NEWLINE  shift, and go to state 46
 
 
 State 26
@@ -522,17 +522,18 @@ State 26
 
 State 27
 
-   55 decl_operations: arithm_expr • NEWLINE
+   55 decl_operations: arithm_expr •
    61 arithm_expr: arithm_expr • "+" arithm_expr
    62            | arithm_expr • "-" arithm_expr
    63            | arithm_expr • "*" arithm_expr
    64            | arithm_expr • "/" arithm_expr
 
-    "+"      shift, and go to state 46
-    "-"      shift, and go to state 47
-    "*"      shift, and go to state 48
-    "/"      shift, and go to state 49
-    NEWLINE  shift, and go to state 50
+    "+"  shift, and go to state 47
+    "-"  shift, and go to state 48
+    "*"  shift, and go to state 49
+    "/"  shift, and go to state 50
+
+    $default  reduce using rule 55 (decl_operations)
 
 
 State 28
@@ -691,6 +692,13 @@ State 45
 
 State 46
 
+    5 program: program decl_operations NEWLINE •
+
+    $default  reduce using rule 5 (program)
+
+
+State 47
+
    61 arithm_expr: arithm_expr "+" • arithm_expr
 
     IDENTIFIER  shift, and go to state 73
@@ -702,7 +710,7 @@ State 46
     arithm_expr  go to state 74
 
 
-State 47
+State 48
 
    62 arithm_expr: arithm_expr "-" • arithm_expr
 
@@ -715,7 +723,7 @@ State 47
     arithm_expr  go to state 75
 
 
-State 48
+State 49
 
    63 arithm_expr: arithm_expr "*" • arithm_expr
 
@@ -728,7 +736,7 @@ State 48
     arithm_expr  go to state 76
 
 
-State 49
+State 50
 
    64 arithm_expr: arithm_expr "/" • arithm_expr
 
@@ -739,13 +747,6 @@ State 49
 
     sign         go to state 26
     arithm_expr  go to state 77
-
-
-State 50
-
-   55 decl_operations: arithm_expr NEWLINE •
-
-    $default  reduce using rule 55 (decl_operations)
 
 
 State 51
@@ -945,8 +946,8 @@ State 74
    63            | arithm_expr • "*" arithm_expr
    64            | arithm_expr • "/" arithm_expr
 
-    "*"  shift, and go to state 48
-    "/"  shift, and go to state 49
+    "*"  shift, and go to state 49
+    "/"  shift, and go to state 50
 
     $default  reduce using rule 61 (arithm_expr)
 
@@ -959,8 +960,8 @@ State 75
    63            | arithm_expr • "*" arithm_expr
    64            | arithm_expr • "/" arithm_expr
 
-    "*"  shift, and go to state 48
-    "/"  shift, and go to state 49
+    "*"  shift, and go to state 49
+    "/"  shift, and go to state 50
 
     $default  reduce using rule 62 (arithm_expr)
 
