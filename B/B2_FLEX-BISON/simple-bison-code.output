@@ -42,12 +42,14 @@
 
 Άχρηστοι κανόνες στη γραμματική
 
-   65 cmp_expr: arithm_expr ">" arithm_expr
-   66         | arithm_expr "<" arithm_expr
-   67         | arithm_expr "<=" arithm_expr
-   68         | arithm_expr ">=" arithm_expr
-   69         | arithm_expr "==" arithm_expr
-   70         | arithm_expr "!=" arithm_expr
+   65 cmp_expr: cmp_expr
+   66         | IDENTIFIER
+   67         | cmp_expr ">" cmp_expr
+   68         | cmp_expr "<" cmp_expr
+   69         | cmp_expr "<=" cmp_expr
+   70         | cmp_expr ">=" cmp_expr
+   71         | cmp_expr "==" cmp_expr
+   72         | cmp_expr "!=" cmp_expr
 
 
 Γραμματική

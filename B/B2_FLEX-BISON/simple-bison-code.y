@@ -230,12 +230,14 @@ arithm_expr:
         ;
 /* === [2.6.3] Συγκρίσεις === */
 cmp_expr:
-        arithm_expr ">" arithm_expr     { $$ = strdup(yytext); }
-        | arithm_expr "<" arithm_expr   { $$ = strdup(yytext); }
-        | arithm_expr "<=" arithm_expr  { $$ = strdup(yytext); }
-        | arithm_expr ">=" arithm_expr  { $$ = strdup(yytext); }
-        | arithm_expr "==" arithm_expr  { $$ = strdup(yytext); }
-        | arithm_expr "!=" arithm_expr  { $$ = strdup(yytext); }
+	cmp_expr     		  { $$ = strdup(yytext); }
+	| IDENTIFIER              { $$ = strdup(yytext); }
+	| cmp_expr ">"  cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "<"  cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "<=" cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr ">=" cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "==" cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "!=" cmp_expr  { $$ = strdup(yytext); }
         ;
 /* === [2.7] Σύνθετες δηλώσεις === */
 
