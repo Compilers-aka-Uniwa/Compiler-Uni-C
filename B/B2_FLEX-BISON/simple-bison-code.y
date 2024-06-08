@@ -228,21 +228,28 @@ arithm_expr:
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         ;
-        /* Αναθέσεις τιμών σε αναγνωριστικά */
+   
+/* Αναθέσεις τιμών σε αναγνωριστικά */
 assign_statement:
     IDENTIFIER "=" arithm_expr ";"                { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); }
     | identifier_list "=" value_list ";"           { fprintf(yyout, "[BISON] Line=%d, expression=\"Ομαδική ανάθεση τιμών σε μεταβλητές\"\n", line); }
     ;
-
 identifier_list:
     IDENTIFIER                                    { $$ = strdup(yytext); }
-    | identifier_list "," IDENTIFIER              { $$ = strcat($1, yytext); }
+    | identifier_list "," IDENTIFIER              { $$ = strcat($1, ", "); $$ = strcat($$, yytext); }
     ;
 
 value_list:
-    arithm_expr                                   { $$ = strdup(yytext); }
-    | value_list "," arithm_expr                  { $$ = strcat($1, yytext); }
+    arithm_expr                                   { $$ = $1; }
+    | value_list "," arithm_expr                  { 
+        char *temp = malloc(strlen($$) + strlen($3) + 3); 
+        strcpy(temp, $$); 
+        strcat(temp, ", "); 
+        strcat(temp, $3); 
+        $$ = temp;
+    }
     ;
+
 
 /* === [2.7] Σύνθετες δηλώσεις === */
 
