@@ -234,20 +234,15 @@ assign_statement:
     IDENTIFIER "=" arithm_expr ";"                { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); }
     | identifier_list "=" value_list ";"           { fprintf(yyout, "[BISON] Line=%d, expression=\"Ομαδική ανάθεση τιμών σε μεταβλητές\"\n", line); }
     ;
+
 identifier_list:
     IDENTIFIER                                    { $$ = strdup(yytext); }
-    | identifier_list "," IDENTIFIER              { $$ = strcat($1, ", "); $$ = strcat($$, yytext); }
+    | identifier_list "," IDENTIFIER              { $$ = strcat($1, $3); }
     ;
 
 value_list:
-    arithm_expr                                   { $$ = $1; }
-    | value_list "," arithm_expr                  { 
-        char *temp = malloc(strlen($$) + strlen($3) + 3); 
-        strcpy(temp, $$); 
-        strcat(temp, ", "); 
-        strcat(temp, $3); 
-        $$ = temp;
-    }
+    arithm_expr                                   { $$ = strdup($1); }
+    | value_list "," arithm_expr                  { $$ = strcat($1, $3); }
     ;
 
 
