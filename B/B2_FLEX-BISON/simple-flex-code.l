@@ -1,20 +1,3 @@
-/* Όνομα αρχείου:       simple-flex-code.l
-   Περιγραφή:           Υποδείγμα για ανάπτυξη λεκτικού αναλυτή με χρήση του εργαλείου Flex
-   Συγγραφέας:          Εργαστήριο Μεταγλωττιστών, Τμήμα Μηχανικών Πληροφορικής και Υπολογιστών,
-                         Πανεπιστήμιο Δυτικής Αττικής
-   Σχόλια:              Το παρόν πρόγραμμα υλοποιεί (με τη χρήση flex) έναν απλό λεκτικό αναλυτή
-                         που αναγνωρίζει κενά (διάστημα και tab) και αριθμούς (δεκαδικού συστήματος
-                         μόνο!) για τη γλώσσα Uni-C ενώ διαχειρίζεται τους ειδικούς χαρακτήρες
-                         νέας γραμμής '\n' (new line) και 'EOF' (end of file). Υπάρχουν αναφορές
-                         για την αναγνώριση μεταβλητών, με τον πραγματικό κώδικα να έχει αντικατασταθεί
-                         από τον λεκτικό FILL ME έτσι ώστε να συμπληρωθεί από εσάς. Προαιρετικά ο λεκτικός
-                         αναλυτής δέχεται ορίσματα αρχείων για είσοδο και έξοδο.
-   Οδηγίες εκτέλεσης:   Δώστε "make" χωρίς τα εισαγωγικά στον τρέχοντα κατάλογο. Εναλλακτικά:
-                         flex -o simple-flex-code.c simple-flex-code.l
-                         gcc -o simple-flex-code simple-flex-code.c
-                         ./simple-flex-code
-*/
-
 /* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
 %option noyywrap
 
@@ -59,26 +42,26 @@ UNKNOWN          [^ \t\r\n;]
 
 %%
 
-"break"         { prn("KEYWORD"); return BREAK; }
-"case"          { prn("KEYWORD"); return CASE; }
-"const"         { prn("KEYWORD"); return CONST; }
-"continue"      { prn("KEYWORD"); return CONTINUE; }
-"do"            { prn("KEYWORD"); return DO; }
-"double"        { prn("KEYWORD"); return DOUBLE; }
-"else"          { prn("KEYWORD"); return ELSE; }
-"float"         { prn("KEYWORD"); return FLOAT_KEY; }
-"for"           { prn("KEYWORD"); return FOR; }
-"if"            { prn("KEYWORD"); return IF; }
-"int"           { prn("KEYWORD"); return INT; }
-"long"          { prn("KEYWORD"); return LONG; }
-"return"        { prn("KEYWORD"); return RETURN; }
-"sizeof"        { prn("KEYWORD"); return SIZEOF; }
-"struct"        { prn("KEYWORD"); return STRUCT; }
-"switch"        { prn("KEYWORD"); return SWITCH; }
-"void"          { prn("KEYWORD"); return VOID; }
-"while"         { prn("KEYWORD"); return WHILE; }
-"func"          { prn("KEYWORD"); return FUNC; }
-"short"         { prn("KEYWORD"); return SHORT; }
+"break"         { prn("KEYWORD"); return SBREAK; }
+"case"          { prn("KEYWORD"); return SCASE; }
+"const"         { prn("KEYWORD"); return SCONST; }
+"continue"      { prn("KEYWORD"); return SCONTINUE; }
+"do"            { prn("KEYWORD"); return SDO; }
+"double"        { prn("KEYWORD"); return SDOUBLE; }
+"else"          { prn("KEYWORD"); return SELSE; }
+"float"         { prn("KEYWORD"); return SFLOAT; }
+"for"           { prn("KEYWORD"); return SFOR; }
+"if"            { prn("KEYWORD"); return SIF; }
+"int"           { prn("KEYWORD"); return SINT; }
+"long"          { prn("KEYWORD"); return SLONG; }
+"return"        { prn("KEYWORD"); return SRETURN; }
+"sizeof"        { prn("KEYWORD"); return SSIZEOF; }
+"struct"        { prn("KEYWORD"); return SSTRUCT; }
+"switch"        { prn("KEYWORD"); return SSWITCH; }
+"void"          { prn("KEYWORD"); return SVOID; }
+"while"         { prn("KEYWORD"); return SWHILE; }
+"func"          { prn("KEYWORD"); return SFUNC; }
+"short"         { prn("KEYWORD"); return SSHORT; }
 "+"             { prn("OPERATOR"); return PLUS; }
 "*="            { prn("OPERATOR"); return MULEQ; }
 "--"            { prn("OPERATOR"); return PMINEQ; }
@@ -94,30 +77,30 @@ UNKNOWN          [^ \t\r\n;]
 "%"             { prn("OPERATOR"); return MOD; }
 "||"            { prn("OPERATOR"); return OR; }
 ">="            { prn("OPERATOR"); return GREQ; }
-"="             { prn("OPERATOR"); return ASSIGNOP; }
+"="             { prn("OPERATOR"); return ASSIGN; }
 "=="            { prn("OPERATOR"); return EQUAL; }
-"&"             { prn("OPERATOR"); return ADDROP; }
+"&"             { prn("OPERATOR"); return ADDR; }
 "+="            { prn("OPERATOR"); return PLUSEQ; }
 "!="            { prn("OPERATOR"); return NOTEQ; }
 "-="            { prn("OPERATOR"); return MINEQ; }
 "++"            { prn("OPERATOR"); return PPLUSEQ; }
-"("             { prn("SPECIAL"); return OPEN_PARENTHESIS; }
-")"             { prn("SPECIAL"); return CLOSE_PARENTHESIS; }
-"["             { prn("SPECIAL"); return OPEN_SQ_BRACKET; }
-"]"             { prn("SPECIAL"); return CLOSE_SQ_BRACKET; }
-"{"             { prn("SPECIAL"); return OPEN_CU_BRACKET; }
-"}"             { prn("SPECIAL"); return CLOSE_CU_BRACKET; }
+"("             { prn("SPECIAL"); return OPENPAR; }
+")"             { prn("SPECIAL"); return CLOSEPAR; }
+"["             { prn("SPECIAL"); return OPENSQBRA; }
+"]"             { prn("SPECIAL"); return CLOSESQBRA; }
+"{"             { prn("SPECIAL"); return OPENCURBRA; }
+"}"             { prn("SPECIAL"); return CLOSECURBRA; }
 ","             { prn("SPECIAL"); return COMMA; }
 "\\"            { prn("SPECIAL"); return BACKSLASH; }
-"scan"          { prn("FUNCTION"); return SCAN; }
-"len"           { prn("FUNCTION"); return LEN; }
-"print"         { prn("FUNCTION"); return PRINT; }
-"cmp"           { prn("FUNCTION"); return CMP; }
+"scan"          { prn("FUNCTION"); return SSCAN; }
+"len"           { prn("FUNCTION"); return SLEN; }
+"print"         { prn("FUNCTION"); return SPRINT; }
+"cmp"           { prn("FUNCTION"); return SCMP; }
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
 {IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }
 {STRING}        { prn("STRING"); return STRING; }
-{INTEGER}       { yylval = atoi(yytext); prn("INTEGER"); return INTEGER; } 
-{FLOAT}         { yylval = atof(yytext); prn("FLOAT"); return FLOAT; }
+{INTEGER}       { yylval.ival = atoi(yytext); prn("INTEGER"); return INTEGER; } 
+{FLOAT}         { yylval.fval = atof(yytext); prn("FLOAT"); return FLOAT; }
 {COMMENT}       { ECHO; line++; }
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
