@@ -43,7 +43,7 @@
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
 %token IDENTIFIER STRING 
 %token INTEGER FLOAT 
-%token BREAK DO IF SIZEOF CASE DOUBLE INT STRUCT FUNC ELSE LONG SWITCH CONST FLOAT_KEY RETURN VOID CONTINUE FOR SHORT WHILE 
+%token SBREAK SDO SIF SSIZEOF SCASE SDOUBLE SINT SSTRUCT SFUNC SELSE SLONG SSWITCH SCONST SFLOAT SRETURN SVOID SCONTINUE SFOR SSHORT SWHILE 
 %token PLUS "+"
 %token MULEQ "*="
 %token PMINEQ "--"
@@ -59,23 +59,23 @@
 %token MOD "%"
 %token OR "||"
 %token GREQ ">="
-%token ASSIGNOP "="
+%token ASSIGN "="
 %token EQUAL "=="
-%token ADDROP "&"
+%token ADDR "&"
 %token PLUSEQ "+="
 %token NOTEQ "!="
 %token MINEQ "-="
 %token PPLUSEQ "++"
-%token OPEN_PARENTHESIS "("
-%token CLOSE_PARENTHESIS ")"
-%token OPEN_SQ_BRACKET "["
-%token CLOSE_SQ_BRACKET "]"
-%token OPEN_CU_BRACKET "{"
-%token CLOSE_CU_BRACKET "}"
+%token OPENPAR "("
+%token CLOSEPAR ")"
+%token OPENSQBRA "["
+%token CLOSESQBRA "]"
+%token OPENCURBRA "{"
+%token CLOSECURBRA "}"
 %token COMMA ","
 %token BACKSLASH "\\"
 %token DELIMITER ";"
-%token SCAN PRINT LEN CMP
+%token SSCAN SPRINT SLEN SCMP
 %token NEWLINE
 %token UNKNOWN
 
@@ -104,7 +104,7 @@ program:
         | program decl_arr NEWLINE              { fprintf(yyout, "[BISON] [2.3] Πίνακες\n\n"); }
         | program build_func NEWLINE            { fprintf(yyout, "[BISON] [2.4] Ενσωματωμένες απλές συναρτήσεις\n\n");}
         | program decl_func NEWLINE             { fprintf(yyout, "[BISON] [2.5] Δήλωση συναρτήσεων χρήστη\n\n");}
-        | program decl_operations NEWLINE       { fprintf(yyout, "[BISON] [2.6] Δηλώσεις απλών εκφράσεων\n\n"); }
+        | program decl_ops NEWLINE            { fprintf(yyout, "[BISON] [2.6] Δηλώσεις απλών εκφράσεων\n\n"); }
         | program NEWLINE                       { }
         |                                      
         ;
@@ -116,11 +116,11 @@ decl_var:
         type var ";" { fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση Μεταβλητής\"", line); }
         ;
 type: 
-        INT             { $$ = strdup(yytext); }
-        | FLOAT_KEY     { $$ = strdup(yytext); }
-        | DOUBLE        { $$ = strdup(yytext); }
-        | SHORT         { $$ = strdup(yytext); }
-        | LONG          { $$ = strdup(yytext); }
+        SINT             { $$ = strdup(yytext); }
+        | SFLOAT         { $$ = strdup(yytext); }
+        | SDOUBLE        { $$ = strdup(yytext); }
+        | SSHORT         { $$ = strdup(yytext); }
+        | SLONG          { $$ = strdup(yytext); }
         ;
 var:
         IDENTIFIER              { $$ = strdup(yytext); }
@@ -129,27 +129,27 @@ var:
 
 /* === [2.3] Πίνακες === */
 decl_arr:
-        IDENTIFIER "=" elements ";" { fprintf(yyout, "[BISON] Line= %d, expression=\"Δήλωση Πίνακα\"", line); }
+        IDENTIFIER "=" arr_elements ";" { fprintf(yyout, "[BISON] Line= %d, expression=\"Δήλωση Πίνακα\"", line); }
         ;
 pos_elem:
         IDENTIFIER "[" INTEGER "]"  { $$ = strdup(yytext); }
-elements:
+arr_elements:
         "[" "]"                 {$$ = strdup(yytext); }
-        | "[" arr_int "]"       { $$ = strdup(yytext); }
-        | "[" arr_fl "]"        { $$ = strdup(yytext); }
-        | "[" arr_str "]"       { $$ = strdup(yytext); }       
+        | "[" integ "]"       { $$ = strdup(yytext); }
+        | "[" fl "]"        { $$ = strdup(yytext); }
+        | "[" str "]"       { $$ = strdup(yytext); }       
         ;  
-arr_int:
+integ:
         INTEGER                 { $$ = $1; }
-        | arr_int "," arr_int   { $$ = strdup(yytext); }
+        | integ "," integ   { $$ = strdup(yytext); }
         ;
-arr_fl:
+fl:
         FLOAT                   { $$ = $1; }
-        | arr_fl "," arr_fl     { $$ = strdup(yytext); }
+        | fl "," fl     { $$ = strdup(yytext); }
         ;
-arr_str:
+str:
         STRING                  { $$ = strdup(yytext); }  
-        | arr_str "," arr_str   { $$ = strdup(yytext); }
+        | str "," str   { $$ = strdup(yytext); }
         ;
 
 /* === [2.4] Ενσωματωμένες απλές συναρτήσεις === */
@@ -157,16 +157,16 @@ build_func:
 	func ";" { fprintf(yyout, "[BISON] Line=%d, expression=\"Ενσωματωμένη απλή συνάρτηση\"", line); }
 	;
 func:
-        SCAN "(" scan_params ")"        { $$ = strdup(yytext); }        
-        | LEN "(" len_params ")"        { $$ = strdup(yytext); }
-        | CMP "(" cmp_params ")"        { $$ = strdup(yytext); }
-        | PRINT "(" print_params ")"    { $$ = strdup(yytext); }
+        SSCAN "(" scan_params ")"        { $$ = strdup(yytext); }        
+        | SLEN "(" len_params ")"        { $$ = strdup(yytext); }
+        | SCMP "(" cmp_params ")"        { $$ = strdup(yytext); }
+        | SPRINT "(" print_params ")"    { $$ = strdup(yytext); }
         ;
 scan_params:
         IDENTIFIER { $$ = strdup(yytext); }
         ;
 len_params:
-        elements        { $$ = strdup(yytext); }
+        arr_elements        { $$ = strdup(yytext); }
         | STRING        { $$ = strdup(yytext); }
         | IDENTIFIER    { $$ = strdup(yytext); }
         ;
@@ -178,7 +178,8 @@ cmp_params:
 print_params:
         STRING                          { $$ = strdup(yytext); }
         | IDENTIFIER                    { $$ = strdup(yytext); }
-        | INTEGER                       { $$ = strdup(yytext);}
+        | INTEGER                       { $$ = strdup(yytext); }
+        | FLOAT                         { $$ = strdup(yytext); }
         | func                          { $$ = strdup(yytext); }
         | pos_elem                      { $$ = strdup(yytext); }
         | print_params "," print_params { $$ = strdup(yytext); }
@@ -190,14 +191,14 @@ decl_func:
 	;
 name_func: 
         IDENTIFIER                      { $$=strdup(yytext); }
-        | FUNC name_func params NEWLINE { $$=strdup(yytext); }
+        | SFUNC name_func params NEWLINE { $$=strdup(yytext); }
         ;
 params:
         "(" ")"                 { $$ = strdup(yytext); }
         |"(" type_params ")"    { $$ = strdup(yytext); }
         ;
 type_params:
-        type IDENTIFIER                 { $$ = strdup(yytext); }
+        type IDENTIFIER                { $$ = strdup(yytext); }
         | type_params "," type_params   { $$ = strdup(yytext); }
         ;
 code_func:
@@ -209,7 +210,7 @@ code:
         ;
 
 /* === [2.6] Δηλώσεις απλών εκφράσεων === */
-decl_operations:
+decl_ops:
         arithm_expr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Αριθμητική έκφραση\"\n", line); }
     /*  | init_vars ";"         { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); } */
         | cmp_expr              { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύγκριση\"\n", line); }
@@ -217,7 +218,7 @@ decl_operations:
         ;
 sign:
         INTEGER         { $$ = strdup(yytext); }
-        | FLOAT         { $$ = strdup(yytext); }
+        | FLOAT        { $$ = strdup(yytext); }
         | "+" sign      { $$ = strdup(yytext); }
         | "-" sign      { $$ = strdup(yytext); }
         ;
@@ -231,9 +232,9 @@ arithm_expr:
         ;
 
 cmp_expr:
-	INTEGER    		  { $$ = strdup(yytext); }
-        | FLOAT                   { $$ = strdup(yytext); }
-	| IDENTIFIER              { $$ = strdup(yytext); }
+	INTEGER   		  { $$ = strdup(yytext); }
+        | FLOAT                  { $$ = strdup(yytext); }
+	| IDENTIFIER             { $$ = strdup(yytext); }
 	| cmp_expr ">"  cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "<"  cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "<=" cmp_expr  { $$ = strdup(yytext); }
@@ -243,7 +244,7 @@ cmp_expr:
         ;
 
 merge_arr:
-        elements "+" elements { $$ = strdup(yytext); }
+        arr_elements "+" arr_elements { $$ = strdup(yytext); }
         ;
         
 /* === [2.7] Σύνθετες δηλώσεις === */
@@ -267,7 +268,7 @@ void yyerror(char *s) {
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 0;
+        yydebug = 1;
 
 	if (argc == 3)
         {

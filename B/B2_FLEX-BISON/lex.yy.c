@@ -918,102 +918,102 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 62 "simple-flex-code.l"
-{ prn("KEYWORD"); return BREAK; }
+{ prn("KEYWORD"); return SBREAK; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 63 "simple-flex-code.l"
-{ prn("KEYWORD"); return CASE; }
+{ prn("KEYWORD"); return SCASE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 64 "simple-flex-code.l"
-{ prn("KEYWORD"); return CONST; }
+{ prn("KEYWORD"); return SCONST; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 65 "simple-flex-code.l"
-{ prn("KEYWORD"); return CONTINUE; }
+{ prn("KEYWORD"); return SCONTINUE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 66 "simple-flex-code.l"
-{ prn("KEYWORD"); return DO; }
+{ prn("KEYWORD"); return SDO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 67 "simple-flex-code.l"
-{ prn("KEYWORD"); return DOUBLE; }
+{ prn("KEYWORD"); return SDOUBLE; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 68 "simple-flex-code.l"
-{ prn("KEYWORD"); return ELSE; }
+{ prn("KEYWORD"); return SELSE; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 69 "simple-flex-code.l"
-{ prn("KEYWORD"); return FLOAT_KEY; }
+{ prn("KEYWORD"); return SFLOAT; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 70 "simple-flex-code.l"
-{ prn("KEYWORD"); return FOR; }
+{ prn("KEYWORD"); return SFOR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 71 "simple-flex-code.l"
-{ prn("KEYWORD"); return IF; }
+{ prn("KEYWORD"); return SIF; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 72 "simple-flex-code.l"
-{ prn("KEYWORD"); return INT; }
+{ prn("KEYWORD"); return SINT; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 73 "simple-flex-code.l"
-{ prn("KEYWORD"); return LONG; }
+{ prn("KEYWORD"); return SLONG; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 74 "simple-flex-code.l"
-{ prn("KEYWORD"); return RETURN; }
+{ prn("KEYWORD"); return SRETURN; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 75 "simple-flex-code.l"
-{ prn("KEYWORD"); return SIZEOF; }
+{ prn("KEYWORD"); return SSIZEOF; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 76 "simple-flex-code.l"
-{ prn("KEYWORD"); return STRUCT; }
+{ prn("KEYWORD"); return SSTRUCT; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 77 "simple-flex-code.l"
-{ prn("KEYWORD"); return SWITCH; }
+{ prn("KEYWORD"); return SSWITCH; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 78 "simple-flex-code.l"
-{ prn("KEYWORD"); return VOID; }
+{ prn("KEYWORD"); return SVOID; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 79 "simple-flex-code.l"
-{ prn("KEYWORD"); return WHILE; }
+{ prn("KEYWORD"); return SWHILE; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 80 "simple-flex-code.l"
-{ prn("KEYWORD"); return FUNC; }
+{ prn("KEYWORD"); return SFUNC; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 81 "simple-flex-code.l"
-{ prn("KEYWORD"); return SHORT; }
+{ prn("KEYWORD"); return SSHORT; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
@@ -1093,7 +1093,7 @@ YY_RULE_SETUP
 case 36:
 YY_RULE_SETUP
 #line 97 "simple-flex-code.l"
-{ prn("OPERATOR"); return ASSIGNOP; }
+{ prn("OPERATOR"); return ASSIGN; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
@@ -1103,7 +1103,7 @@ YY_RULE_SETUP
 case 38:
 YY_RULE_SETUP
 #line 99 "simple-flex-code.l"
-{ prn("OPERATOR"); return ADDROP; }
+{ prn("OPERATOR"); return ADDR; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
@@ -1128,32 +1128,32 @@ YY_RULE_SETUP
 case 43:
 YY_RULE_SETUP
 #line 104 "simple-flex-code.l"
-{ prn("SPECIAL"); return OPEN_PARENTHESIS; }
+{ prn("SPECIAL"); return OPENPAR; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 105 "simple-flex-code.l"
-{ prn("SPECIAL"); return CLOSE_PARENTHESIS; }
+{ prn("SPECIAL"); return CLOSEPAR; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 106 "simple-flex-code.l"
-{ prn("SPECIAL"); return OPEN_SQ_BRACKET; }
+{ prn("SPECIAL"); return OPENSQBRA; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 107 "simple-flex-code.l"
-{ prn("SPECIAL"); return CLOSE_SQ_BRACKET; }
+{ prn("SPECIAL"); return CLOSESQBRA; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 108 "simple-flex-code.l"
-{ prn("SPECIAL"); return OPEN_CU_BRACKET; }
+{ prn("SPECIAL"); return OPENCURBRA; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 109 "simple-flex-code.l"
-{ prn("SPECIAL"); return CLOSE_CU_BRACKET; }
+{ prn("SPECIAL"); return CLOSECURBRA; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
@@ -1168,22 +1168,22 @@ YY_RULE_SETUP
 case 51:
 YY_RULE_SETUP
 #line 112 "simple-flex-code.l"
-{ prn("FUNCTION"); return SCAN; }
+{ prn("FUNCTION"); return SSCAN; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 113 "simple-flex-code.l"
-{ prn("FUNCTION"); return LEN; }
+{ prn("FUNCTION"); return SLEN; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
 #line 114 "simple-flex-code.l"
-{ prn("FUNCTION"); return PRINT; }
+{ prn("FUNCTION"); return SPRINT; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 115 "simple-flex-code.l"
-{ prn("FUNCTION"); return CMP; }
+{ prn("FUNCTION"); return SCMP; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
