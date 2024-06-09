@@ -64,3 +64,5 @@ myvar == 52
 if (var == 100) print("Value of expression is 100");
 if (x < y < z) { print(x); print(y); print(z); }
 
+// ====== Test case [#2.7.2] :  WHILE STATEMETS =====
+while (i < 10) { print("i is: ", i); i += 1; }

@@ -396,5 +396,21 @@
 	[FLEX] Line=71, token=SPECIAL, value="}"
 [BISON] Line=71, expression="Δήλωση if"
 
+// ====== Test case [#2.7.2] :  WHILE STATEMETS =====
+	[FLEX] Line=74, token=KEYWORD, value="while"
+	[FLEX] Line=74, token=SPECIAL, value="("
+	[FLEX] Line=74, token=IDENTIFIER, value="i"
+	[FLEX] Line=74, token=OPERATOR, value="<"
+	[FLEX] Line=74, token=INTEGER, value="10"
+	[FLEX] Line=74, token=SPECIAL, value=")"
+	[FLEX] Line=74, token=SPECIAL, value="{"
+	[FLEX] Line=74, token=FUNCTION, value="print"
+	[FLEX] Line=74, token=SPECIAL, value="("
+	[FLEX] Line=74, token=STRING, value=""i is: ""
+	[FLEX] Line=74, token=SPECIAL, value=","
+	[FLEX] Line=74, token=IDENTIFIER, value="i"
+	[FLEX] Line=74, token=SPECIAL, value=")"
+	[FLEX] Line=74, token=DELIMITER, value=";"
+	[FLEX] Line=74, token=IDENTIFIER, value="i"
 
-[0] ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.
+[1] ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.

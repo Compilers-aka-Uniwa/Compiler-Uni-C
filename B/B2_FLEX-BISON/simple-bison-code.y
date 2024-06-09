@@ -255,6 +255,7 @@ merge_arr:
 /* [2.7.1] Η δήλωση if */
 decl_statement:
         if_statement { $$ = "\"Δήλωση if\""; }
+        | while_statement { $$ = "\"Δήλωση while\""; }
         ;
 
 if_statement:
@@ -276,6 +277,11 @@ statements:
         ;
 
 /* [2.7.2] Η δήλωση while */
+
+while_statement:
+        SWHILE "(" condition ")" statement               {$$ = strdup(yytext);} 
+        | SWHILE "(" condition ")" "{" statements "}"    {$$ = strdup(yytext);}
+        ;
 
 /* [2.7.3] Η δήλωση for */
        
