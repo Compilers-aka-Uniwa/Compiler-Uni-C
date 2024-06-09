@@ -1,20 +1,3 @@
-/* Όνομα αρχείου:       simple-flex-code.l
-   Περιγραφή:           Υποδείγμα για ανάπτυξη λεκτικού αναλυτή με χρήση του εργαλείου Flex
-   Συγγραφέας:          Εργαστήριο Μεταγλωττιστών, Τμήμα Μηχανικών Πληροφορικής και Υπολογιστών,
-                         Πανεπιστήμιο Δυτικής Αττικής
-   Σχόλια:              Το παρόν πρόγραμμα υλοποιεί (με τη χρήση flex) έναν απλό λεκτικό αναλυτή
-                         που αναγνωρίζει κενά (διάστημα και tab) και αριθμούς (δεκαδικού συστήματος
-                         μόνο!) για τη γλώσσα Uni-C ενώ διαχειρίζεται τους ειδικούς χαρακτήρες
-                         νέας γραμμής '\n' (new line) και 'EOF' (end of file). Υπάρχουν αναφορές
-                         για την αναγνώριση μεταβλητών, με τον πραγματικό κώδικα να έχει αντικατασταθεί
-                         από τον λεκτικό FILL ME έτσι ώστε να συμπληρωθεί από εσάς. Προαιρετικά ο λεκτικός
-                         αναλυτής δέχεται ορίσματα αρχείων για είσοδο και έξοδο.
-   Οδηγίες εκτέλεσης:   Δώστε "make" χωρίς τα εισαγωγικά στον τρέχοντα κατάλογο. Εναλλακτικά:
-                         flex -o simple-flex-code.c simple-flex-code.l
-                         gcc -o simple-flex-code simple-flex-code.c
-                         ./simple-flex-code
-*/
-
 /* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
 %option noyywrap
 
@@ -116,8 +99,8 @@ UNKNOWN          [^ \t\r\n;]
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
 {IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }
 {STRING}        { prn("STRING"); return STRING; }
-{INTEGER}       { yylval = atoi(yytext); prn("INTEGER"); return INTEGER; } 
-{FLOAT}         { yylval = atof(yytext); prn("FLOAT"); return FLOAT; }
+{INTEGER}       { yylval.ival = atoi(yytext); prn("INTEGER"); return INTEGER; } 
+{FLOAT}         { yylval.fval = atof(yytext); prn("FLOAT"); return FLOAT; }
 {COMMENT}       { ECHO; line++; }
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
