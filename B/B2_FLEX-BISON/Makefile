@@ -1,5 +1,5 @@
 all:
-	bison -d simple-bison-code.y --verbose -Wcounterexamples
+	bison -d simple-bison-code.y --verbose
 	flex simple-flex-code.l
 	gcc -o compiler-Uni-C simple-bison-code.tab.c lex.yy.c 
 	./compiler-Uni-C input-test.txt output.txt
