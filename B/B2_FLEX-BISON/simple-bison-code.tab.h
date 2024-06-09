@@ -58,26 +58,26 @@ extern int yydebug;
     STRING = 259,                  /* STRING  */
     INTEGER = 260,                 /* INTEGER  */
     FLOAT = 261,                   /* FLOAT  */
-    BREAK = 262,                   /* BREAK  */
-    DO = 263,                      /* DO  */
-    IF = 264,                      /* IF  */
-    SIZEOF = 265,                  /* SIZEOF  */
-    CASE = 266,                    /* CASE  */
-    DOUBLE = 267,                  /* DOUBLE  */
-    INT = 268,                     /* INT  */
-    STRUCT = 269,                  /* STRUCT  */
-    FUNC = 270,                    /* FUNC  */
-    ELSE = 271,                    /* ELSE  */
-    LONG = 272,                    /* LONG  */
-    SWITCH = 273,                  /* SWITCH  */
-    CONST = 274,                   /* CONST  */
-    FLOAT_KEY = 275,               /* FLOAT_KEY  */
-    RETURN = 276,                  /* RETURN  */
-    VOID = 277,                    /* VOID  */
-    CONTINUE = 278,                /* CONTINUE  */
-    FOR = 279,                     /* FOR  */
-    SHORT = 280,                   /* SHORT  */
-    WHILE = 281,                   /* WHILE  */
+    SBREAK = 262,                  /* SBREAK  */
+    SDO = 263,                     /* SDO  */
+    SIF = 264,                     /* SIF  */
+    SSIZEOF = 265,                 /* SSIZEOF  */
+    SCASE = 266,                   /* SCASE  */
+    SDOUBLE = 267,                 /* SDOUBLE  */
+    SINT = 268,                    /* SINT  */
+    SSTRUCT = 269,                 /* SSTRUCT  */
+    SFUNC = 270,                   /* SFUNC  */
+    SELSE = 271,                   /* SELSE  */
+    SLONG = 272,                   /* SLONG  */
+    SSWITCH = 273,                 /* SSWITCH  */
+    SCONST = 274,                  /* SCONST  */
+    SFLOAT = 275,                  /* SFLOAT  */
+    SRETURN = 276,                 /* SRETURN  */
+    SVOID = 277,                   /* SVOID  */
+    SCONTINUE = 278,               /* SCONTINUE  */
+    SFOR = 279,                    /* SFOR  */
+    SSHORT = 280,                  /* SSHORT  */
+    SWHILE = 281,                  /* SWHILE  */
     PLUS = 282,                    /* "+"  */
     MULEQ = 283,                   /* "*="  */
     PMINEQ = 284,                  /* "--"  */
@@ -93,26 +93,26 @@ extern int yydebug;
     MOD = 294,                     /* "%"  */
     OR = 295,                      /* "||"  */
     GREQ = 296,                    /* ">="  */
-    ASSIGNOP = 297,                /* "="  */
+    ASSIGN = 297,                  /* "="  */
     EQUAL = 298,                   /* "=="  */
-    ADDROP = 299,                  /* "&"  */
+    ADDR = 299,                    /* "&"  */
     PLUSEQ = 300,                  /* "+="  */
     NOTEQ = 301,                   /* "!="  */
     MINEQ = 302,                   /* "-="  */
     PPLUSEQ = 303,                 /* "++"  */
-    OPEN_PARENTHESIS = 304,        /* "("  */
-    CLOSE_PARENTHESIS = 305,       /* ")"  */
-    OPEN_SQ_BRACKET = 306,         /* "["  */
-    CLOSE_SQ_BRACKET = 307,        /* "]"  */
-    OPEN_CU_BRACKET = 308,         /* "{"  */
-    CLOSE_CU_BRACKET = 309,        /* "}"  */
+    OPENPAR = 304,                 /* "("  */
+    CLOSEPAR = 305,                /* ")"  */
+    OPENSQBRA = 306,               /* "["  */
+    CLOSESQBRA = 307,              /* "]"  */
+    OPENCURBRA = 308,              /* "{"  */
+    CLOSECURBRA = 309,             /* "}"  */
     COMMA = 310,                   /* ","  */
     BACKSLASH = 311,               /* "\\"  */
     DELIMITER = 312,               /* ";"  */
-    SCAN = 313,                    /* SCAN  */
-    PRINT = 314,                   /* PRINT  */
-    LEN = 315,                     /* LEN  */
-    CMP = 316,                     /* CMP  */
+    SSCAN = 313,                   /* SSCAN  */
+    SPRINT = 314,                  /* SPRINT  */
+    SLEN = 315,                    /* SLEN  */
+    SCMP = 316,                    /* SCMP  */
     NEWLINE = 317,                 /* NEWLINE  */
     UNKNOWN = 318                  /* UNKNOWN  */
   };
@@ -121,7 +121,18 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 25 "simple-bison-code.y"
+
+    int ival;
+    float fval;
+    char *sval;
+
+#line 133 "simple-bison-code.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
