@@ -211,8 +211,8 @@ code:
 /* === [2.6] Δηλώσεις απλών εκφράσεων === */
 decl_operations:
         arithm_expr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Αριθμητική έκφραση\"\n", line); }
-    /*  | init_vars ";"         { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); }
-        | cmp_expr              { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύγκριση\"\n", line); }
+        | assign           { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); }
+    /*  | cmp_expr              { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύγκριση\"\n", line); }
         | merge_arr             { fprintf(yyout, "[BISON] Line=%d, expression=\"Συνένωση Πινάκων\"\n", line); }*/
         ;
 sign:
@@ -229,10 +229,10 @@ arithm_expr:
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         ;
    
-/* Αναθέσεις τιμών σε αναγνωριστικά */
+/* Αναθέσεις τιμών σε αναγνωριστικά 
 assign_statement:
-    IDENTIFIER "=" arithm_expr ";"                { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); }
-    | identifier_list "=" value_list ";"           { fprintf(yyout, "[BISON] Line=%d, expression=\"Ομαδική ανάθεση τιμών σε μεταβλητές\"\n", line); }
+    IDENTIFIER "=" arithm_expr ";"                 { fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n", line); }
+    | identifier_list "=" value_list            { fprintf(yyout, "[BISON] Line=%d, expression=\"Ομαδική ανάθεση τιμών σε μεταβλητές\"\n", line); }
     ;
 
 identifier_list:
@@ -244,6 +244,23 @@ value_list:
     arithm_expr                                   { $$ = strdup($1); }
     | value_list "," arithm_expr                  { $$ = strcat($1, $3); }
     ;
+*/
+
+/* Αναθέσεις τιμών σε αναγνωριστικά */
+
+val: 
+    INTEGER { $$ = strdup(yytext); }
+    | FLOAT  { $$ = strdup(yytext); }
+    | STRING  { $$ = strdup(yytext); }
+    | elements  { $$ = strdup(yytext); }
+    | val "," val  { $$ = strdup(yytext); }
+    ;
+
+assign:
+    var "=" val ";" { $$ = strdup(yytext); }
+    ;
+
+
 
 
 /* === [2.7] Σύνθετες δηλώσεις === */
@@ -267,7 +284,7 @@ void yyerror(char *s) {
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 0;
+        yydebug = 1;
 
 	if (argc == 3)
         {
