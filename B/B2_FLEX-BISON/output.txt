@@ -397,5 +397,45 @@
 [BISON] Line=56, expression="Συνένωση Πινάκων"
 [BISON] [2.6] Δηλώσεις απλών εκφράσεων
 
+// ====== Test case #8 STATEMENTS ====== 
+	[FLEX] Line=59, token=KEYWORD, value="if"
+	[FLEX] Line=59, token=SPECIAL, value="("
+	[FLEX] Line=59, token=IDENTIFIER, value="var"
+	[FLEX] Line=59, token=OPERATOR, value="=="
+	[FLEX] Line=59, token=INTEGER, value="100"
+	[FLEX] Line=59, token=SPECIAL, value=")"
+	[FLEX] Line=59, token=FUNCTION, value="print"
+	[FLEX] Line=59, token=SPECIAL, value="("
+	[FLEX] Line=59, token=STRING, value=""Value of expression is 100""
+	[FLEX] Line=59, token=SPECIAL, value=")"
+	[FLEX] Line=59, token=DELIMITER, value=";"
+[BISON] Line=59, expression="Απλή δήλωση if"
+[BISON] Line=59, expression="Δήλωση if"
+[BISON] [2.7] Δηλώσεις συναρτήσεων
 
-ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.
+	[FLEX] Line=60, token=KEYWORD, value="if"
+	[FLEX] Line=60, token=SPECIAL, value="("
+	[FLEX] Line=60, token=IDENTIFIER, value="x"
+	[FLEX] Line=60, token=OPERATOR, value="<"
+	[FLEX] Line=60, token=IDENTIFIER, value="y"
+	[FLEX] Line=60, token=OPERATOR, value="<"
+	[FLEX] Line=60, token=IDENTIFIER, value="z"
+	[FLEX] Line=60, token=SPECIAL, value=")"
+	[FLEX] Line=60, token=SPECIAL, value="{"
+	[FLEX] Line=60, token=FUNCTION, value="print"
+	[FLEX] Line=60, token=SPECIAL, value="("
+	[FLEX] Line=60, token=IDENTIFIER, value="x"
+	[FLEX] Line=60, token=SPECIAL, value=")"
+	[FLEX] Line=60, token=DELIMITER, value=";"
+	[FLEX] Line=60, token=FUNCTION, value="print"
+	[FLEX] Line=60, token=SPECIAL, value="("
+	[FLEX] Line=60, token=IDENTIFIER, value="y"
+	[FLEX] Line=60, token=SPECIAL, value=")"
+	[FLEX] Line=60, token=DELIMITER, value=";"
+	[FLEX] Line=60, token=FUNCTION, value="print"
+	[FLEX] Line=60, token=SPECIAL, value="("
+	[FLEX] Line=60, token=IDENTIFIER, value="z"
+	[FLEX] Line=60, token=SPECIAL, value=")"
+	[FLEX] Line=60, token=SPECIAL, value="}"
+
+ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.
