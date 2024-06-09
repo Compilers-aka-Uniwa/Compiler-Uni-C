@@ -101,8 +101,8 @@ program:
         | program decl_func NEWLINE             { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
 /* Εκφράσεις αριθμητικές, συγκρίσεις, συνένωνση πινάκων, ανάθεση τιμής σε μεταβλητή */
         | program decl_ops NEWLINE              { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-/* Σύνθετες δηλώσεις */
-        | program decl_statement NEWLINE        { fprintf(yyout, "[BISON] [2.7] Δηλώσεις συναρτήσεων\n\n");}
+/* Σύνθετες δηλώσεις, δήλωση if, while, for */
+        | program decl_statement NEWLINE        { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
 /* Αλλαγή γραμμής */
         | program NEWLINE                       { }
 /* Κενή γραμμή */
@@ -252,14 +252,14 @@ merge_arr:
         ;
         
 /* === [2.7] Σύνθετες δηλώσεις === */
-/* === [2.7.1] Η δήλωση if === */
+/* [2.7.1] Η δήλωση if */
 decl_statement:
-        if_statement { fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση if\"\n", line); }
+        if_statement { $$ = "\"Δήλωση if\""; }
         ;
 
 if_statement:
-        SIF "(" condition ")" statement { fprintf(yyout, "[BISON] Line=%d, expression=\"Απλή δήλωση if\"\n", line); }
-        | SIF "(" condition ")" "{" statements "}" { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύνθετη δήλωση if\"\n", line); }
+        SIF "(" condition ")" statement            { $$ = strdup(yytext);}
+        | SIF "(" condition ")" "{" statements "}" { $$ = strdup(yytext); }
         ;
 
 condition:
@@ -271,9 +271,13 @@ statement:
         ;
 
 statements:
-        statement
-        | statements statement
+        statement                    { $$ = strdup(yytext); }
+        | statements statement       { $$ = strdup(yytext); }
         ;
+
+/* [2.7.2] Η δήλωση while */
+
+/* [2.7.3] Η δήλωση for */
        
 %%
 

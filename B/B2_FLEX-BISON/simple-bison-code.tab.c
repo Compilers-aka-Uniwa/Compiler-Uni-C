@@ -1323,7 +1323,7 @@ yyreduce:
 
   case 6: /* program: program decl_statement NEWLINE  */
 #line 105 "simple-bison-code.y"
-                                                { fprintf(yyout, "[BISON] [2.7] Δηλώσεις συναρτήσεων\n\n");}
+                                                { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, (yyvsp[-1].sval)); }
 #line 1328 "simple-bison-code.tab.c"
     break;
 
@@ -1797,19 +1797,19 @@ yyreduce:
 
   case 85: /* decl_statement: if_statement  */
 #line 257 "simple-bison-code.y"
-                     { fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση if\"\n", line); }
+                     { (yyval.sval) = "\"Δήλωση if\""; }
 #line 1802 "simple-bison-code.tab.c"
     break;
 
   case 86: /* if_statement: SIF "(" condition ")" statement  */
 #line 261 "simple-bison-code.y"
-                                        { fprintf(yyout, "[BISON] Line=%d, expression=\"Απλή δήλωση if\"\n", line); }
+                                                   { (yyval.sval) = strdup(yytext);}
 #line 1808 "simple-bison-code.tab.c"
     break;
 
   case 87: /* if_statement: SIF "(" condition ")" "{" statements "}"  */
 #line 262 "simple-bison-code.y"
-                                                   { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύνθετη δήλωση if\"\n", line); }
+                                                   { (yyval.sval) = strdup(yytext); }
 #line 1814 "simple-bison-code.tab.c"
     break;
 
@@ -1825,8 +1825,20 @@ yyreduce:
 #line 1826 "simple-bison-code.tab.c"
     break;
 
+  case 90: /* statements: statement  */
+#line 274 "simple-bison-code.y"
+                                     { (yyval.sval) = strdup(yytext); }
+#line 1832 "simple-bison-code.tab.c"
+    break;
 
-#line 1830 "simple-bison-code.tab.c"
+  case 91: /* statements: statements statement  */
+#line 275 "simple-bison-code.y"
+                                     { (yyval.sval) = strdup(yytext); }
+#line 1838 "simple-bison-code.tab.c"
+    break;
+
+
+#line 1842 "simple-bison-code.tab.c"
 
       default: break;
     }
@@ -2019,7 +2031,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 278 "simple-bison-code.y"
+#line 282 "simple-bison-code.y"
 
 
 
