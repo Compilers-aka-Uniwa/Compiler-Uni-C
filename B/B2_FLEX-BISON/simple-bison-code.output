@@ -1,8 +1,7 @@
-Terminals unused in grammar
+Τερματικά σύμβολα μη χρησιμοποιούμενα στη γραμματική
 
     SBREAK
     SDO
-    SIF
     SSIZEOF
     SCASE
     SSTRUCT
@@ -29,12 +28,12 @@ Terminals unused in grammar
     UNKNOWN
 
 
-State 3 conflicts: 1 reduce/reduce
-State 4 conflicts: 1 reduce/reduce
-State 5 conflicts: 1 reduce/reduce
+Κατάσταση 3 συγκρούσεις: 1 ελάττωση/ελάττωση
+Κατάσταση 4 συγκρούσεις: 1 ελάττωση/ελάττωση
+Κατάσταση 5 συγκρούσεις: 1 ελάττωση/ελάττωση
 
 
-Grammar
+Γραμματική
 
     0 $accept: program $end
 
@@ -42,1621 +41,1831 @@ Grammar
     2        | program build_func NEWLINE
     3        | program decl_func NEWLINE
     4        | program decl_ops NEWLINE
-    5        | program NEWLINE
-    6        | ε
+    5        | program decl_statement NEWLINE
+    6        | program NEWLINE
+    7        | ε
 
-    7 decl_var: type var ";"
+    8 decl_var: type var ";"
 
-    8 type: SINT
-    9     | SFLOAT
-   10     | SDOUBLE
-   11     | SSHORT
-   12     | SLONG
+    9 type: SINT
+   10     | SFLOAT
+   11     | SDOUBLE
+   12     | SSHORT
+   13     | SLONG
 
-   13 var: IDENTIFIER
-   14    | var "," var
+   14 var: IDENTIFIER
+   15    | var "," var
 
-   15 pos_elem: IDENTIFIER "[" INTEGER "]"
+   16 pos_elem: IDENTIFIER "[" INTEGER "]"
 
-   16 arr_elements: "[" "]"
-   17             | "[" integ "]"
-   18             | "[" fl "]"
-   19             | "[" str "]"
+   17 arr_elements: "[" "]"
+   18             | "[" integ "]"
+   19             | "[" fl "]"
+   20             | "[" str "]"
 
-   20 integ: INTEGER
-   21      | integ "," integ
+   21 integ: INTEGER
+   22      | integ "," integ
 
-   22 fl: FLOAT
-   23   | fl "," fl
+   23 fl: FLOAT
+   24   | fl "," fl
 
-   24 str: STRING
-   25    | str "," str
+   25 str: STRING
+   26    | str "," str
 
-   26 build_func: func ";"
+   27 build_func: func ";"
 
-   27 func: SSCAN "(" scan_params ")"
-   28     | SLEN "(" len_params ")"
-   29     | SCMP "(" cmp_params ")"
-   30     | SPRINT "(" print_params ")"
+   28 func: SSCAN "(" scan_params ")"
+   29     | SLEN "(" len_params ")"
+   30     | SCMP "(" cmp_params ")"
+   31     | SPRINT "(" print_params ")"
 
-   31 scan_params: IDENTIFIER
+   32 scan_params: IDENTIFIER
 
-   32 len_params: arr_elements
-   33           | STRING
-   34           | IDENTIFIER
+   33 len_params: arr_elements
+   34           | STRING
+   35           | IDENTIFIER
 
-   35 cmp_params: STRING
-   36           | IDENTIFIER
-   37           | cmp_params "," cmp_params
+   36 cmp_params: STRING
+   37           | IDENTIFIER
+   38           | cmp_params "," cmp_params
 
-   38 print_params: STRING
-   39             | IDENTIFIER
-   40             | INTEGER
-   41             | FLOAT
-   42             | func
-   43             | pos_elem
-   44             | print_params "," print_params
+   39 print_params: STRING
+   40             | IDENTIFIER
+   41             | INTEGER
+   42             | FLOAT
+   43             | func
+   44             | pos_elem
+   45             | print_params "," print_params
 
-   45 decl_func: name_func code_func
+   46 decl_func: name_func code_func
 
-   46 name_func: IDENTIFIER
-   47          | SFUNC name_func params NEWLINE
+   47 name_func: IDENTIFIER
+   48          | SFUNC name_func params NEWLINE
 
-   48 params: "(" ")"
-   49       | "(" type_params ")"
+   49 params: "(" ")"
+   50       | "(" type_params ")"
 
-   50 type_params: type IDENTIFIER
-   51            | type_params "," type_params
+   51 type_params: type IDENTIFIER
+   52            | type_params "," type_params
 
-   52 code_func: "{" NEWLINE "}"
+   53 code_func: "{" NEWLINE "}"
 
-   53 decl_ops: arithm_expr
-   54         | assign
-   55         | cmp_expr
-   56         | merge_arr
+   54 decl_ops: arithm_expr
+   55         | assign
+   56         | cmp_expr
+   57         | merge_arr
 
-   57 sign: INTEGER
-   58     | FLOAT
-   59     | "+" sign
-   60     | "-" sign
+   58 sign: INTEGER
+   59     | FLOAT
+   60     | "+" sign
+   61     | "-" sign
 
-   61 arithm_expr: sign
-   62            | IDENTIFIER
-   63            | arithm_expr "+" arithm_expr
-   64            | arithm_expr "-" arithm_expr
-   65            | arithm_expr "*" arithm_expr
-   66            | arithm_expr "/" arithm_expr
+   62 arithm_expr: sign
+   63            | IDENTIFIER
+   64            | arithm_expr "+" arithm_expr
+   65            | arithm_expr "-" arithm_expr
+   66            | arithm_expr "*" arithm_expr
+   67            | arithm_expr "/" arithm_expr
 
-   67 assign: var "=" val ";"
+   68 assign: var "=" val ";"
 
-   68 val: INTEGER
-   69    | FLOAT
-   70    | STRING
-   71    | arr_elements
-   72    | val "," val
+   69 val: INTEGER
+   70    | FLOAT
+   71    | STRING
+   72    | arr_elements
+   73    | val "," val
 
-   73 cmp_expr: INTEGER
-   74         | FLOAT
-   75         | IDENTIFIER
-   76         | cmp_expr ">" cmp_expr
-   77         | cmp_expr "<" cmp_expr
-   78         | cmp_expr "<=" cmp_expr
-   79         | cmp_expr ">=" cmp_expr
-   80         | cmp_expr "==" cmp_expr
-   81         | cmp_expr "!=" cmp_expr
+   74 cmp_expr: INTEGER
+   75         | FLOAT
+   76         | IDENTIFIER
+   77         | cmp_expr ">" cmp_expr
+   78         | cmp_expr "<" cmp_expr
+   79         | cmp_expr "<=" cmp_expr
+   80         | cmp_expr ">=" cmp_expr
+   81         | cmp_expr "==" cmp_expr
+   82         | cmp_expr "!=" cmp_expr
 
-   82 merge_arr: arr_elements "+" arr_elements
+   83 merge_arr: arr_elements "+" arr_elements
+
+   84 decl_statement: if_statement
+
+   85 if_statement: SIF "(" condition ")" statement
+   86             | SIF "(" condition ")" "{" statements "}"
+
+   87 condition: cmp_expr
+
+   88 statement: SPRINT "(" print_params ")" ";"
+
+   89 statements: statement
+   90           | statements statement
 
 
-Terminals, with rules where they appear
+Τερματικά σύμβολα, με κανόνες όπου εμφανίζονται
 
     $end (0) 0
     error (256)
-    IDENTIFIER <sval> (258) 13 15 31 34 36 39 46 50 62 75
-    STRING <sval> (259) 24 33 35 38 70
-    INTEGER <ival> (260) 15 20 40 57 68 73
-    FLOAT <fval> (261) 22 41 58 69 74
+    IDENTIFIER <sval> (258) 14 16 32 35 37 40 47 51 63 76
+    STRING <sval> (259) 25 34 36 39 71
+    INTEGER <ival> (260) 16 21 41 58 69 74
+    FLOAT <fval> (261) 23 42 59 70 75
     SBREAK <sval> (262)
     SDO <sval> (263)
-    SIF <sval> (264)
+    SIF <sval> (264) 85 86
     SSIZEOF <sval> (265)
     SCASE <sval> (266)
-    SDOUBLE <sval> (267) 10
-    SINT <sval> (268) 8
+    SDOUBLE <sval> (267) 11
+    SINT <sval> (268) 9
     SSTRUCT <sval> (269)
-    SFUNC <sval> (270) 47
+    SFUNC <sval> (270) 48
     SELSE <sval> (271)
-    SLONG <sval> (272) 12
+    SLONG <sval> (272) 13
     SSWITCH <sval> (273)
     SCONST <sval> (274)
-    SFLOAT <sval> (275) 9
+    SFLOAT <sval> (275) 10
     SRETURN <sval> (276)
     SVOID <sval> (277)
     SCONTINUE <sval> (278)
     SFOR <sval> (279)
-    SSHORT <sval> (280) 11
+    SSHORT <sval> (280) 12
     SWHILE <sval> (281)
-    "+" (282) 59 63 82
+    "+" (282) 60 64 83
     "*=" (283)
     "--" (284)
-    "-" (285) 60 64
+    "-" (285) 61 65
     "/=" (286)
-    "<" (287) 77
-    "*" (288) 65
+    "<" (287) 78
+    "*" (288) 66
     "!" (289)
-    ">" (290) 76
-    "/" (291) 66
+    ">" (290) 77
+    "/" (291) 67
     "&&" (292)
-    "<=" (293) 78
+    "<=" (293) 79
     "%" (294)
     "||" (295)
-    ">=" (296) 79
-    "=" (297) 67
-    "==" (298) 80
+    ">=" (296) 80
+    "=" (297) 68
+    "==" (298) 81
     "&" (299)
     "+=" (300)
-    "!=" (301) 81
+    "!=" (301) 82
     "-=" (302)
     "++" (303)
-    "(" (304) 27 28 29 30 48 49
-    ")" (305) 27 28 29 30 48 49
-    "[" (306) 15 16 17 18 19
-    "]" (307) 15 16 17 18 19
-    "{" (308) 52
-    "}" (309) 52
-    "," (310) 14 21 23 25 37 44 51 72
+    "(" (304) 28 29 30 31 49 50 85 86 88
+    ")" (305) 28 29 30 31 49 50 85 86 88
+    "[" (306) 16 17 18 19 20
+    "]" (307) 16 17 18 19 20
+    "{" (308) 53 86
+    "}" (309) 53 86
+    "," (310) 15 22 24 26 38 45 52 73
     "\\" (311)
-    ";" (312) 7 26 67
-    SSCAN (313) 27
-    SPRINT (314) 30
-    SLEN (315) 28
-    SCMP (316) 29
-    NEWLINE (317) 1 2 3 4 5 47 52
+    ";" (312) 8 27 68 88
+    SSCAN (313) 28
+    SPRINT (314) 31 88
+    SLEN (315) 29
+    SCMP (316) 30
+    NEWLINE (317) 1 2 3 4 5 6 48 53
     UNKNOWN (318)
 
 
-Nonterminals, with rules where they appear
+Μη τερματικά σύμβολα, με κανόνες όπου εμφανίζονται
 
     $accept (64)
-        on left: 0
+        στα αριστερά: 0
     program <sval> (65)
-        on left: 1 2 3 4 5 6
-        on right: 0 1 2 3 4 5
+        στα αριστερά: 1 2 3 4 5 6 7
+        στα δεξιά: 0 1 2 3 4 5 6
     decl_var <sval> (66)
-        on left: 7
-        on right: 1
+        στα αριστερά: 8
+        στα δεξιά: 1
     type <sval> (67)
-        on left: 8 9 10 11 12
-        on right: 7 50
+        στα αριστερά: 9 10 11 12 13
+        στα δεξιά: 8 51
     var <sval> (68)
-        on left: 13 14
-        on right: 7 14 67
+        στα αριστερά: 14 15
+        στα δεξιά: 8 15 68
     pos_elem <sval> (69)
-        on left: 15
-        on right: 43
+        στα αριστερά: 16
+        στα δεξιά: 44
     arr_elements <sval> (70)
-        on left: 16 17 18 19
-        on right: 32 71 82
+        στα αριστερά: 17 18 19 20
+        στα δεξιά: 33 72 83
     integ <sval> (71)
-        on left: 20 21
-        on right: 17 21
+        στα αριστερά: 21 22
+        στα δεξιά: 18 22
     fl <sval> (72)
-        on left: 22 23
-        on right: 18 23
+        στα αριστερά: 23 24
+        στα δεξιά: 19 24
     str <sval> (73)
-        on left: 24 25
-        on right: 19 25
+        στα αριστερά: 25 26
+        στα δεξιά: 20 26
     build_func <sval> (74)
-        on left: 26
-        on right: 2
+        στα αριστερά: 27
+        στα δεξιά: 2
     func <sval> (75)
-        on left: 27 28 29 30
-        on right: 26 42
+        στα αριστερά: 28 29 30 31
+        στα δεξιά: 27 43
     scan_params <sval> (76)
-        on left: 31
-        on right: 27
+        στα αριστερά: 32
+        στα δεξιά: 28
     len_params <sval> (77)
-        on left: 32 33 34
-        on right: 28
+        στα αριστερά: 33 34 35
+        στα δεξιά: 29
     cmp_params <sval> (78)
-        on left: 35 36 37
-        on right: 29 37
+        στα αριστερά: 36 37 38
+        στα δεξιά: 30 38
     print_params <sval> (79)
-        on left: 38 39 40 41 42 43 44
-        on right: 30 44
+        στα αριστερά: 39 40 41 42 43 44 45
+        στα δεξιά: 31 45 88
     decl_func <sval> (80)
-        on left: 45
-        on right: 3
+        στα αριστερά: 46
+        στα δεξιά: 3
     name_func <sval> (81)
-        on left: 46 47
-        on right: 45 47
+        στα αριστερά: 47 48
+        στα δεξιά: 46 48
     params <sval> (82)
-        on left: 48 49
-        on right: 47
+        στα αριστερά: 49 50
+        στα δεξιά: 48
     type_params <sval> (83)
-        on left: 50 51
-        on right: 49 51
+        στα αριστερά: 51 52
+        στα δεξιά: 50 52
     code_func <sval> (84)
-        on left: 52
-        on right: 45
+        στα αριστερά: 53
+        στα δεξιά: 46
     decl_ops <sval> (85)
-        on left: 53 54 55 56
-        on right: 4
+        στα αριστερά: 54 55 56 57
+        στα δεξιά: 4
     sign <sval> (86)
-        on left: 57 58 59 60
-        on right: 59 60 61
+        στα αριστερά: 58 59 60 61
+        στα δεξιά: 60 61 62
     arithm_expr <sval> (87)
-        on left: 61 62 63 64 65 66
-        on right: 53 63 64 65 66
+        στα αριστερά: 62 63 64 65 66 67
+        στα δεξιά: 54 64 65 66 67
     assign <sval> (88)
-        on left: 67
-        on right: 54
+        στα αριστερά: 68
+        στα δεξιά: 55
     val <sval> (89)
-        on left: 68 69 70 71 72
-        on right: 67 72
+        στα αριστερά: 69 70 71 72 73
+        στα δεξιά: 68 73
     cmp_expr <sval> (90)
-        on left: 73 74 75 76 77 78 79 80 81
-        on right: 55 76 77 78 79 80 81
+        στα αριστερά: 74 75 76 77 78 79 80 81 82
+        στα δεξιά: 56 77 78 79 80 81 82 87
     merge_arr <sval> (91)
-        on left: 82
-        on right: 56
+        στα αριστερά: 83
+        στα δεξιά: 57
+    decl_statement <sval> (92)
+        στα αριστερά: 84
+        στα δεξιά: 5
+    if_statement <sval> (93)
+        στα αριστερά: 85 86
+        στα δεξιά: 84
+    condition <sval> (94)
+        στα αριστερά: 87
+        στα δεξιά: 85 86
+    statement <sval> (95)
+        στα αριστερά: 88
+        στα δεξιά: 85 89 90
+    statements <sval> (96)
+        στα αριστερά: 89 90
+        στα δεξιά: 86 90
 
 
-State 0
+Κατάσταση 0
 
     0 $accept: • program $end
 
-    $default  reduce using rule 6 (program)
+    $default  ελάττωση με χρήση του κανόνα 7 (program)
 
-    program  go to state 1
+    program  πήγαινε στην κατάσταση 1
 
 
-State 1
+Κατάσταση 1
 
     0 $accept: program • $end
     1 program: program • decl_var NEWLINE
     2        | program • build_func NEWLINE
     3        | program • decl_func NEWLINE
     4        | program • decl_ops NEWLINE
-    5        | program • NEWLINE
+    5        | program • decl_statement NEWLINE
+    6        | program • NEWLINE
 
-    $end        shift, and go to state 2
-    IDENTIFIER  shift, and go to state 3
-    INTEGER     shift, and go to state 4
-    FLOAT       shift, and go to state 5
-    SDOUBLE     shift, and go to state 6
-    SINT        shift, and go to state 7
-    SFUNC       shift, and go to state 8
-    SLONG       shift, and go to state 9
-    SFLOAT      shift, and go to state 10
-    SSHORT      shift, and go to state 11
-    "+"         shift, and go to state 12
-    "-"         shift, and go to state 13
-    "["         shift, and go to state 14
-    SSCAN       shift, and go to state 15
-    SPRINT      shift, and go to state 16
-    SLEN        shift, and go to state 17
-    SCMP        shift, and go to state 18
-    NEWLINE     shift, and go to state 19
+    $end        ολίσθηση, και μετάβαση στη κατάσταση 2
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 3
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 4
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 5
+    SIF         ολίσθηση, και μετάβαση στη κατάσταση 6
+    SDOUBLE     ολίσθηση, και μετάβαση στη κατάσταση 7
+    SINT        ολίσθηση, και μετάβαση στη κατάσταση 8
+    SFUNC       ολίσθηση, και μετάβαση στη κατάσταση 9
+    SLONG       ολίσθηση, και μετάβαση στη κατάσταση 10
+    SFLOAT      ολίσθηση, και μετάβαση στη κατάσταση 11
+    SSHORT      ολίσθηση, και μετάβαση στη κατάσταση 12
+    "+"         ολίσθηση, και μετάβαση στη κατάσταση 13
+    "-"         ολίσθηση, και μετάβαση στη κατάσταση 14
+    "["         ολίσθηση, και μετάβαση στη κατάσταση 15
+    SSCAN       ολίσθηση, και μετάβαση στη κατάσταση 16
+    SPRINT      ολίσθηση, και μετάβαση στη κατάσταση 17
+    SLEN        ολίσθηση, και μετάβαση στη κατάσταση 18
+    SCMP        ολίσθηση, και μετάβαση στη κατάσταση 19
+    NEWLINE     ολίσθηση, και μετάβαση στη κατάσταση 20
 
-    decl_var      go to state 20
-    type          go to state 21
-    var           go to state 22
-    arr_elements  go to state 23
-    build_func    go to state 24
-    func          go to state 25
-    decl_func     go to state 26
-    name_func     go to state 27
-    decl_ops      go to state 28
-    sign          go to state 29
-    arithm_expr   go to state 30
-    assign        go to state 31
-    cmp_expr      go to state 32
-    merge_arr     go to state 33
+    decl_var        πήγαινε στην κατάσταση 21
+    type            πήγαινε στην κατάσταση 22
+    var             πήγαινε στην κατάσταση 23
+    arr_elements    πήγαινε στην κατάσταση 24
+    build_func      πήγαινε στην κατάσταση 25
+    func            πήγαινε στην κατάσταση 26
+    decl_func       πήγαινε στην κατάσταση 27
+    name_func       πήγαινε στην κατάσταση 28
+    decl_ops        πήγαινε στην κατάσταση 29
+    sign            πήγαινε στην κατάσταση 30
+    arithm_expr     πήγαινε στην κατάσταση 31
+    assign          πήγαινε στην κατάσταση 32
+    cmp_expr        πήγαινε στην κατάσταση 33
+    merge_arr       πήγαινε στην κατάσταση 34
+    decl_statement  πήγαινε στην κατάσταση 35
+    if_statement    πήγαινε στην κατάσταση 36
 
 
-State 2
+Κατάσταση 2
 
     0 $accept: program $end •
 
-    $default  accept
+    $default  αποδοχή
 
 
-State 3
+Κατάσταση 3
 
-   13 var: IDENTIFIER •
-   46 name_func: IDENTIFIER •
-   62 arithm_expr: IDENTIFIER •
-   75 cmp_expr: IDENTIFIER •
+   14 var: IDENTIFIER •
+   47 name_func: IDENTIFIER •
+   63 arithm_expr: IDENTIFIER •
+   76 cmp_expr: IDENTIFIER •
 
-    "+"       reduce using rule 62 (arithm_expr)
-    "-"       reduce using rule 62 (arithm_expr)
-    "*"       reduce using rule 62 (arithm_expr)
-    "/"       reduce using rule 62 (arithm_expr)
-    "="       reduce using rule 13 (var)
-    "{"       reduce using rule 46 (name_func)
-    ","       reduce using rule 13 (var)
-    NEWLINE   reduce using rule 62 (arithm_expr)
-    NEWLINE   [reduce using rule 75 (cmp_expr)]
-    $default  reduce using rule 75 (cmp_expr)
+    "+"       ελάττωση με χρήση του κανόνα 63 (arithm_expr)
+    "-"       ελάττωση με χρήση του κανόνα 63 (arithm_expr)
+    "*"       ελάττωση με χρήση του κανόνα 63 (arithm_expr)
+    "/"       ελάττωση με χρήση του κανόνα 63 (arithm_expr)
+    "="       ελάττωση με χρήση του κανόνα 14 (var)
+    "{"       ελάττωση με χρήση του κανόνα 47 (name_func)
+    ","       ελάττωση με χρήση του κανόνα 14 (var)
+    NEWLINE   ελάττωση με χρήση του κανόνα 63 (arithm_expr)
+    NEWLINE   [ελάττωση με χρήση του κανόνα 76 (cmp_expr)]
+    $default  ελάττωση με χρήση του κανόνα 76 (cmp_expr)
 
 
-State 4
+Κατάσταση 4
 
-   57 sign: INTEGER •
-   73 cmp_expr: INTEGER •
+   58 sign: INTEGER •
+   74 cmp_expr: INTEGER •
 
-    "+"       reduce using rule 57 (sign)
-    "-"       reduce using rule 57 (sign)
-    "*"       reduce using rule 57 (sign)
-    "/"       reduce using rule 57 (sign)
-    NEWLINE   reduce using rule 57 (sign)
-    NEWLINE   [reduce using rule 73 (cmp_expr)]
-    $default  reduce using rule 73 (cmp_expr)
+    "+"       ελάττωση με χρήση του κανόνα 58 (sign)
+    "-"       ελάττωση με χρήση του κανόνα 58 (sign)
+    "*"       ελάττωση με χρήση του κανόνα 58 (sign)
+    "/"       ελάττωση με χρήση του κανόνα 58 (sign)
+    NEWLINE   ελάττωση με χρήση του κανόνα 58 (sign)
+    NEWLINE   [ελάττωση με χρήση του κανόνα 74 (cmp_expr)]
+    $default  ελάττωση με χρήση του κανόνα 74 (cmp_expr)
 
 
-State 5
+Κατάσταση 5
 
-   58 sign: FLOAT •
-   74 cmp_expr: FLOAT •
+   59 sign: FLOAT •
+   75 cmp_expr: FLOAT •
 
-    "+"       reduce using rule 58 (sign)
-    "-"       reduce using rule 58 (sign)
-    "*"       reduce using rule 58 (sign)
-    "/"       reduce using rule 58 (sign)
-    NEWLINE   reduce using rule 58 (sign)
-    NEWLINE   [reduce using rule 74 (cmp_expr)]
-    $default  reduce using rule 74 (cmp_expr)
+    "+"       ελάττωση με χρήση του κανόνα 59 (sign)
+    "-"       ελάττωση με χρήση του κανόνα 59 (sign)
+    "*"       ελάττωση με χρήση του κανόνα 59 (sign)
+    "/"       ελάττωση με χρήση του κανόνα 59 (sign)
+    NEWLINE   ελάττωση με χρήση του κανόνα 59 (sign)
+    NEWLINE   [ελάττωση με χρήση του κανόνα 75 (cmp_expr)]
+    $default  ελάττωση με χρήση του κανόνα 75 (cmp_expr)
 
 
-State 6
+Κατάσταση 6
 
-   10 type: SDOUBLE •
+   85 if_statement: SIF • "(" condition ")" statement
+   86             | SIF • "(" condition ")" "{" statements "}"
 
-    $default  reduce using rule 10 (type)
+    "("  ολίσθηση, και μετάβαση στη κατάσταση 37
 
 
-State 7
+Κατάσταση 7
 
-    8 type: SINT •
+   11 type: SDOUBLE •
 
-    $default  reduce using rule 8 (type)
+    $default  ελάττωση με χρήση του κανόνα 11 (type)
 
 
-State 8
+Κατάσταση 8
 
-   47 name_func: SFUNC • name_func params NEWLINE
+    9 type: SINT •
 
-    IDENTIFIER  shift, and go to state 34
-    SFUNC       shift, and go to state 8
+    $default  ελάττωση με χρήση του κανόνα 9 (type)
 
-    name_func  go to state 35
 
+Κατάσταση 9
 
-State 9
+   48 name_func: SFUNC • name_func params NEWLINE
 
-   12 type: SLONG •
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 38
+    SFUNC       ολίσθηση, και μετάβαση στη κατάσταση 9
 
-    $default  reduce using rule 12 (type)
+    name_func  πήγαινε στην κατάσταση 39
 
 
-State 10
+Κατάσταση 10
 
-    9 type: SFLOAT •
+   13 type: SLONG •
 
-    $default  reduce using rule 9 (type)
+    $default  ελάττωση με χρήση του κανόνα 13 (type)
 
 
-State 11
+Κατάσταση 11
 
-   11 type: SSHORT •
+   10 type: SFLOAT •
 
-    $default  reduce using rule 11 (type)
+    $default  ελάττωση με χρήση του κανόνα 10 (type)
 
 
-State 12
+Κατάσταση 12
 
-   59 sign: "+" • sign
+   12 type: SSHORT •
 
-    INTEGER  shift, and go to state 36
-    FLOAT    shift, and go to state 37
-    "+"      shift, and go to state 12
-    "-"      shift, and go to state 13
+    $default  ελάττωση με χρήση του κανόνα 12 (type)
 
-    sign  go to state 38
 
+Κατάσταση 13
 
-State 13
+   60 sign: "+" • sign
 
-   60 sign: "-" • sign
+    INTEGER  ολίσθηση, και μετάβαση στη κατάσταση 40
+    FLOAT    ολίσθηση, και μετάβαση στη κατάσταση 41
+    "+"      ολίσθηση, και μετάβαση στη κατάσταση 13
+    "-"      ολίσθηση, και μετάβαση στη κατάσταση 14
 
-    INTEGER  shift, and go to state 36
-    FLOAT    shift, and go to state 37
-    "+"      shift, and go to state 12
-    "-"      shift, and go to state 13
+    sign  πήγαινε στην κατάσταση 42
 
-    sign  go to state 39
 
+Κατάσταση 14
 
-State 14
+   61 sign: "-" • sign
 
-   16 arr_elements: "[" • "]"
-   17             | "[" • integ "]"
-   18             | "[" • fl "]"
-   19             | "[" • str "]"
+    INTEGER  ολίσθηση, και μετάβαση στη κατάσταση 40
+    FLOAT    ολίσθηση, και μετάβαση στη κατάσταση 41
+    "+"      ολίσθηση, και μετάβαση στη κατάσταση 13
+    "-"      ολίσθηση, και μετάβαση στη κατάσταση 14
 
-    STRING   shift, and go to state 40
-    INTEGER  shift, and go to state 41
-    FLOAT    shift, and go to state 42
-    "]"      shift, and go to state 43
+    sign  πήγαινε στην κατάσταση 43
 
-    integ  go to state 44
-    fl     go to state 45
-    str    go to state 46
 
+Κατάσταση 15
 
-State 15
+   17 arr_elements: "[" • "]"
+   18             | "[" • integ "]"
+   19             | "[" • fl "]"
+   20             | "[" • str "]"
 
-   27 func: SSCAN • "(" scan_params ")"
+    STRING   ολίσθηση, και μετάβαση στη κατάσταση 44
+    INTEGER  ολίσθηση, και μετάβαση στη κατάσταση 45
+    FLOAT    ολίσθηση, και μετάβαση στη κατάσταση 46
+    "]"      ολίσθηση, και μετάβαση στη κατάσταση 47
 
-    "("  shift, and go to state 47
+    integ  πήγαινε στην κατάσταση 48
+    fl     πήγαινε στην κατάσταση 49
+    str    πήγαινε στην κατάσταση 50
 
 
-State 16
+Κατάσταση 16
 
-   30 func: SPRINT • "(" print_params ")"
+   28 func: SSCAN • "(" scan_params ")"
 
-    "("  shift, and go to state 48
+    "("  ολίσθηση, και μετάβαση στη κατάσταση 51
 
 
-State 17
+Κατάσταση 17
 
-   28 func: SLEN • "(" len_params ")"
+   31 func: SPRINT • "(" print_params ")"
 
-    "("  shift, and go to state 49
+    "("  ολίσθηση, και μετάβαση στη κατάσταση 52
 
 
-State 18
+Κατάσταση 18
 
-   29 func: SCMP • "(" cmp_params ")"
+   29 func: SLEN • "(" len_params ")"
 
-    "("  shift, and go to state 50
+    "("  ολίσθηση, και μετάβαση στη κατάσταση 53
 
 
-State 19
+Κατάσταση 19
 
-    5 program: program NEWLINE •
+   30 func: SCMP • "(" cmp_params ")"
 
-    $default  reduce using rule 5 (program)
+    "("  ολίσθηση, και μετάβαση στη κατάσταση 54
 
 
-State 20
+Κατάσταση 20
+
+    6 program: program NEWLINE •
+
+    $default  ελάττωση με χρήση του κανόνα 6 (program)
+
+
+Κατάσταση 21
 
     1 program: program decl_var • NEWLINE
 
-    NEWLINE  shift, and go to state 51
+    NEWLINE  ολίσθηση, και μετάβαση στη κατάσταση 55
 
 
-State 21
+Κατάσταση 22
 
-    7 decl_var: type • var ";"
+    8 decl_var: type • var ";"
 
-    IDENTIFIER  shift, and go to state 52
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 56
 
-    var  go to state 53
-
-
-State 22
-
-   14 var: var • "," var
-   67 assign: var • "=" val ";"
-
-    "="  shift, and go to state 54
-    ","  shift, and go to state 55
+    var  πήγαινε στην κατάσταση 57
 
 
-State 23
+Κατάσταση 23
 
-   82 merge_arr: arr_elements • "+" arr_elements
+   15 var: var • "," var
+   68 assign: var • "=" val ";"
 
-    "+"  shift, and go to state 56
+    "="  ολίσθηση, και μετάβαση στη κατάσταση 58
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 59
 
 
-State 24
+Κατάσταση 24
+
+   83 merge_arr: arr_elements • "+" arr_elements
+
+    "+"  ολίσθηση, και μετάβαση στη κατάσταση 60
+
+
+Κατάσταση 25
 
     2 program: program build_func • NEWLINE
 
-    NEWLINE  shift, and go to state 57
+    NEWLINE  ολίσθηση, και μετάβαση στη κατάσταση 61
 
 
-State 25
+Κατάσταση 26
 
-   26 build_func: func • ";"
+   27 build_func: func • ";"
 
-    ";"  shift, and go to state 58
+    ";"  ολίσθηση, και μετάβαση στη κατάσταση 62
 
 
-State 26
+Κατάσταση 27
 
     3 program: program decl_func • NEWLINE
 
-    NEWLINE  shift, and go to state 59
+    NEWLINE  ολίσθηση, και μετάβαση στη κατάσταση 63
 
 
-State 27
+Κατάσταση 28
 
-   45 decl_func: name_func • code_func
+   46 decl_func: name_func • code_func
 
-    "{"  shift, and go to state 60
+    "{"  ολίσθηση, και μετάβαση στη κατάσταση 64
 
-    code_func  go to state 61
+    code_func  πήγαινε στην κατάσταση 65
 
 
-State 28
+Κατάσταση 29
 
     4 program: program decl_ops • NEWLINE
 
-    NEWLINE  shift, and go to state 62
+    NEWLINE  ολίσθηση, και μετάβαση στη κατάσταση 66
 
 
-State 29
+Κατάσταση 30
 
-   61 arithm_expr: sign •
+   62 arithm_expr: sign •
 
-    $default  reduce using rule 61 (arithm_expr)
+    $default  ελάττωση με χρήση του κανόνα 62 (arithm_expr)
 
 
-State 30
+Κατάσταση 31
 
-   53 decl_ops: arithm_expr •
-   63 arithm_expr: arithm_expr • "+" arithm_expr
-   64            | arithm_expr • "-" arithm_expr
-   65            | arithm_expr • "*" arithm_expr
-   66            | arithm_expr • "/" arithm_expr
+   54 decl_ops: arithm_expr •
+   64 arithm_expr: arithm_expr • "+" arithm_expr
+   65            | arithm_expr • "-" arithm_expr
+   66            | arithm_expr • "*" arithm_expr
+   67            | arithm_expr • "/" arithm_expr
 
-    "+"  shift, and go to state 63
-    "-"  shift, and go to state 64
-    "*"  shift, and go to state 65
-    "/"  shift, and go to state 66
+    "+"  ολίσθηση, και μετάβαση στη κατάσταση 67
+    "-"  ολίσθηση, και μετάβαση στη κατάσταση 68
+    "*"  ολίσθηση, και μετάβαση στη κατάσταση 69
+    "/"  ολίσθηση, και μετάβαση στη κατάσταση 70
 
-    $default  reduce using rule 53 (decl_ops)
+    $default  ελάττωση με χρήση του κανόνα 54 (decl_ops)
 
 
-State 31
+Κατάσταση 32
 
-   54 decl_ops: assign •
+   55 decl_ops: assign •
 
-    $default  reduce using rule 54 (decl_ops)
+    $default  ελάττωση με χρήση του κανόνα 55 (decl_ops)
 
 
-State 32
+Κατάσταση 33
 
-   55 decl_ops: cmp_expr •
-   76 cmp_expr: cmp_expr • ">" cmp_expr
-   77         | cmp_expr • "<" cmp_expr
-   78         | cmp_expr • "<=" cmp_expr
-   79         | cmp_expr • ">=" cmp_expr
-   80         | cmp_expr • "==" cmp_expr
-   81         | cmp_expr • "!=" cmp_expr
+   56 decl_ops: cmp_expr •
+   77 cmp_expr: cmp_expr • ">" cmp_expr
+   78         | cmp_expr • "<" cmp_expr
+   79         | cmp_expr • "<=" cmp_expr
+   80         | cmp_expr • ">=" cmp_expr
+   81         | cmp_expr • "==" cmp_expr
+   82         | cmp_expr • "!=" cmp_expr
 
-    "<"   shift, and go to state 67
-    ">"   shift, and go to state 68
-    "<="  shift, and go to state 69
-    ">="  shift, and go to state 70
-    "=="  shift, and go to state 71
-    "!="  shift, and go to state 72
+    "<"   ολίσθηση, και μετάβαση στη κατάσταση 71
+    ">"   ολίσθηση, και μετάβαση στη κατάσταση 72
+    "<="  ολίσθηση, και μετάβαση στη κατάσταση 73
+    ">="  ολίσθηση, και μετάβαση στη κατάσταση 74
+    "=="  ολίσθηση, και μετάβαση στη κατάσταση 75
+    "!="  ολίσθηση, και μετάβαση στη κατάσταση 76
 
-    $default  reduce using rule 55 (decl_ops)
+    $default  ελάττωση με χρήση του κανόνα 56 (decl_ops)
 
 
-State 33
+Κατάσταση 34
 
-   56 decl_ops: merge_arr •
+   57 decl_ops: merge_arr •
 
-    $default  reduce using rule 56 (decl_ops)
+    $default  ελάττωση με χρήση του κανόνα 57 (decl_ops)
 
 
-State 34
+Κατάσταση 35
 
-   46 name_func: IDENTIFIER •
+    5 program: program decl_statement • NEWLINE
 
-    $default  reduce using rule 46 (name_func)
+    NEWLINE  ολίσθηση, και μετάβαση στη κατάσταση 77
 
 
-State 35
+Κατάσταση 36
 
-   47 name_func: SFUNC name_func • params NEWLINE
+   84 decl_statement: if_statement •
 
-    "("  shift, and go to state 73
+    $default  ελάττωση με χρήση του κανόνα 84 (decl_statement)
 
-    params  go to state 74
 
+Κατάσταση 37
 
-State 36
+   85 if_statement: SIF "(" • condition ")" statement
+   86             | SIF "(" • condition ")" "{" statements "}"
 
-   57 sign: INTEGER •
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 78
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 79
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 80
 
-    $default  reduce using rule 57 (sign)
+    cmp_expr   πήγαινε στην κατάσταση 81
+    condition  πήγαινε στην κατάσταση 82
 
 
-State 37
+Κατάσταση 38
 
-   58 sign: FLOAT •
+   47 name_func: IDENTIFIER •
 
-    $default  reduce using rule 58 (sign)
+    $default  ελάττωση με χρήση του κανόνα 47 (name_func)
 
 
-State 38
+Κατάσταση 39
 
-   59 sign: "+" sign •
+   48 name_func: SFUNC name_func • params NEWLINE
 
-    $default  reduce using rule 59 (sign)
+    "("  ολίσθηση, και μετάβαση στη κατάσταση 83
 
+    params  πήγαινε στην κατάσταση 84
 
-State 39
 
-   60 sign: "-" sign •
+Κατάσταση 40
 
-    $default  reduce using rule 60 (sign)
+   58 sign: INTEGER •
 
+    $default  ελάττωση με χρήση του κανόνα 58 (sign)
 
-State 40
 
-   24 str: STRING •
+Κατάσταση 41
 
-    $default  reduce using rule 24 (str)
+   59 sign: FLOAT •
 
+    $default  ελάττωση με χρήση του κανόνα 59 (sign)
 
-State 41
 
-   20 integ: INTEGER •
+Κατάσταση 42
 
-    $default  reduce using rule 20 (integ)
+   60 sign: "+" sign •
 
+    $default  ελάττωση με χρήση του κανόνα 60 (sign)
 
-State 42
 
-   22 fl: FLOAT •
+Κατάσταση 43
 
-    $default  reduce using rule 22 (fl)
+   61 sign: "-" sign •
 
+    $default  ελάττωση με χρήση του κανόνα 61 (sign)
 
-State 43
 
-   16 arr_elements: "[" "]" •
+Κατάσταση 44
 
-    $default  reduce using rule 16 (arr_elements)
+   25 str: STRING •
 
+    $default  ελάττωση με χρήση του κανόνα 25 (str)
 
-State 44
 
-   17 arr_elements: "[" integ • "]"
-   21 integ: integ • "," integ
+Κατάσταση 45
 
-    "]"  shift, and go to state 75
-    ","  shift, and go to state 76
+   21 integ: INTEGER •
 
+    $default  ελάττωση με χρήση του κανόνα 21 (integ)
 
-State 45
 
-   18 arr_elements: "[" fl • "]"
-   23 fl: fl • "," fl
+Κατάσταση 46
 
-    "]"  shift, and go to state 77
-    ","  shift, and go to state 78
+   23 fl: FLOAT •
 
+    $default  ελάττωση με χρήση του κανόνα 23 (fl)
 
-State 46
 
-   19 arr_elements: "[" str • "]"
-   25 str: str • "," str
+Κατάσταση 47
 
-    "]"  shift, and go to state 79
-    ","  shift, and go to state 80
+   17 arr_elements: "[" "]" •
 
+    $default  ελάττωση με χρήση του κανόνα 17 (arr_elements)
 
-State 47
 
-   27 func: SSCAN "(" • scan_params ")"
+Κατάσταση 48
 
-    IDENTIFIER  shift, and go to state 81
+   18 arr_elements: "[" integ • "]"
+   22 integ: integ • "," integ
 
-    scan_params  go to state 82
+    "]"  ολίσθηση, και μετάβαση στη κατάσταση 85
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 86
 
 
-State 48
+Κατάσταση 49
 
-   30 func: SPRINT "(" • print_params ")"
+   19 arr_elements: "[" fl • "]"
+   24 fl: fl • "," fl
 
-    IDENTIFIER  shift, and go to state 83
-    STRING      shift, and go to state 84
-    INTEGER     shift, and go to state 85
-    FLOAT       shift, and go to state 86
-    SSCAN       shift, and go to state 15
-    SPRINT      shift, and go to state 16
-    SLEN        shift, and go to state 17
-    SCMP        shift, and go to state 18
+    "]"  ολίσθηση, και μετάβαση στη κατάσταση 87
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 88
 
-    pos_elem      go to state 87
-    func          go to state 88
-    print_params  go to state 89
 
+Κατάσταση 50
 
-State 49
+   20 arr_elements: "[" str • "]"
+   26 str: str • "," str
 
-   28 func: SLEN "(" • len_params ")"
+    "]"  ολίσθηση, και μετάβαση στη κατάσταση 89
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 90
 
-    IDENTIFIER  shift, and go to state 90
-    STRING      shift, and go to state 91
-    "["         shift, and go to state 14
 
-    arr_elements  go to state 92
-    len_params    go to state 93
+Κατάσταση 51
 
+   28 func: SSCAN "(" • scan_params ")"
 
-State 50
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 91
 
-   29 func: SCMP "(" • cmp_params ")"
+    scan_params  πήγαινε στην κατάσταση 92
 
-    IDENTIFIER  shift, and go to state 94
-    STRING      shift, and go to state 95
 
-    cmp_params  go to state 96
+Κατάσταση 52
 
+   31 func: SPRINT "(" • print_params ")"
 
-State 51
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 93
+    STRING      ολίσθηση, και μετάβαση στη κατάσταση 94
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 95
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 96
+    SSCAN       ολίσθηση, και μετάβαση στη κατάσταση 16
+    SPRINT      ολίσθηση, και μετάβαση στη κατάσταση 17
+    SLEN        ολίσθηση, και μετάβαση στη κατάσταση 18
+    SCMP        ολίσθηση, και μετάβαση στη κατάσταση 19
+
+    pos_elem      πήγαινε στην κατάσταση 97
+    func          πήγαινε στην κατάσταση 98
+    print_params  πήγαινε στην κατάσταση 99
+
+
+Κατάσταση 53
+
+   29 func: SLEN "(" • len_params ")"
+
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 100
+    STRING      ολίσθηση, και μετάβαση στη κατάσταση 101
+    "["         ολίσθηση, και μετάβαση στη κατάσταση 15
+
+    arr_elements  πήγαινε στην κατάσταση 102
+    len_params    πήγαινε στην κατάσταση 103
+
+
+Κατάσταση 54
+
+   30 func: SCMP "(" • cmp_params ")"
+
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 104
+    STRING      ολίσθηση, και μετάβαση στη κατάσταση 105
+
+    cmp_params  πήγαινε στην κατάσταση 106
+
+
+Κατάσταση 55
 
     1 program: program decl_var NEWLINE •
 
-    $default  reduce using rule 1 (program)
+    $default  ελάττωση με χρήση του κανόνα 1 (program)
 
 
-State 52
+Κατάσταση 56
 
-   13 var: IDENTIFIER •
+   14 var: IDENTIFIER •
 
-    $default  reduce using rule 13 (var)
-
-
-State 53
-
-    7 decl_var: type var • ";"
-   14 var: var • "," var
-
-    ","  shift, and go to state 55
-    ";"  shift, and go to state 97
+    $default  ελάττωση με χρήση του κανόνα 14 (var)
 
 
-State 54
+Κατάσταση 57
 
-   67 assign: var "=" • val ";"
+    8 decl_var: type var • ";"
+   15 var: var • "," var
 
-    STRING   shift, and go to state 98
-    INTEGER  shift, and go to state 99
-    FLOAT    shift, and go to state 100
-    "["      shift, and go to state 14
-
-    arr_elements  go to state 101
-    val           go to state 102
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 59
+    ";"  ολίσθηση, και μετάβαση στη κατάσταση 107
 
 
-State 55
+Κατάσταση 58
 
-   14 var: var "," • var
+   68 assign: var "=" • val ";"
 
-    IDENTIFIER  shift, and go to state 52
+    STRING   ολίσθηση, και μετάβαση στη κατάσταση 108
+    INTEGER  ολίσθηση, και μετάβαση στη κατάσταση 109
+    FLOAT    ολίσθηση, και μετάβαση στη κατάσταση 110
+    "["      ολίσθηση, και μετάβαση στη κατάσταση 15
 
-    var  go to state 103
-
-
-State 56
-
-   82 merge_arr: arr_elements "+" • arr_elements
-
-    "["  shift, and go to state 14
-
-    arr_elements  go to state 104
+    arr_elements  πήγαινε στην κατάσταση 111
+    val           πήγαινε στην κατάσταση 112
 
 
-State 57
+Κατάσταση 59
+
+   15 var: var "," • var
+
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 56
+
+    var  πήγαινε στην κατάσταση 113
+
+
+Κατάσταση 60
+
+   83 merge_arr: arr_elements "+" • arr_elements
+
+    "["  ολίσθηση, και μετάβαση στη κατάσταση 15
+
+    arr_elements  πήγαινε στην κατάσταση 114
+
+
+Κατάσταση 61
 
     2 program: program build_func NEWLINE •
 
-    $default  reduce using rule 2 (program)
+    $default  ελάττωση με χρήση του κανόνα 2 (program)
 
 
-State 58
+Κατάσταση 62
 
-   26 build_func: func ";" •
+   27 build_func: func ";" •
 
-    $default  reduce using rule 26 (build_func)
+    $default  ελάττωση με χρήση του κανόνα 27 (build_func)
 
 
-State 59
+Κατάσταση 63
 
     3 program: program decl_func NEWLINE •
 
-    $default  reduce using rule 3 (program)
+    $default  ελάττωση με χρήση του κανόνα 3 (program)
 
 
-State 60
+Κατάσταση 64
 
-   52 code_func: "{" • NEWLINE "}"
+   53 code_func: "{" • NEWLINE "}"
 
-    NEWLINE  shift, and go to state 105
-
-
-State 61
-
-   45 decl_func: name_func code_func •
-
-    $default  reduce using rule 45 (decl_func)
+    NEWLINE  ολίσθηση, και μετάβαση στη κατάσταση 115
 
 
-State 62
+Κατάσταση 65
+
+   46 decl_func: name_func code_func •
+
+    $default  ελάττωση με χρήση του κανόνα 46 (decl_func)
+
+
+Κατάσταση 66
 
     4 program: program decl_ops NEWLINE •
 
-    $default  reduce using rule 4 (program)
+    $default  ελάττωση με χρήση του κανόνα 4 (program)
 
 
-State 63
+Κατάσταση 67
 
-   63 arithm_expr: arithm_expr "+" • arithm_expr
+   64 arithm_expr: arithm_expr "+" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 106
-    INTEGER     shift, and go to state 36
-    FLOAT       shift, and go to state 37
-    "+"         shift, and go to state 12
-    "-"         shift, and go to state 13
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 116
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 40
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 41
+    "+"         ολίσθηση, και μετάβαση στη κατάσταση 13
+    "-"         ολίσθηση, και μετάβαση στη κατάσταση 14
 
-    sign         go to state 29
-    arithm_expr  go to state 107
+    sign         πήγαινε στην κατάσταση 30
+    arithm_expr  πήγαινε στην κατάσταση 117
 
 
-State 64
+Κατάσταση 68
 
-   64 arithm_expr: arithm_expr "-" • arithm_expr
+   65 arithm_expr: arithm_expr "-" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 106
-    INTEGER     shift, and go to state 36
-    FLOAT       shift, and go to state 37
-    "+"         shift, and go to state 12
-    "-"         shift, and go to state 13
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 116
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 40
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 41
+    "+"         ολίσθηση, και μετάβαση στη κατάσταση 13
+    "-"         ολίσθηση, και μετάβαση στη κατάσταση 14
 
-    sign         go to state 29
-    arithm_expr  go to state 108
+    sign         πήγαινε στην κατάσταση 30
+    arithm_expr  πήγαινε στην κατάσταση 118
 
 
-State 65
+Κατάσταση 69
 
-   65 arithm_expr: arithm_expr "*" • arithm_expr
+   66 arithm_expr: arithm_expr "*" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 106
-    INTEGER     shift, and go to state 36
-    FLOAT       shift, and go to state 37
-    "+"         shift, and go to state 12
-    "-"         shift, and go to state 13
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 116
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 40
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 41
+    "+"         ολίσθηση, και μετάβαση στη κατάσταση 13
+    "-"         ολίσθηση, και μετάβαση στη κατάσταση 14
 
-    sign         go to state 29
-    arithm_expr  go to state 109
+    sign         πήγαινε στην κατάσταση 30
+    arithm_expr  πήγαινε στην κατάσταση 119
 
 
-State 66
+Κατάσταση 70
 
-   66 arithm_expr: arithm_expr "/" • arithm_expr
+   67 arithm_expr: arithm_expr "/" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 106
-    INTEGER     shift, and go to state 36
-    FLOAT       shift, and go to state 37
-    "+"         shift, and go to state 12
-    "-"         shift, and go to state 13
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 116
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 40
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 41
+    "+"         ολίσθηση, και μετάβαση στη κατάσταση 13
+    "-"         ολίσθηση, και μετάβαση στη κατάσταση 14
 
-    sign         go to state 29
-    arithm_expr  go to state 110
+    sign         πήγαινε στην κατάσταση 30
+    arithm_expr  πήγαινε στην κατάσταση 120
 
 
-State 67
+Κατάσταση 71
 
-   77 cmp_expr: cmp_expr "<" • cmp_expr
+   78 cmp_expr: cmp_expr "<" • cmp_expr
 
-    IDENTIFIER  shift, and go to state 111
-    INTEGER     shift, and go to state 112
-    FLOAT       shift, and go to state 113
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 78
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 79
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 80
 
-    cmp_expr  go to state 114
+    cmp_expr  πήγαινε στην κατάσταση 121
 
 
-State 68
+Κατάσταση 72
 
-   76 cmp_expr: cmp_expr ">" • cmp_expr
+   77 cmp_expr: cmp_expr ">" • cmp_expr
 
-    IDENTIFIER  shift, and go to state 111
-    INTEGER     shift, and go to state 112
-    FLOAT       shift, and go to state 113
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 78
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 79
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 80
 
-    cmp_expr  go to state 115
+    cmp_expr  πήγαινε στην κατάσταση 122
 
 
-State 69
+Κατάσταση 73
 
-   78 cmp_expr: cmp_expr "<=" • cmp_expr
+   79 cmp_expr: cmp_expr "<=" • cmp_expr
 
-    IDENTIFIER  shift, and go to state 111
-    INTEGER     shift, and go to state 112
-    FLOAT       shift, and go to state 113
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 78
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 79
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 80
 
-    cmp_expr  go to state 116
+    cmp_expr  πήγαινε στην κατάσταση 123
 
 
-State 70
+Κατάσταση 74
 
-   79 cmp_expr: cmp_expr ">=" • cmp_expr
+   80 cmp_expr: cmp_expr ">=" • cmp_expr
 
-    IDENTIFIER  shift, and go to state 111
-    INTEGER     shift, and go to state 112
-    FLOAT       shift, and go to state 113
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 78
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 79
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 80
 
-    cmp_expr  go to state 117
+    cmp_expr  πήγαινε στην κατάσταση 124
 
 
-State 71
+Κατάσταση 75
 
-   80 cmp_expr: cmp_expr "==" • cmp_expr
+   81 cmp_expr: cmp_expr "==" • cmp_expr
 
-    IDENTIFIER  shift, and go to state 111
-    INTEGER     shift, and go to state 112
-    FLOAT       shift, and go to state 113
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 78
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 79
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 80
 
-    cmp_expr  go to state 118
+    cmp_expr  πήγαινε στην κατάσταση 125
 
 
-State 72
+Κατάσταση 76
 
-   81 cmp_expr: cmp_expr "!=" • cmp_expr
+   82 cmp_expr: cmp_expr "!=" • cmp_expr
 
-    IDENTIFIER  shift, and go to state 111
-    INTEGER     shift, and go to state 112
-    FLOAT       shift, and go to state 113
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 78
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 79
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 80
 
-    cmp_expr  go to state 119
+    cmp_expr  πήγαινε στην κατάσταση 126
 
 
-State 73
+Κατάσταση 77
 
-   48 params: "(" • ")"
-   49       | "(" • type_params ")"
+    5 program: program decl_statement NEWLINE •
 
-    SDOUBLE  shift, and go to state 6
-    SINT     shift, and go to state 7
-    SLONG    shift, and go to state 9
-    SFLOAT   shift, and go to state 10
-    SSHORT   shift, and go to state 11
-    ")"      shift, and go to state 120
+    $default  ελάττωση με χρήση του κανόνα 5 (program)
 
-    type         go to state 121
-    type_params  go to state 122
 
+Κατάσταση 78
 
-State 74
+   76 cmp_expr: IDENTIFIER •
 
-   47 name_func: SFUNC name_func params • NEWLINE
+    $default  ελάττωση με χρήση του κανόνα 76 (cmp_expr)
 
-    NEWLINE  shift, and go to state 123
 
+Κατάσταση 79
 
-State 75
+   74 cmp_expr: INTEGER •
 
-   17 arr_elements: "[" integ "]" •
+    $default  ελάττωση με χρήση του κανόνα 74 (cmp_expr)
 
-    $default  reduce using rule 17 (arr_elements)
 
+Κατάσταση 80
 
-State 76
+   75 cmp_expr: FLOAT •
 
-   21 integ: integ "," • integ
+    $default  ελάττωση με χρήση του κανόνα 75 (cmp_expr)
 
-    INTEGER  shift, and go to state 41
 
-    integ  go to state 124
+Κατάσταση 81
 
+   77 cmp_expr: cmp_expr • ">" cmp_expr
+   78         | cmp_expr • "<" cmp_expr
+   79         | cmp_expr • "<=" cmp_expr
+   80         | cmp_expr • ">=" cmp_expr
+   81         | cmp_expr • "==" cmp_expr
+   82         | cmp_expr • "!=" cmp_expr
+   87 condition: cmp_expr •
 
-State 77
+    "<"   ολίσθηση, και μετάβαση στη κατάσταση 71
+    ">"   ολίσθηση, και μετάβαση στη κατάσταση 72
+    "<="  ολίσθηση, και μετάβαση στη κατάσταση 73
+    ">="  ολίσθηση, και μετάβαση στη κατάσταση 74
+    "=="  ολίσθηση, και μετάβαση στη κατάσταση 75
+    "!="  ολίσθηση, και μετάβαση στη κατάσταση 76
 
-   18 arr_elements: "[" fl "]" •
+    $default  ελάττωση με χρήση του κανόνα 87 (condition)
 
-    $default  reduce using rule 18 (arr_elements)
 
+Κατάσταση 82
 
-State 78
+   85 if_statement: SIF "(" condition • ")" statement
+   86             | SIF "(" condition • ")" "{" statements "}"
 
-   23 fl: fl "," • fl
+    ")"  ολίσθηση, και μετάβαση στη κατάσταση 127
 
-    FLOAT  shift, and go to state 42
 
-    fl  go to state 125
+Κατάσταση 83
 
+   49 params: "(" • ")"
+   50       | "(" • type_params ")"
 
-State 79
+    SDOUBLE  ολίσθηση, και μετάβαση στη κατάσταση 7
+    SINT     ολίσθηση, και μετάβαση στη κατάσταση 8
+    SLONG    ολίσθηση, και μετάβαση στη κατάσταση 10
+    SFLOAT   ολίσθηση, και μετάβαση στη κατάσταση 11
+    SSHORT   ολίσθηση, και μετάβαση στη κατάσταση 12
+    ")"      ολίσθηση, και μετάβαση στη κατάσταση 128
 
-   19 arr_elements: "[" str "]" •
+    type         πήγαινε στην κατάσταση 129
+    type_params  πήγαινε στην κατάσταση 130
 
-    $default  reduce using rule 19 (arr_elements)
 
+Κατάσταση 84
 
-State 80
+   48 name_func: SFUNC name_func params • NEWLINE
 
-   25 str: str "," • str
+    NEWLINE  ολίσθηση, και μετάβαση στη κατάσταση 131
 
-    STRING  shift, and go to state 40
 
-    str  go to state 126
+Κατάσταση 85
 
+   18 arr_elements: "[" integ "]" •
 
-State 81
+    $default  ελάττωση με χρήση του κανόνα 18 (arr_elements)
 
-   31 scan_params: IDENTIFIER •
 
-    $default  reduce using rule 31 (scan_params)
+Κατάσταση 86
 
+   22 integ: integ "," • integ
 
-State 82
+    INTEGER  ολίσθηση, και μετάβαση στη κατάσταση 45
 
-   27 func: SSCAN "(" scan_params • ")"
+    integ  πήγαινε στην κατάσταση 132
 
-    ")"  shift, and go to state 127
 
+Κατάσταση 87
 
-State 83
+   19 arr_elements: "[" fl "]" •
 
-   15 pos_elem: IDENTIFIER • "[" INTEGER "]"
-   39 print_params: IDENTIFIER •
+    $default  ελάττωση με χρήση του κανόνα 19 (arr_elements)
 
-    "["  shift, and go to state 128
 
-    $default  reduce using rule 39 (print_params)
+Κατάσταση 88
 
+   24 fl: fl "," • fl
 
-State 84
+    FLOAT  ολίσθηση, και μετάβαση στη κατάσταση 46
 
-   38 print_params: STRING •
+    fl  πήγαινε στην κατάσταση 133
 
-    $default  reduce using rule 38 (print_params)
 
+Κατάσταση 89
 
-State 85
+   20 arr_elements: "[" str "]" •
 
-   40 print_params: INTEGER •
+    $default  ελάττωση με χρήση του κανόνα 20 (arr_elements)
 
-    $default  reduce using rule 40 (print_params)
 
+Κατάσταση 90
 
-State 86
+   26 str: str "," • str
 
-   41 print_params: FLOAT •
+    STRING  ολίσθηση, και μετάβαση στη κατάσταση 44
 
-    $default  reduce using rule 41 (print_params)
+    str  πήγαινε στην κατάσταση 134
 
 
-State 87
+Κατάσταση 91
 
-   43 print_params: pos_elem •
+   32 scan_params: IDENTIFIER •
 
-    $default  reduce using rule 43 (print_params)
+    $default  ελάττωση με χρήση του κανόνα 32 (scan_params)
 
 
-State 88
+Κατάσταση 92
 
-   42 print_params: func •
+   28 func: SSCAN "(" scan_params • ")"
 
-    $default  reduce using rule 42 (print_params)
+    ")"  ολίσθηση, και μετάβαση στη κατάσταση 135
 
 
-State 89
+Κατάσταση 93
 
-   30 func: SPRINT "(" print_params • ")"
-   44 print_params: print_params • "," print_params
+   16 pos_elem: IDENTIFIER • "[" INTEGER "]"
+   40 print_params: IDENTIFIER •
 
-    ")"  shift, and go to state 129
-    ","  shift, and go to state 130
+    "["  ολίσθηση, και μετάβαση στη κατάσταση 136
 
+    $default  ελάττωση με χρήση του κανόνα 40 (print_params)
 
-State 90
 
-   34 len_params: IDENTIFIER •
+Κατάσταση 94
 
-    $default  reduce using rule 34 (len_params)
+   39 print_params: STRING •
 
+    $default  ελάττωση με χρήση του κανόνα 39 (print_params)
 
-State 91
 
-   33 len_params: STRING •
+Κατάσταση 95
 
-    $default  reduce using rule 33 (len_params)
+   41 print_params: INTEGER •
 
+    $default  ελάττωση με χρήση του κανόνα 41 (print_params)
 
-State 92
 
-   32 len_params: arr_elements •
+Κατάσταση 96
 
-    $default  reduce using rule 32 (len_params)
+   42 print_params: FLOAT •
 
+    $default  ελάττωση με χρήση του κανόνα 42 (print_params)
 
-State 93
 
-   28 func: SLEN "(" len_params • ")"
+Κατάσταση 97
 
-    ")"  shift, and go to state 131
+   44 print_params: pos_elem •
 
+    $default  ελάττωση με χρήση του κανόνα 44 (print_params)
 
-State 94
 
-   36 cmp_params: IDENTIFIER •
+Κατάσταση 98
 
-    $default  reduce using rule 36 (cmp_params)
+   43 print_params: func •
 
+    $default  ελάττωση με χρήση του κανόνα 43 (print_params)
 
-State 95
 
-   35 cmp_params: STRING •
+Κατάσταση 99
 
-    $default  reduce using rule 35 (cmp_params)
+   31 func: SPRINT "(" print_params • ")"
+   45 print_params: print_params • "," print_params
 
+    ")"  ολίσθηση, και μετάβαση στη κατάσταση 137
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 138
 
-State 96
 
-   29 func: SCMP "(" cmp_params • ")"
-   37 cmp_params: cmp_params • "," cmp_params
+Κατάσταση 100
 
-    ")"  shift, and go to state 132
-    ","  shift, and go to state 133
+   35 len_params: IDENTIFIER •
 
+    $default  ελάττωση με χρήση του κανόνα 35 (len_params)
 
-State 97
 
-    7 decl_var: type var ";" •
+Κατάσταση 101
 
-    $default  reduce using rule 7 (decl_var)
+   34 len_params: STRING •
 
+    $default  ελάττωση με χρήση του κανόνα 34 (len_params)
 
-State 98
 
-   70 val: STRING •
+Κατάσταση 102
 
-    $default  reduce using rule 70 (val)
+   33 len_params: arr_elements •
 
+    $default  ελάττωση με χρήση του κανόνα 33 (len_params)
 
-State 99
 
-   68 val: INTEGER •
+Κατάσταση 103
 
-    $default  reduce using rule 68 (val)
+   29 func: SLEN "(" len_params • ")"
 
+    ")"  ολίσθηση, και μετάβαση στη κατάσταση 139
 
-State 100
 
-   69 val: FLOAT •
+Κατάσταση 104
 
-    $default  reduce using rule 69 (val)
+   37 cmp_params: IDENTIFIER •
 
+    $default  ελάττωση με χρήση του κανόνα 37 (cmp_params)
 
-State 101
 
-   71 val: arr_elements •
+Κατάσταση 105
 
-    $default  reduce using rule 71 (val)
+   36 cmp_params: STRING •
 
+    $default  ελάττωση με χρήση του κανόνα 36 (cmp_params)
 
-State 102
 
-   67 assign: var "=" val • ";"
-   72 val: val • "," val
+Κατάσταση 106
 
-    ","  shift, and go to state 134
-    ";"  shift, and go to state 135
+   30 func: SCMP "(" cmp_params • ")"
+   38 cmp_params: cmp_params • "," cmp_params
 
+    ")"  ολίσθηση, και μετάβαση στη κατάσταση 140
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 141
 
-State 103
 
-   14 var: var • "," var
-   14    | var "," var •
+Κατάσταση 107
 
-    $default  reduce using rule 14 (var)
+    8 decl_var: type var ";" •
 
+    $default  ελάττωση με χρήση του κανόνα 8 (decl_var)
 
-State 104
 
-   82 merge_arr: arr_elements "+" arr_elements •
+Κατάσταση 108
 
-    $default  reduce using rule 82 (merge_arr)
+   71 val: STRING •
 
+    $default  ελάττωση με χρήση του κανόνα 71 (val)
 
-State 105
 
-   52 code_func: "{" NEWLINE • "}"
+Κατάσταση 109
 
-    "}"  shift, and go to state 136
+   69 val: INTEGER •
 
+    $default  ελάττωση με χρήση του κανόνα 69 (val)
 
-State 106
 
-   62 arithm_expr: IDENTIFIER •
+Κατάσταση 110
 
-    $default  reduce using rule 62 (arithm_expr)
+   70 val: FLOAT •
 
+    $default  ελάττωση με χρήση του κανόνα 70 (val)
 
-State 107
 
-   63 arithm_expr: arithm_expr • "+" arithm_expr
-   63            | arithm_expr "+" arithm_expr •
-   64            | arithm_expr • "-" arithm_expr
-   65            | arithm_expr • "*" arithm_expr
-   66            | arithm_expr • "/" arithm_expr
+Κατάσταση 111
 
-    "*"  shift, and go to state 65
-    "/"  shift, and go to state 66
+   72 val: arr_elements •
 
-    $default  reduce using rule 63 (arithm_expr)
+    $default  ελάττωση με χρήση του κανόνα 72 (val)
 
 
-State 108
+Κατάσταση 112
 
-   63 arithm_expr: arithm_expr • "+" arithm_expr
-   64            | arithm_expr • "-" arithm_expr
-   64            | arithm_expr "-" arithm_expr •
-   65            | arithm_expr • "*" arithm_expr
-   66            | arithm_expr • "/" arithm_expr
+   68 assign: var "=" val • ";"
+   73 val: val • "," val
 
-    "*"  shift, and go to state 65
-    "/"  shift, and go to state 66
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 142
+    ";"  ολίσθηση, και μετάβαση στη κατάσταση 143
 
-    $default  reduce using rule 64 (arithm_expr)
 
+Κατάσταση 113
 
-State 109
+   15 var: var • "," var
+   15    | var "," var •
 
-   63 arithm_expr: arithm_expr • "+" arithm_expr
-   64            | arithm_expr • "-" arithm_expr
-   65            | arithm_expr • "*" arithm_expr
-   65            | arithm_expr "*" arithm_expr •
-   66            | arithm_expr • "/" arithm_expr
+    $default  ελάττωση με χρήση του κανόνα 15 (var)
 
-    $default  reduce using rule 65 (arithm_expr)
 
+Κατάσταση 114
 
-State 110
+   83 merge_arr: arr_elements "+" arr_elements •
 
-   63 arithm_expr: arithm_expr • "+" arithm_expr
-   64            | arithm_expr • "-" arithm_expr
-   65            | arithm_expr • "*" arithm_expr
-   66            | arithm_expr • "/" arithm_expr
-   66            | arithm_expr "/" arithm_expr •
+    $default  ελάττωση με χρήση του κανόνα 83 (merge_arr)
 
-    $default  reduce using rule 66 (arithm_expr)
 
+Κατάσταση 115
 
-State 111
+   53 code_func: "{" NEWLINE • "}"
 
-   75 cmp_expr: IDENTIFIER •
+    "}"  ολίσθηση, και μετάβαση στη κατάσταση 144
 
-    $default  reduce using rule 75 (cmp_expr)
 
+Κατάσταση 116
 
-State 112
+   63 arithm_expr: IDENTIFIER •
 
-   73 cmp_expr: INTEGER •
+    $default  ελάττωση με χρήση του κανόνα 63 (arithm_expr)
 
-    $default  reduce using rule 73 (cmp_expr)
 
+Κατάσταση 117
 
-State 113
+   64 arithm_expr: arithm_expr • "+" arithm_expr
+   64            | arithm_expr "+" arithm_expr •
+   65            | arithm_expr • "-" arithm_expr
+   66            | arithm_expr • "*" arithm_expr
+   67            | arithm_expr • "/" arithm_expr
 
-   74 cmp_expr: FLOAT •
+    "*"  ολίσθηση, και μετάβαση στη κατάσταση 69
+    "/"  ολίσθηση, και μετάβαση στη κατάσταση 70
 
-    $default  reduce using rule 74 (cmp_expr)
+    $default  ελάττωση με χρήση του κανόνα 64 (arithm_expr)
 
 
-State 114
+Κατάσταση 118
 
-   76 cmp_expr: cmp_expr • ">" cmp_expr
-   77         | cmp_expr • "<" cmp_expr
-   77         | cmp_expr "<" cmp_expr •
-   78         | cmp_expr • "<=" cmp_expr
-   79         | cmp_expr • ">=" cmp_expr
-   80         | cmp_expr • "==" cmp_expr
-   81         | cmp_expr • "!=" cmp_expr
+   64 arithm_expr: arithm_expr • "+" arithm_expr
+   65            | arithm_expr • "-" arithm_expr
+   65            | arithm_expr "-" arithm_expr •
+   66            | arithm_expr • "*" arithm_expr
+   67            | arithm_expr • "/" arithm_expr
 
-    $default  reduce using rule 77 (cmp_expr)
+    "*"  ολίσθηση, και μετάβαση στη κατάσταση 69
+    "/"  ολίσθηση, και μετάβαση στη κατάσταση 70
 
+    $default  ελάττωση με χρήση του κανόνα 65 (arithm_expr)
 
-State 115
 
-   76 cmp_expr: cmp_expr • ">" cmp_expr
-   76         | cmp_expr ">" cmp_expr •
-   77         | cmp_expr • "<" cmp_expr
-   78         | cmp_expr • "<=" cmp_expr
-   79         | cmp_expr • ">=" cmp_expr
-   80         | cmp_expr • "==" cmp_expr
-   81         | cmp_expr • "!=" cmp_expr
+Κατάσταση 119
 
-    $default  reduce using rule 76 (cmp_expr)
+   64 arithm_expr: arithm_expr • "+" arithm_expr
+   65            | arithm_expr • "-" arithm_expr
+   66            | arithm_expr • "*" arithm_expr
+   66            | arithm_expr "*" arithm_expr •
+   67            | arithm_expr • "/" arithm_expr
 
+    $default  ελάττωση με χρήση του κανόνα 66 (arithm_expr)
 
-State 116
 
-   76 cmp_expr: cmp_expr • ">" cmp_expr
-   77         | cmp_expr • "<" cmp_expr
-   78         | cmp_expr • "<=" cmp_expr
-   78         | cmp_expr "<=" cmp_expr •
-   79         | cmp_expr • ">=" cmp_expr
-   80         | cmp_expr • "==" cmp_expr
-   81         | cmp_expr • "!=" cmp_expr
+Κατάσταση 120
 
-    $default  reduce using rule 78 (cmp_expr)
+   64 arithm_expr: arithm_expr • "+" arithm_expr
+   65            | arithm_expr • "-" arithm_expr
+   66            | arithm_expr • "*" arithm_expr
+   67            | arithm_expr • "/" arithm_expr
+   67            | arithm_expr "/" arithm_expr •
 
+    $default  ελάττωση με χρήση του κανόνα 67 (arithm_expr)
 
-State 117
 
-   76 cmp_expr: cmp_expr • ">" cmp_expr
-   77         | cmp_expr • "<" cmp_expr
-   78         | cmp_expr • "<=" cmp_expr
-   79         | cmp_expr • ">=" cmp_expr
-   79         | cmp_expr ">=" cmp_expr •
-   80         | cmp_expr • "==" cmp_expr
-   81         | cmp_expr • "!=" cmp_expr
+Κατάσταση 121
 
-    $default  reduce using rule 79 (cmp_expr)
+   77 cmp_expr: cmp_expr • ">" cmp_expr
+   78         | cmp_expr • "<" cmp_expr
+   78         | cmp_expr "<" cmp_expr •
+   79         | cmp_expr • "<=" cmp_expr
+   80         | cmp_expr • ">=" cmp_expr
+   81         | cmp_expr • "==" cmp_expr
+   82         | cmp_expr • "!=" cmp_expr
 
+    $default  ελάττωση με χρήση του κανόνα 78 (cmp_expr)
 
-State 118
 
-   76 cmp_expr: cmp_expr • ">" cmp_expr
-   77         | cmp_expr • "<" cmp_expr
-   78         | cmp_expr • "<=" cmp_expr
-   79         | cmp_expr • ">=" cmp_expr
-   80         | cmp_expr • "==" cmp_expr
-   80         | cmp_expr "==" cmp_expr •
-   81         | cmp_expr • "!=" cmp_expr
+Κατάσταση 122
 
-    "<"   shift, and go to state 67
-    ">"   shift, and go to state 68
-    "<="  shift, and go to state 69
-    ">="  shift, and go to state 70
+   77 cmp_expr: cmp_expr • ">" cmp_expr
+   77         | cmp_expr ">" cmp_expr •
+   78         | cmp_expr • "<" cmp_expr
+   79         | cmp_expr • "<=" cmp_expr
+   80         | cmp_expr • ">=" cmp_expr
+   81         | cmp_expr • "==" cmp_expr
+   82         | cmp_expr • "!=" cmp_expr
 
-    $default  reduce using rule 80 (cmp_expr)
+    $default  ελάττωση με χρήση του κανόνα 77 (cmp_expr)
 
 
-State 119
+Κατάσταση 123
 
-   76 cmp_expr: cmp_expr • ">" cmp_expr
-   77         | cmp_expr • "<" cmp_expr
-   78         | cmp_expr • "<=" cmp_expr
-   79         | cmp_expr • ">=" cmp_expr
-   80         | cmp_expr • "==" cmp_expr
-   81         | cmp_expr • "!=" cmp_expr
-   81         | cmp_expr "!=" cmp_expr •
+   77 cmp_expr: cmp_expr • ">" cmp_expr
+   78         | cmp_expr • "<" cmp_expr
+   79         | cmp_expr • "<=" cmp_expr
+   79         | cmp_expr "<=" cmp_expr •
+   80         | cmp_expr • ">=" cmp_expr
+   81         | cmp_expr • "==" cmp_expr
+   82         | cmp_expr • "!=" cmp_expr
 
-    "<"   shift, and go to state 67
-    ">"   shift, and go to state 68
-    "<="  shift, and go to state 69
-    ">="  shift, and go to state 70
+    $default  ελάττωση με χρήση του κανόνα 79 (cmp_expr)
 
-    $default  reduce using rule 81 (cmp_expr)
 
+Κατάσταση 124
 
-State 120
+   77 cmp_expr: cmp_expr • ">" cmp_expr
+   78         | cmp_expr • "<" cmp_expr
+   79         | cmp_expr • "<=" cmp_expr
+   80         | cmp_expr • ">=" cmp_expr
+   80         | cmp_expr ">=" cmp_expr •
+   81         | cmp_expr • "==" cmp_expr
+   82         | cmp_expr • "!=" cmp_expr
 
-   48 params: "(" ")" •
+    $default  ελάττωση με χρήση του κανόνα 80 (cmp_expr)
 
-    $default  reduce using rule 48 (params)
 
+Κατάσταση 125
 
-State 121
+   77 cmp_expr: cmp_expr • ">" cmp_expr
+   78         | cmp_expr • "<" cmp_expr
+   79         | cmp_expr • "<=" cmp_expr
+   80         | cmp_expr • ">=" cmp_expr
+   81         | cmp_expr • "==" cmp_expr
+   81         | cmp_expr "==" cmp_expr •
+   82         | cmp_expr • "!=" cmp_expr
 
-   50 type_params: type • IDENTIFIER
+    "<"   ολίσθηση, και μετάβαση στη κατάσταση 71
+    ">"   ολίσθηση, και μετάβαση στη κατάσταση 72
+    "<="  ολίσθηση, και μετάβαση στη κατάσταση 73
+    ">="  ολίσθηση, και μετάβαση στη κατάσταση 74
 
-    IDENTIFIER  shift, and go to state 137
+    $default  ελάττωση με χρήση του κανόνα 81 (cmp_expr)
 
 
-State 122
+Κατάσταση 126
 
-   49 params: "(" type_params • ")"
-   51 type_params: type_params • "," type_params
+   77 cmp_expr: cmp_expr • ">" cmp_expr
+   78         | cmp_expr • "<" cmp_expr
+   79         | cmp_expr • "<=" cmp_expr
+   80         | cmp_expr • ">=" cmp_expr
+   81         | cmp_expr • "==" cmp_expr
+   82         | cmp_expr • "!=" cmp_expr
+   82         | cmp_expr "!=" cmp_expr •
 
-    ")"  shift, and go to state 138
-    ","  shift, and go to state 139
+    "<"   ολίσθηση, και μετάβαση στη κατάσταση 71
+    ">"   ολίσθηση, και μετάβαση στη κατάσταση 72
+    "<="  ολίσθηση, και μετάβαση στη κατάσταση 73
+    ">="  ολίσθηση, και μετάβαση στη κατάσταση 74
 
+    $default  ελάττωση με χρήση του κανόνα 82 (cmp_expr)
 
-State 123
 
-   47 name_func: SFUNC name_func params NEWLINE •
+Κατάσταση 127
 
-    $default  reduce using rule 47 (name_func)
+   85 if_statement: SIF "(" condition ")" • statement
+   86             | SIF "(" condition ")" • "{" statements "}"
 
+    "{"     ολίσθηση, και μετάβαση στη κατάσταση 145
+    SPRINT  ολίσθηση, και μετάβαση στη κατάσταση 146
 
-State 124
+    statement  πήγαινε στην κατάσταση 147
 
-   21 integ: integ • "," integ
-   21      | integ "," integ •
 
-    $default  reduce using rule 21 (integ)
+Κατάσταση 128
 
+   49 params: "(" ")" •
 
-State 125
+    $default  ελάττωση με χρήση του κανόνα 49 (params)
 
-   23 fl: fl • "," fl
-   23   | fl "," fl •
 
-    $default  reduce using rule 23 (fl)
+Κατάσταση 129
 
+   51 type_params: type • IDENTIFIER
 
-State 126
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 148
 
-   25 str: str • "," str
-   25    | str "," str •
 
-    $default  reduce using rule 25 (str)
+Κατάσταση 130
 
+   50 params: "(" type_params • ")"
+   52 type_params: type_params • "," type_params
 
-State 127
+    ")"  ολίσθηση, και μετάβαση στη κατάσταση 149
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 150
 
-   27 func: SSCAN "(" scan_params ")" •
 
-    $default  reduce using rule 27 (func)
+Κατάσταση 131
 
+   48 name_func: SFUNC name_func params NEWLINE •
 
-State 128
+    $default  ελάττωση με χρήση του κανόνα 48 (name_func)
 
-   15 pos_elem: IDENTIFIER "[" • INTEGER "]"
 
-    INTEGER  shift, and go to state 140
+Κατάσταση 132
 
+   22 integ: integ • "," integ
+   22      | integ "," integ •
 
-State 129
+    $default  ελάττωση με χρήση του κανόνα 22 (integ)
 
-   30 func: SPRINT "(" print_params ")" •
 
-    $default  reduce using rule 30 (func)
+Κατάσταση 133
 
+   24 fl: fl • "," fl
+   24   | fl "," fl •
 
-State 130
+    $default  ελάττωση με χρήση του κανόνα 24 (fl)
 
-   44 print_params: print_params "," • print_params
 
-    IDENTIFIER  shift, and go to state 83
-    STRING      shift, and go to state 84
-    INTEGER     shift, and go to state 85
-    FLOAT       shift, and go to state 86
-    SSCAN       shift, and go to state 15
-    SPRINT      shift, and go to state 16
-    SLEN        shift, and go to state 17
-    SCMP        shift, and go to state 18
+Κατάσταση 134
 
-    pos_elem      go to state 87
-    func          go to state 88
-    print_params  go to state 141
+   26 str: str • "," str
+   26    | str "," str •
 
+    $default  ελάττωση με χρήση του κανόνα 26 (str)
 
-State 131
 
-   28 func: SLEN "(" len_params ")" •
+Κατάσταση 135
 
-    $default  reduce using rule 28 (func)
+   28 func: SSCAN "(" scan_params ")" •
 
+    $default  ελάττωση με χρήση του κανόνα 28 (func)
 
-State 132
 
-   29 func: SCMP "(" cmp_params ")" •
+Κατάσταση 136
 
-    $default  reduce using rule 29 (func)
+   16 pos_elem: IDENTIFIER "[" • INTEGER "]"
 
+    INTEGER  ολίσθηση, και μετάβαση στη κατάσταση 151
 
-State 133
 
-   37 cmp_params: cmp_params "," • cmp_params
+Κατάσταση 137
 
-    IDENTIFIER  shift, and go to state 94
-    STRING      shift, and go to state 95
+   31 func: SPRINT "(" print_params ")" •
 
-    cmp_params  go to state 142
+    $default  ελάττωση με χρήση του κανόνα 31 (func)
 
 
-State 134
+Κατάσταση 138
 
-   72 val: val "," • val
+   45 print_params: print_params "," • print_params
 
-    STRING   shift, and go to state 98
-    INTEGER  shift, and go to state 99
-    FLOAT    shift, and go to state 100
-    "["      shift, and go to state 14
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 93
+    STRING      ολίσθηση, και μετάβαση στη κατάσταση 94
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 95
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 96
+    SSCAN       ολίσθηση, και μετάβαση στη κατάσταση 16
+    SPRINT      ολίσθηση, και μετάβαση στη κατάσταση 17
+    SLEN        ολίσθηση, και μετάβαση στη κατάσταση 18
+    SCMP        ολίσθηση, και μετάβαση στη κατάσταση 19
 
-    arr_elements  go to state 101
-    val           go to state 143
+    pos_elem      πήγαινε στην κατάσταση 97
+    func          πήγαινε στην κατάσταση 98
+    print_params  πήγαινε στην κατάσταση 152
 
 
-State 135
+Κατάσταση 139
 
-   67 assign: var "=" val ";" •
+   29 func: SLEN "(" len_params ")" •
 
-    $default  reduce using rule 67 (assign)
+    $default  ελάττωση με χρήση του κανόνα 29 (func)
 
 
-State 136
+Κατάσταση 140
 
-   52 code_func: "{" NEWLINE "}" •
+   30 func: SCMP "(" cmp_params ")" •
 
-    $default  reduce using rule 52 (code_func)
+    $default  ελάττωση με χρήση του κανόνα 30 (func)
 
 
-State 137
+Κατάσταση 141
 
-   50 type_params: type IDENTIFIER •
+   38 cmp_params: cmp_params "," • cmp_params
 
-    $default  reduce using rule 50 (type_params)
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 104
+    STRING      ολίσθηση, και μετάβαση στη κατάσταση 105
 
+    cmp_params  πήγαινε στην κατάσταση 153
 
-State 138
 
-   49 params: "(" type_params ")" •
+Κατάσταση 142
 
-    $default  reduce using rule 49 (params)
+   73 val: val "," • val
 
+    STRING   ολίσθηση, και μετάβαση στη κατάσταση 108
+    INTEGER  ολίσθηση, και μετάβαση στη κατάσταση 109
+    FLOAT    ολίσθηση, και μετάβαση στη κατάσταση 110
+    "["      ολίσθηση, και μετάβαση στη κατάσταση 15
 
-State 139
+    arr_elements  πήγαινε στην κατάσταση 111
+    val           πήγαινε στην κατάσταση 154
 
-   51 type_params: type_params "," • type_params
 
-    SDOUBLE  shift, and go to state 6
-    SINT     shift, and go to state 7
-    SLONG    shift, and go to state 9
-    SFLOAT   shift, and go to state 10
-    SSHORT   shift, and go to state 11
+Κατάσταση 143
 
-    type         go to state 121
-    type_params  go to state 144
+   68 assign: var "=" val ";" •
 
+    $default  ελάττωση με χρήση του κανόνα 68 (assign)
 
-State 140
 
-   15 pos_elem: IDENTIFIER "[" INTEGER • "]"
+Κατάσταση 144
 
-    "]"  shift, and go to state 145
+   53 code_func: "{" NEWLINE "}" •
 
+    $default  ελάττωση με χρήση του κανόνα 53 (code_func)
 
-State 141
 
-   44 print_params: print_params • "," print_params
-   44             | print_params "," print_params •
+Κατάσταση 145
 
-    $default  reduce using rule 44 (print_params)
+   86 if_statement: SIF "(" condition ")" "{" • statements "}"
 
+    SPRINT  ολίσθηση, και μετάβαση στη κατάσταση 146
 
-State 142
+    statement   πήγαινε στην κατάσταση 155
+    statements  πήγαινε στην κατάσταση 156
 
-   37 cmp_params: cmp_params • "," cmp_params
-   37           | cmp_params "," cmp_params •
 
-    $default  reduce using rule 37 (cmp_params)
+Κατάσταση 146
 
+   88 statement: SPRINT • "(" print_params ")" ";"
 
-State 143
+    "("  ολίσθηση, και μετάβαση στη κατάσταση 157
 
-   72 val: val • "," val
-   72    | val "," val •
 
-    $default  reduce using rule 72 (val)
+Κατάσταση 147
 
+   85 if_statement: SIF "(" condition ")" statement •
 
-State 144
+    $default  ελάττωση με χρήση του κανόνα 85 (if_statement)
 
-   51 type_params: type_params • "," type_params
-   51            | type_params "," type_params •
 
-    $default  reduce using rule 51 (type_params)
+Κατάσταση 148
 
+   51 type_params: type IDENTIFIER •
 
-State 145
+    $default  ελάττωση με χρήση του κανόνα 51 (type_params)
 
-   15 pos_elem: IDENTIFIER "[" INTEGER "]" •
 
-    $default  reduce using rule 15 (pos_elem)
+Κατάσταση 149
+
+   50 params: "(" type_params ")" •
+
+    $default  ελάττωση με χρήση του κανόνα 50 (params)
+
+
+Κατάσταση 150
+
+   52 type_params: type_params "," • type_params
+
+    SDOUBLE  ολίσθηση, και μετάβαση στη κατάσταση 7
+    SINT     ολίσθηση, και μετάβαση στη κατάσταση 8
+    SLONG    ολίσθηση, και μετάβαση στη κατάσταση 10
+    SFLOAT   ολίσθηση, και μετάβαση στη κατάσταση 11
+    SSHORT   ολίσθηση, και μετάβαση στη κατάσταση 12
+
+    type         πήγαινε στην κατάσταση 129
+    type_params  πήγαινε στην κατάσταση 158
+
+
+Κατάσταση 151
+
+   16 pos_elem: IDENTIFIER "[" INTEGER • "]"
+
+    "]"  ολίσθηση, και μετάβαση στη κατάσταση 159
+
+
+Κατάσταση 152
+
+   45 print_params: print_params • "," print_params
+   45             | print_params "," print_params •
+
+    $default  ελάττωση με χρήση του κανόνα 45 (print_params)
+
+
+Κατάσταση 153
+
+   38 cmp_params: cmp_params • "," cmp_params
+   38           | cmp_params "," cmp_params •
+
+    $default  ελάττωση με χρήση του κανόνα 38 (cmp_params)
+
+
+Κατάσταση 154
+
+   73 val: val • "," val
+   73    | val "," val •
+
+    $default  ελάττωση με χρήση του κανόνα 73 (val)
+
+
+Κατάσταση 155
+
+   89 statements: statement •
+
+    $default  ελάττωση με χρήση του κανόνα 89 (statements)
+
+
+Κατάσταση 156
+
+   86 if_statement: SIF "(" condition ")" "{" statements • "}"
+   90 statements: statements • statement
+
+    "}"     ολίσθηση, και μετάβαση στη κατάσταση 160
+    SPRINT  ολίσθηση, και μετάβαση στη κατάσταση 146
+
+    statement  πήγαινε στην κατάσταση 161
+
+
+Κατάσταση 157
+
+   88 statement: SPRINT "(" • print_params ")" ";"
+
+    IDENTIFIER  ολίσθηση, και μετάβαση στη κατάσταση 93
+    STRING      ολίσθηση, και μετάβαση στη κατάσταση 94
+    INTEGER     ολίσθηση, και μετάβαση στη κατάσταση 95
+    FLOAT       ολίσθηση, και μετάβαση στη κατάσταση 96
+    SSCAN       ολίσθηση, και μετάβαση στη κατάσταση 16
+    SPRINT      ολίσθηση, και μετάβαση στη κατάσταση 17
+    SLEN        ολίσθηση, και μετάβαση στη κατάσταση 18
+    SCMP        ολίσθηση, και μετάβαση στη κατάσταση 19
+
+    pos_elem      πήγαινε στην κατάσταση 97
+    func          πήγαινε στην κατάσταση 98
+    print_params  πήγαινε στην κατάσταση 162
+
+
+Κατάσταση 158
+
+   52 type_params: type_params • "," type_params
+   52            | type_params "," type_params •
+
+    $default  ελάττωση με χρήση του κανόνα 52 (type_params)
+
+
+Κατάσταση 159
+
+   16 pos_elem: IDENTIFIER "[" INTEGER "]" •
+
+    $default  ελάττωση με χρήση του κανόνα 16 (pos_elem)
+
+
+Κατάσταση 160
+
+   86 if_statement: SIF "(" condition ")" "{" statements "}" •
+
+    $default  ελάττωση με χρήση του κανόνα 86 (if_statement)
+
+
+Κατάσταση 161
+
+   90 statements: statements statement •
+
+    $default  ελάττωση με χρήση του κανόνα 90 (statements)
+
+
+Κατάσταση 162
+
+   45 print_params: print_params • "," print_params
+   88 statement: SPRINT "(" print_params • ")" ";"
+
+    ")"  ολίσθηση, και μετάβαση στη κατάσταση 163
+    ","  ολίσθηση, και μετάβαση στη κατάσταση 138
+
+
+Κατάσταση 163
+
+   88 statement: SPRINT "(" print_params ")" • ";"
+
+    ";"  ολίσθηση, και μετάβαση στη κατάσταση 164
+
+
+Κατάσταση 164
+
+   88 statement: SPRINT "(" print_params ")" ";" •
+
+    $default  ελάττωση με χρήση του κανόνα 88 (statement)

@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params code_func decl_ops arithm_expr sign assign val cmp_expr merge_arr
+%type <sval> program decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params code_func decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition statement statements
 
 %start program
 
@@ -101,6 +101,8 @@ program:
         | program decl_func NEWLINE             { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
 /* Εκφράσεις αριθμητικές, συγκρίσεις, συνένωνση πινάκων, ανάθεση τιμής σε μεταβλητή */
         | program decl_ops NEWLINE              { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
+/* Σύνθετες δηλώσεις */
+        | program decl_statement NEWLINE        { fprintf(yyout, "[BISON] [2.7] Δηλώσεις συναρτήσεων\n\n");}
 /* Αλλαγή γραμμής */
         | program NEWLINE                       { }
 /* Κενή γραμμή */
@@ -250,9 +252,29 @@ merge_arr:
         ;
         
 /* === [2.7] Σύνθετες δηλώσεις === */
+/* === [2.7.1] Η δήλωση if === */
+decl_statement:
+        if_statement { fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση if\"\n", line); }
+        ;
 
- 
+if_statement:
+        SIF "(" condition ")" statement { fprintf(yyout, "[BISON] Line=%d, expression=\"Απλή δήλωση if\"\n", line); }
+        | SIF "(" condition ")" "{" statements "}" { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύνθετη δήλωση if\"\n", line); }
+        ;
 
+condition:
+        cmp_expr { $$ = strdup(yytext); }
+        ;
+
+statement:
+        SPRINT "(" print_params ")" ";" { $$ = strdup(yytext); }
+        ;
+
+statements:
+        statement
+        | statements statement
+        ;
+       
 %%
 
 

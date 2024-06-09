@@ -59,3 +59,8 @@ x1, list1, string = 0, ["A", "B", "C"], "HELLO";
 x1 > x2
 a <= b
 myvar == 52
+
+// ====== Test case [#2.7.1] : STATEMETS ======
+if (var == 100) print("Value of expression is 100");
+if (x < y < z) { print(x); print(y); print(z); }
+
