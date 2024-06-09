@@ -269,7 +269,6 @@ condition:
 
 statement:
         SPRINT "(" print_params ")" ";" { $$ = strdup(yytext); }
-        | val "=" arithm_expr ";" { $$ = strdup(yytext); }
         ;
 
 statements:
@@ -280,8 +279,8 @@ statements:
 /* [2.7.2] Η δήλωση while */
 
 while_statement:
-        SWHILE "(" condition ")" "{"statement"}" {$$ = strdup(yytext);} 
-        | SWHILE "(" condition ")" "{"statements"}" {$$ = strdup(yytext);}
+        SWHILE "(" condition ")" NEWLINE "{" NEWLINE statement NEWLINE "}" {$$ = strdup(yytext);} 
+        | SWHILE "(" condition ")" NEWLINE "{" NEWLINE statements NEWLINE "}" {$$ = strdup(yytext);}
         ;
 
 /* [2.7.3] Η δήλωση for */

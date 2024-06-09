@@ -30,7 +30,7 @@ Terminals unused in grammar
 State 3 conflicts: 1 reduce/reduce
 State 4 conflicts: 1 reduce/reduce
 State 5 conflicts: 1 reduce/reduce
-State 167 conflicts: 1 shift/reduce
+State 172 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -156,13 +156,12 @@ Grammar
    88 condition: cmp_expr
 
    89 statement: SPRINT "(" print_params ")" ";"
-   90          | val "=" arithm_expr ";"
 
-   91 statements: statement
-   92           | statements statement
+   90 statements: statement
+   91           | statements statement
 
-   93 while_statement: SWHILE "(" condition ")" "{" statement "}"
-   94                | SWHILE "(" condition ")" "{" statements "}"
+   92 while_statement: SWHILE "(" condition ")" NEWLINE "{" NEWLINE statement NEWLINE "}"
+   93                | SWHILE "(" condition ")" NEWLINE "{" NEWLINE statements NEWLINE "}"
 
 
 Terminals, with rules where they appear
@@ -192,7 +191,7 @@ Terminals, with rules where they appear
     SCONTINUE <sval> (278)
     SFOR <sval> (279)
     SSHORT <sval> (280) 12
-    SWHILE <sval> (281) 93 94
+    SWHILE <sval> (281) 92 93
     "+" (282) 60 64 83
     "*=" (283)
     "--" (284)
@@ -208,27 +207,27 @@ Terminals, with rules where they appear
     "%" (294)
     "||" (295)
     ">=" (296) 80
-    "=" (297) 68 90
+    "=" (297) 68
     "==" (298) 81
     "&" (299)
     "+=" (300)
     "!=" (301) 82
     "-=" (302)
     "++" (303)
-    "(" (304) 28 29 30 31 49 50 86 87 89 93 94
-    ")" (305) 28 29 30 31 49 50 86 87 89 93 94
+    "(" (304) 28 29 30 31 49 50 86 87 89 92 93
+    ")" (305) 28 29 30 31 49 50 86 87 89 92 93
     "[" (306) 16 17 18 19 20
     "]" (307) 16 17 18 19 20
-    "{" (308) 53 87 93 94
-    "}" (309) 53 87 93 94
+    "{" (308) 53 87 92 93
+    "}" (309) 53 87 92 93
     "," (310) 15 22 24 26 38 45 52 73
     "\\" (311)
-    ";" (312) 8 27 68 89 90
+    ";" (312) 8 27 68 89
     SSCAN (313) 28
     SPRINT (314) 31 89
     SLEN (315) 29
     SCMP (316) 30
-    NEWLINE (317) 1 2 3 4 5 6 48 53
+    NEWLINE (317) 1 2 3 4 5 6 48 53 92 93
     UNKNOWN (318)
 
 
@@ -304,13 +303,13 @@ Nonterminals, with rules where they appear
         on right: 60 61 62
     arithm_expr <sval> (87)
         on left: 62 63 64 65 66 67
-        on right: 54 64 65 66 67 90
+        on right: 54 64 65 66 67
     assign <sval> (88)
         on left: 68
         on right: 55
     val <sval> (89)
         on left: 69 70 71 72 73
-        on right: 68 73 90
+        on right: 68 73
     cmp_expr <sval> (90)
         on left: 74 75 76 77 78 79 80 81 82
         on right: 56 77 78 79 80 81 82 88
@@ -325,15 +324,15 @@ Nonterminals, with rules where they appear
         on right: 84
     condition <sval> (94)
         on left: 88
-        on right: 86 87 93 94
+        on right: 86 87 92 93
     statement <sval> (95)
-        on left: 89 90
-        on right: 86 91 92 93
+        on left: 89
+        on right: 86 90 91 92
     statements <sval> (96)
-        on left: 91 92
-        on right: 87 92 94
+        on left: 90 91
+        on right: 87 91 93
     while_statement <sval> (97)
-        on left: 93 94
+        on left: 92 93
         on right: 85
 
 
@@ -505,8 +504,8 @@ State 12
 
 State 13
 
-   93 while_statement: SWHILE • "(" condition ")" "{" statement "}"
-   94                | SWHILE • "(" condition ")" "{" statements "}"
+   92 while_statement: SWHILE • "(" condition ")" NEWLINE "{" NEWLINE statement NEWLINE "}"
+   93                | SWHILE • "(" condition ")" NEWLINE "{" NEWLINE statements NEWLINE "}"
 
     "("  shift, and go to state 42
 
@@ -765,8 +764,8 @@ State 41
 
 State 42
 
-   93 while_statement: SWHILE "(" • condition ")" "{" statement "}"
-   94                | SWHILE "(" • condition ")" "{" statements "}"
+   92 while_statement: SWHILE "(" • condition ")" NEWLINE "{" NEWLINE statement NEWLINE "}"
+   93                | SWHILE "(" • condition ")" NEWLINE "{" NEWLINE statements NEWLINE "}"
 
     IDENTIFIER  shift, and go to state 81
     INTEGER     shift, and go to state 82
@@ -1207,8 +1206,8 @@ State 87
 
 State 88
 
-   93 while_statement: SWHILE "(" condition • ")" "{" statement "}"
-   94                | SWHILE "(" condition • ")" "{" statements "}"
+   92 while_statement: SWHILE "(" condition • ")" NEWLINE "{" NEWLINE statement NEWLINE "}"
+   93                | SWHILE "(" condition • ")" NEWLINE "{" NEWLINE statements NEWLINE "}"
 
     ")"  shift, and go to state 136
 
@@ -1596,16 +1595,10 @@ State 131
    86 if_statement: SIF "(" condition ")" • statement
    87             | SIF "(" condition ")" • "{" statements "}"
 
-    STRING   shift, and go to state 112
-    INTEGER  shift, and go to state 113
-    FLOAT    shift, and go to state 114
-    "["      shift, and go to state 16
-    "{"      shift, and go to state 150
-    SPRINT   shift, and go to state 151
+    "{"     shift, and go to state 150
+    SPRINT  shift, and go to state 151
 
-    arr_elements  go to state 115
-    val           go to state 152
-    statement     go to state 153
+    statement  go to state 152
 
 
 State 132
@@ -1619,7 +1612,7 @@ State 133
 
    51 type_params: type • IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 154
+    IDENTIFIER  shift, and go to state 153
 
 
 State 134
@@ -1627,8 +1620,8 @@ State 134
    50 params: "(" type_params • ")"
    52 type_params: type_params • "," type_params
 
-    ")"  shift, and go to state 155
-    ","  shift, and go to state 156
+    ")"  shift, and go to state 154
+    ","  shift, and go to state 155
 
 
 State 135
@@ -1640,10 +1633,10 @@ State 135
 
 State 136
 
-   93 while_statement: SWHILE "(" condition ")" • "{" statement "}"
-   94                | SWHILE "(" condition ")" • "{" statements "}"
+   92 while_statement: SWHILE "(" condition ")" • NEWLINE "{" NEWLINE statement NEWLINE "}"
+   93                | SWHILE "(" condition ")" • NEWLINE "{" NEWLINE statements NEWLINE "}"
 
-    "{"  shift, and go to state 157
+    NEWLINE  shift, and go to state 156
 
 
 State 137
@@ -1681,7 +1674,7 @@ State 141
 
    16 pos_elem: IDENTIFIER "[" • INTEGER "]"
 
-    INTEGER  shift, and go to state 158
+    INTEGER  shift, and go to state 157
 
 
 State 142
@@ -1706,7 +1699,7 @@ State 143
 
     pos_elem      go to state 101
     func          go to state 102
-    print_params  go to state 159
+    print_params  go to state 158
 
 
 State 144
@@ -1730,7 +1723,7 @@ State 146
     IDENTIFIER  shift, and go to state 108
     STRING      shift, and go to state 109
 
-    cmp_params  go to state 160
+    cmp_params  go to state 159
 
 
 State 147
@@ -1743,7 +1736,7 @@ State 147
     "["      shift, and go to state 16
 
     arr_elements  go to state 115
-    val           go to state 161
+    val           go to state 160
 
 
 State 148
@@ -1764,56 +1757,41 @@ State 150
 
    87 if_statement: SIF "(" condition ")" "{" • statements "}"
 
-    STRING   shift, and go to state 112
-    INTEGER  shift, and go to state 113
-    FLOAT    shift, and go to state 114
-    "["      shift, and go to state 16
-    SPRINT   shift, and go to state 151
+    SPRINT  shift, and go to state 151
 
-    arr_elements  go to state 115
-    val           go to state 152
-    statement     go to state 162
-    statements    go to state 163
+    statement   go to state 161
+    statements  go to state 162
 
 
 State 151
 
    89 statement: SPRINT • "(" print_params ")" ";"
 
-    "("  shift, and go to state 164
+    "("  shift, and go to state 163
 
 
 State 152
-
-   73 val: val • "," val
-   90 statement: val • "=" arithm_expr ";"
-
-    "="  shift, and go to state 165
-    ","  shift, and go to state 147
-
-
-State 153
 
    86 if_statement: SIF "(" condition ")" statement •
 
     $default  reduce using rule 86 (if_statement)
 
 
-State 154
+State 153
 
    51 type_params: type IDENTIFIER •
 
     $default  reduce using rule 51 (type_params)
 
 
-State 155
+State 154
 
    50 params: "(" type_params ")" •
 
     $default  reduce using rule 50 (params)
 
 
-State 156
+State 155
 
    52 type_params: type_params "," • type_params
 
@@ -1824,34 +1802,25 @@ State 156
     SSHORT   shift, and go to state 12
 
     type         go to state 133
-    type_params  go to state 166
+    type_params  go to state 164
+
+
+State 156
+
+   92 while_statement: SWHILE "(" condition ")" NEWLINE • "{" NEWLINE statement NEWLINE "}"
+   93                | SWHILE "(" condition ")" NEWLINE • "{" NEWLINE statements NEWLINE "}"
+
+    "{"  shift, and go to state 165
 
 
 State 157
 
-   93 while_statement: SWHILE "(" condition ")" "{" • statement "}"
-   94                | SWHILE "(" condition ")" "{" • statements "}"
+   16 pos_elem: IDENTIFIER "[" INTEGER • "]"
 
-    STRING   shift, and go to state 112
-    INTEGER  shift, and go to state 113
-    FLOAT    shift, and go to state 114
-    "["      shift, and go to state 16
-    SPRINT   shift, and go to state 151
-
-    arr_elements  go to state 115
-    val           go to state 152
-    statement     go to state 167
-    statements    go to state 168
+    "]"  shift, and go to state 166
 
 
 State 158
-
-   16 pos_elem: IDENTIFIER "[" INTEGER • "]"
-
-    "]"  shift, and go to state 169
-
-
-State 159
 
    45 print_params: print_params • "," print_params
    45             | print_params "," print_params •
@@ -1859,7 +1828,7 @@ State 159
     $default  reduce using rule 45 (print_params)
 
 
-State 160
+State 159
 
    38 cmp_params: cmp_params • "," cmp_params
    38           | cmp_params "," cmp_params •
@@ -1867,7 +1836,7 @@ State 160
     $default  reduce using rule 38 (cmp_params)
 
 
-State 161
+State 160
 
    73 val: val • "," val
    73    | val "," val •
@@ -1875,31 +1844,25 @@ State 161
     $default  reduce using rule 73 (val)
 
 
+State 161
+
+   90 statements: statement •
+
+    $default  reduce using rule 90 (statements)
+
+
 State 162
 
-   91 statements: statement •
+   87 if_statement: SIF "(" condition ")" "{" statements • "}"
+   91 statements: statements • statement
 
-    $default  reduce using rule 91 (statements)
+    "}"     shift, and go to state 167
+    SPRINT  shift, and go to state 151
+
+    statement  go to state 168
 
 
 State 163
-
-   87 if_statement: SIF "(" condition ")" "{" statements • "}"
-   92 statements: statements • statement
-
-    STRING   shift, and go to state 112
-    INTEGER  shift, and go to state 113
-    FLOAT    shift, and go to state 114
-    "["      shift, and go to state 16
-    "}"      shift, and go to state 170
-    SPRINT   shift, and go to state 151
-
-    arr_elements  go to state 115
-    val           go to state 152
-    statement     go to state 171
-
-
-State 164
 
    89 statement: SPRINT "(" • print_params ")" ";"
 
@@ -1914,24 +1877,10 @@ State 164
 
     pos_elem      go to state 101
     func          go to state 102
-    print_params  go to state 172
+    print_params  go to state 169
 
 
-State 165
-
-   90 statement: val "=" • arithm_expr ";"
-
-    IDENTIFIER  shift, and go to state 120
-    INTEGER     shift, and go to state 43
-    FLOAT       shift, and go to state 44
-    "+"         shift, and go to state 14
-    "-"         shift, and go to state 15
-
-    sign         go to state 31
-    arithm_expr  go to state 173
-
-
-State 166
+State 164
 
    52 type_params: type_params • "," type_params
    52            | type_params "," type_params •
@@ -1939,109 +1888,114 @@ State 166
     $default  reduce using rule 52 (type_params)
 
 
-State 167
+State 165
 
-   91 statements: statement •
-   93 while_statement: SWHILE "(" condition ")" "{" statement • "}"
+   92 while_statement: SWHILE "(" condition ")" NEWLINE "{" • NEWLINE statement NEWLINE "}"
+   93                | SWHILE "(" condition ")" NEWLINE "{" • NEWLINE statements NEWLINE "}"
 
-    "}"  shift, and go to state 174
-
-    "}"       [reduce using rule 91 (statements)]
-    $default  reduce using rule 91 (statements)
+    NEWLINE  shift, and go to state 170
 
 
-State 168
-
-   92 statements: statements • statement
-   94 while_statement: SWHILE "(" condition ")" "{" statements • "}"
-
-    STRING   shift, and go to state 112
-    INTEGER  shift, and go to state 113
-    FLOAT    shift, and go to state 114
-    "["      shift, and go to state 16
-    "}"      shift, and go to state 175
-    SPRINT   shift, and go to state 151
-
-    arr_elements  go to state 115
-    val           go to state 152
-    statement     go to state 171
-
-
-State 169
+State 166
 
    16 pos_elem: IDENTIFIER "[" INTEGER "]" •
 
     $default  reduce using rule 16 (pos_elem)
 
 
-State 170
+State 167
 
    87 if_statement: SIF "(" condition ")" "{" statements "}" •
 
     $default  reduce using rule 87 (if_statement)
 
 
-State 171
+State 168
 
-   92 statements: statements statement •
+   91 statements: statements statement •
 
-    $default  reduce using rule 92 (statements)
+    $default  reduce using rule 91 (statements)
 
 
-State 172
+State 169
 
    45 print_params: print_params • "," print_params
    89 statement: SPRINT "(" print_params • ")" ";"
 
-    ")"  shift, and go to state 176
+    ")"  shift, and go to state 171
     ","  shift, and go to state 143
+
+
+State 170
+
+   92 while_statement: SWHILE "(" condition ")" NEWLINE "{" NEWLINE • statement NEWLINE "}"
+   93                | SWHILE "(" condition ")" NEWLINE "{" NEWLINE • statements NEWLINE "}"
+
+    SPRINT  shift, and go to state 151
+
+    statement   go to state 172
+    statements  go to state 173
+
+
+State 171
+
+   89 statement: SPRINT "(" print_params ")" • ";"
+
+    ";"  shift, and go to state 174
+
+
+State 172
+
+   90 statements: statement •
+   92 while_statement: SWHILE "(" condition ")" NEWLINE "{" NEWLINE statement • NEWLINE "}"
+
+    NEWLINE  shift, and go to state 175
+
+    NEWLINE   [reduce using rule 90 (statements)]
+    $default  reduce using rule 90 (statements)
 
 
 State 173
 
-   64 arithm_expr: arithm_expr • "+" arithm_expr
-   65            | arithm_expr • "-" arithm_expr
-   66            | arithm_expr • "*" arithm_expr
-   67            | arithm_expr • "/" arithm_expr
-   90 statement: val "=" arithm_expr • ";"
+   91 statements: statements • statement
+   93 while_statement: SWHILE "(" condition ")" NEWLINE "{" NEWLINE statements • NEWLINE "}"
 
-    "+"  shift, and go to state 70
-    "-"  shift, and go to state 71
-    "*"  shift, and go to state 72
-    "/"  shift, and go to state 73
-    ";"  shift, and go to state 177
+    SPRINT   shift, and go to state 151
+    NEWLINE  shift, and go to state 176
+
+    statement  go to state 168
 
 
 State 174
 
-   93 while_statement: SWHILE "(" condition ")" "{" statement "}" •
+   89 statement: SPRINT "(" print_params ")" ";" •
 
-    $default  reduce using rule 93 (while_statement)
+    $default  reduce using rule 89 (statement)
 
 
 State 175
 
-   94 while_statement: SWHILE "(" condition ")" "{" statements "}" •
+   92 while_statement: SWHILE "(" condition ")" NEWLINE "{" NEWLINE statement NEWLINE • "}"
 
-    $default  reduce using rule 94 (while_statement)
+    "}"  shift, and go to state 177
 
 
 State 176
 
-   89 statement: SPRINT "(" print_params ")" • ";"
+   93 while_statement: SWHILE "(" condition ")" NEWLINE "{" NEWLINE statements NEWLINE • "}"
 
-    ";"  shift, and go to state 178
+    "}"  shift, and go to state 178
 
 
 State 177
 
-   90 statement: val "=" arithm_expr ";" •
+   92 while_statement: SWHILE "(" condition ")" NEWLINE "{" NEWLINE statement NEWLINE "}" •
 
-    $default  reduce using rule 90 (statement)
+    $default  reduce using rule 92 (while_statement)
 
 
 State 178
 
-   89 statement: SPRINT "(" print_params ")" ";" •
+   93 while_statement: SWHILE "(" condition ")" NEWLINE "{" NEWLINE statements NEWLINE "}" •
 
-    $default  reduce using rule 89 (statement)
+    $default  reduce using rule 93 (while_statement)

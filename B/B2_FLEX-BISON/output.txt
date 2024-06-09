@@ -403,14 +403,14 @@
 	[FLEX] Line=74, token=OPERATOR, value="<"
 	[FLEX] Line=74, token=INTEGER, value="10"
 	[FLEX] Line=74, token=SPECIAL, value=")"
-	[FLEX] Line=74, token=SPECIAL, value="{"
-	[FLEX] Line=74, token=FUNCTION, value="print"
-	[FLEX] Line=74, token=SPECIAL, value="("
-	[FLEX] Line=74, token=STRING, value=""i is: ""
-	[FLEX] Line=74, token=SPECIAL, value=","
-	[FLEX] Line=74, token=IDENTIFIER, value="i"
-	[FLEX] Line=74, token=SPECIAL, value=")"
-	[FLEX] Line=74, token=DELIMITER, value=";"
-	[FLEX] Line=74, token=IDENTIFIER, value="i"
+	[FLEX] Line=75, token=SPECIAL, value="{"
+	[FLEX] Line=76, token=FUNCTION, value="print"
+	[FLEX] Line=76, token=SPECIAL, value="("
+	[FLEX] Line=76, token=STRING, value=""i is: ""
+	[FLEX] Line=76, token=SPECIAL, value=","
+	[FLEX] Line=76, token=IDENTIFIER, value="i"
+	[FLEX] Line=76, token=SPECIAL, value=")"
+	[FLEX] Line=76, token=DELIMITER, value=";"
+	[FLEX] Line=77, token=IDENTIFIER, value="i"
 
 [1] ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.
