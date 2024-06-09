@@ -105,6 +105,7 @@ program:
         | program build_func NEWLINE            { fprintf(yyout, "[BISON] [2.4] Ενσωματωμένες απλές συναρτήσεις\n\n");}
         | program decl_func NEWLINE             { fprintf(yyout, "[BISON] [2.5] Δήλωση συναρτήσεων χρήστη\n\n");}
         | program decl_operations NEWLINE       { fprintf(yyout, "[BISON] [2.6] Δηλώσεις απλών εκφράσεων\n\n"); }
+        | program decl_statement     NEWLINE    { fprintf(yyout, "[BISON] [2.7] Δηλώσεις συναρτήσεων\n\n");}
         | program NEWLINE                       { }
         |                                      
         ;
@@ -247,8 +248,29 @@ merge_arr:
         ;
         
 /* === [2.7] Σύνθετες δηλώσεις === */
+/* === [2.7.1] Η δήλωση if === */
+decl_statement:
+        if_statement { fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση if\"\n", line); }
+        ;
 
- 
+if_statement:
+        IF "(" condition ")" statement { fprintf(yyout, "[BISON] Line=%d, expression=\"Απλή δήλωση if\"\n", line); }
+        | IF "(" condition ")" "{" statements "}" { fprintf(yyout, "[BISON] Line=%d, expression=\"Σύνθετη δήλωση if\"\n", line); }
+        ;
+
+condition:
+        cmp_expr { $$ = strdup(yytext); }
+        ;
+
+statement:
+        PRINT "(" print_params ")" ";" { $$ = strdup(yytext); }
+        ;
+
+statements:
+        statement
+        | statements statement
+        ;
+
 
 %%
 
