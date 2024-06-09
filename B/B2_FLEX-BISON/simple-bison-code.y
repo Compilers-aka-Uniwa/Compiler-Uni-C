@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params code_func decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition statement statements
+%type <sval> program decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params code_func decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition statement statements while_statement
 
 %start program
 
@@ -227,6 +227,7 @@ arithm_expr:
 /* [2.6.2] Αναθέσεις τιμών σε μεταβλητή */
 assign:
         var "=" val ";" { $$ = strdup(yytext); }
+        ;
 val: 
     INTEGER             { $$ = strdup(yytext); }
     | FLOAT             { $$ = strdup(yytext); }
@@ -252,7 +253,6 @@ merge_arr:
         ;
         
 /* === [2.7] Σύνθετες δηλώσεις === */
-/* [2.7.1] Η δήλωση if */
 decl_statement:
         if_statement { $$ = "\"Δήλωση if\""; }
         | while_statement { $$ = "\"Δήλωση while\""; }
@@ -269,6 +269,7 @@ condition:
 
 statement:
         SPRINT "(" print_params ")" ";" { $$ = strdup(yytext); }
+        | val "=" arithm_expr ";" { $$ = strdup(yytext); }
         ;
 
 statements:
@@ -279,8 +280,8 @@ statements:
 /* [2.7.2] Η δήλωση while */
 
 while_statement:
-        SWHILE "(" condition ")" statement               {$$ = strdup(yytext);} 
-        | SWHILE "(" condition ")" "{" statements "}"    {$$ = strdup(yytext);}
+        SWHILE "(" condition ")" "{"statement"}" {$$ = strdup(yytext);} 
+        | SWHILE "(" condition ")" "{"statements"}" {$$ = strdup(yytext);}
         ;
 
 /* [2.7.3] Η δήλωση for */
