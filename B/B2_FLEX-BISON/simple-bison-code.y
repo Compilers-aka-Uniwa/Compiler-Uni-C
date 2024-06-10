@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params code_func decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition statement statements while_statement
+%type <sval> program code_block decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition code while_statement
 
 %start program
 
@@ -184,7 +184,7 @@ print_params:
 
 /* === [2.5] Δήλωση συναρτήσεων χρήστη === */
 decl_func:
-        name_func code_func { $$ = "\"Δήλωση συναρτήσεων χρήστη\""; }
+        name_func "{" code "}" { $$ = "\"Δήλωση συναρτήσεων χρήστη\""; }
 	;
 name_func: 
         IDENTIFIER                       { $$ = strdup(yytext); }
@@ -198,8 +198,17 @@ type_params:
         type IDENTIFIER                 { $$ = strdup(yytext); }
         | type_params "," type_params   { $$ = strdup(yytext); }
         ;
-code_func:
-        "{" NEWLINE "}" { $$=strdup(yytext); }
+
+code_block:
+        code { $$=strdup(yytext); }
+        | code_block code { $$=strdup(yytext); }
+        ;
+code:
+        decl_var { $$=strdup(yytext); }
+        | build_func { $$=strdup(yytext); }
+        | decl_ops { $$=strdup(yytext); }
+        | decl_statement { $$=strdup(yytext); }
+        |                         {} 
         ;
 
 /* === [2.6] Δηλώσεις απλών εκφράσεων === */
@@ -259,28 +268,21 @@ decl_statement:
         ;
 
 if_statement:
-        SIF "(" condition ")" statement            { $$ = strdup(yytext);}
-        | SIF "(" condition ")" "{" statements "}" { $$ = strdup(yytext); }
+        SIF condition code            { $$ = strdup(yytext);}
+        | SIF condition "{" code "}" { $$ = strdup(yytext); }
         ;
 
 condition:
         cmp_expr { $$ = strdup(yytext); }
+        | "(" condition ")" { $$ = strdup(yytext); }
         ;
 
-statement:
-        SPRINT "(" print_params ")" ";" { $$ = strdup(yytext); }
-        ;
-
-statements:
-        statement                    { $$ = strdup(yytext); }
-        | statements statement       { $$ = strdup(yytext); }
-        ;
 
 /* [2.7.2] Η δήλωση while */
 
 while_statement:
-        SWHILE "(" condition ")" NEWLINE "{" NEWLINE statement NEWLINE "}" {$$ = strdup(yytext);} 
-        | SWHILE "(" condition ")" NEWLINE "{" NEWLINE statements NEWLINE "}" {$$ = strdup(yytext);}
+        SWHILE condition code { $$ = strdup(yytext); } 
+        | SWHILE condition "{" code "}" { $$ = strdup(yytext); }
         ;
 
 /* [2.7.3] Η δήλωση for */
