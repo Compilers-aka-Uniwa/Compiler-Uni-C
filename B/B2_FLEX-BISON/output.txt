@@ -367,7 +367,7 @@
 	[FLEX] Line=70, token=STRING, value=""Value of expression is 100""
 	[FLEX] Line=70, token=SPECIAL, value=")"
 	[FLEX] Line=70, token=DELIMITER, value=";"
-[BISON] Line=70, expression="Σύνθετη δήλωση"
+[BISON] Line=70, expression=;
 
 	[FLEX] Line=71, token=KEYWORD, value="if"
 	[FLEX] Line=71, token=SPECIAL, value="("
@@ -394,7 +394,7 @@
 	[FLEX] Line=71, token=SPECIAL, value=")"
 	[FLEX] Line=71, token=DELIMITER, value=";"
 	[FLEX] Line=71, token=SPECIAL, value="}"
-[BISON] Line=71, expression="Σύνθετη δήλωση"
+[BISON] Line=71, expression=}
 
 	[FLEX] Line=73, token=KEYWORD, value="if"
 	[FLEX] Line=73, token=SPECIAL, value="("
@@ -441,6 +441,31 @@
 	[FLEX] Line=84, token=DELIMITER, value=";"
 	[FLEX] Line=85, token=SPECIAL, value="}"
 [BISON] Line=85, expression="Σύνθετες δηλώσεις"
+
+// ====== Test case [#2.7.2] :  FOR STATEMETS =====
+	[FLEX] Line=88, token=KEYWORD, value="for"
+	[FLEX] Line=88, token=SPECIAL, value="("
+	[FLEX] Line=88, token=IDENTIFIER, value="i"
+	[FLEX] Line=88, token=OPERATOR, value="="
+	[FLEX] Line=88, token=INTEGER, value="0"
+	[FLEX] Line=88, token=DELIMITER, value=";"
+	[FLEX] Line=88, token=IDENTIFIER, value="i"
+	[FLEX] Line=88, token=OPERATOR, value="<"
+	[FLEX] Line=88, token=INTEGER, value="10"
+	[FLEX] Line=88, token=DELIMITER, value=";"
+	[FLEX] Line=88, token=IDENTIFIER, value="i"
+	[FLEX] Line=88, token=OPERATOR, value="++"
+	[FLEX] Line=88, token=SPECIAL, value=")"
+	[FLEX] Line=89, token=SPECIAL, value="{"
+	[FLEX] Line=90, token=FUNCTION, value="print"
+	[FLEX] Line=90, token=SPECIAL, value="("
+	[FLEX] Line=90, token=STRING, value=""i = ""
+	[FLEX] Line=90, token=SPECIAL, value=","
+	[FLEX] Line=90, token=IDENTIFIER, value="i"
+	[FLEX] Line=90, token=SPECIAL, value=")"
+	[FLEX] Line=90, token=DELIMITER, value=";"
+	[FLEX] Line=91, token=SPECIAL, value="}"
+[BISON] Line=91, expression="Σύνθετες δηλώσεις"
 
 
 [0] ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.

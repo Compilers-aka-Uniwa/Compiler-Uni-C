@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program block_statement  decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition code while_statement
+%type <sval> program block_statement, decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition code while_statement changing_val for_statement
 
 %start program
 
@@ -230,6 +230,16 @@ arithm_expr:
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         ;
+changing_val:
+        IDENTIFIER "++" { $$ = strdup(yytext); }
+        | IDENTIFIER "--" { $$ = strdup(yytext); }
+        | "++" IDENTIFIER  { $$ = strdup(yytext); }
+        | "--" IDENTIFIER  { $$ = strdup(yytext); }
+        |IDENTIFIER "+=" IDENTIFIER  { $$ = strdup(yytext); }
+        |IDENTIFIER "-=" IDENTIFIER  { $$ = strdup(yytext); }
+        |IDENTIFIER "*=" IDENTIFIER  { $$ = strdup(yytext); }
+        |IDENTIFIER "/=" IDENTIFIER  { $$ = strdup(yytext); }
+        ;
 /* [2.6.2] Αναθέσεις τιμών σε μεταβλητή */
 assign:
         var "=" val ";" { $$ = strdup(yytext); }
@@ -266,6 +276,7 @@ decl_statements:
 decl_statement:
         if_statement { $$ = strdup(yytext); }
         | while_statement { $$ = strdup(yytext); }
+        | for_statement { $$ = strdup(yytext); }
         | code {  $$ = strdup(yytext); }
         | block_statement {  $$ = strdup(yytext); }
         ;
@@ -287,12 +298,14 @@ block_statement:
 /* [2.7.2] Η δήλωση while */
 
 while_statement:
-        SWHILE condition code { $$ = strdup(yytext); } 
-        | SWHILE condition "{" code "}" { $$ = strdup(yytext); }
+        SWHILE condition decl_statement { $$ = strdup(yytext); } 
         ;
 
 /* [2.7.3] Η δήλωση for */
-       
+for_statement:
+       SFOR "(" assign cmp_expr ";" changing_val ")" decl_statement { $$ = strdup(yytext); }
+        ;
+
 %%
 
 
@@ -310,7 +323,7 @@ void yyerror(char *s) {
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 1;
+        yydebug = 0;
 
 	if (argc == 3)
         {

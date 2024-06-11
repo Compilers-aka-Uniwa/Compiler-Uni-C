@@ -78,3 +78,8 @@ while (i < 10)
 print("i is: ", i);
 }
 
+// ====== Test case [#2.7.2] :  FOR STATEMETS =====
+for (i = 0; i < 10; i++)
+{
+print("i = ", i);
+}
