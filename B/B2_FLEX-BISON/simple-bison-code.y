@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program code_block decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition code while_statement
+%type <sval> program block_statement  decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition code while_statement
 
 %start program
 
@@ -102,7 +102,7 @@ program:
 /* Εκφράσεις αριθμητικές, συγκρίσεις, συνένωνση πινάκων, ανάθεση τιμής σε μεταβλητή */
         | program decl_ops NEWLINE              { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
 /* Σύνθετες δηλώσεις, δήλωση if, while, for */
-        | program decl_statement NEWLINE        { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
+        | program decl_statements NEWLINE        { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
 /* Αλλαγή γραμμής */
         | program NEWLINE                       { }
 /* Κενή γραμμή */
@@ -199,16 +199,13 @@ type_params:
         | type_params "," type_params   { $$ = strdup(yytext); }
         ;
 
-code_block:
-        code { $$=strdup(yytext); }
-        | code_block code { $$=strdup(yytext); }
-        ;
 code:
         decl_var { $$=strdup(yytext); }
         | build_func { $$=strdup(yytext); }
         | decl_ops { $$=strdup(yytext); }
-        | decl_statement { $$=strdup(yytext); }
-        |                         {} 
+      /*  | decl_statement { $$=strdup(yytext); }*/
+        | NEWLINE     {$$=strdup(yytext);} 
+        |                   {}
         ;
 
 /* === [2.6] Δηλώσεις απλών εκφράσεων === */
@@ -262,19 +259,28 @@ merge_arr:
         ;
         
 /* === [2.7] Σύνθετες δηλώσεις === */
+decl_statements:
+        decl_statement { }
+        | decl_statements decl_statement { $$ = "\"Σύνθετες δηλώσεις\""; }
+
 decl_statement:
-        if_statement { $$ = "\"Δήλωση if\""; }
-        | while_statement { $$ = "\"Δήλωση while\""; }
+        if_statement { $$ = strdup(yytext); }
+        | while_statement { $$ = strdup(yytext); }
+        | code {  $$ = strdup(yytext); }
+        | block_statement {  $$ = strdup(yytext); }
         ;
 
 if_statement:
-        SIF condition code            { $$ = strdup(yytext);}
-        | SIF condition "{" code "}" { $$ = strdup(yytext); }
+        SIF condition decl_statement { $$ = strdup(yytext);}
         ;
 
 condition:
         cmp_expr { $$ = strdup(yytext); }
         | "(" condition ")" { $$ = strdup(yytext); }
+        ;
+
+block_statement:
+        "{" decl_statements "}" {  $$ = strdup(yytext); }
         ;
 
 
@@ -304,7 +310,7 @@ void yyerror(char *s) {
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 0;
+        yydebug = 1;
 
 	if (argc == 3)
         {

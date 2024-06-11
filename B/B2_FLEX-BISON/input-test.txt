@@ -61,13 +61,20 @@ a <= b
 myvar == 52
 
 // ====== Test case [#2.7.1] : STATEMETS ======
-if (var == 100) print("Value of expression is 100");
-if (x < y < z) { print(x); print(y); print(z); }
+if (var == 100) print("Value of expression is 100"); 
+if (x < y < z) { print(x);  print(y);  print(z);  } 
+
+if (x == 1) 
+{
+    int i;
+    i = 1;
+    if (i > 1)
+        print("MIHALI GIATI EISAI TOSO STOKOS????");
+} 
 
 // ====== Test case [#2.7.2] :  WHILE STATEMETS =====
 while (i < 10)
 {
 print("i is: ", i);
-i += 1;
 }
 
