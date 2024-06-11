@@ -1199,7 +1199,7 @@ case 60:
 /* rule 60 can match eol */
 YY_RULE_SETUP
 #line 104 "simple-flex-code.l"
-{ ECHO; line++; }
+{ ECHO; }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP

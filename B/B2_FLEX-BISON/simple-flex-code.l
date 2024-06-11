@@ -101,7 +101,7 @@ UNKNOWN          [^ \t\r\n;]
 {STRING}        { prn("STRING"); return STRING; }
 {INTEGER}       { yylval.ival = atoi(yytext); prn("INTEGER"); return INTEGER; } 
 {FLOAT}         { yylval.fval = atof(yytext); prn("FLOAT"); return FLOAT; }
-{COMMENT}       { ECHO; line++; }
+{COMMENT}       { ECHO; }
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
