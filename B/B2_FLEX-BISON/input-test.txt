@@ -1,5 +1,10 @@
 /************ Test case [#2.1] : CODE-STRUCTURE ************/
-
+// ========== Test case [#2.1.1] : LOGICAL LINES ==========
+x == y
+x < y
+x > y
+x <= y
+x >= y
 
 /************ Test case [#2.2] : VARIABLES-STATEMENT ************/
 int a;

@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params code_func decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition statement statements
+%type <sval> program decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params code_func decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition statement statements src_code logical_line
 
 %start program
 
@@ -93,8 +93,10 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-/* Δηλώσεις Μεταβλητών */
-        program decl_var NEWLINE                { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
+/* 2.1 Δομή πηγαίου κώδικα */
+        program src_code NEWLINE		{ fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
+/* Δηλώσεις Μεταβλητών */			
+        |program decl_var NEWLINE               { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
 /* Ενσωματωμένες συναρτήσεις */
         | program build_func NEWLINE            { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
 /* Συναρτήσεις του χρήστη */
@@ -110,7 +112,13 @@ program:
         ;
 
 /* === [2.1] Δομή Πηγαίου Κώδικα === */
-
+src_code:
+	logical_line					{ $$ = "\"Λογικές γραμμές\""; }	
+/* === [2.1] Λογικές γραμμές     === */
+logical_line:
+        decl_statement ";" NEWLINE 			{ $$ = strdup(yytext); }
+        | decl_statement ";" NEWLINE logical_line 	{ $$ = strdup(yytext); }
+        ;
 /* === [2.2] Δηλώσεις Μεταβλητών === */
 decl_var:
         type var ";" { $$ = "\"Δήλωση Μεταβλητής\""; }
