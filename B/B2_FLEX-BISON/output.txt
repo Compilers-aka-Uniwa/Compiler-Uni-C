@@ -27,17 +27,17 @@
 /************ Test case [#2.2] : VARIABLES-STATEMENT ************/	[FLEX] Line=12, token=KEYWORD, value="int"
 	[FLEX] Line=12, token=IDENTIFIER, value="a"
 	[FLEX] Line=12, token=DELIMITER, value=";"
-[BISON] Line=12, expression="Δήλωση Μεταβλητής"
+[BISON] Line=12, expression=;
 
 	[FLEX] Line=13, token=KEYWORD, value="double"
 	[FLEX] Line=13, token=IDENTIFIER, value="var"
 	[FLEX] Line=13, token=DELIMITER, value=";"
-[BISON] Line=13, expression="Δήλωση Μεταβλητής"
+[BISON] Line=13, expression=;
 
 	[FLEX] Line=14, token=KEYWORD, value="float"
 	[FLEX] Line=14, token=IDENTIFIER, value="c"
 	[FLEX] Line=14, token=DELIMITER, value=";"
-[BISON] Line=14, expression="Δήλωση Μεταβλητής"
+[BISON] Line=14, expression=;
 
 	[FLEX] Line=15, token=KEYWORD, value="int"
 	[FLEX] Line=15, token=IDENTIFIER, value="a"
@@ -46,7 +46,7 @@
 	[FLEX] Line=15, token=SPECIAL, value=","
 	[FLEX] Line=15, token=IDENTIFIER, value="c"
 	[FLEX] Line=15, token=DELIMITER, value=";"
-[BISON] Line=15, expression="Δήλωση Μεταβλητής"
+[BISON] Line=15, expression=;
 
 	[FLEX] Line=16, token=KEYWORD, value="long"
 	[FLEX] Line=16, token=IDENTIFIER, value="var1"
@@ -57,12 +57,12 @@
 	[FLEX] Line=16, token=SPECIAL, value=","
 	[FLEX] Line=16, token=IDENTIFIER, value="var4"
 	[FLEX] Line=16, token=DELIMITER, value=";"
-[BISON] Line=16, expression="Δήλωση Μεταβλητής"
+[BISON] Line=16, expression=;
 
 	[FLEX] Line=17, token=KEYWORD, value="short"
 	[FLEX] Line=17, token=IDENTIFIER, value="sh1"
 	[FLEX] Line=17, token=DELIMITER, value=";"
-[BISON] Line=17, expression="Δήλωση Μεταβλητής"
+[BISON] Line=17, expression=;
 
 /************ Test case [#2.3] : ARRAYS ************/	[FLEX] Line=21, token=IDENTIFIER, value="pin1"
 	[FLEX] Line=21, token=OPERATOR, value="="
