@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params code_func decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition statement statements
+%type <sval> changing_val program decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params code_func decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition statement statements
 
 %start program
 
@@ -208,6 +208,7 @@ decl_ops:
         | assign                { $$ = "\"Ανάθεση τιμής σε μεταβλητή\""; } 
         | cmp_expr              { $$ = "\"Σύγκριση\""; }
         | merge_arr             { $$ = "\"Συνένωση Πινάκων\""; }
+        |changing_val         { $$ = "\"Αλλαγή τιμής\"";}
         ;
 /* [2.6.1] Αριθμητικές εκφράσεις */
 sign:
@@ -223,6 +224,12 @@ arithm_expr:
         | arithm_expr "-" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
+        ;
+changing_val:
+        IDENTIFIER "++" { $$ = strdup(yytext); }
+        | IDENTIFIER "--" { $$ = strdup(yytext); }
+        | "++" IDENTIFIER { $$ = strdup(yytext); }
+        | "--" IDENTIFIER { $$ = strdup(yytext); }
         ;
 /* [2.6.2] Αναθέσεις τιμών σε μεταβλητή */
 assign:
@@ -278,7 +285,14 @@ statements:
 /* [2.7.2] Η δήλωση while */
 
 /* [2.7.3] Η δήλωση for */
-       
+decl_statement:
+        for_statement {$$ ="\"Δήλωση for\"";}
+        ;
+for_statement:
+        SFOR "(" decl_var condition";" changing_val")"  { $$ = strdup(yytext); }
+        ;
+
+
 %%
 
 
