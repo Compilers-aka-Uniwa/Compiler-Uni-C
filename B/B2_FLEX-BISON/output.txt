@@ -1,17 +1,17 @@
-/************ Test case [#2.1] : CODE-STRUCTURE ************//************ Test case [#2.2] : VARIABLES-STATEMENT ************/	[FLEX] Line=7, token=KEYWORD, value="int"
+/************ Test case [#2.1] : CODE-STRUCTURE ************//************ Test case [#2.2] : VARIABLES-STATEMENT ************/	[FLEX] Line=7, token=KEYWORD, value="int"
 	[FLEX] Line=7, token=IDENTIFIER, value="a"
 	[FLEX] Line=7, token=DELIMITER, value=";"
-[BISON] Line=7, expression="Δήλωση Μεταβλητής"
+[BISON] Line=7, expression="Δήλωση Μεταβλητής"
 
 	[FLEX] Line=8, token=KEYWORD, value="double"
 	[FLEX] Line=8, token=IDENTIFIER, value="var"
 	[FLEX] Line=8, token=DELIMITER, value=";"
-[BISON] Line=8, expression="Δήλωση Μεταβλητής"
+[BISON] Line=8, expression="Δήλωση Μεταβλητής"
 
 	[FLEX] Line=9, token=KEYWORD, value="float"
 	[FLEX] Line=9, token=IDENTIFIER, value="c"
 	[FLEX] Line=9, token=DELIMITER, value=";"
-[BISON] Line=9, expression="Δήλωση Μεταβλητής"
+[BISON] Line=9, expression="Δήλωση Μεταβλητής"
 
 	[FLEX] Line=10, token=KEYWORD, value="int"
 	[FLEX] Line=10, token=IDENTIFIER, value="a"
@@ -20,7 +20,7 @@
 	[FLEX] Line=10, token=SPECIAL, value=","
 	[FLEX] Line=10, token=IDENTIFIER, value="c"
 	[FLEX] Line=10, token=DELIMITER, value=";"
-[BISON] Line=10, expression="Δήλωση Μεταβλητής"
+[BISON] Line=10, expression="Δήλωση Μεταβλητής"
 
 	[FLEX] Line=11, token=KEYWORD, value="long"
 	[FLEX] Line=11, token=IDENTIFIER, value="var1"
@@ -31,14 +31,14 @@
 	[FLEX] Line=11, token=SPECIAL, value=","
 	[FLEX] Line=11, token=IDENTIFIER, value="var4"
 	[FLEX] Line=11, token=DELIMITER, value=";"
-[BISON] Line=11, expression="Δήλωση Μεταβλητής"
+[BISON] Line=11, expression="Δήλωση Μεταβλητής"
 
 	[FLEX] Line=12, token=KEYWORD, value="short"
 	[FLEX] Line=12, token=IDENTIFIER, value="sh1"
 	[FLEX] Line=12, token=DELIMITER, value=";"
-[BISON] Line=12, expression="Δήλωση Μεταβλητής"
+[BISON] Line=12, expression="Δήλωση Μεταβλητής"
 
-/************ Test case [#2.3] : ARRAYS ************/	[FLEX] Line=16, token=IDENTIFIER, value="pin1"
+/************ Test case [#2.3] : ARRAYS ************/	[FLEX] Line=16, token=IDENTIFIER, value="pin1"
 	[FLEX] Line=16, token=OPERATOR, value="="
 	[FLEX] Line=16, token=SPECIAL, value="["
 	[FLEX] Line=16, token=INTEGER, value="1"
@@ -52,7 +52,7 @@
 	[FLEX] Line=16, token=INTEGER, value="5"
 	[FLEX] Line=16, token=SPECIAL, value="]"
 	[FLEX] Line=16, token=DELIMITER, value=";"
-[BISON] Line=16, expression="Ανάθεση τιμής σε μεταβλητή"
+[BISON] Line=16, expression="Ανάθεση τιμής σε μεταβλητή"
 
 	[FLEX] Line=17, token=IDENTIFIER, value="pin2"
 	[FLEX] Line=17, token=OPERATOR, value="="
@@ -66,22 +66,22 @@
 	[FLEX] Line=17, token=STRING, value=""d""
 	[FLEX] Line=17, token=SPECIAL, value="]"
 	[FLEX] Line=17, token=DELIMITER, value=";"
-[BISON] Line=17, expression="Ανάθεση τιμής σε μεταβλητή"
+[BISON] Line=17, expression="Ανάθεση τιμής σε μεταβλητή"
 
-/************ Test case [#2.4] : BUILD-IN-FUNCTIONS ************/// ========== Test case [#2.4.1] : SCAN ==========
+/************ Test case [#2.4] : BUILD-IN-FUNCTIONS ************/// ========== Test case [#2.4.1] : SCAN ==========
 	[FLEX] Line=22, token=FUNCTION, value="scan"
 	[FLEX] Line=22, token=SPECIAL, value="("
 	[FLEX] Line=22, token=IDENTIFIER, value="x"
 	[FLEX] Line=22, token=SPECIAL, value=")"
 	[FLEX] Line=22, token=DELIMITER, value=";"
-[BISON] Line=22, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=22, expression="Ενσωματωμένη απλή συνάρτηση"
 
 	[FLEX] Line=23, token=FUNCTION, value="scan"
 	[FLEX] Line=23, token=SPECIAL, value="("
 	[FLEX] Line=23, token=IDENTIFIER, value="MyVariable"
 	[FLEX] Line=23, token=SPECIAL, value=")"
 	[FLEX] Line=23, token=DELIMITER, value=";"
-[BISON] Line=23, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=23, expression="Ενσωματωμένη απλή συνάρτηση"
 
 // ========== Test case [#2.4.2] : LEN ==========
 	[FLEX] Line=25, token=FUNCTION, value="len"
@@ -99,21 +99,21 @@
 	[FLEX] Line=25, token=SPECIAL, value="]"
 	[FLEX] Line=25, token=SPECIAL, value=")"
 	[FLEX] Line=25, token=DELIMITER, value=";"
-[BISON] Line=25, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=25, expression="Ενσωματωμένη απλή συνάρτηση"
 
 	[FLEX] Line=26, token=FUNCTION, value="len"
 	[FLEX] Line=26, token=SPECIAL, value="("
 	[FLEX] Line=26, token=STRING, value=""Τhis is a string""
 	[FLEX] Line=26, token=SPECIAL, value=")"
 	[FLEX] Line=26, token=DELIMITER, value=";"
-[BISON] Line=26, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=26, expression="Ενσωματωμένη απλή συνάρτηση"
 
 	[FLEX] Line=27, token=FUNCTION, value="len"
 	[FLEX] Line=27, token=SPECIAL, value="("
 	[FLEX] Line=27, token=IDENTIFIER, value="StringVariable"
 	[FLEX] Line=27, token=SPECIAL, value=")"
 	[FLEX] Line=27, token=DELIMITER, value=";"
-[BISON] Line=27, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=27, expression="Ενσωματωμένη απλή συνάρτηση"
 
 // ========== Test case [#2.4.3] : CMP ==========
 	[FLEX] Line=29, token=FUNCTION, value="cmp"
@@ -123,7 +123,7 @@
 	[FLEX] Line=29, token=STRING, value=""best""
 	[FLEX] Line=29, token=SPECIAL, value=")"
 	[FLEX] Line=29, token=DELIMITER, value=";"
-[BISON] Line=29, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=29, expression="Ενσωματωμένη απλή συνάρτηση"
 
 	[FLEX] Line=30, token=FUNCTION, value="cmp"
 	[FLEX] Line=30, token=SPECIAL, value="("
@@ -132,7 +132,7 @@
 	[FLEX] Line=30, token=IDENTIFIER, value="str2"
 	[FLEX] Line=30, token=SPECIAL, value=")"
 	[FLEX] Line=30, token=DELIMITER, value=";"
-[BISON] Line=30, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=30, expression="Ενσωματωμένη απλή συνάρτηση"
 
 // ========== Test case [#2.4.4] : PRINT ==========
 	[FLEX] Line=32, token=FUNCTION, value="print"
@@ -140,7 +140,7 @@
 	[FLEX] Line=32, token=STRING, value=""Hello World""
 	[FLEX] Line=32, token=SPECIAL, value=")"
 	[FLEX] Line=32, token=DELIMITER, value=";"
-[BISON] Line=32, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=32, expression="Ενσωματωμένη απλή συνάρτηση"
 
 	[FLEX] Line=33, token=FUNCTION, value="print"
 	[FLEX] Line=33, token=SPECIAL, value="("
@@ -151,7 +151,7 @@
 	[FLEX] Line=33, token=INTEGER, value="100"
 	[FLEX] Line=33, token=SPECIAL, value=")"
 	[FLEX] Line=33, token=DELIMITER, value=";"
-[BISON] Line=33, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=33, expression="Ενσωματωμένη απλή συνάρτηση"
 
 	[FLEX] Line=34, token=FUNCTION, value="print"
 	[FLEX] Line=34, token=SPECIAL, value="("
@@ -163,7 +163,7 @@
 	[FLEX] Line=34, token=SPECIAL, value=")"
 	[FLEX] Line=34, token=SPECIAL, value=")"
 	[FLEX] Line=34, token=DELIMITER, value=";"
-[BISON] Line=34, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=34, expression="Ενσωματωμένη απλή συνάρτηση"
 
 	[FLEX] Line=35, token=FUNCTION, value="print"
 	[FLEX] Line=35, token=SPECIAL, value="("
@@ -173,7 +173,7 @@
 	[FLEX] Line=35, token=SPECIAL, value=")"
 	[FLEX] Line=35, token=SPECIAL, value=")"
 	[FLEX] Line=35, token=DELIMITER, value=";"
-[BISON] Line=35, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=35, expression="Ενσωματωμένη απλή συνάρτηση"
 
 	[FLEX] Line=36, token=FUNCTION, value="print"
 	[FLEX] Line=36, token=SPECIAL, value="("
@@ -183,15 +183,15 @@
 	[FLEX] Line=36, token=SPECIAL, value="]"
 	[FLEX] Line=36, token=SPECIAL, value=")"
 	[FLEX] Line=36, token=DELIMITER, value=";"
-[BISON] Line=36, expression="Ενσωματωμένη απλή συνάρτηση"
+[BISON] Line=36, expression="Ενσωματωμένη απλή συνάρτηση"
 
-/************ Test case [#2.5] : USER-FUNCTIONS ************/	[FLEX] Line=40, token=KEYWORD, value="func"
+/************ Test case [#2.5] : USER-FUNCTIONS ************/	[FLEX] Line=40, token=KEYWORD, value="func"
 	[FLEX] Line=40, token=IDENTIFIER, value="myfunc"
 	[FLEX] Line=40, token=SPECIAL, value="("
 	[FLEX] Line=40, token=SPECIAL, value=")"
-	[FLEX] Line=41, token=SPECIAL, value="{"
-	[FLEX] Line=42, token=SPECIAL, value="}"
-[BISON] Line=42, expression="Δήλωση συναρτήσεων χρήστη"
+	[FLEX] Line=41, token=SPECIAL, value="{"
+	[FLEX] Line=42, token=SPECIAL, value="}"
+[BISON] Line=42, expression="Δήλωση συναρτήσεων χρήστη"
 
 	[FLEX] Line=43, token=KEYWORD, value="func"
 	[FLEX] Line=43, token=IDENTIFIER, value="myfunc2"
@@ -205,33 +205,33 @@
 	[FLEX] Line=43, token=KEYWORD, value="short"
 	[FLEX] Line=43, token=IDENTIFIER, value="paramC"
 	[FLEX] Line=43, token=SPECIAL, value=")"
-	[FLEX] Line=44, token=SPECIAL, value="{"
-	[FLEX] Line=45, token=SPECIAL, value="}"
-[BISON] Line=45, expression="Δήλωση συναρτήσεων χρήστη"
+	[FLEX] Line=44, token=SPECIAL, value="{"
+	[FLEX] Line=45, token=SPECIAL, value="}"
+[BISON] Line=45, expression="Δήλωση συναρτήσεων χρήστη"
 
-/************ Test case [#2.6] : EXPRESSIONS-STATEMENT ************/// ========== Test case [#2.6.1] : ARITHMETIC-EXPRESSIONS ==========
+/************ Test case [#2.6] : EXPRESSIONS-STATEMENT ************/// ========== Test case [#2.6.1] : ARITHMETIC-EXPRESSIONS ==========
 	[FLEX] Line=50, token=IDENTIFIER, value="a1"
 	[FLEX] Line=50, token=OPERATOR, value="*"
 	[FLEX] Line=50, token=IDENTIFIER, value="a2"
-[BISON] Line=50, expression="Αριθμητική έκφραση"
+[BISON] Line=50, expression="Αριθμητική έκφραση"
 
 	[FLEX] Line=51, token=IDENTIFIER, value="a3"
 	[FLEX] Line=51, token=OPERATOR, value="+"
 	[FLEX] Line=51, token=IDENTIFIER, value="a4"
-[BISON] Line=51, expression="Αριθμητική έκφραση"
+[BISON] Line=51, expression="Αριθμητική έκφραση"
 
 	[FLEX] Line=52, token=OPERATOR, value="-"
 	[FLEX] Line=52, token=INTEGER, value="5"
 	[FLEX] Line=52, token=OPERATOR, value="+"
 	[FLEX] Line=52, token=INTEGER, value="10"
-[BISON] Line=52, expression="Αριθμητική έκφραση"
+[BISON] Line=52, expression="Αριθμητική έκφραση"
 
 	[FLEX] Line=53, token=INTEGER, value="15"
 	[FLEX] Line=53, token=OPERATOR, value="+"
 	[FLEX] Line=53, token=IDENTIFIER, value="a5"
 	[FLEX] Line=53, token=OPERATOR, value="-"
 	[FLEX] Line=53, token=INTEGER, value="9"
-[BISON] Line=53, expression="Αριθμητική έκφραση"
+[BISON] Line=53, expression="Αριθμητική έκφραση"
 
 	[FLEX] Line=54, token=OPERATOR, value="+"
 	[FLEX] Line=54, token=INTEGER, value="5"
@@ -239,7 +239,7 @@
 	[FLEX] Line=54, token=IDENTIFIER, value="a1"
 	[FLEX] Line=54, token=OPERATOR, value="-"
 	[FLEX] Line=54, token=INTEGER, value="16"
-[BISON] Line=54, expression="Αριθμητική έκφραση"
+[BISON] Line=54, expression="Αριθμητική έκφραση"
 
 	[FLEX] Line=55, token=OPERATOR, value="+"
 	[FLEX] Line=55, token=INTEGER, value="10"
@@ -249,14 +249,14 @@
 	[FLEX] Line=55, token=IDENTIFIER, value="myvar"
 	[FLEX] Line=55, token=OPERATOR, value="-"
 	[FLEX] Line=55, token=IDENTIFIER, value="myvar2"
-[BISON] Line=55, expression="Αριθμητική έκφραση"
+[BISON] Line=55, expression="Αριθμητική έκφραση"
 
 // ========== Test case [#2.6.2] : VARIABLES-INITIALIZE ==========
 	[FLEX] Line=57, token=IDENTIFIER, value="x1"
 	[FLEX] Line=57, token=OPERATOR, value="="
 	[FLEX] Line=57, token=INTEGER, value="0"
 	[FLEX] Line=57, token=DELIMITER, value=";"
-[BISON] Line=57, expression="Ανάθεση τιμής σε μεταβλητή"
+[BISON] Line=57, expression="Ανάθεση τιμής σε μεταβλητή"
 
 	[FLEX] Line=58, token=IDENTIFIER, value="x1"
 	[FLEX] Line=58, token=SPECIAL, value=","
@@ -266,7 +266,7 @@
 	[FLEX] Line=58, token=SPECIAL, value=","
 	[FLEX] Line=58, token=INTEGER, value="1"
 	[FLEX] Line=58, token=DELIMITER, value=";"
-[BISON] Line=58, expression="Ανάθεση τιμής σε μεταβλητή"
+[BISON] Line=58, expression="Ανάθεση τιμής σε μεταβλητή"
 
 	[FLEX] Line=59, token=IDENTIFIER, value="x1"
 	[FLEX] Line=59, token=SPECIAL, value=","
@@ -282,7 +282,7 @@
 	[FLEX] Line=59, token=STRING, value=""C""
 	[FLEX] Line=59, token=SPECIAL, value="]"
 	[FLEX] Line=59, token=DELIMITER, value=";"
-[BISON] Line=59, expression="Ανάθεση τιμής σε μεταβλητή"
+[BISON] Line=59, expression="Ανάθεση τιμής σε μεταβλητή"
 
 	[FLEX] Line=60, token=IDENTIFIER, value="x1"
 	[FLEX] Line=60, token=SPECIAL, value=","
@@ -302,7 +302,7 @@
 	[FLEX] Line=60, token=SPECIAL, value=","
 	[FLEX] Line=60, token=STRING, value=""HELLO""
 	[FLEX] Line=60, token=DELIMITER, value=";"
-[BISON] Line=60, expression="Ανάθεση τιμής σε μεταβλητή"
+[BISON] Line=60, expression="Ανάθεση τιμής σε μεταβλητή"
 
 // ========== Test case [#2.6.3] : ARRAY-MERGE ==========
 	[FLEX] Line=62, token=SPECIAL, value="["
@@ -320,7 +320,7 @@
 	[FLEX] Line=62, token=SPECIAL, value=","
 	[FLEX] Line=62, token=INTEGER, value="6"
 	[FLEX] Line=62, token=SPECIAL, value="]"
-[BISON] Line=62, expression="Συνένωση Πινάκων"
+[BISON] Line=62, expression="Συνένωση Πινάκων"
 
 	[FLEX] Line=63, token=SPECIAL, value="["
 	[FLEX] Line=63, token=INTEGER, value="1"
@@ -337,25 +337,25 @@
 	[FLEX] Line=63, token=SPECIAL, value=","
 	[FLEX] Line=63, token=INTEGER, value="11"
 	[FLEX] Line=63, token=SPECIAL, value="]"
-[BISON] Line=63, expression="Συνένωση Πινάκων"
+[BISON] Line=63, expression="Συνένωση Πινάκων"
 
 // ========== Test case [#2.6.4] : COMPARISONS ==========
 	[FLEX] Line=65, token=IDENTIFIER, value="x1"
 	[FLEX] Line=65, token=OPERATOR, value=">"
 	[FLEX] Line=65, token=IDENTIFIER, value="x2"
-[BISON] Line=65, expression="Σύγκριση"
+[BISON] Line=65, expression="Σύγκριση"
 
 	[FLEX] Line=66, token=IDENTIFIER, value="a"
 	[FLEX] Line=66, token=OPERATOR, value="<="
 	[FLEX] Line=66, token=IDENTIFIER, value="b"
-[BISON] Line=66, expression="Σύγκριση"
+[BISON] Line=66, expression="Σύγκριση"
 
 	[FLEX] Line=67, token=IDENTIFIER, value="myvar"
 	[FLEX] Line=67, token=OPERATOR, value="=="
 	[FLEX] Line=67, token=INTEGER, value="52"
-[BISON] Line=67, expression="Σύγκριση"
+[BISON] Line=67, expression="Σύγκριση"
 
-// ====== Test case [#2.7.1] : STATEMETS ======
+// ====== Test case [#2.7.1] : STATEMETS ======
 	[FLEX] Line=70, token=KEYWORD, value="if"
 	[FLEX] Line=70, token=SPECIAL, value="("
 	[FLEX] Line=70, token=IDENTIFIER, value="var"
@@ -367,7 +367,7 @@
 	[FLEX] Line=70, token=STRING, value=""Value of expression is 100""
 	[FLEX] Line=70, token=SPECIAL, value=")"
 	[FLEX] Line=70, token=DELIMITER, value=";"
-[BISON] Line=70, expression="Δήλωση if"
+[BISON] Line=70, expression="Δήλωση if"
 
 	[FLEX] Line=71, token=KEYWORD, value="if"
 	[FLEX] Line=71, token=SPECIAL, value="("
@@ -394,7 +394,7 @@
 	[FLEX] Line=71, token=SPECIAL, value=")"
 	[FLEX] Line=71, token=DELIMITER, value=";"
 	[FLEX] Line=71, token=SPECIAL, value="}"
-[BISON] Line=71, expression="Δήλωση if"
+[BISON] Line=71, expression="Δήλωση if"
 
 
 [0] ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ: Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.
