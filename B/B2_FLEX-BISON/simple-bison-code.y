@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program physical_line logic_line call_func number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement changing_val for_statement
+%type <sval> program physical_line logic_line call_func oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
 
 %start program
 
@@ -93,19 +93,18 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        physical_line                   { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $1); }                        
+        logic_line                   { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $1); }                        
         ;
 
 /* ============== [2.1] Δομή Πηγαίου Κώδικα ============== */
 physical_line:
-        logic_line NEWLINE { $$ = $1; }
+        logic_line NEWLINE    { $$ = $1; }
         ;
 
 logic_line:          
         decl_statements         { $$ = $1; }
-        | logic_line "\\"       { $$ = $1; }
         | logic_line ";"        { $$ = $1; }
-        |                       { $$ = "\"Κενή Γραμμή\""; }
+        | logic_line NEWLINE    { $$ = $1; }
         ;
 
 /* ============== [2.2] Δηλώσεις Μεταβλητών ============== */
@@ -128,9 +127,8 @@ var:
 
 /* ============== [2.3] Πίνακες ============== */
 pos_elem:
-        IDENTIFIER                         { $$ = strdup(yytext); }
-        | INTEGER                          { $$ = strdup(yytext); }
-        | IDENTIFIER "[" pos_elem "]"      { $$ = strdup(yytext); }
+        IDENTIFIER "[" INTEGER "]"           { $$ = strdup(yytext); }
+        | IDENTIFIER "[" IDENTIFIER "]"      { $$ = strdup(yytext); }
         ;
 
 arr_elements:
@@ -238,32 +236,32 @@ arithm_expr:
 number:
         INTEGER  { $$ = strdup(yytext); }
         | FLOAT  { $$ = strdup(yytext); }
+        | pos_elem { $$ = strdup(yytext); }
         ;
 
-changing_val:
-        IDENTIFIER 
-        | changing_val "++"           { $$ = strdup(yytext); }
-        | changing_val "--"           { $$ = strdup(yytext); }
-        | "++" changing_val           { $$ = strdup(yytext); }
-        | "--" changing_val           { $$ = strdup(yytext); }
-        | changing_val "+=" number    { $$ = strdup(yytext); }
-        | changing_val "-=" number    { $$ = strdup(yytext); }
-        | changing_val "*=" number    { $$ = strdup(yytext); }
-        | changing_val "/=" number    { $$ = strdup(yytext); }
-        ;
 
 /* [2.6.2] Αναθέσεις τιμών σε μεταβλητή */
 assign:
-        var "=" val               { $$ = "\"Ανάθεση τιμής σε μεταβλητή\""; } 
-        | var "=" cmp_expr        { $$ = "\"Σύγκριση\""; }
-        | var "=" arithm_expr     { $$ = "\"Αριθμητική έκφραση\""; }
-        | var "=" merge_arr       { $$ = "\"Συνένωση Πινάκων\""; }
+        var "=" val               { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Ανάθεση τιμής σε μεταβλητή\"\n\n", line-1); } 
+        | var "=" cmp_expr        { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Σύγκριση\"\n\n", line-1); }
+        | var "=" arithm_expr     { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Αριθμητική έκφραση\"\n\n", line-1); }
+        | var "=" merge_arr       { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Συνένωση πινάκων\"\n\n", line-1); }
+        ;
+
+oper_eq:
+        var "++"                  { $$ = strdup(yytext); }
+        | var "--"                { $$ = strdup(yytext); }
+        | "++" var                { $$ = strdup(yytext); }
+        | "--" var                { $$ = strdup(yytext); }
+        | var "+=" number         { $$ = strdup(yytext); }
+        | var "-=" number         { $$ = strdup(yytext); }
+        | var "*=" number         { $$ = strdup(yytext); }
+        | var "/=" number         { $$ = strdup(yytext); }
         ;
 
 val: 
-    INTEGER             { $$ = strdup(yytext); }
+    number              { $$ = strdup(yytext); }
     | IDENTIFIER        { $$ = strdup(yytext); }
-    | FLOAT             { $$ = strdup(yytext); }
     | STRING            { $$ = strdup(yytext); }
     | arr_elements      { $$ = strdup(yytext); } 
     | val "," val       { $$ = strdup(yytext); }
@@ -297,14 +295,14 @@ decl_statements:
         ;
 
 decl_statement:
-        if_statement                     { $$ = "\"Δήλωση if\""; }
-        | while_statement                { $$ = "\"Δήλωση while\""; }
-        | for_statement                  { $$ = "\"Δήλωση for\""; }
-        | decl_var                       { $$ = "\"Δήλωση Μεταβλητής\""; }
-        | build_func                     { $$ = "\"Ενσωματωμένη απλή συνάρτηση\""; }
-        | decl_func                      { $$ = "\"Δήλωση συναρτήσεων χρήστη\""; }
-        | call_func                      { $$ = "\"Κλήση συναρτήσεων χρήστη\""; }
-        | assign                         { $$ = $1; }
+        if_statement                     { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση if\"\n\n", line-1); }
+        | while_statement                { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση while\"\n\n", line-1); }
+        | for_statement                  { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση for\"\n\n", line-1); }
+        | decl_var ";"                   { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση μεταβλητής\"\n\n", line-1); }
+        | build_func ";"                 { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Ενσωματωμένη απλή συνάρτηση\"\n\n", line-1); }
+        | decl_func                      { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Δήλωση συναρτήσεων χρήστη\"\n\n", line-1); }
+        | call_func ";"                  { $$ = strdup(yytext); fprintf(yyout, "[BISON] Line=%d, expression=\"Κλήση συναρτήσεων χρήστη\"\n\n", line-1); }
+        | assign ";"                     { $$ = $1; }
         | block_statement                { $$ = $1; }
         | NEWLINE                        { }
         ;
@@ -330,7 +328,7 @@ while_statement:
 
 /* [2.7.3] Η δήλωση for */
 for_statement:
-        SFOR "(" assign cmp_expr ";" changing_val ")" decl_statement { $$ = strdup(yytext); }
+        SFOR "(" assign ";" cmp_expr ";" oper_eq ")" decl_statement { $$ = strdup(yytext); }
         ;
 
 %%

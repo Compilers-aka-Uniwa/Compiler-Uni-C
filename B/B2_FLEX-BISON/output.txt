@@ -13,6 +13,73 @@
 	[FLEX] Line=3, token=SPECIAL, value=","
 	[FLEX] Line=3, token=IDENTIFIER, value="j"
 	[FLEX] Line=3, token=DELIMITER, value=";"
+[BISON] Line=2, expression="Δήλωση μεταβλητής"
+
+	[FLEX] Line=4, token=KEYWORD, value="float"
+	[FLEX] Line=4, token=IDENTIFIER, value="avg"
+	[FLEX] Line=4, token=DELIMITER, value=";"
+[BISON] Line=3, expression="Δήλωση μεταβλητής"
+
+	[FLEX] Line=5, token=KEYWORD, value="int"
+	[FLEX] Line=5, token=IDENTIFIER, value="sum"
+	[FLEX] Line=5, token=DELIMITER, value=";"
+[BISON] Line=4, expression="Δήλωση μεταβλητής"
+
+	[FLEX] Line=6, token=IDENTIFIER, value="pin1"
+	[FLEX] Line=6, token=OPERATOR, value="="
+	[FLEX] Line=6, token=SPECIAL, value="["
+	[FLEX] Line=6, token=INTEGER, value="1"
+	[FLEX] Line=6, token=SPECIAL, value=","
+	[FLEX] Line=6, token=INTEGER, value="2"
+	[FLEX] Line=6, token=SPECIAL, value=","
+	[FLEX] Line=6, token=INTEGER, value="3"
+	[FLEX] Line=6, token=SPECIAL, value=","
+	[FLEX] Line=6, token=INTEGER, value="4"
+	[FLEX] Line=6, token=SPECIAL, value=","
+	[FLEX] Line=6, token=INTEGER, value="5"
+	[FLEX] Line=6, token=SPECIAL, value=","
+	[FLEX] Line=6, token=INTEGER, value="6"
+	[FLEX] Line=6, token=SPECIAL, value="]"
+	[FLEX] Line=6, token=DELIMITER, value=";"
+[BISON] Line=5, expression="Ανάθεση τιμής σε μεταβλητή"
+
+	[FLEX] Line=7, token=KEYWORD, value="int"
+	[FLEX] Line=7, token=IDENTIFIER, value="N"
+	[FLEX] Line=7, token=DELIMITER, value=";"
+[BISON] Line=6, expression="Δήλωση μεταβλητής"
+
+	[FLEX] Line=9, token=IDENTIFIER, value="sum"
+	[FLEX] Line=9, token=OPERATOR, value="="
+	[FLEX] Line=9, token=INTEGER, value="0"
+	[FLEX] Line=9, token=DELIMITER, value=";"
+[BISON] Line=8, expression="Αριθμητική έκφραση"
+
+	[FLEX] Line=10, token=IDENTIFIER, value="avg"
+	[FLEX] Line=10, token=OPERATOR, value="="
+	[FLEX] Line=10, token=INTEGER, value="0"
+	[FLEX] Line=10, token=DELIMITER, value=";"
+[BISON] Line=9, expression="Αριθμητική έκφραση"
+
+	[FLEX] Line=12, token=KEYWORD, value="for"
+	[FLEX] Line=12, token=SPECIAL, value="("
+	[FLEX] Line=12, token=IDENTIFIER, value="i"
+	[FLEX] Line=12, token=OPERATOR, value="="
+	[FLEX] Line=12, token=INTEGER, value="0"
+	[FLEX] Line=12, token=DELIMITER, value=";"
+[BISON] Line=11, expression="Αριθμητική έκφραση"
+
+	[FLEX] Line=12, token=IDENTIFIER, value="i"
+	[FLEX] Line=12, token=OPERATOR, value="<"
+	[FLEX] Line=12, token=IDENTIFIER, value="N"
+	[FLEX] Line=12, token=DELIMITER, value=";"
+	[FLEX] Line=12, token=IDENTIFIER, value="i"
+	[FLEX] Line=12, token=OPERATOR, value="++"
+	[FLEX] Line=12, token=SPECIAL, value=")"
+[BISON] Line=12, expression="Δήλωση for"
+
+	[FLEX] Line=13, token=SPECIAL, value="{"
+	[FLEX] Line=14, token=IDENTIFIER, value="sum"
+	[FLEX] Line=14, token=OPERATOR, value="+="
 
 ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.
 ΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : 1

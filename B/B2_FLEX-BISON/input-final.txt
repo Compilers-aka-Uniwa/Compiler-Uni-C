@@ -15,4 +15,10 @@ func main(int paramA, int paramB)
     }
 
     avg = sum / N;
+
+    if (x && y && z) 
+    {
+        print("Hello World");
+    }
+
 }
