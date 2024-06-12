@@ -234,9 +234,9 @@ arithm_expr:
         ;
 
 number:
-        INTEGER  { $$ = strdup(yytext); }
-        | FLOAT  { $$ = strdup(yytext); }
-        | pos_elem { $$ = strdup(yytext); }
+        INTEGER     { $$ = strdup(yytext); }
+        | FLOAT     { $$ = strdup(yytext); }
+        | pos_elem  { $$ = strdup(yytext); }
         ;
 
 
