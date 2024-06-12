@@ -469,6 +469,58 @@
 	[FLEX] Line=109, token=SPECIAL, value="}"
 [BISON] Line=109, expression="Δήλωση for"
 
+/*============= Test case [#2.8] : FINAL =============*/	[FLEX] Line=112, token=KEYWORD, value="func"
+	[FLEX] Line=112, token=IDENTIFIER, value="myAdd"
+	[FLEX] Line=112, token=SPECIAL, value="("
+	[FLEX] Line=112, token=KEYWORD, value="int"
+	[FLEX] Line=112, token=IDENTIFIER, value="num1"
+	[FLEX] Line=112, token=SPECIAL, value=","
+	[FLEX] Line=112, token=KEYWORD, value="int"
+	[FLEX] Line=112, token=IDENTIFIER, value="num2"
+	[FLEX] Line=112, token=SPECIAL, value=")"
+	[FLEX] Line=113, token=SPECIAL, value="{"
+	[FLEX] Line=114, token=KEYWORD, value="int"
+	[FLEX] Line=114, token=IDENTIFIER, value="sum"
+	[FLEX] Line=114, token=DELIMITER, value=";"
+	[FLEX] Line=115, token=IDENTIFIER, value="sum"
+	[FLEX] Line=115, token=OPERATOR, value="="
+	[FLEX] Line=115, token=IDENTIFIER, value="a"
+	[FLEX] Line=115, token=OPERATOR, value="+"
+	[FLEX] Line=115, token=IDENTIFIER, value="b"
+	[FLEX] Line=115, token=DELIMITER, value=";"
+	[FLEX] Line=116, token=FUNCTION, value="print"
+	[FLEX] Line=116, token=SPECIAL, value="("
+	[FLEX] Line=116, token=STRING, value=""Sum is: ""
+	[FLEX] Line=116, token=SPECIAL, value=","
+	[FLEX] Line=116, token=IDENTIFIER, value="sum"
+	[FLEX] Line=116, token=SPECIAL, value=")"
+	[FLEX] Line=116, token=DELIMITER, value=";"
+	[FLEX] Line=117, token=SPECIAL, value="}"
+[BISON] Line=117, expression="Δήλωση συναρτήσεων χρήστη"
 
-ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.
-ΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : 0
+	[FLEX] Line=119, token=KEYWORD, value="func"
+	[FLEX] Line=119, token=IDENTIFIER, value="main"
+	[FLEX] Line=119, token=SPECIAL, value="("
+	[FLEX] Line=119, token=SPECIAL, value=")"
+	[FLEX] Line=120, token=SPECIAL, value="{"
+	[FLEX] Line=121, token=KEYWORD, value="int"
+	[FLEX] Line=121, token=IDENTIFIER, value="a"
+	[FLEX] Line=121, token=DELIMITER, value=";"
+	[FLEX] Line=122, token=KEYWORD, value="int"
+	[FLEX] Line=122, token=IDENTIFIER, value="b"
+	[FLEX] Line=122, token=DELIMITER, value=";"
+	[FLEX] Line=123, token=FUNCTION, value="scan"
+	[FLEX] Line=123, token=SPECIAL, value="("
+	[FLEX] Line=123, token=IDENTIFIER, value="a"
+	[FLEX] Line=123, token=SPECIAL, value=")"
+	[FLEX] Line=123, token=DELIMITER, value=";"
+	[FLEX] Line=124, token=FUNCTION, value="scan"
+	[FLEX] Line=124, token=SPECIAL, value="("
+	[FLEX] Line=124, token=IDENTIFIER, value="b"
+	[FLEX] Line=124, token=SPECIAL, value=")"
+	[FLEX] Line=124, token=DELIMITER, value=";"
+	[FLEX] Line=125, token=IDENTIFIER, value="myAdd"
+	[FLEX] Line=125, token=SPECIAL, value="("
+
+ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.
+ΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : 1

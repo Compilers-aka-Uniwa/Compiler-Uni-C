@@ -12,7 +12,7 @@ short sh1;
 
 /*============= Test case [#2.3] : ARRAYS =============*/
 
-pin1 = [1, 2, 3, 4, 5 ];
+pin1 = [1, 2, 3, 4, 5 ]; 
 pin2 = ["a", "b", "c", "d"];
 
 /*============= Test case [#2.4] : BUILD-IN-FUNCTIONS =============*/
@@ -106,4 +106,21 @@ print("i is: ", i);
 for (i = 0; i < 10; i++)
 {
 print("i = ", i);
+}
+
+/*============= Test case [#2.8] : FINAL =============*/
+func myAdd(int num1, int num2)
+{
+    int sum;
+    sum = a + b;
+    print("Sum is: ", sum);
+}
+
+func main()
+{
+    int a;
+    int b;
+    scan(a);
+    scan(b);
+    myAdd(a,b);
 }

@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition code while_statement changing_val for_statement
+%type <sval> program number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition code while_statement changing_val for_statement
 
 %start program
 
@@ -244,21 +244,29 @@ arithm_expr:
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         ;
 
+number:
+        INTEGER  { $$ = strdup(yytext); }
+        | FLOAT  { $$ = strdup(yytext); }
+        ;
+
 changing_val:
         IDENTIFIER 
-        | changing_val "++"                 { $$ = strdup(yytext); }
-        | changing_val "--"                 { $$ = strdup(yytext); }
-        | "++" changing_val                 { $$ = strdup(yytext); }
-        | "--" changing_val                 { $$ = strdup(yytext); }
-        | changing_val "+=" changing_val    { $$ = strdup(yytext); }
-        | changing_val "-=" changing_val    { $$ = strdup(yytext); }
-        | changing_val "*=" changing_val    { $$ = strdup(yytext); }
-        | changing_val "/=" changing_val    { $$ = strdup(yytext); }
+        | changing_val "++"           { $$ = strdup(yytext); }
+        | changing_val "--"           { $$ = strdup(yytext); }
+        | "++" changing_val           { $$ = strdup(yytext); }
+        | "--" changing_val           { $$ = strdup(yytext); }
+        | changing_val "+=" number    { $$ = strdup(yytext); }
+        | changing_val "-=" number    { $$ = strdup(yytext); }
+        | changing_val "*=" number    { $$ = strdup(yytext); }
+        | changing_val "/=" number    { $$ = strdup(yytext); }
         ;
 
 /* [2.6.2] Αναθέσεις τιμών σε μεταβλητή */
 assign:
-        var "=" val ";" { $$ = strdup(yytext); }
+        var "=" val ";"           { $$ = strdup(yytext); }
+        | var "=" cmp_expr ";"    { $$ = strdup(yytext); }
+        | var "=" arithm_expr ";" { $$ = strdup(yytext); }
+        | var "=" merge_arr ";"   { $$ = strdup(yytext); }
         ;
 
 val: 
@@ -342,7 +350,7 @@ void yyerror(char *s) {
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 0;
+        yydebug = 1;
 
 	if (argc == 3)
         {
