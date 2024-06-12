@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params decl_ops arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition code while_statement changing_val for_statement
+%type <sval> program physical_line logic_line call_func number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement changing_val for_statement
 
 %start program
 
@@ -93,27 +93,24 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-/* Δηλώσεις Μεταβλητών */
-        program decl_var NEWLINE                { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-/* Ενσωματωμένες συναρτήσεις */
-        | program build_func NEWLINE            { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-/* Συναρτήσεις του χρήστη */
-        | program decl_func NEWLINE             { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-/* Εκφράσεις αριθμητικές, συγκρίσεις, συνένωνση πινάκων, ανάθεση τιμής σε μεταβλητή */
-        | program decl_ops NEWLINE              { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-/* Σύνθετες δηλώσεις, δήλωση if, while, for */
-        | program decl_statements NEWLINE       { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-/* Αλλαγή γραμμής */
-        | program NEWLINE                       { }
-/* Κενή γραμμή */
-        |                                       { }                              
+        physical_line                   { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $1); }                        
         ;
 
 /* ============== [2.1] Δομή Πηγαίου Κώδικα ============== */
+physical_line:
+        logic_line NEWLINE { $$ = $1; }
+        ;
+
+logic_line:          
+        decl_statements         { $$ = $1; }
+        | logic_line "\\"       { $$ = $1; }
+        | logic_line ";"        { $$ = $1; }
+        |                       { $$ = "\"Κενή Γραμμή\""; }
+        ;
 
 /* ============== [2.2] Δηλώσεις Μεταβλητών ============== */
 decl_var:
-        type var ";" { $$ = "\"Δήλωση Μεταβλητής\""; }
+        type var { $$ = strdup(yytext); }
         ;
 
 type: 
@@ -131,7 +128,10 @@ var:
 
 /* ============== [2.3] Πίνακες ============== */
 pos_elem:
-        IDENTIFIER "[" INTEGER "]"      { $$ = strdup(yytext); }
+        IDENTIFIER                         { $$ = strdup(yytext); }
+        | INTEGER                          { $$ = strdup(yytext); }
+        | IDENTIFIER "[" pos_elem "]"      { $$ = strdup(yytext); }
+        ;
 
 arr_elements:
         "[" "]"                         { $$ = strdup(yytext); }
@@ -157,7 +157,7 @@ str:
 
 /* ============== [2.4] Ενσωματωμένες απλές συναρτήσεις ============== */
 build_func:
-	func ";" { $$ = "\"Ενσωματωμένη απλή συνάρτηση\""; }
+	func  { $$ = strdup(yytext); }
 	;
 
 func:
@@ -195,12 +195,16 @@ print_params:
 
 /* ============== [2.5] Δήλωση συναρτήσεων χρήστη ============== */
 decl_func:
-        name_func decl_statement { $$ = "\"Δήλωση συναρτήσεων χρήστη\""; }
+        name_func decl_statement { $$ = strdup(yytext); }
 	;
 
 name_func: 
-        SFUNC IDENTIFIER params NEWLINE { $$ = strdup(yytext); }
+        SFUNC                                   { $$ = strdup(yytext); }
+        | name_func IDENTIFIER params NEWLINE   { $$ = strdup(yytext); }
         ;
+
+call_func:
+        name_func "(" print_params ")"  { $$ = strdup(yytext); }
 
 params:
         "(" ")"                 { $$ = strdup(yytext); }
@@ -212,21 +216,7 @@ type_params:
         | type_params "," type_params   { $$ = strdup(yytext); }
         ;
 
-code:
-        decl_var        { $$ = strdup(yytext); }
-        | build_func    { $$ = strdup(yytext); }
-        | decl_ops      { $$ = strdup(yytext); }
-        | NEWLINE       { $$ = strdup(yytext); } 
-        ;
-
 /* ============== [2.6] Δηλώσεις απλών εκφράσεων ============== */
-decl_ops:
-        arithm_expr             { $$ = "\"Αριθμητική έκφραση\""; }
-        | assign                { $$ = "\"Ανάθεση τιμής σε μεταβλητή\""; } 
-        | cmp_expr              { $$ = "\"Σύγκριση\""; }
-        | merge_arr             { $$ = "\"Συνένωση Πινάκων\""; }
-        ;
-
 /* [2.6.1] Αριθμητικές εκφράσεις */
 sign:
         INTEGER         { $$ = strdup(yytext); }
@@ -242,6 +232,7 @@ arithm_expr:
         | arithm_expr "-" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
+        | arithm_expr "%" arithm_expr   { $$ = strdup(yytext); }
         ;
 
 number:
@@ -263,14 +254,15 @@ changing_val:
 
 /* [2.6.2] Αναθέσεις τιμών σε μεταβλητή */
 assign:
-        var "=" val ";"           { $$ = strdup(yytext); }
-        | var "=" cmp_expr ";"    { $$ = strdup(yytext); }
-        | var "=" arithm_expr ";" { $$ = strdup(yytext); }
-        | var "=" merge_arr ";"   { $$ = strdup(yytext); }
+        var "=" val               { $$ = "\"Ανάθεση τιμής σε μεταβλητή\""; } 
+        | var "=" cmp_expr        { $$ = "\"Σύγκριση\""; }
+        | var "=" arithm_expr     { $$ = "\"Αριθμητική έκφραση\""; }
+        | var "=" merge_arr       { $$ = "\"Συνένωση Πινάκων\""; }
         ;
 
 val: 
     INTEGER             { $$ = strdup(yytext); }
+    | IDENTIFIER        { $$ = strdup(yytext); }
     | FLOAT             { $$ = strdup(yytext); }
     | STRING            { $$ = strdup(yytext); }
     | arr_elements      { $$ = strdup(yytext); } 
@@ -282,12 +274,15 @@ cmp_expr:
 	INTEGER   		  { $$ = strdup(yytext); }
         | FLOAT                   { $$ = strdup(yytext); }
 	| IDENTIFIER              { $$ = strdup(yytext); }
-	| cmp_expr ">"  cmp_expr  { $$ = strdup(yytext); }
-        | cmp_expr "<"  cmp_expr  { $$ = strdup(yytext); }
+	| cmp_expr ">" cmp_expr   { $$ = strdup(yytext); }
+        | cmp_expr "<" cmp_expr   { $$ = strdup(yytext); }
         | cmp_expr "<=" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr ">=" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "==" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "!=" cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "||" cmp_expr  { $$ = strdup(yytext); }
+        | cmp_expr "&&" cmp_expr  { $$ = strdup(yytext); }
+        | "!" cmp_expr            { $$ = strdup(yytext); }
         ;
 
 /* [2.6.4] Συνένωση Πινάκων */
@@ -305,13 +300,18 @@ decl_statement:
         if_statement                     { $$ = "\"Δήλωση if\""; }
         | while_statement                { $$ = "\"Δήλωση while\""; }
         | for_statement                  { $$ = "\"Δήλωση for\""; }
-        | code                           { $$ = strdup(yytext); }
-        | block_statement                { $$ = strdup(yytext); }
+        | decl_var                       { $$ = "\"Δήλωση Μεταβλητής\""; }
+        | build_func                     { $$ = "\"Ενσωματωμένη απλή συνάρτηση\""; }
+        | decl_func                      { $$ = "\"Δήλωση συναρτήσεων χρήστη\""; }
+        | call_func                      { $$ = "\"Κλήση συναρτήσεων χρήστη\""; }
+        | assign                         { $$ = $1; }
+        | block_statement                { $$ = $1; }
+        | NEWLINE                        { }
         ;
 
 /* [2.7.1] Η δήλωση if */
 if_statement:
-        SIF condition decl_statement     { $$ = "\"Δήλωση if\""; }
+        SIF condition decl_statement     { $$ = strdup(yytext); }
         ;
 
 condition:
@@ -325,12 +325,12 @@ block_statement:
 
 /* [2.7.2] Η δήλωση while */
 while_statement:
-        SWHILE condition decl_statement { $$ = "\"Δήλωση while\""; } 
+        SWHILE condition decl_statement { $$ = strdup(yytext); }
         ;
 
 /* [2.7.3] Η δήλωση for */
 for_statement:
-       SFOR "(" assign cmp_expr ";" changing_val ")" decl_statement { $$ = "\"Δήλωση for\""; }
+        SFOR "(" assign cmp_expr ";" changing_val ")" decl_statement { $$ = strdup(yytext); }
         ;
 
 %%
