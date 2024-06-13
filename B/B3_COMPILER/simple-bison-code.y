@@ -11,6 +11,8 @@
 	int errflag = 0;
 
 	extern char *yytext;
+        extern int lex_warning;
+        int parse_warning = 0;
 	
 	void yyerror(char *);
         int yylex(void);
@@ -84,6 +86,10 @@
 
 %type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
 
+/* BUG DECLARATION*/
+%token ARRAY_SIZE_ERROR TOKEN_ERROR
+
+/* Έναρξη προγραμμάτος*/
 %start program
 
 %%
@@ -93,9 +99,11 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        program decl_statements NEWLINE         { if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
+        program decl_statements NEWLINE         { if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
+        | program ARRAY_SIZE_ERROR NEWLINE       { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, "ARRAY_SIZE_ERROR"); }
         |                                       { }                       
         ;
+       
 
 /* ============== [2.1] Δομή Πηγαίου Κώδικα ============== */
 
@@ -119,9 +127,15 @@ var:
 
 /* ============== [2.3] Πίνακες ============== */
 pos_elem:
-        IDENTIFIER "[" INTEGER "]"           { $$ = strdup(yytext); }
-        | IDENTIFIER "[" IDENTIFIER "]"      { $$ = strdup(yytext); }
+        IDENTIFIER "[" INTEGER "]"{ 
+            if ($3 < 0) {
+                ARRAY_SIZE_ERROR;
+            }
+            $$ = strdup(yytext);
+        }
+        | IDENTIFIER "[" IDENTIFIER "]" { $$ = strdup(yytext); }
         ;
+
 
 arr_elements:
         "[" "]"                         { $$ = strdup(yytext); }

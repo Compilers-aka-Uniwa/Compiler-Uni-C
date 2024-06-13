@@ -1,5 +1,6 @@
 /* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
 %option noyywrap
+%x error
 
 /* Κώδικας C για τον ορισμό των απαιτούμενων header files και των μεταβλητών.
    Οτιδήποτε ανάμεσα στα %{ και %} μεταφέρεται αυτόματα στο αρχείο C που
@@ -18,8 +19,10 @@
 /* Ορισμός μετρητή τρέχουσας γραμμής */
 extern int line;
 extern int flag;
+int lex_warning = 0;
 
-void prn(const char *token);
+void yyerror (const char *msg);
+void prn(char *token);
 
 %}
 
@@ -36,7 +39,7 @@ COMMENT          (\/\/.*|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 DELIMITER        \;
 WHITESPACE       [ \t]+  
 NEWLINE          \n
-UNKNOWN          [^ \t\r\n;] 
+TOKEN_ERROR      [^ \t\r\n;] 
 /* ΚΑΤΑΣΤΑΣΗ UNKNOWN */
 %x UNKNOWN_STATE 
 
@@ -105,12 +108,15 @@ UNKNOWN          [^ \t\r\n;]
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
-{UNKNOWN}       { BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-<UNKNOWN_STATE>{UNKNOWN}+ { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+{TOKEN_ERROR}       { BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+<UNKNOWN_STATE>{TOKEN_ERROR}+ { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+<error>.       {lex_warning ++;}
+<error>\n      {BEGIN(0); printf("\t\t%d character(s) ignored so far\n", lex_warning); return NEWLINE;}
 
 %%
 
-void prn(const char *token)
+
+void prn(char *token)
 {
    fprintf(yyout, "\t[FLEX] Line=%d, token=%s, value=\"%s\"\n", line, token, yytext);   
    return;
