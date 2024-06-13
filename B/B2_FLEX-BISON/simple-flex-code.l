@@ -32,7 +32,7 @@ IDENTIFIER       [a-zA-Z_][a-zA-Z0-9_]{0,31}
 STRING           \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
 INTEGER          ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
 FLOAT            (?:[1-9][0-9]*|0)(?:\.(?:[1-9][0-9]*|0*[1-9]+))?(?:[eE](?:-?[1-9][0-9]*|0))?
-COMMENT          (\/\/.*\n|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
+COMMENT          (\/\/.*|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 DELIMITER        \;
 WHITESPACE       [ \t]+  
 NEWLINE          \n
@@ -101,7 +101,7 @@ UNKNOWN          [^ \t\r\n;]
 {STRING}        { prn("STRING"); return STRING; }
 {INTEGER}       { yylval.ival = atoi(yytext); prn("INTEGER"); return INTEGER; } 
 {FLOAT}         { yylval.fval = atof(yytext); prn("FLOAT"); return FLOAT; }
-{COMMENT}       { ECHO; line++; }
+{COMMENT}       { ECHO; }
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
