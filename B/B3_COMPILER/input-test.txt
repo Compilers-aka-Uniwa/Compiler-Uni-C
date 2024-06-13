@@ -1,0 +1,123 @@
+/*============= Test case [#2.2] : VARIABLES-STATEMENT =============*/
+
+int a;
+double var;
+float c;
+int a, b, c;
+long var1,var2,var3,var4;
+short sh1;
+
+/*============= Test case [#2.3] : ARRAYS =============*/
+
+pin1 = [1, 2, 3, 4, 5 ]; 
+pin2 = ["a", "b", "c", "d"];
+
+/*============= Test case [#2.4] : BUILD-IN-FUNCTIONS =============*/
+/* --- Test case [#2.4.1] : SCAN --- */
+
+scan(x);
+scan(MyVariable);
+
+/* --- Test case [#2.4.2] : LEN --- */
+
+len([10, 20, 30, 40, 50]);
+len("Τhis is a string");
+len(StringVariable);
+
+/* --- Test case [#2.4.3] : CMP --- */
+
+cmp("test", "best");
+cmp(str1, str2);
+
+/* --- Test case [#2.4.4] : PRINT --- */
+
+print("Hello World");
+print(x, "=", 100);
+print(cmp(str1, str2));
+print(len("This is a string"));
+print(pin[0]);
+
+/*============= Test case [#2.5] : USER-FUNCTIONS =============*/
+
+func myfunc()
+{
+}
+func myfunc2(int paramA, long paramB, short paramC)
+{
+
+}
+func main()
+{
+    print("Hello World\n");
+}
+
+/*============= Test case [#2.6] : EXPRESSIONS =============*/
+/* --- Test case [#2.6.1] : ARITHMETIC-EXPRESSIONS --- */
+
+a1 * a2
+a3 + a4
+-5 + 10
+15 + a5 - 9
++5 - a1 -16
++10 -5 + myvar - myvar2
+
+/* --- Test case [#2.6.2] : VARIABLES-INITIALIZE --- */
+
+x1=0;
+x1, x2 = 0, 1;
+x1, list1 = 0, ["A", "B", "C"];
+x1, list1, string = 0, ["A", "B", "C"], "HELLO";
+
+/* --- Test case [#2.6.3] : ARRAY-MERGE --- */
+
+[1, 2, 3] + [4, 5, 6]
+[1, 3] + [5, 7, 9, 11]
+
+/* --- Test case [#2.6.4] : COMPARISONS --- */
+
+x1 > x2
+a <= b
+myvar == 52
+
+/*============= Test case [#2.7] : STATEMENTS =============*/
+/* --- Test case [#2.7.1] : IF-STATEMENTS --- */
+
+if (var == 100) print("Value of expression is 100"); 
+if (x < y < z) { print(x);  print(y);  print(z);  } 
+
+if (x == 0) 
+{
+    int i;
+    i = 1;
+    if (i > 1)
+        print("i is greater than 1");
+}
+
+/* --- Test case [#2.7.2] : WHILE-STATEMENTS --- */
+while (i < 10)
+{
+print("i is: ", i);
+}
+
+/* --- Test case [#2.7.3] : FOR-STATEMENTS --- */
+for (i = 0; i < 10; i++)
+{
+print("i = ", i);
+}
+
+/*============= Test case [#2.8] : FINAL =============*/
+func myAdd(int num1, int num2)
+{
+    int sum;
+    sum = a + b;
+    print("Sum is: ", sum);
+}
+
+func main()
+{
+    int a;
+    int b;
+    scan(a);
+    scan(b);
+    myAdd(a,b);
+}

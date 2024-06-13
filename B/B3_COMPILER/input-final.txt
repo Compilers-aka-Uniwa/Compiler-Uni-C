@@ -1,0 +1,24 @@
+func main(int paramA, int paramB)
+{
+    int i, j;
+    float avg;
+    int sum;
+    pin1 = [1, 2, 3, 4, 5, 6];
+    int N;
+
+    sum = 0;
+    avg = 0;
+
+    for (i = 0; i < N; i++) 
+    {
+        sum += pin1[i];
+    }
+
+    avg = sum / N;
+
+    if (x && y && z) 
+    {
+        print("Hello World");
+    }
+
+}
