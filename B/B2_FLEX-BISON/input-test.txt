@@ -94,7 +94,7 @@ if (x == 0)
     i = 1;
     if (i > 1)
         print("i is greater than 1");
-} 
+}
 
 /* --- Test case [#2.7.2] : WHILE-STATEMENTS --- */
 while (i < 10)

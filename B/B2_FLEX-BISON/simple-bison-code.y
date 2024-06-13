@@ -302,7 +302,7 @@ decl_statement:
 
 /* [2.7.1] Η δήλωση if */
 if_statement:
-        SIF condition decl_statement     { $$ = strdup(yytext); }
+        SIF condition decl_statement            { $$ = strdup(yytext); }
         ;
 
 condition:

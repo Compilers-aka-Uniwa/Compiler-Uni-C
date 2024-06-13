@@ -2028,7 +2028,7 @@ yyreduce:
 
   case 110: /* if_statement: SIF condition decl_statement  */
 #line 305 "simple-bison-code.y"
-                                         { (yyval.sval) = strdup(yytext); }
+                                                { (yyval.sval) = strdup(yytext); }
 #line 2033 "simple-bison-code.tab.c"
     break;
 
