@@ -6,7 +6,7 @@
         #include <string.h>
 	#include <stdlib.h>
         #define YYDEBUG 1
-	
+
 	int line = 1;
 	int errflag = 0;
 
@@ -94,7 +94,7 @@
 				όνομα : κανόνας { κώδικας C } */
 program:
         program decl_statements NEWLINE         { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
-        |                                       {}                       
+        |                                       { }                       
         ;
 
 /* ============== [2.1] Δομή Πηγαίου Κώδικα ============== */
@@ -113,7 +113,7 @@ type:
         ;
 
 var:
-        IDENTIFIER   { $$ = strdup(yytext); }
+        IDENTIFIER     { $$ = strdup(yytext); }
         | var "," var  { $$ = strdup(yytext); }
         ;
 
@@ -151,15 +151,15 @@ build_func:
 	;
 
 func:
-        SSCAN "(" scan_params ")"        { $$ = strdup(yytext); }        
-        | SLEN "(" len_params ")"        { $$ = strdup(yytext); }
-        | SCMP "(" cmp_params ")"        { $$ = strdup(yytext); }
-        | SPRINT "(" print_params ")"    { $$ = strdup(yytext); }
+        SSCAN "(" scan_params ")"         { $$ = strdup(yytext); }        
+        | SLEN "(" len_params ")"         { $$ = strdup(yytext); }
+        | SCMP "(" cmp_params ")"         { $$ = strdup(yytext); }
+        | SPRINT "(" print_params ")"     { $$ = strdup(yytext); }
         | IDENTIFIER "(" print_params ")" { $$ = strdup(yytext); }
         ;
 
 scan_params:
-        IDENTIFIER       { $$ = strdup(yytext); }
+        IDENTIFIER      { $$ = strdup(yytext); }
         ;
 
 len_params:
@@ -236,6 +236,7 @@ assign:
         | var "=" cmp_expr        { $$ = strdup(yytext); }
         | var "=" arithm_expr     { $$ = strdup(yytext); }
         | var "=" merge_arr       { $$ = strdup(yytext); }
+        | oper_eq                 { $$ = strdup(yytext); }
         ;
 
 oper_eq:
