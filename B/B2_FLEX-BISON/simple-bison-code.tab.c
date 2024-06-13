@@ -1380,7 +1380,7 @@ yyreduce:
     {
   case 2: /* program: program decl_statements NEWLINE  */
 #line 96 "simple-bison-code.y"
-                                                { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, (yyvsp[-1].sval)); }
+                                                { if ((yyvsp[-1].sval) != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, (yyvsp[-1].sval)); }
 #line 1385 "simple-bison-code.tab.c"
     break;
 
@@ -1950,7 +1950,7 @@ yyreduce:
 
   case 97: /* decl_statements: decl_statements decl_statement  */
 #line 285 "simple-bison-code.y"
-                                         { (yyval.sval) = (yyvsp[-1].sval); }
+                                         { (yyval.sval) = (yyvsp[0].sval); }
 #line 1955 "simple-bison-code.tab.c"
     break;
 
@@ -2016,19 +2016,19 @@ yyreduce:
 
   case 108: /* decl_statement: block_statement  */
 #line 299 "simple-bison-code.y"
-                                         { (yyval.sval) = strdup(yytext); }
+                                         { (yyval.sval) = "\"Σύνθετες δηλώσεις\""; }
 #line 2021 "simple-bison-code.tab.c"
     break;
 
   case 109: /* decl_statement: NEWLINE  */
 #line 300 "simple-bison-code.y"
-                                         { (yyval.sval) = strdup(yytext); }
+                                         { (yyval.sval) = "\n"; }
 #line 2027 "simple-bison-code.tab.c"
     break;
 
   case 110: /* if_statement: SIF condition decl_statement  */
 #line 305 "simple-bison-code.y"
-                                                { (yyval.sval) = strdup(yytext); }
+                                         { (yyval.sval) = strdup(yytext); }
 #line 2033 "simple-bison-code.tab.c"
     break;
 
@@ -2274,7 +2274,7 @@ void yyerror(char *s) {
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 1;
+        yydebug = 0;
 
 	if (argc == 3)
         {

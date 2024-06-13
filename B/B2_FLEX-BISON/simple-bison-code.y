@@ -93,7 +93,7 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        program decl_statements NEWLINE         { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
+        program decl_statements NEWLINE         { if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
         |                                       { }                       
         ;
 
@@ -282,7 +282,7 @@ merge_arr:
 /* ============== [2.7] Σύνθετες δηλώσεις ============== */
 decl_statements:
         decl_statement                   { $$ = $1; }
-        | decl_statements decl_statement { $$ = $1; }
+        | decl_statements decl_statement { $$ = $2; }
         ;
 
 decl_statement:
@@ -296,13 +296,13 @@ decl_statement:
         | arithm_expr                    { $$ = "\"Αριθμητική έκφραση\""; }
         | cmp_expr                       { $$ = "\"Σύγκριση\""; }
         | merge_arr                      { $$ = "\"Συνένωση πινάκων\""; }
-        | block_statement                { $$ = strdup(yytext); } 
-        | NEWLINE                        { $$ = strdup(yytext); }
+        | block_statement                { $$ = "\"Σύνθετες δηλώσεις\""; } 
+        | NEWLINE                        { $$ = "\n"; }
         ;
 
 /* [2.7.1] Η δήλωση if */
 if_statement:
-        SIF condition decl_statement            { $$ = strdup(yytext); }
+        SIF condition decl_statement     { $$ = strdup(yytext); }
         ;
 
 condition:
@@ -341,7 +341,7 @@ void yyerror(char *s) {
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 1;
+        yydebug = 0;
 
 	if (argc == 3)
         {
