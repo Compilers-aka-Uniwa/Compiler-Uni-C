@@ -343,7 +343,7 @@ void yyerror(char *s) {
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 1;
+        yydebug = 0;
 
 	if (argc == 3)
         {
