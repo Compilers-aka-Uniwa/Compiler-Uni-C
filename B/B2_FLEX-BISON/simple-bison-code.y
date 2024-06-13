@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program physical_line logic_line call_func oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
+%type <sval> program call_func oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
 
 %start program
 
@@ -93,18 +93,11 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        program physical_line                   { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
+        program decl_statements NEWLINE         { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
         |                                       {}                       
         ;
 
 /* ============== [2.1] Δομή Πηγαίου Κώδικα ============== */
-physical_line:
-        logic_line NEWLINE    { $$ = $1; }
-        ;
-
-logic_line:          
-        decl_statements         { $$ = $1; }
-        ;
 
 /* ============== [2.2] Δηλώσεις Μεταβλητών ============== */
 decl_var:
@@ -120,8 +113,8 @@ type:
         ;
 
 var:
-        IDENTIFIER              { $$ = strdup(yytext); }
-        | var "," var           { $$ = strdup(yytext); }
+        IDENTIFIER   { $$ = strdup(yytext); }
+        | var "," var  { $$ = strdup(yytext); }
         ;
 
 /* ============== [2.3] Πίνακες ============== */
