@@ -82,7 +82,7 @@
 %left "++" "--"
 
 
-%type <sval> program call_func oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
+%type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
 
 %start program
 
@@ -155,6 +155,7 @@ func:
         | SLEN "(" len_params ")"        { $$ = strdup(yytext); }
         | SCMP "(" cmp_params ")"        { $$ = strdup(yytext); }
         | SPRINT "(" print_params ")"    { $$ = strdup(yytext); }
+        | IDENTIFIER "(" print_params ")" { $$ = strdup(yytext); }
         ;
 
 scan_params:
@@ -192,9 +193,6 @@ name_func:
         SFUNC                                   { $$ = strdup(yytext); }
         | name_func IDENTIFIER params NEWLINE   { $$ = strdup(yytext); }
         ;
-
-call_func:
-        name_func "(" print_params ")"  { $$ = strdup(yytext); }
 
 params:
         "(" ")"                 { $$ = strdup(yytext); }
@@ -291,14 +289,13 @@ decl_statement:
         | while_statement                { $$ = "\"Δήλωση while\""; }
         | for_statement                  { $$ = "\"Δήλωση for\""; }
         | decl_var ";"                   { $$ = "\"Δήλωση μεταβλητής\""; }
-        | build_func ";"                 { $$ = "\"Ενσωματωμένη απλή συνάρτηση\""; }
+        | build_func ";"                 { $$ = "\"Κλήση συνάρτησης\""; }
         | decl_func                      { $$ = "\"Δήλωση συναρτήσεων χρήστη\""; }
-        | call_func ";"                  { $$ = "\"Κλήση συναρτήσεων χρήστη\""; }
         | assign ";"                     { $$ = "\"Ανάθεση τιμής σε μεταβλητή\""; }
         | arithm_expr                    { $$ = "\"Αριθμητική έκφραση\""; }
         | cmp_expr                       { $$ = "\"Σύγκριση\""; }
         | merge_arr                      { $$ = "\"Συνένωση πινάκων\""; }
-        | block_statement                { $$ = strdup(yytext); }
+        | block_statement                { $$ = strdup(yytext); } 
         | NEWLINE                        { $$ = strdup(yytext); }
         ;
 
@@ -343,7 +340,7 @@ void yyerror(char *s) {
    για να ξεκινήσει η συντακτική ανάλυση. */
 int main(int argc, char **argv)  
 {       
-        yydebug = 0;
+        yydebug = 1;
 
 	if (argc == 3)
         {
