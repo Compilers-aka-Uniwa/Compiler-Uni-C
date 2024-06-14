@@ -1,5 +1,6 @@
 /* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
 %option noyywrap
+%x error
 
 /* Κώδικας C για τον ορισμό των απαιτούμενων header files και των μεταβλητών.
    Οτιδήποτε ανάμεσα στα %{ και %} μεταφέρεται αυτόματα στο αρχείο C που
@@ -18,7 +19,8 @@
 /* Ορισμός μετρητή τρέχουσας γραμμής */
 extern int line;
 extern int flag;
-int lex_warning = 0;
+extern int correct_tokens; //Correct words counter
+extern int incorrect_tokens; //Incorrect Words counter
 
 void yyerror (const char *msg);
 void prn(char *token);
@@ -38,32 +40,30 @@ COMMENT          (\/\/.*|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 DELIMITER        \;
 WHITESPACE       [ \t]+  
 NEWLINE          \n
-TOKEN_ERROR      [^ \t\r\n;] 
-/* ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-%x UNKNOWN_STATE 
+TOKEN_ERROR      [^ \t\r\n;]
 
 %%
 
-"break"         { prn("KEYWORD"); return SBREAK; }
-"case"          { prn("KEYWORD"); return SCASE; }
-"const"         { prn("KEYWORD"); return SCONST; }
-"continue"      { prn("KEYWORD"); return SCONTINUE; }
-"do"            { prn("KEYWORD"); return SDO; }
-"double"        { prn("KEYWORD"); return SDOUBLE; }
-"else"          { prn("KEYWORD"); return SELSE; }
-"float"         { prn("KEYWORD"); return SFLOAT; }
-"for"           { prn("KEYWORD"); return SFOR; }
-"if"            { prn("KEYWORD"); return SIF; }
-"int"           { prn("KEYWORD"); return SINT; }
-"long"          { prn("KEYWORD"); return SLONG; }
-"return"        { prn("KEYWORD"); return SRETURN; }
-"sizeof"        { prn("KEYWORD"); return SSIZEOF; }
-"struct"        { prn("KEYWORD"); return SSTRUCT; }
-"switch"        { prn("KEYWORD"); return SSWITCH; }
-"void"          { prn("KEYWORD"); return SVOID; }
-"while"         { prn("KEYWORD"); return SWHILE; }
-"func"          { prn("KEYWORD"); return SFUNC; }
-"short"         { prn("KEYWORD"); return SSHORT; }
+"break"         { correct_tokens++; prn("KEYWORD"); return SBREAK; }
+"case"          { correct_tokens++; prn("KEYWORD"); return SCASE; }
+"const"         { correct_tokens++; prn("KEYWORD"); return SCONST; }
+"continue"      { correct_tokens++; prn("KEYWORD"); return SCONTINUE; }
+"do"            { correct_tokens++; prn("KEYWORD"); return SDO; }
+"double"        { correct_tokens++; prn("KEYWORD"); return SDOUBLE; }
+"else"          { correct_tokens++; prn("KEYWORD"); return SELSE; }
+"float"         { correct_tokens++; prn("KEYWORD"); return SFLOAT; }
+"for"           { correct_tokens++; prn("KEYWORD"); return SFOR; }
+"if"            { correct_tokens++; prn("KEYWORD"); return SIF; }
+"int"           { correct_tokens++; prn("KEYWORD"); return SINT; }
+"long"          { correct_tokens++; prn("KEYWORD"); return SLONG; }
+"return"        { correct_tokens++; prn("KEYWORD"); return SRETURN; }
+"sizeof"        { correct_tokens++; prn("KEYWORD"); return SSIZEOF; }
+"struct"        { correct_tokens++; prn("KEYWORD"); return SSTRUCT; }
+"switch"        { correct_tokens++; prn("KEYWORD"); return SSWITCH; }
+"void"          { correct_tokens++; prn("KEYWORD"); return SVOID; }
+"while"         { correct_tokens++; prn("KEYWORD"); return SWHILE; }
+"func"          { correct_tokens++; prn("KEYWORD"); return SFUNC; }
+"short"         { correct_tokens++; prn("KEYWORD"); return SSHORT; }
 "+"             { prn("OPERATOR"); return PLUS; }
 "*="            { prn("OPERATOR"); return MULEQ; }
 "--"            { prn("OPERATOR"); return PMINEQ; }
@@ -94,29 +94,29 @@ TOKEN_ERROR      [^ \t\r\n;]
 "}"             { prn("SPECIAL"); return CLOSECURBRA; }
 ","             { prn("SPECIAL"); return COMMA; }
 "\\"            { prn("SPECIAL"); return BACKSLASH; }
-"scan"          { prn("FUNCTION"); return SSCAN; }
-"len"           { prn("FUNCTION"); return SLEN; }
-"print"         { prn("FUNCTION"); return SPRINT; }
-"cmp"           { prn("FUNCTION"); return SCMP; }
+"scan"          { correct_tokens++; prn("FUNCTION"); return SSCAN; }
+"len"           { correct_tokens++; prn("FUNCTION"); return SLEN; }
+"print"         { correct_tokens++; prn("FUNCTION"); return SPRINT; }
+"cmp"           { correct_tokens++; prn("FUNCTION"); return SCMP; }
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
-{IDENTIFIER}    { prn("IDENTIFIER"); return IDENTIFIER; }
-{STRING}        { prn("STRING"); return STRING; }
+{IDENTIFIER}    { correct_tokens++; prn("IDENTIFIER"); return IDENTIFIER; }
+{STRING}        { correct_tokens++; prn("STRING"); return STRING; } 
 {INTEGER}       { yylval.ival = atoi(yytext); prn("INTEGER"); return INTEGER; } 
 {FLOAT}         { yylval.fval = atof(yytext); prn("FLOAT"); return FLOAT; }
 {COMMENT}       { ECHO; }
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
-{TOKEN_ERROR}   { yyerror("Unrecognized character(s) encountered!"); lex_warning++; BEGIN(UNKNOWN_STATE); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-<UNKNOWN_STATE>{TOKEN_ERROR}+ { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warning); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
-<error>.        { lex_warning++; }
-<error>\n       { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warning); return NEWLINE;}
+{TOKEN_ERROR}   { incorrect_tokens++; yyerror("Unrecognized character(s) encountered!"); BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+<error>{TOKEN_ERROR}+ { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", incorrect_tokens); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+<error>.        { incorrect_tokens++; }
+<error>\n       { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", incorrect_tokens); return NEWLINE;}
 
 %%
 
 void yyerror(const char *msg)
 {
-   fprintf(stderr, "\t[FLEX] Line=%d at lexeme \'%s\' Error=%s\n", line, yytext, msg);
+   fprintf(yyout, "\t[FLEX] Line=%d at lexeme \'%s\' Error=%s\n", line, yytext, msg);
    return;
 }
 

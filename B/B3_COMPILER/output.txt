@@ -1,8 +1,5 @@
-	[FLEX] Line=1, token=FUNCTION, value="print"
-	[FLEX] Line=1, token=SPECIAL, value="("
 	[FLEX] Line=1, token=IDENTIFIER, value="pin1"
 	[FLEX] Line=1, token=SPECIAL, value="["
 	[FLEX] Line=1, token=OPERATOR, value="-"
-
-ΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.
-ΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : 1
+	[FLEX] Line=1 at lexeme '-' Error=syntax error
+		Bison -> PARSING FAILED (0 syntax error(s) found).

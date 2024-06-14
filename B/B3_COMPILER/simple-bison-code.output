@@ -13,7 +13,6 @@ Terminals unused in grammar
     SCONTINUE
     "&"
     "\\"
-    UNKNOWN
     TOKEN_ERROR
 
 
@@ -246,115 +245,114 @@ Terminals, with rules where they appear
     SLEN (315) 26
     SCMP (316) 27
     NEWLINE (317) 1 2 46 109
-    UNKNOWN (318)
-    ARRAY_SIZE_ERROR (319) 2
-    TOKEN_ERROR (320)
+    ARRAY_SIZE_ERROR (318) 2
+    TOKEN_ERROR (319)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (66)
+    $accept (65)
         on left: 0
-    program <sval> (67)
+    program <sval> (66)
         on left: 1 2 3
         on right: 0 1 2
-    decl_var <sval> (68)
+    decl_var <sval> (67)
         on left: 4
         on right: 101
-    type <sval> (69)
+    type <sval> (68)
         on left: 5 6 7 8 9
         on right: 4 49
-    var <sval> (70)
+    var <sval> (69)
         on left: 10 11
         on right: 4 11 65 66 67 68 70 71 72 73 74 75 76 77
-    pos_elem <sval> (71)
+    pos_elem <sval> (70)
         on left: 12 13
         on right: 42 64
-    arr_elements <sval> (72)
+    arr_elements <sval> (71)
         on left: 14 15 16 17
         on right: 31 81 95
-    integ <sval> (73)
+    integ <sval> (72)
         on left: 18 19
         on right: 15 19
-    fl <sval> (74)
+    fl <sval> (73)
         on left: 20 21
         on right: 16 21
-    str <sval> (75)
+    str <sval> (74)
         on left: 22 23
         on right: 17 23
-    build_func <sval> (76)
+    build_func <sval> (75)
         on left: 24
         on right: 102
-    func <sval> (77)
+    func <sval> (76)
         on left: 25 26 27 28 29
         on right: 24 41
-    scan_params <sval> (78)
+    scan_params <sval> (77)
         on left: 30
         on right: 25
-    len_params <sval> (79)
+    len_params <sval> (78)
         on left: 31 32 33
         on right: 26
-    cmp_params <sval> (80)
+    cmp_params <sval> (79)
         on left: 34 35 36
         on right: 27 36
-    print_params <sval> (81)
+    print_params <sval> (80)
         on left: 37 38 39 40 41 42 43
         on right: 28 29 43
-    decl_func <sval> (82)
+    decl_func <sval> (81)
         on left: 44
         on right: 103
-    name_func <sval> (83)
+    name_func <sval> (82)
         on left: 45 46
         on right: 44 46
-    params <sval> (84)
+    params <sval> (83)
         on left: 47 48
         on right: 46
-    type_params <sval> (85)
+    type_params <sval> (84)
         on left: 49 50
         on right: 48 50
-    sign <sval> (86)
+    sign <sval> (85)
         on left: 51 52 53 54
         on right: 53 54 55
-    arithm_expr <sval> (87)
+    arithm_expr <sval> (86)
         on left: 55 56 57 58 59 60 61
         on right: 57 58 59 60 61 67 105
-    number <sval> (88)
+    number <sval> (87)
         on left: 62 63 64
         on right: 74 75 76 77 78
-    assign <sval> (89)
+    assign <sval> (88)
         on left: 65 66 67 68 69
         on right: 104 115
-    oper_eq <sval> (90)
+    oper_eq <sval> (89)
         on left: 70 71 72 73 74 75 76 77
         on right: 69 115
-    val <sval> (91)
+    val <sval> (90)
         on left: 78 79 80 81 82
         on right: 65 82
-    cmp_expr <sval> (92)
+    cmp_expr <sval> (91)
         on left: 83 84 85 86 87 88 89 90 91 92 93 94
         on right: 66 86 87 88 89 90 91 92 93 94 106 111 115
-    merge_arr <sval> (93)
+    merge_arr <sval> (92)
         on left: 95
         on right: 68 107
-    decl_statements <sval> (94)
+    decl_statements <sval> (93)
         on left: 96 97
         on right: 1 97 113
-    decl_statement <sval> (95)
+    decl_statement <sval> (94)
         on left: 98 99 100 101 102 103 104 105 106 107 108 109
         on right: 44 96 97 110 114 115
-    if_statement <sval> (96)
+    if_statement <sval> (95)
         on left: 110
         on right: 98
-    condition <sval> (97)
+    condition <sval> (96)
         on left: 111 112
         on right: 110 112 114
-    block_statement <sval> (98)
+    block_statement <sval> (97)
         on left: 113
         on right: 108
-    while_statement <sval> (99)
+    while_statement <sval> (98)
         on left: 114
         on right: 99
-    for_statement <sval> (100)
+    for_statement <sval> (99)
         on left: 115
         on right: 100
 

@@ -11,8 +11,10 @@
 	int errflag = 0;
 
 	extern char *yytext;
-        extern int lex_warning;
-        int parse_warning = 0;
+        int correct_tokens = 0;
+        int incorrect_tokens = 0;
+        int correct_exprs = 0;
+        int incorrect_exprs = 0; //Counts correct statements
 	
         int yylex();
 	void yyerror(const char *msg);
@@ -69,7 +71,6 @@
 %token DELIMITER ";"
 %token SSCAN SPRINT SLEN SCMP
 %token NEWLINE
-%token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
 %left ","   
@@ -87,7 +88,7 @@
 %type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
 
 /* BUG DECLARATION*/
-%token ARRAY_SIZE_ERROR TOKEN_ERROR
+%token TOKEN_ERROR
 
 /* Έναρξη προγραμμάτος*/
 %start program
@@ -99,8 +100,8 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        program decl_statements NEWLINE         { if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-        | program ARRAY_SIZE_ERROR NEWLINE      { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, "ARRAY_SIZE_ERROR"); yyerrok; errflag++; }
+        program decl_statements NEWLINE         { correct_exprs++; if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
+        | program error NEWLINE                 { incorrect_exprs; fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); yyerrok; errflag++; }
         |                                       { }                       
         ;
        
@@ -127,12 +128,8 @@ var:
 
 /* ============== [2.3] Πίνακες ============== */
 pos_elem:
-        IDENTIFIER "[" INTEGER "]"{ 
-            if ($3 < 0) {
-                ARRAY_SIZE_ERROR;
-            }
-            $$ = strdup(yytext);
-        }
+        IDENTIFIER "[" INTEGER "]"{ $$ = strdup(yytext); }
+        IDENTIFIER "[" sign "]" { }
         | IDENTIFIER "[" IDENTIFIER "]" { $$ = strdup(yytext); }
         ;
 
@@ -346,9 +343,9 @@ for_statement:
 /* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
    από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
    συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
-void yyerror(const char *msg) {
+/*void yyerror(const char *msg) {
         fprintf(stderr, "Error: %s\n", msg);
-}
+}*/
 
 /* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
    Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
@@ -374,7 +371,12 @@ int main(int argc, char **argv)
 	int parse = yyparse();
 
 	if (errflag == 0 && parse == 0)
+        {
 		fprintf(yyout, "\t\tBison -> PARSING SUCCEEDED (%d syntax error(s) found).\n", errflag);
+                if (parse_warning > 0)
+                        fprintf(yyout, "(with %d warning(s))\n", parse_warning);
+                fprintf(yyout, "\n");
+        }
         else
 		fprintf(yyout, "\t\tBison -> PARSING FAILED (%d syntax error(s) found).\n", errflag);
 
