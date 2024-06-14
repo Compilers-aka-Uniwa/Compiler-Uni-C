@@ -1,6 +1,5 @@
 /* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
 %option noyywrap
-%x error
 
 /* Κώδικας C για τον ορισμό των απαιτούμενων header files και των μεταβλητών.
    Οτιδήποτε ανάμεσα στα %{ και %} μεταφέρεται αυτόματα στο αρχείο C που
@@ -108,10 +107,10 @@ TOKEN_ERROR      [^ \t\r\n;]
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
-{TOKEN_ERROR}   {BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-<UNKNOWN_STATE> {TOKEN_ERROR} + { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+{TOKEN_ERROR}   { yyerror("Unrecognized character(s) encountered!"); lex_warning++; BEGIN(UNKNOWN_STATE); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+<UNKNOWN_STATE>{TOKEN_ERROR}+ { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warning); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
 <error>.        { lex_warning++; }
-<error>\n       {BEGIN(0); printf("\t\t%d character(s) ignored so far\n", lex_warning); return NEWLINE;}
+<error>\n       { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warning); return NEWLINE;}
 
 %%
 

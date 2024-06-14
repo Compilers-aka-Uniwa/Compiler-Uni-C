@@ -1,2 +1,2 @@
-print(pin1[1]);
+print(pin1[-1]);
 

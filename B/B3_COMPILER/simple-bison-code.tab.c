@@ -84,8 +84,8 @@
         extern int lex_warning;
         int parse_warning = 0;
 	
-	void yyerror(char *);
-        int yylex(void);
+        int yylex();
+	//void yyerror(const char *msg);
 
         /* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
    του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
@@ -1390,7 +1390,7 @@ yyreduce:
 
   case 3: /* program: program ARRAY_SIZE_ERROR NEWLINE  */
 #line 103 "simple-bison-code.y"
-                                                { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, "ARRAY_SIZE_ERROR"); }
+                                                { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, "ARRAY_SIZE_ERROR"); yyerrok; errflag++; }
 #line 1395 "simple-bison-code.tab.c"
     break;
 
@@ -2280,8 +2280,8 @@ yyreturnlab:
 /* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
    από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
    συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
-void yyerror(char *s) {
-        fprintf(stderr, "Error: %s\n", s);
+void yyerror(const char *msg) {
+        fprintf(stderr, "Error: %s\n", msg);
 }
 
 /* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
@@ -2308,10 +2308,10 @@ int main(int argc, char **argv)
 	int parse = yyparse();
 
 	if (errflag == 0 && parse == 0)
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
+		fprintf(yyout, "\t\tBison -> PARSING SUCCEEDED (%d syntax error(s) found).\n", errflag);
         else
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
-        
+		fprintf(yyout, "\t\tBison -> PARSING FAILED (%d syntax error(s) found).\n", errflag);
+
         fclose(yyin);
         fclose(yyout);
 
