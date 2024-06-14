@@ -1390,7 +1390,7 @@ yyreduce:
 
   case 3: /* program: program ARRAY_SIZE_ERROR NEWLINE  */
 #line 103 "simple-bison-code.y"
-                                                 { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, "ARRAY_SIZE_ERROR"); }
+                                                { fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, "ARRAY_SIZE_ERROR"); }
 #line 1395 "simple-bison-code.tab.c"
     break;
 

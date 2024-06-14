@@ -108,13 +108,18 @@ TOKEN_ERROR      [^ \t\r\n;]
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
-{TOKEN_ERROR}       { BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-<UNKNOWN_STATE>{TOKEN_ERROR}+ { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
-<error>.       {lex_warning ++;}
-<error>\n      {BEGIN(0); printf("\t\t%d character(s) ignored so far\n", lex_warning); return NEWLINE;}
+{TOKEN_ERROR}   {BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+<UNKNOWN_STATE> {TOKEN_ERROR} + { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+<error>.        { lex_warning++; }
+<error>\n       {BEGIN(0); printf("\t\t%d character(s) ignored so far\n", lex_warning); return NEWLINE;}
 
 %%
 
+void yyerror(const char *msg)
+{
+   fprintf(stderr, "\t[FLEX] Line=%d at lexeme \'%s\' Error=%s\n", line, yytext, msg);
+   return;
+}
 
 void prn(char *token)
 {
