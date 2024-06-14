@@ -15,6 +15,7 @@
         int incorrect_tokens = 0;
         int correct_exprs = 0;
         int incorrect_exprs = 0; //Counts correct statements
+        int warnings = 0;
 	
         int yylex();
 	void yyerror(const char *msg);
@@ -101,7 +102,7 @@
 				όνομα : κανόνας { κώδικας C } */
 program:
         program decl_statements NEWLINE         { correct_exprs++; if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-        | program error NEWLINE                 { incorrect_exprs; fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); yyerrok; errflag++; }
+        | program error NEWLINE                 { incorrect_exprs++; }
         |                                       { }                       
         ;
        
@@ -129,7 +130,6 @@ var:
 /* ============== [2.3] Πίνακες ============== */
 pos_elem:
         IDENTIFIER "[" INTEGER "]"{ $$ = strdup(yytext); }
-        IDENTIFIER "[" sign "]" { }
         | IDENTIFIER "[" IDENTIFIER "]" { $$ = strdup(yytext); }
         ;
 
@@ -232,6 +232,7 @@ arithm_expr:
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "%" arithm_expr   { $$ = strdup(yytext); }
+        | arithm_expr "*" "*" arithm_expr { warnings++; $$ = strdup(yytext); fprintf(yyout, "XAZE EVALES 2!! * XAZE"); }  
         ;
 
 number:
@@ -368,17 +369,12 @@ int main(int argc, char **argv)
                 }
         }
 		
-	int parse = yyparse();
+	yyparse();
 
-	if (errflag == 0 && parse == 0)
-        {
-		fprintf(yyout, "\t\tBison -> PARSING SUCCEEDED (%d syntax error(s) found).\n", errflag);
-                if (parse_warning > 0)
-                        fprintf(yyout, "(with %d warning(s))\n", parse_warning);
-                fprintf(yyout, "\n");
-        }
-        else
-		fprintf(yyout, "\t\tBison -> PARSING FAILED (%d syntax error(s) found).\n", errflag);
+	fprintf(yyout, "\t\tBison -> Parsing completed (%d syntax error(s) found)\n", incorrect_exprs);
+        if (warnings > 0)
+                fprintf(yyout, "(with %d warning(s))\n", warnings);
+        fprintf(yyout, "\n");
 
         fclose(yyin);
         fclose(yyout);

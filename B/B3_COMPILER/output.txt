@@ -1,5 +1,35 @@
-	[FLEX] Line=1, token=IDENTIFIER, value="pin1"
-	[FLEX] Line=1, token=SPECIAL, value="["
-	[FLEX] Line=1, token=OPERATOR, value="-"
-	[FLEX] Line=1 at lexeme '-' Error=syntax error
-		Bison -> PARSING FAILED (0 syntax error(s) found).
+	[FLEX] Line=1, token=INTEGER, value="5"
+	[FLEX] Line=1, token=OPERATOR, value="+"
+	[FLEX] Line=1, token=INTEGER, value="3"
+
+[BISON] Line=1, expression="Αριθμητική έκφραση"
+
+	[FLEX] Line=2, token=INTEGER, value="4"
+	[FLEX] Line=2, token=OPERATOR, value="*"
+	[FLEX] Line=2, token=INTEGER, value="5"
+
+[BISON] Line=2, expression="Αριθμητική έκφραση"
+
+	[FLEX] Line=3, token=INTEGER, value="4"
+	[FLEX] Line=3, token=OPERATOR, value="*"
+	[FLEX] Line=3, token=OPERATOR, value="*"
+	[FLEX] Line=3, token=INTEGER, value="5"
+XAZE EVALES 2!! * XAZE
+[BISON] Line=3, expression="Αριθμητική έκφραση"
+
+	[FLEX] Line=4, token=INTEGER, value="1"
+	[FLEX] Line=4, token=OPERATOR, value="-"
+	[FLEX] Line=4, token=INTEGER, value="3"
+
+[BISON] Line=4, expression="Αριθμητική έκφραση"
+
+	[FLEX] Line=5, token=IDENTIFIER, value="a"
+	[FLEX] Line=5, token=OPERATOR, value="*"
+	[FLEX] Line=5, token=OPERATOR, value="*"
+	[FLEX] Line=5, token=IDENTIFIER, value="C"
+XAZE EVALES 2!! * XAZE
+[BISON] Line=5, expression="Αριθμητική έκφραση"
+
+		Bison -> Parsing completed (0 syntax error(s) found)
+(with 2 warning(s))
+

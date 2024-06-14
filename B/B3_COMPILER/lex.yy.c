@@ -615,16 +615,17 @@ char *yytext;
 /* Ορισμός μετρητή τρέχουσας γραμμής */
 extern int line;
 extern int flag;
-int lex_warning = 0;
+extern int correct_tokens; //Correct words counter
+extern int incorrect_tokens; //Incorrect Words counter
 
 void yyerror (const char *msg);
 void prn(char *token);
 
-#line 624 "lex.yy.c"
+#line 625 "lex.yy.c"
 /* Ονόματα και αντίστοιχοι ορισμοί (υπό μορφή κανονικής έκφρασης).
    Μετά από αυτό, μπορεί να γίνει χρήση των ονομάτων (αριστερά) αντί των,
    συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
-#line 628 "lex.yy.c"
+#line 629 "lex.yy.c"
 
 #define INITIAL 0
 #define error 1
@@ -842,10 +843,10 @@ YY_DECL
 		}
 
 	{
-#line 44 "simple-flex-code.l"
+#line 45 "simple-flex-code.l"
 
 
-#line 849 "lex.yy.c"
+#line 850 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -904,349 +905,349 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 46 "simple-flex-code.l"
-{ prn("KEYWORD"); return SBREAK; }
+#line 47 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SBREAK; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 47 "simple-flex-code.l"
-{ prn("KEYWORD"); return SCASE; }
+#line 48 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SCASE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 48 "simple-flex-code.l"
-{ prn("KEYWORD"); return SCONST; }
+#line 49 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SCONST; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 49 "simple-flex-code.l"
-{ prn("KEYWORD"); return SCONTINUE; }
+#line 50 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SCONTINUE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 50 "simple-flex-code.l"
-{ prn("KEYWORD"); return SDO; }
+#line 51 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SDO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 51 "simple-flex-code.l"
-{ prn("KEYWORD"); return SDOUBLE; }
+#line 52 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SDOUBLE; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 52 "simple-flex-code.l"
-{ prn("KEYWORD"); return SELSE; }
+#line 53 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SELSE; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 53 "simple-flex-code.l"
-{ prn("KEYWORD"); return SFLOAT; }
+#line 54 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SFLOAT; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 54 "simple-flex-code.l"
-{ prn("KEYWORD"); return SFOR; }
+#line 55 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SFOR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 55 "simple-flex-code.l"
-{ prn("KEYWORD"); return SIF; }
+#line 56 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SIF; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 56 "simple-flex-code.l"
-{ prn("KEYWORD"); return SINT; }
+#line 57 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SINT; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 57 "simple-flex-code.l"
-{ prn("KEYWORD"); return SLONG; }
+#line 58 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SLONG; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 58 "simple-flex-code.l"
-{ prn("KEYWORD"); return SRETURN; }
+#line 59 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SRETURN; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 59 "simple-flex-code.l"
-{ prn("KEYWORD"); return SSIZEOF; }
+#line 60 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SSIZEOF; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 60 "simple-flex-code.l"
-{ prn("KEYWORD"); return SSTRUCT; }
+#line 61 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SSTRUCT; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 61 "simple-flex-code.l"
-{ prn("KEYWORD"); return SSWITCH; }
+#line 62 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SSWITCH; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 62 "simple-flex-code.l"
-{ prn("KEYWORD"); return SVOID; }
+#line 63 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SVOID; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 63 "simple-flex-code.l"
-{ prn("KEYWORD"); return SWHILE; }
+#line 64 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SWHILE; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 64 "simple-flex-code.l"
-{ prn("KEYWORD"); return SFUNC; }
+#line 65 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SFUNC; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 65 "simple-flex-code.l"
-{ prn("KEYWORD"); return SSHORT; }
+#line 66 "simple-flex-code.l"
+{ correct_tokens++; prn("KEYWORD"); return SSHORT; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 66 "simple-flex-code.l"
+#line 67 "simple-flex-code.l"
 { prn("OPERATOR"); return PLUS; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 67 "simple-flex-code.l"
+#line 68 "simple-flex-code.l"
 { prn("OPERATOR"); return MULEQ; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 68 "simple-flex-code.l"
+#line 69 "simple-flex-code.l"
 { prn("OPERATOR"); return PMINEQ; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 69 "simple-flex-code.l"
+#line 70 "simple-flex-code.l"
 { prn("OPERATOR"); return MINUS; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 70 "simple-flex-code.l"
+#line 71 "simple-flex-code.l"
 { prn("OPERATOR"); return DIVEQ; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 71 "simple-flex-code.l"
+#line 72 "simple-flex-code.l"
 { prn("OPERATOR"); return LT; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 72 "simple-flex-code.l"
+#line 73 "simple-flex-code.l"
 { prn("OPERATOR"); return MUL; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 73 "simple-flex-code.l"
+#line 74 "simple-flex-code.l"
 { prn("OPERATOR"); return NOT; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 74 "simple-flex-code.l"
+#line 75 "simple-flex-code.l"
 { prn("OPERATOR"); return GT; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 75 "simple-flex-code.l"
+#line 76 "simple-flex-code.l"
 { prn("OPERATOR"); return DIV; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 76 "simple-flex-code.l"
+#line 77 "simple-flex-code.l"
 { prn("OPERATOR"); return AND; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 77 "simple-flex-code.l"
+#line 78 "simple-flex-code.l"
 { prn("OPERATOR"); return LEQ; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 78 "simple-flex-code.l"
+#line 79 "simple-flex-code.l"
 { prn("OPERATOR"); return MOD; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 79 "simple-flex-code.l"
+#line 80 "simple-flex-code.l"
 { prn("OPERATOR"); return OR; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 80 "simple-flex-code.l"
+#line 81 "simple-flex-code.l"
 { prn("OPERATOR"); return GREQ; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 81 "simple-flex-code.l"
+#line 82 "simple-flex-code.l"
 { prn("OPERATOR"); return ASSIGN; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 82 "simple-flex-code.l"
+#line 83 "simple-flex-code.l"
 { prn("OPERATOR"); return EQUAL; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 83 "simple-flex-code.l"
+#line 84 "simple-flex-code.l"
 { prn("OPERATOR"); return ADDR; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 84 "simple-flex-code.l"
+#line 85 "simple-flex-code.l"
 { prn("OPERATOR"); return PLUSEQ; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 85 "simple-flex-code.l"
+#line 86 "simple-flex-code.l"
 { prn("OPERATOR"); return NOTEQ; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 86 "simple-flex-code.l"
+#line 87 "simple-flex-code.l"
 { prn("OPERATOR"); return MINEQ; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 87 "simple-flex-code.l"
+#line 88 "simple-flex-code.l"
 { prn("OPERATOR"); return PPLUSEQ; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 88 "simple-flex-code.l"
+#line 89 "simple-flex-code.l"
 { prn("SPECIAL"); return OPENPAR; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 89 "simple-flex-code.l"
+#line 90 "simple-flex-code.l"
 { prn("SPECIAL"); return CLOSEPAR; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 90 "simple-flex-code.l"
+#line 91 "simple-flex-code.l"
 { prn("SPECIAL"); return OPENSQBRA; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 91 "simple-flex-code.l"
+#line 92 "simple-flex-code.l"
 { prn("SPECIAL"); return CLOSESQBRA; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 92 "simple-flex-code.l"
+#line 93 "simple-flex-code.l"
 { prn("SPECIAL"); return OPENCURBRA; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 93 "simple-flex-code.l"
+#line 94 "simple-flex-code.l"
 { prn("SPECIAL"); return CLOSECURBRA; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 94 "simple-flex-code.l"
+#line 95 "simple-flex-code.l"
 { prn("SPECIAL"); return COMMA; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 95 "simple-flex-code.l"
+#line 96 "simple-flex-code.l"
 { prn("SPECIAL"); return BACKSLASH; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 96 "simple-flex-code.l"
-{ prn("FUNCTION"); return SSCAN; }
+#line 97 "simple-flex-code.l"
+{ correct_tokens++; prn("FUNCTION"); return SSCAN; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 97 "simple-flex-code.l"
-{ prn("FUNCTION"); return SLEN; }
+#line 98 "simple-flex-code.l"
+{ correct_tokens++; prn("FUNCTION"); return SLEN; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 98 "simple-flex-code.l"
-{ prn("FUNCTION"); return SPRINT; }
+#line 99 "simple-flex-code.l"
+{ correct_tokens++; prn("FUNCTION"); return SPRINT; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 99 "simple-flex-code.l"
-{ prn("FUNCTION"); return SCMP; }
+#line 100 "simple-flex-code.l"
+{ correct_tokens++; prn("FUNCTION"); return SCMP; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 100 "simple-flex-code.l"
+#line 101 "simple-flex-code.l"
 { prn("DELIMITER"); return DELIMITER; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 101 "simple-flex-code.l"
-{ prn("IDENTIFIER"); return IDENTIFIER; }
+#line 102 "simple-flex-code.l"
+{ correct_tokens++; prn("IDENTIFIER"); return IDENTIFIER; }
 	YY_BREAK
 case 57:
 /* rule 57 can match eol */
 YY_RULE_SETUP
-#line 102 "simple-flex-code.l"
-{ prn("STRING"); return STRING; }
+#line 103 "simple-flex-code.l"
+{ correct_tokens++; prn("STRING"); return STRING; } 
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 103 "simple-flex-code.l"
+#line 104 "simple-flex-code.l"
 { yylval.ival = atoi(yytext); prn("INTEGER"); return INTEGER; } 
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 104 "simple-flex-code.l"
+#line 105 "simple-flex-code.l"
 { yylval.fval = atof(yytext); prn("FLOAT"); return FLOAT; }
 	YY_BREAK
 case 60:
 /* rule 60 can match eol */
 YY_RULE_SETUP
-#line 105 "simple-flex-code.l"
+#line 106 "simple-flex-code.l"
 { ECHO; }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 106 "simple-flex-code.l"
+#line 107 "simple-flex-code.l"
 { }
 	YY_BREAK
 case 62:
 /* rule 62 can match eol */
 YY_RULE_SETUP
-#line 107 "simple-flex-code.l"
+#line 108 "simple-flex-code.l"
 { line++; return NEWLINE; }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(error):
-#line 108 "simple-flex-code.l"
+#line 109 "simple-flex-code.l"
 { return EOF; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 109 "simple-flex-code.l"
-{ yyerror("Unrecognized character(s) encountered!"); lex_warning++; BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+#line 110 "simple-flex-code.l"
+{ incorrect_tokens++; yyerror("Unrecognized character(s) encountered!"); BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 110 "simple-flex-code.l"
-{ BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warning); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+#line 111 "simple-flex-code.l"
+{ BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", incorrect_tokens); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 111 "simple-flex-code.l"
-{ lex_warning++; }
+#line 112 "simple-flex-code.l"
+{ incorrect_tokens++; }
 	YY_BREAK
 case 66:
 /* rule 66 can match eol */
 YY_RULE_SETUP
-#line 112 "simple-flex-code.l"
-{ BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warning); return NEWLINE;}
+#line 113 "simple-flex-code.l"
+{ BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", incorrect_tokens); return NEWLINE;}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 114 "simple-flex-code.l"
+#line 115 "simple-flex-code.l"
 ECHO;
 	YY_BREAK
-#line 1250 "lex.yy.c"
+#line 1251 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2249,7 +2250,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 114 "simple-flex-code.l"
+#line 115 "simple-flex-code.l"
 
 
 void yyerror(const char *msg)
