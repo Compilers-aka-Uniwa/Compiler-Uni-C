@@ -2316,9 +2316,13 @@ int main(int argc, char **argv)
 		
 	yyparse();
 
-	fprintf(yyout, "\t\tBison -> Parsing completed (%d syntax error(s) found)\n", incorrect_exprs);
-        if (warnings > 0)
-                fprintf(yyout, "(with %d warning(s))\n", warnings);
+	fprintf(yyout, "\t\tΣΑ -> Η συντακτική ανάλυση ολοκλήρωθηκε");
+        fprintf(yyout, "ΣΩΣΤΕΣ ΛΕΞΕΙΣ: %d\n", correct_tokens);
+        fprintf(yyout, "ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: %d\n", correct_exprs);
+        fprintf(yyout, "ΛΑΘΟΣ ΛΕΞΕΙΣ: %d\n", incorrect_tokens);
+        fprintf(yyout, "ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: %d\n", incorrect_exprs);
+        fprintf(yyout, "ΣΥΝΤΑΚΤΙΚΑ ΠΡΟΕΙΔΟΠΟΙΗΤΙΚΑ ΛΑΘΗ: %d\n", warnings);
+
         fprintf(yyout, "\n");
 
         fclose(yyin);
