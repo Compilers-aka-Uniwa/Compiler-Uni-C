@@ -11,7 +11,7 @@
 	int errflag = 0;
 
 	extern char *yytext;
-        int correct_tokens = 0;
+        int correct_words = 0;
         int correct_exprs = 0;
         int fatal_errors = 0; 
         int par_warnings = 0;
@@ -119,8 +119,7 @@ type:
         | SFLOAT         { $$ = strdup(yytext); }
         | SDOUBLE        { $$ = strdup(yytext); }
         | SSHORT         { $$ = strdup(yytext); }
-        | SLONG          { $$ = strdup(yytext); }
-        | IDENTIFIER     {  }    
+        | SLONG          { $$ = strdup(yytext); }  
         ;
 
 var:
@@ -381,7 +380,7 @@ int main(int argc, char **argv)
         else
                 fprintf(yyout, "BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία\n");
        
-        fprintf(yyout, "\t\tΣΩΣΤΕΣ ΛΕΞΕΙΣ: %d\n", correct_tokens);
+        fprintf(yyout, "\t\tΣΩΣΤΕΣ ΛΕΞΕΙΣ: %d\n", correct_words);
         fprintf(yyout, "\t\tΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: %d\n", correct_exprs);
         fprintf(yyout, "\t\tΛΑΘΟΣ ΛΕΞΕΙΣ: %d\n", lex_warnings);
         fprintf(yyout, "\t\tΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: %d\n", fatal_errors);

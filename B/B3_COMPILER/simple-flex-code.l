@@ -20,8 +20,7 @@
 extern int line;
 extern int flag;
 
-extern int correct_tokens; //Correct words counter
-extern int incorrect_tokens; //Incorrect Words counter
+extern int correct_words; //Correct words counter
 extern int lex_warnings;
 
 void yyerror (const char *msg);
@@ -46,26 +45,26 @@ TOKEN_ERROR      [^ \t\r\n;]
 
 %%
 
-"break"         { correct_tokens++; prn("KEYWORD"); return SBREAK; }
-"case"          { correct_tokens++; prn("KEYWORD"); return SCASE; }
-"const"         { correct_tokens++; prn("KEYWORD"); return SCONST; }
-"continue"      { correct_tokens++; prn("KEYWORD"); return SCONTINUE; }
-"do"            { correct_tokens++; prn("KEYWORD"); return SDO; }
-"double"        { correct_tokens++; prn("KEYWORD"); return SDOUBLE; }
-"else"          { correct_tokens++; prn("KEYWORD"); return SELSE; }
-"float"         { correct_tokens++; prn("KEYWORD"); return SFLOAT; }
-"for"           { correct_tokens++; prn("KEYWORD"); return SFOR; }
-"if"            { correct_tokens++; prn("KEYWORD"); return SIF; }
-"int"           { correct_tokens++; prn("KEYWORD"); return SINT; }
-"long"          { correct_tokens++; prn("KEYWORD"); return SLONG; }
-"return"        { correct_tokens++; prn("KEYWORD"); return SRETURN; }
-"sizeof"        { correct_tokens++; prn("KEYWORD"); return SSIZEOF; }
-"struct"        { correct_tokens++; prn("KEYWORD"); return SSTRUCT; }
-"switch"        { correct_tokens++; prn("KEYWORD"); return SSWITCH; }
-"void"          { correct_tokens++; prn("KEYWORD"); return SVOID; }
-"while"         { correct_tokens++; prn("KEYWORD"); return SWHILE; }
-"func"          { correct_tokens++; prn("KEYWORD"); return SFUNC; }
-"short"         { correct_tokens++; prn("KEYWORD"); return SSHORT; }
+"break"         { correct_words++; prn("KEYWORD"); return SBREAK; }
+"case"          { correct_words++; prn("KEYWORD"); return SCASE; }
+"const"         { correct_words++; prn("KEYWORD"); return SCONST; }
+"continue"      { correct_words++; prn("KEYWORD"); return SCONTINUE; }
+"do"            { correct_words++; prn("KEYWORD"); return SDO; }
+"double"        { correct_words++; prn("KEYWORD"); return SDOUBLE; }
+"else"          { correct_words++; prn("KEYWORD"); return SELSE; }
+"float"         { correct_words++; prn("KEYWORD"); return SFLOAT; }
+"for"           { correct_words++; prn("KEYWORD"); return SFOR; }
+"if"            { correct_words++; prn("KEYWORD"); return SIF; }
+"int"           { correct_words++; prn("KEYWORD"); return SINT; }
+"long"          { correct_words++; prn("KEYWORD"); return SLONG; }
+"return"        { correct_words++; prn("KEYWORD"); return SRETURN; }
+"sizeof"        { correct_words++; prn("KEYWORD"); return SSIZEOF; }
+"struct"        { correct_words++; prn("KEYWORD"); return SSTRUCT; }
+"switch"        { correct_words++; prn("KEYWORD"); return SSWITCH; }
+"void"          { correct_words++; prn("KEYWORD"); return SVOID; }
+"while"         { correct_words++; prn("KEYWORD"); return SWHILE; }
+"func"          { correct_words++; prn("KEYWORD"); return SFUNC; }
+"short"         { correct_words++; prn("KEYWORD"); return SSHORT; }
 "+"             { prn("OPERATOR"); return PLUS; }
 "*="            { prn("OPERATOR"); return MULEQ; }
 "--"            { prn("OPERATOR"); return PMINEQ; }
@@ -96,13 +95,13 @@ TOKEN_ERROR      [^ \t\r\n;]
 "}"             { prn("SPECIAL"); return CLOSECURBRA; }
 ","             { prn("SPECIAL"); return COMMA; }
 "\\"            { prn("SPECIAL"); return BACKSLASH; }
-"scan"          { correct_tokens++; prn("FUNCTION"); return SSCAN; }
-"len"           { correct_tokens++; prn("FUNCTION"); return SLEN; }
-"print"         { correct_tokens++; prn("FUNCTION"); return SPRINT; }
-"cmp"           { correct_tokens++; prn("FUNCTION"); return SCMP; }
+"scan"          { correct_words++; prn("FUNCTION"); return SSCAN; }
+"len"           { correct_words++; prn("FUNCTION"); return SLEN; }
+"print"         { correct_words++; prn("FUNCTION"); return SPRINT; }
+"cmp"           { correct_words++; prn("FUNCTION"); return SCMP; }
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
-{IDENTIFIER}    { correct_tokens++; prn("IDENTIFIER"); return IDENTIFIER; }
-{STRING}        { correct_tokens++; prn("STRING"); return STRING; } 
+{IDENTIFIER}    { correct_words++; prn("IDENTIFIER"); return IDENTIFIER; }
+{STRING}        { correct_words++; prn("STRING"); return STRING; } 
 {INTEGER}       { yylval.ival = atoi(yytext); prn("INTEGER"); return INTEGER; } 
 {FLOAT}         { yylval.fval = atof(yytext); prn("FLOAT"); return FLOAT; }
 {COMMENT}       { ECHO; }
