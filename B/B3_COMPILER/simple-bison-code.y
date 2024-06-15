@@ -49,6 +49,7 @@ extern FILE *yyout;
 
 program:
         program decl_statements NEWLINE         { if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
+        | program error_stmt            	{ } 
         |                                       { }                       
         ;
 
