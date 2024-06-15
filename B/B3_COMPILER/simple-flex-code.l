@@ -36,7 +36,8 @@ COMMENT          (\/\/.*|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 DELIMITER        \;
 WHITESPACE       [ \t]+  
 NEWLINE          \n
-UNKNOWN          [^ \t\r\n;] 
+UNKNOWN          [^ \t\r\n;]
+UNKNOWN_IDENTIFIER [0-9][a-zA-Z_]+
 /* ΚΑΤΑΣΤΑΣΗ UNKNOWN */
 %x UNKNOWN_STATE 
 
@@ -105,6 +106,11 @@ UNKNOWN          [^ \t\r\n;]
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
+{UNKNOWN_IDENTIFIER} {
+    fprintf(yyout, "\t[FLEX] Line=%d, Warning: Unknown identifier \"%s\"\n", line, yytext);
+    yylval.sval = strdup(yytext);
+    return UNKNOWN;
+}
 {UNKNOWN}       { BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
 <UNKNOWN_STATE>{UNKNOWN}+ { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
 
@@ -112,7 +118,11 @@ UNKNOWN          [^ \t\r\n;]
 
 void prn(const char *token)
 {
-   fprintf(yyout, "\t[FLEX] Line=%d, token=%s, value=\"%s\"\n", line, token, yytext);   
+   if (strcmp(token, "UNKNOWN") == 0) {
+       fprintf(yyout, "\t[FLEX] Line=%d, Error: Unknown token \"%s\"\n", line, yytext);
+   } else {
+       fprintf(yyout, "\t[FLEX] Line=%d, token=%s, value=\"%s\"\n", line, token, yytext);
+   }
    return;
 }
 

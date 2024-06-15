@@ -1,25 +1,21 @@
 %{
-/* Ορισμοί και δηλώσεις γλώσσας C. Οτιδήποτε έχει να κάνει με ορισμό ή αρχικοποίηση
-   μεταβλητών & συναρτήσεων, αρχεία header και δηλώσεις #define μπαίνει σε αυτό το σημείο */
-        
-        #include <stdio.h>
-        #include <string.h>
-	#include <stdlib.h>
-        #define YYDEBUG 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#define YYDEBUG 1
 
-	int line = 1;
-	int errflag = 0;
+int line = 1;
+int errflag = 0;
+int fatal_error_count = 0;
 
-	extern char *yytext;
-	
-	void yyerror(char *);
-        int yylex(void);
+extern char *yytext;
 
-        /* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
-   του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
+void yyerror(char *);
+void SyntaxError(const char *);
 
-        extern FILE *yyin;
-        extern FILE *yyout;
+extern int yylex(void);
+extern FILE *yyin;
+extern FILE *yyout;
 %}
 
 %union {
@@ -28,48 +24,12 @@
     char *sval;
 }
 
-
-/* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
 %token <sval> IDENTIFIER STRING 
 %token <ival> INTEGER 
 %token <fval> FLOAT 
 %token <sval> SBREAK SDO SIF SSIZEOF SCASE SDOUBLE SINT SSTRUCT SFUNC SELSE SLONG SSWITCH SCONST SFLOAT SRETURN SVOID SCONTINUE SFOR SSHORT SWHILE 
-%token PLUS "+"
-%token MULEQ "*="
-%token PMINEQ "--"
-%token MINUS "-"
-%token DIVEQ "/="
-%token LT "<"
-%token MUL "*"
-%token NOT "!"
-%token GT ">" 
-%token DIV "/"
-%token AND "&&"
-%token LEQ "<="
-%token MOD "%"
-%token OR "||"
-%token GREQ ">="
-%token ASSIGN "="
-%token EQUAL "=="
-%token ADDR "&"
-%token PLUSEQ "+="
-%token NOTEQ "!="
-%token MINEQ "-="
-%token PPLUSEQ "++"
-%token OPENPAR "("
-%token CLOSEPAR ")"
-%token OPENSQBRA "["
-%token CLOSESQBRA "]"
-%token OPENCURBRA "{"
-%token CLOSECURBRA "}"
-%token COMMA ","
-%token BACKSLASH "\\"
-%token DELIMITER ";"
-%token SSCAN SPRINT SLEN SCMP
-%token NEWLINE
-%token UNKNOWN
+%token PLUS "+" MULEQ "*=" PMINEQ "--" MINUS "-" DIVEQ "/=" LT "<" MUL "*" NOT "!" GT ">" DIV "/" AND "&&" LEQ "<=" MOD "%" OR "||" GREQ ">=" ASSIGN "=" EQUAL "==" ADDR "&" PLUSEQ "+=" NOTEQ "!=" MINEQ "-=" PPLUSEQ "++" OPENPAR "(" CLOSEPAR ")" OPENSQBRA "[" CLOSESQBRA "]" OPENCURBRA "{" CLOSECURBRA "}" COMMA "," BACKSLASH "\\" DELIMITER ";" SSCAN SPRINT SLEN SCMP NEWLINE UNKNOWN
 
-/* Ορισμός προτεραιοτήτων στα tokens */
 %left ","   
 %right "*=" "/=" "+=" "-=" "="
 %left "||" 
@@ -81,25 +41,17 @@
 %right "&" "!" 
 %left "++" "--"
 
-
-%type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
+%type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement for_statement
 
 %start program
 
 %%
 
-/* Ορισμός των γραμματικών κανόνων. Κάθε φορά που αντιστοιχίζεται ένας γραμματικός
-   κανόνας με τα δεδομένα εισόδου, εκτελείται ο κώδικας C που βρίσκεται ανάμεσα στα
-   αγκύλια. Η αναμενόμενη σύνταξη είναι:
-				όνομα : κανόνας { κώδικας C } */
 program:
         program decl_statements NEWLINE         { if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
         |                                       { }                       
         ;
 
-/* ============== [2.1] Δομή Πηγαίου Κώδικα ============== */
-
-/* ============== [2.2] Δηλώσεις Μεταβλητών ============== */
 decl_var:
         type var { $$ = strdup(yytext); }
         ;
@@ -117,7 +69,6 @@ var:
         | var "," var  { $$ = strdup(yytext); }
         ;
 
-/* ============== [2.3] Πίνακες ============== */
 pos_elem:
         IDENTIFIER "[" INTEGER "]"           { $$ = strdup(yytext); }
         | IDENTIFIER "[" IDENTIFIER "]"      { $$ = strdup(yytext); }
@@ -145,7 +96,6 @@ str:
         | str "," str           { $$ = strdup(yytext); }
         ;
 
-/* ============== [2.4] Ενσωματωμένες απλές συναρτήσεις ============== */
 build_func:
 	func  { $$ = strdup(yytext); }
 	;
@@ -184,7 +134,6 @@ print_params:
         | print_params "," print_params { $$ = strdup(yytext); }
         ;
 
-/* ============== [2.5] Δήλωση συναρτήσεων χρήστη ============== */
 decl_func:
         name_func decl_statement { $$ = strdup(yytext); }
 	;
@@ -204,8 +153,6 @@ type_params:
         | type_params "," type_params   { $$ = strdup(yytext); }
         ;
 
-/* ============== [2.6] Δηλώσεις απλών εκφράσεων ============== */
-/* [2.6.1] Αριθμητικές εκφράσεις */
 sign:
         INTEGER         { $$ = strdup(yytext); }
         | FLOAT         { $$ = strdup(yytext); }
@@ -229,8 +176,6 @@ number:
         | pos_elem  { $$ = strdup(yytext); }
         ;
 
-
-/* [2.6.2] Αναθέσεις τιμών σε μεταβλητή */
 assign:
         var "=" val               { $$ = strdup(yytext); } 
         | var "=" cmp_expr        { $$ = strdup(yytext); }
@@ -258,12 +203,11 @@ val:
     | val "," val       { $$ = strdup(yytext); }
     ;
 
-/* [2.6.3] Συγκρίσεις */
 cmp_expr:
-	INTEGER   		  { $$ = strdup(yytext); }
+        INTEGER                   { $$ = strdup(yytext); }
         | FLOAT                   { $$ = strdup(yytext); }
-	| IDENTIFIER              { $$ = strdup(yytext); }
-	| cmp_expr ">" cmp_expr   { $$ = strdup(yytext); }
+        | IDENTIFIER              { $$ = strdup(yytext); }
+        | cmp_expr ">" cmp_expr   { $$ = strdup(yytext); }
         | cmp_expr "<" cmp_expr   { $$ = strdup(yytext); }
         | cmp_expr "<=" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr ">=" cmp_expr  { $$ = strdup(yytext); }
@@ -271,101 +215,117 @@ cmp_expr:
         | cmp_expr "!=" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "||" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "&&" cmp_expr  { $$ = strdup(yytext); }
-        | "!" cmp_expr            { $$ = strdup(yytext); }
         ;
 
-/* [2.6.4] Συνένωση Πινάκων */
 merge_arr:
-        arr_elements "+" arr_elements { $$ = strdup(yytext); }
+        "{" arr_elements "}"      { $$ = strdup(yytext); }
         ;
-        
-/* ============== [2.7] Σύνθετες δηλώσεις ============== */
+
 decl_statements:
-        decl_statement                   { $$ = $1; }
-        | decl_statements decl_statement { $$ = $2; }
-        ;
-
-decl_statement:
-        if_statement                     { $$ = "\"Δήλωση if\""; }
-        | while_statement                { $$ = "\"Δήλωση while\""; }
-        | for_statement                  { $$ = "\"Δήλωση for\""; }
-        | decl_var ";"                   { $$ = "\"Δήλωση μεταβλητής\""; }
-        | build_func ";"                 { $$ = "\"Κλήση συνάρτησης\""; }
-        | decl_func                      { $$ = "\"Δήλωση συναρτήσεων χρήστη\""; }
-        | assign ";"                     { $$ = "\"Ανάθεση τιμής σε μεταβλητή\""; }
-        | arithm_expr                    { $$ = "\"Αριθμητική έκφραση\""; }
-        | cmp_expr                       { $$ = "\"Σύγκριση\""; }
-        | merge_arr                      { $$ = "\"Συνένωση πινάκων\""; }
-        | block_statement                { $$ = "\"Σύνθετες δηλώσεις\""; } 
-        | NEWLINE                        { $$ = "\n"; }
-        ;
-
-/* [2.7.1] Η δήλωση if */
-if_statement:
-        SIF condition decl_statement     { $$ = strdup(yytext); }
-        ;
-
-condition:
-        cmp_expr            { $$ = strdup(yytext); }
-        | "(" condition ")" { $$ = strdup(yytext); }
+        block_statement DELIMITER                  { $$ = strdup(yytext); } 
+        | decl_statement DELIMITER                 { $$ = strdup(yytext); }
         ;
 
 block_statement:
-        "{" decl_statements "}" {  $$ = strdup(yytext); }
+        OPENCURBRA decl_statement CLOSECURBRA      { $$ = strdup(yytext); }
         ;
 
-/* [2.7.2] Η δήλωση while */
+decl_statement:
+        type var DELIMITER                         { $$ = strdup(yytext); }
+        | decl_func                                { $$ = strdup(yytext); }
+        | assign                                   { $$ = strdup(yytext); }
+        | if_statement                             { $$ = strdup(yytext); }
+        | condition                                { $$ = strdup(yytext); }
+        | while_statement                          { $$ = strdup(yytext); }
+        | for_statement                            { $$ = strdup(yytext); }
+        | func                                     { $$ = strdup(yytext); }
+        ;
+
+if_statement:
+        SIF OPENPAR cmp_expr CLOSEPAR block_statement 
+        {
+            $$ = strdup(yytext);
+        }
+        | SIF OPENPAR cmp_expr CLOSEPAR block_statement SELSE block_statement 
+        {
+            $$ = strdup(yytext);
+        }
+        ;
+
+condition:
+        SIF OPENPAR cmp_expr CLOSEPAR block_statement SELSE condition
+        {
+            $$ = strdup(yytext);
+        }
+        | SIF OPENPAR cmp_expr CLOSEPAR block_statement SELSE block_statement
+        {
+            $$ = strdup(yytext);
+        }
+        ;
+
 while_statement:
-        SWHILE condition decl_statement { $$ = strdup(yytext); }
+        SWHILE OPENPAR cmp_expr CLOSEPAR block_statement
+        {
+            $$ = strdup(yytext);
+        }
         ;
 
-/* [2.7.3] Η δήλωση for */
 for_statement:
-        SFOR "(" assign ";" cmp_expr ";" oper_eq ")" decl_statement { $$ = strdup(yytext); }
+        SFOR OPENPAR assign DELIMITER cmp_expr DELIMITER assign CLOSEPAR block_statement 
+        {
+            $$ = strdup(yytext);
+        }
         ;
+
+error_stmt:
+    error NEWLINE       { SyntaxError("Invalid statement"); }
+    | error DELIMITER   { SyntaxError("Invalid statement"); }
+    ;
 
 %%
 
-
-
-
-/* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
-   από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
-   συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
-void yyerror(char *s) {
-        fprintf(stderr, "Error: %s\n", s);
+void SyntaxError(const char *s) {
+    fprintf(stderr, "Syntax Error: %s at line %d\n", s, line);
+    errflag++;
+    // Η μέθοδος του πανικού: αναγνωρίζουμε και παραβλέπουμε tokens μέχρι το τέλος γραμμής ή τη δήλωση.
+    while (1) {
+        int tok = yylex();
+        if (tok == NEWLINE || tok == DELIMITER || tok == 0) {
+            break;
+        }
+    }
 }
 
-/* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
-   Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
-   για να ξεκινήσει η συντακτική ανάλυση. */
-int main(int argc, char **argv)  
-{       
-        yydebug = 0;
+void yyerror(char *s) {
+    SyntaxError(s);
+}
 
-	if (argc == 3)
-        {
-                if (!(yyin = fopen(argv[1], "r"))) 
-                {
-                        fprintf(stderr, "Cannot read file: %s\n", argv[1]);
-                        return 1;
-                }
-                if (!(yyout = fopen(argv[2], "w"))) 
-                {
-                        fprintf(stderr, "Cannot create file: %s\n", argv[2]);
-                        return 1;
-                }
+int main(int argc, char *argv[]) {
+    if (argc > 1) {
+        yyin = fopen(argv[1], "r");
+        if (!yyin) {
+            fprintf(stderr, "Error: Could not open input file %s\n", argv[1]);
+            return 1;
         }
-		
-	int parse = yyparse();
+    } else {
+        yyin = stdin;
+    }
 
-	if (errflag == 0 && parse == 0)
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
-        else
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
-        
-        fclose(yyin);
-        fclose(yyout);
+    if (argc > 2) {
+        yyout = fopen(argv[2], "w");
+        if (!yyout) {
+            fprintf(stderr, "Error: Could not open output file %s\n", argv[2]);
+            return 1;
+        }
+    } else {
+        yyout = stdout;
+    }
 
-	return 0;
-} 
+    yyparse();
+
+    if (yyin && yyin != stdin) fclose(yyin);
+    if (yyout && yyout != stdout) fclose(yyout);
+
+    return (fatal_error_count > 0) ? 1 : 0;
+}
+

@@ -1,123 +1,49 @@
-/*============= Test case [#2.2] : VARIABLES-STATEMENT =============*/
+a = 5 / 0;
 
-int a;
-double var;
-float c;
-int a, b, c;
-long var1,var2,var3,var4;
-short sh1;
+b = 10.0 / 0.0;
 
-/*============= Test case [#2.3] : ARRAYS =============*/
+c = 15 / 0;
 
-pin1 = [1, 2, 3, 4, 5 ]; 
-pin2 = ["a", "b", "c", "d"];
+d = 20;
+d = d / 0;
 
-/*============= Test case [#2.4] : BUILD-IN-FUNCTIONS =============*/
-/* --- Test case [#2.4.1] : SCAN --- */
+e = 25.0;
+e /= 0;
 
-scan(x);
-scan(MyVariable);
+f = 30;
+f /= 0;
 
-/* --- Test case [#2.4.2] : LEN --- */
+g = 35.0;
+g = g / 0.0;
 
-len([10, 20, 30, 40, 50]);
-len("Τhis is a string");
-len(StringVariable);
+h = 40;
+h = h / 0;
 
-/* --- Test case [#2.4.3] : CMP --- */
+i = 45;
+i = i / 0;
 
-cmp("test", "best");
-cmp(str1, str2);
+j = 50.0;
+j = j / 1 - 1;
 
-/* --- Test case [#2.4.4] : PRINT --- */
+b = 10 / 0;
 
-print("Hello World");
-print(x, "=", 100);
-print(cmp(str1, str2));
-print(len("This is a string"));
-print(pin[0]);
+c = 7 + 3 / 0;
 
-/*============= Test case [#2.5] : USER-FUNCTIONS =============*/
+d = 4 * 2 - 1 / 0;
 
-func myfunc()
-{
-}
-func myfunc2(int paramA, long paramB, short paramC)
-{
+e = 6 + 2 / 0;
 
-}
-func main()
-{
-    print("Hello World\n");
-}
+f = 8 % 0;
+ 
+g = 5 / 0;
 
-/*============= Test case [#2.6] : EXPRESSIONS =============*/
-/* --- Test case [#2.6.1] : ARITHMETIC-EXPRESSIONS --- */
+h = 0;
+i = 5 / h;
 
-a1 * a2
-a3 + a4
--5 + 10
-15 + a5 - 9
-+5 - a1 -16
-+10 -5 + myvar - myvar2
+j = 100;
+k = j / j - 100;
 
-/* --- Test case [#2.6.2] : VARIABLES-INITIALIZE --- */
+l = 15 / 3 - 3;
 
-x1=0;
-x1, x2 = 0, 1;
-x1, list1 = 0, ["A", "B", "C"];
-x1, list1, string = 0, ["A", "B", "C"], "HELLO";
-
-/* --- Test case [#2.6.3] : ARRAY-MERGE --- */
-
-[1, 2, 3] + [4, 5, 6]
-[1, 3] + [5, 7, 9, 11]
-
-/* --- Test case [#2.6.4] : COMPARISONS --- */
-
-x1 > x2
-a <= b
-myvar == 52
-
-/*============= Test case [#2.7] : STATEMENTS =============*/
-/* --- Test case [#2.7.1] : IF-STATEMENTS --- */
-
-if (var == 100) print("Value of expression is 100"); 
-if (x < y < z) { print(x);  print(y);  print(z);  } 
-
-if (x == 0) 
-{
-    int i;
-    i = 1;
-    if (i > 1)
-        print("i is greater than 1");
-}
-
-/* --- Test case [#2.7.2] : WHILE-STATEMENTS --- */
-while (i < 10)
-{
-print("i is: ", i);
-}
-
-/* --- Test case [#2.7.3] : FOR-STATEMENTS --- */
-for (i = 0; i < 10; i++)
-{
-print("i = ", i);
-}
-
-/*============= Test case [#2.8] : FINAL =============*/
-func myAdd(int num1, int num2)
-{
-    int sum;
-    sum = a + b;
-    print("Sum is: ", sum);
-}
-
-func main()
-{
-    int a;
-    int b;
-    scan(a);
-    scan(b);
-    myAdd(a,b);
-}
+m = 25;
+n = m / m - 25;
