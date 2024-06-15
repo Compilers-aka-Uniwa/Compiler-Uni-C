@@ -19,8 +19,10 @@
 /* Ορισμός μετρητή τρέχουσας γραμμής */
 extern int line;
 extern int flag;
+
 extern int correct_tokens; //Correct words counter
 extern int incorrect_tokens; //Incorrect Words counter
+extern int lex_warnings;
 
 void yyerror (const char *msg);
 void prn(char *token);
@@ -107,16 +109,18 @@ TOKEN_ERROR      [^ \t\r\n;]
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
-{TOKEN_ERROR}   { incorrect_tokens++; yyerror("Unrecognized character(s) encountered!"); BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-<error>{TOKEN_ERROR}+ { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", incorrect_tokens); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
-<error>.        { incorrect_tokens++; }
-<error>\n       { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", incorrect_tokens); return NEWLINE;}
+
+
+{TOKEN_ERROR}           { lex_warnings++; yyerror("Token eror"); BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+<error>{TOKEN_ERROR}+   { BEGIN(0); fprintf(yyout, "\t%d character(s) ignored so far\n", lex_warnings); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+<error>.                { lex_warnings++; }
+<error>\n               { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warnings); return NEWLINE;}
 
 %%
 
 void yyerror(const char *msg)
 {
-   fprintf(yyout, "\t[FLEX] Line=%d at lexeme \'%s\' Error=%s\n", line, yytext, msg);
+   fprintf(yyout, "%s at Line=%d\n\n", msg, line-1);
    return;
 }
 

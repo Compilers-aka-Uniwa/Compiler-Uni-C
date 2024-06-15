@@ -12,10 +12,10 @@
 
 	extern char *yytext;
         int correct_tokens = 0;
-        int incorrect_tokens = 0;
         int correct_exprs = 0;
-        int incorrect_exprs = 0; //Counts correct statements
-        int warnings = 0;
+        int fatal_errors = 0; 
+        int par_warnings = 0;
+        int lex_warnings = 0;
 	
         int yylex();
 	void yyerror(const char *msg);
@@ -89,7 +89,7 @@
 %type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
 
 /* BUG DECLARATION*/
-%token TOKEN_ERROR
+%token TOKEN_ERROR 
 
 /* Έναρξη προγραμμάτος*/
 %start program
@@ -102,7 +102,7 @@
 				όνομα : κανόνας { κώδικας C } */
 program:
         program decl_statements NEWLINE         { correct_exprs++; if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-        | program error NEWLINE                 { incorrect_exprs++; }
+        | program error NEWLINE                 { fatal_errors++; errflag = 1; yyerrok; }
         |                                       { }                       
         ;
        
@@ -120,6 +120,7 @@ type:
         | SDOUBLE        { $$ = strdup(yytext); }
         | SSHORT         { $$ = strdup(yytext); }
         | SLONG          { $$ = strdup(yytext); }
+        | IDENTIFIER     {  }    
         ;
 
 var:
@@ -232,7 +233,7 @@ arithm_expr:
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "%" arithm_expr   { $$ = strdup(yytext); }
-        | arithm_expr "*" "*" arithm_expr { warnings++; $$ = strdup(yytext); fprintf(yyout, "XAZE EVALES 2!! * XAZE"); }  
+        | arithm_expr "*" "*" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Extra * detected at Line=%d", line); }  
         ;
 
 number:
@@ -369,15 +370,21 @@ int main(int argc, char **argv)
                 }
         }
 		
-	yyparse();
+	int parse = yyparse();
 
-	fprintf(yyout, "\t\tBISON -> Η συντακτική ανάλυση ολοκλήρωθηκε");
-        fprintf(yyout, "ΣΩΣΤΕΣ ΛΕΞΕΙΣ: %d\n", correct_tokens);
-        fprintf(yyout, "ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: %d\n", correct_exprs);
-        fprintf(yyout, "ΛΑΘΟΣ ΛΕΞΕΙΣ: %d\n", incorrect_tokens);
-        fprintf(yyout, "ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: %d\n", incorrect_exprs);
-        fprintf(yyout, "ΣΥΝΤΑΚΤΙΚΑ ΠΡΟΕΙΔΟΠΟΙΗΤΙΚΑ ΛΑΘΗ: %d\n", warnings);
-
+        if (errflag == 0 && parse == 0) 
+        {
+                fprintf(yyout, "BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με επιτυχία\n");
+                if (par_warnings > 0)
+                        fprintf(yyout, "\t\t(με %d warnings)\n", par_warnings);
+        }
+        else
+                fprintf(yyout, "BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία\n");
+       
+        fprintf(yyout, "\t\tΣΩΣΤΕΣ ΛΕΞΕΙΣ: %d\n", correct_tokens);
+        fprintf(yyout, "\t\tΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: %d\n", correct_exprs);
+        fprintf(yyout, "\t\tΛΑΘΟΣ ΛΕΞΕΙΣ: %d\n", lex_warnings);
+        fprintf(yyout, "\t\tΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: %d\n", fatal_errors);
         fprintf(yyout, "\n");
 
         fclose(yyin);

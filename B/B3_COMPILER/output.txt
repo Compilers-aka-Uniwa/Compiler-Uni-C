@@ -12,7 +12,7 @@
 	[FLEX] Line=3, token=OPERATOR, value="*"
 	[FLEX] Line=3, token=OPERATOR, value="*"
 	[FLEX] Line=3, token=INTEGER, value="5"
-XAZE EVALES 2!! * XAZE[BISON] Line=3, expression="Αριθμητική έκφραση"
+Warning: Extra * detected at Line=3[BISON] Line=3, expression="Αριθμητική έκφραση"
 
 	[FLEX] Line=4, token=INTEGER, value="1"
 	[FLEX] Line=4, token=OPERATOR, value="-"
@@ -23,11 +23,21 @@ XAZE EVALES 2!! * XAZE[BISON] Line=3, expression="Αριθμητική έκφρ
 	[FLEX] Line=5, token=OPERATOR, value="*"
 	[FLEX] Line=5, token=OPERATOR, value="*"
 	[FLEX] Line=5, token=IDENTIFIER, value="C"
-XAZE EVALES 2!! * XAZE[BISON] Line=5, expression="Αριθμητική έκφραση"
+Warning: Extra * detected at Line=5[BISON] Line=5, expression="Αριθμητική έκφραση"
 
-		ΣΑ -> Η συντακτική ανάλυση ολοκλήρωθηκεΣΩΣΤΕΣ ΛΕΞΕΙΣ: 2
-ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 5
-ΛΑΘΟΣ ΛΕΞΕΙΣ: 0
-ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 0
-ΣΥΝΤΑΚΤΙΚΑ ΠΡΟΕΙΔΟΠΟΙΗΤΙΚΑ ΛΑΘΗ: 2
+	[FLEX] Line=6, token=INTEGER, value="5"
+	[FLEX] Line=6, token=INTEGER, value="3"
+	[FLEX] Line=6, token=OPERATOR, value="+"
+syntax error at Line=6
+
+	[FLEX] Line=7, token=INTEGER, value="5"
+	[FLEX] Line=7, token=OPERATOR, value="-"
+	[FLEX] Line=7, token=INTEGER, value="3"
+[BISON] Line=7, expression="Αριθμητική έκφραση"
+
+BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία
+		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 2
+		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 6
+		ΛΑΘΟΣ ΛΕΞΕΙΣ: 0
+		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 1
 
