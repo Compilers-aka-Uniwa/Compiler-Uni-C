@@ -7,6 +7,7 @@
 int line = 1;
 int errflag = 0;
 int fatal_error_count = 0;
+int par_warn = 0; // Declare the par_warn variable
 
 extern char *yytext;
 
@@ -31,7 +32,7 @@ extern FILE *yyout;
 %token PLUS "+" MULEQ "*=" PMINEQ "--" MINUS "-" DIVEQ "/=" LT "<" MUL "*" NOT "!" GT ">" DIV "/" AND "&&" LEQ "<=" MOD "%" OR "||" GREQ ">=" ASSIGN "=" EQUAL "==" ADDR "&" PLUSEQ "+=" NOTEQ "!=" MINEQ "-=" PPLUSEQ "++" OPENPAR "(" CLOSEPAR ")" OPENSQBRA "[" CLOSESQBRA "]" OPENCURBRA "{" CLOSECURBRA "}" COMMA "," BACKSLASH "\\" DELIMITER ";" SSCAN SPRINT SLEN SCMP NEWLINE UNKNOWN
 
 %left ","   
-%right "*=" "/=" "+=" "-=" "="
+%right "*=" "/=" "+=" "-="
 %left "||" 
 %left "&&" 
 %left "==" "!=" 
@@ -167,7 +168,7 @@ arithm_expr:
         | arithm_expr "+" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "-" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
-        | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
+        | arithm_expr "/" arithm_expr   { if ($3 == 0) { par_warn++; fprintf(yyout, "[BISON] Line=%d, Warning: Division by zero\n", line-1); } $$ = strdup(yytext); }
         | arithm_expr "%" arithm_expr   { $$ = strdup(yytext); }
         ;
 
@@ -274,7 +275,7 @@ while_statement:
 for_statement:
         SFOR OPENPAR assign DELIMITER cmp_expr DELIMITER assign CLOSEPAR block_statement 
         {
-            $$ = strdup(yytext);
+            $$ = strdup(yytext); 
         }
         ;
 

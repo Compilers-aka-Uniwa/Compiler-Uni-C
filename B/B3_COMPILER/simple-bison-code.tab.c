@@ -77,6 +77,7 @@
 int line = 1;
 int errflag = 0;
 int fatal_error_count = 0;
+int par_warn = 0; // Declare the par_warn variable
 
 extern char *yytext;
 
@@ -87,7 +88,7 @@ extern int yylex(void);
 extern FILE *yyin;
 extern FILE *yyout;
 
-#line 91 "simple-bison-code.tab.c"
+#line 92 "simple-bison-code.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -604,18 +605,18 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    51,    51,    52,    53,    61,    62,    63,    64,    65,
-      69,    70,    74,    75,    79,    80,    81,    82,    86,    87,
-      91,    92,    96,    97,   105,   106,   107,   108,   109,   113,
-     117,   118,   119,   123,   124,   125,   129,   130,   131,   132,
-     133,   134,   135,   139,   143,   144,   148,   149,   153,   154,
-     158,   159,   160,   161,   165,   166,   167,   168,   169,   170,
-     171,   175,   176,   177,   181,   182,   183,   184,   185,   189,
-     190,   191,   192,   193,   194,   195,   196,   200,   201,   202,
-     203,   204,   208,   209,   210,   211,   212,   213,   214,   215,
-     216,   217,   218,   222,   226,   227,   231,   235,   236,   237,
-     238,   239,   240,   241,   242,   246,   250,   257,   261,   268,
-     275,   282,   283
+       0,    52,    52,    53,    54,    62,    63,    64,    65,    66,
+      70,    71,    75,    76,    80,    81,    82,    83,    87,    88,
+      92,    93,    97,    98,   106,   107,   108,   109,   110,   114,
+     118,   119,   120,   124,   125,   126,   130,   131,   132,   133,
+     134,   135,   136,   140,   144,   145,   149,   150,   154,   155,
+     159,   160,   161,   162,   166,   167,   168,   169,   170,   171,
+     172,   176,   177,   178,   182,   183,   184,   185,   186,   190,
+     191,   192,   193,   194,   195,   196,   197,   201,   202,   203,
+     204,   205,   209,   210,   211,   212,   213,   214,   215,   216,
+     217,   218,   219,   223,   227,   228,   232,   236,   237,   238,
+     239,   240,   241,   242,   243,   247,   251,   258,   262,   269,
+     276,   283,   284
 };
 #endif
 
@@ -1340,685 +1341,685 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: program decl_statements NEWLINE  */
-#line 51 "simple-bison-code.y"
+#line 52 "simple-bison-code.y"
                                                 { if ((yyvsp[-1].sval) != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, (yyvsp[-1].sval)); }
-#line 1346 "simple-bison-code.tab.c"
+#line 1347 "simple-bison-code.tab.c"
     break;
 
   case 3: /* program: program error_stmt  */
-#line 52 "simple-bison-code.y"
+#line 53 "simple-bison-code.y"
                                                 { }
-#line 1352 "simple-bison-code.tab.c"
+#line 1353 "simple-bison-code.tab.c"
     break;
 
   case 4: /* program: %empty  */
-#line 53 "simple-bison-code.y"
+#line 54 "simple-bison-code.y"
                                                 { }
-#line 1358 "simple-bison-code.tab.c"
+#line 1359 "simple-bison-code.tab.c"
     break;
 
   case 5: /* type: SINT  */
-#line 61 "simple-bison-code.y"
+#line 62 "simple-bison-code.y"
                          { (yyval.sval) = strdup(yytext); }
-#line 1364 "simple-bison-code.tab.c"
+#line 1365 "simple-bison-code.tab.c"
     break;
 
   case 6: /* type: SFLOAT  */
-#line 62 "simple-bison-code.y"
+#line 63 "simple-bison-code.y"
                          { (yyval.sval) = strdup(yytext); }
-#line 1370 "simple-bison-code.tab.c"
+#line 1371 "simple-bison-code.tab.c"
     break;
 
   case 7: /* type: SDOUBLE  */
-#line 63 "simple-bison-code.y"
+#line 64 "simple-bison-code.y"
                          { (yyval.sval) = strdup(yytext); }
-#line 1376 "simple-bison-code.tab.c"
+#line 1377 "simple-bison-code.tab.c"
     break;
 
   case 8: /* type: SSHORT  */
-#line 64 "simple-bison-code.y"
+#line 65 "simple-bison-code.y"
                          { (yyval.sval) = strdup(yytext); }
-#line 1382 "simple-bison-code.tab.c"
+#line 1383 "simple-bison-code.tab.c"
     break;
 
   case 9: /* type: SLONG  */
-#line 65 "simple-bison-code.y"
+#line 66 "simple-bison-code.y"
                          { (yyval.sval) = strdup(yytext); }
-#line 1388 "simple-bison-code.tab.c"
+#line 1389 "simple-bison-code.tab.c"
     break;
 
   case 10: /* var: IDENTIFIER  */
-#line 69 "simple-bison-code.y"
+#line 70 "simple-bison-code.y"
                        { (yyval.sval) = strdup(yytext); }
-#line 1394 "simple-bison-code.tab.c"
+#line 1395 "simple-bison-code.tab.c"
     break;
 
   case 11: /* var: var "," var  */
-#line 70 "simple-bison-code.y"
+#line 71 "simple-bison-code.y"
                        { (yyval.sval) = strdup(yytext); }
-#line 1400 "simple-bison-code.tab.c"
+#line 1401 "simple-bison-code.tab.c"
     break;
 
   case 12: /* pos_elem: IDENTIFIER "[" INTEGER "]"  */
-#line 74 "simple-bison-code.y"
+#line 75 "simple-bison-code.y"
                                              { (yyval.sval) = strdup(yytext); }
-#line 1406 "simple-bison-code.tab.c"
+#line 1407 "simple-bison-code.tab.c"
     break;
 
   case 13: /* pos_elem: IDENTIFIER "[" IDENTIFIER "]"  */
-#line 75 "simple-bison-code.y"
+#line 76 "simple-bison-code.y"
                                              { (yyval.sval) = strdup(yytext); }
-#line 1412 "simple-bison-code.tab.c"
+#line 1413 "simple-bison-code.tab.c"
     break;
 
   case 14: /* arr_elements: "[" "]"  */
-#line 79 "simple-bison-code.y"
+#line 80 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1418 "simple-bison-code.tab.c"
+#line 1419 "simple-bison-code.tab.c"
     break;
 
   case 15: /* arr_elements: "[" integ "]"  */
-#line 80 "simple-bison-code.y"
+#line 81 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1424 "simple-bison-code.tab.c"
+#line 1425 "simple-bison-code.tab.c"
     break;
 
   case 16: /* arr_elements: "[" fl "]"  */
-#line 81 "simple-bison-code.y"
+#line 82 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1430 "simple-bison-code.tab.c"
+#line 1431 "simple-bison-code.tab.c"
     break;
 
   case 17: /* arr_elements: "[" str "]"  */
-#line 82 "simple-bison-code.y"
+#line 83 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1436 "simple-bison-code.tab.c"
+#line 1437 "simple-bison-code.tab.c"
     break;
 
   case 18: /* integ: INTEGER  */
-#line 86 "simple-bison-code.y"
+#line 87 "simple-bison-code.y"
                                 { (yyval.sval) = strdup(yytext); }
-#line 1442 "simple-bison-code.tab.c"
+#line 1443 "simple-bison-code.tab.c"
     break;
 
   case 19: /* integ: integ "," integ  */
-#line 87 "simple-bison-code.y"
+#line 88 "simple-bison-code.y"
                                 { (yyval.sval) = strdup(yytext); }
-#line 1448 "simple-bison-code.tab.c"
+#line 1449 "simple-bison-code.tab.c"
     break;
 
   case 20: /* fl: FLOAT  */
-#line 91 "simple-bison-code.y"
+#line 92 "simple-bison-code.y"
                                 { (yyval.sval) = strdup(yytext); }
-#line 1454 "simple-bison-code.tab.c"
+#line 1455 "simple-bison-code.tab.c"
     break;
 
   case 21: /* fl: fl "," fl  */
-#line 92 "simple-bison-code.y"
+#line 93 "simple-bison-code.y"
                                 { (yyval.sval) = strdup(yytext); }
-#line 1460 "simple-bison-code.tab.c"
+#line 1461 "simple-bison-code.tab.c"
     break;
 
   case 22: /* str: STRING  */
-#line 96 "simple-bison-code.y"
+#line 97 "simple-bison-code.y"
                                 { (yyval.sval) = strdup(yytext); }
-#line 1466 "simple-bison-code.tab.c"
+#line 1467 "simple-bison-code.tab.c"
     break;
 
   case 23: /* str: str "," str  */
-#line 97 "simple-bison-code.y"
+#line 98 "simple-bison-code.y"
                                 { (yyval.sval) = strdup(yytext); }
-#line 1472 "simple-bison-code.tab.c"
+#line 1473 "simple-bison-code.tab.c"
     break;
 
   case 24: /* func: SSCAN "(" scan_params ")"  */
-#line 105 "simple-bison-code.y"
+#line 106 "simple-bison-code.y"
                                           { (yyval.sval) = strdup(yytext); }
-#line 1478 "simple-bison-code.tab.c"
+#line 1479 "simple-bison-code.tab.c"
     break;
 
   case 25: /* func: SLEN "(" len_params ")"  */
-#line 106 "simple-bison-code.y"
+#line 107 "simple-bison-code.y"
                                           { (yyval.sval) = strdup(yytext); }
-#line 1484 "simple-bison-code.tab.c"
+#line 1485 "simple-bison-code.tab.c"
     break;
 
   case 26: /* func: SCMP "(" cmp_params ")"  */
-#line 107 "simple-bison-code.y"
+#line 108 "simple-bison-code.y"
                                           { (yyval.sval) = strdup(yytext); }
-#line 1490 "simple-bison-code.tab.c"
+#line 1491 "simple-bison-code.tab.c"
     break;
 
   case 27: /* func: SPRINT "(" print_params ")"  */
-#line 108 "simple-bison-code.y"
+#line 109 "simple-bison-code.y"
                                           { (yyval.sval) = strdup(yytext); }
-#line 1496 "simple-bison-code.tab.c"
+#line 1497 "simple-bison-code.tab.c"
     break;
 
   case 28: /* func: IDENTIFIER "(" print_params ")"  */
-#line 109 "simple-bison-code.y"
+#line 110 "simple-bison-code.y"
                                           { (yyval.sval) = strdup(yytext); }
-#line 1502 "simple-bison-code.tab.c"
+#line 1503 "simple-bison-code.tab.c"
     break;
 
   case 29: /* scan_params: IDENTIFIER  */
-#line 113 "simple-bison-code.y"
+#line 114 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1508 "simple-bison-code.tab.c"
+#line 1509 "simple-bison-code.tab.c"
     break;
 
   case 30: /* len_params: arr_elements  */
-#line 117 "simple-bison-code.y"
+#line 118 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1514 "simple-bison-code.tab.c"
+#line 1515 "simple-bison-code.tab.c"
     break;
 
   case 31: /* len_params: STRING  */
-#line 118 "simple-bison-code.y"
+#line 119 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1520 "simple-bison-code.tab.c"
+#line 1521 "simple-bison-code.tab.c"
     break;
 
   case 32: /* len_params: IDENTIFIER  */
-#line 119 "simple-bison-code.y"
+#line 120 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1526 "simple-bison-code.tab.c"
+#line 1527 "simple-bison-code.tab.c"
     break;
 
   case 33: /* cmp_params: STRING  */
-#line 123 "simple-bison-code.y"
+#line 124 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1532 "simple-bison-code.tab.c"
+#line 1533 "simple-bison-code.tab.c"
     break;
 
   case 34: /* cmp_params: IDENTIFIER  */
-#line 124 "simple-bison-code.y"
+#line 125 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1538 "simple-bison-code.tab.c"
+#line 1539 "simple-bison-code.tab.c"
     break;
 
   case 35: /* cmp_params: cmp_params "," cmp_params  */
-#line 125 "simple-bison-code.y"
+#line 126 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1544 "simple-bison-code.tab.c"
+#line 1545 "simple-bison-code.tab.c"
     break;
 
   case 36: /* print_params: STRING  */
-#line 129 "simple-bison-code.y"
+#line 130 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1550 "simple-bison-code.tab.c"
+#line 1551 "simple-bison-code.tab.c"
     break;
 
   case 37: /* print_params: IDENTIFIER  */
-#line 130 "simple-bison-code.y"
+#line 131 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1556 "simple-bison-code.tab.c"
+#line 1557 "simple-bison-code.tab.c"
     break;
 
   case 38: /* print_params: INTEGER  */
-#line 131 "simple-bison-code.y"
+#line 132 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1562 "simple-bison-code.tab.c"
+#line 1563 "simple-bison-code.tab.c"
     break;
 
   case 39: /* print_params: FLOAT  */
-#line 132 "simple-bison-code.y"
+#line 133 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1568 "simple-bison-code.tab.c"
+#line 1569 "simple-bison-code.tab.c"
     break;
 
   case 40: /* print_params: func  */
-#line 133 "simple-bison-code.y"
+#line 134 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1574 "simple-bison-code.tab.c"
+#line 1575 "simple-bison-code.tab.c"
     break;
 
   case 41: /* print_params: pos_elem  */
-#line 134 "simple-bison-code.y"
+#line 135 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1580 "simple-bison-code.tab.c"
+#line 1581 "simple-bison-code.tab.c"
     break;
 
   case 42: /* print_params: print_params "," print_params  */
-#line 135 "simple-bison-code.y"
+#line 136 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1586 "simple-bison-code.tab.c"
+#line 1587 "simple-bison-code.tab.c"
     break;
 
   case 43: /* decl_func: name_func decl_statement  */
-#line 139 "simple-bison-code.y"
+#line 140 "simple-bison-code.y"
                                  { (yyval.sval) = strdup(yytext); }
-#line 1592 "simple-bison-code.tab.c"
+#line 1593 "simple-bison-code.tab.c"
     break;
 
   case 44: /* name_func: SFUNC  */
-#line 143 "simple-bison-code.y"
+#line 144 "simple-bison-code.y"
                                                 { (yyval.sval) = strdup(yytext); }
-#line 1598 "simple-bison-code.tab.c"
+#line 1599 "simple-bison-code.tab.c"
     break;
 
   case 45: /* name_func: name_func IDENTIFIER params NEWLINE  */
-#line 144 "simple-bison-code.y"
+#line 145 "simple-bison-code.y"
                                                 { (yyval.sval) = strdup(yytext); }
-#line 1604 "simple-bison-code.tab.c"
+#line 1605 "simple-bison-code.tab.c"
     break;
 
   case 46: /* params: "(" ")"  */
-#line 148 "simple-bison-code.y"
+#line 149 "simple-bison-code.y"
                                 { (yyval.sval) = strdup(yytext); }
-#line 1610 "simple-bison-code.tab.c"
+#line 1611 "simple-bison-code.tab.c"
     break;
 
   case 47: /* params: "(" type_params ")"  */
-#line 149 "simple-bison-code.y"
+#line 150 "simple-bison-code.y"
                                 { (yyval.sval) = strdup(yytext); }
-#line 1616 "simple-bison-code.tab.c"
+#line 1617 "simple-bison-code.tab.c"
     break;
 
   case 48: /* type_params: type IDENTIFIER  */
-#line 153 "simple-bison-code.y"
+#line 154 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1622 "simple-bison-code.tab.c"
+#line 1623 "simple-bison-code.tab.c"
     break;
 
   case 49: /* type_params: type_params "," type_params  */
-#line 154 "simple-bison-code.y"
+#line 155 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1628 "simple-bison-code.tab.c"
+#line 1629 "simple-bison-code.tab.c"
     break;
 
   case 50: /* sign: INTEGER  */
-#line 158 "simple-bison-code.y"
+#line 159 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1634 "simple-bison-code.tab.c"
+#line 1635 "simple-bison-code.tab.c"
     break;
 
   case 51: /* sign: FLOAT  */
-#line 159 "simple-bison-code.y"
+#line 160 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1640 "simple-bison-code.tab.c"
+#line 1641 "simple-bison-code.tab.c"
     break;
 
   case 52: /* sign: "+" sign  */
-#line 160 "simple-bison-code.y"
+#line 161 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1646 "simple-bison-code.tab.c"
+#line 1647 "simple-bison-code.tab.c"
     break;
 
   case 53: /* sign: "-" sign  */
-#line 161 "simple-bison-code.y"
+#line 162 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1652 "simple-bison-code.tab.c"
+#line 1653 "simple-bison-code.tab.c"
     break;
 
   case 54: /* arithm_expr: sign  */
-#line 165 "simple-bison-code.y"
+#line 166 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1658 "simple-bison-code.tab.c"
+#line 1659 "simple-bison-code.tab.c"
     break;
 
   case 55: /* arithm_expr: IDENTIFIER  */
-#line 166 "simple-bison-code.y"
+#line 167 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1664 "simple-bison-code.tab.c"
+#line 1665 "simple-bison-code.tab.c"
     break;
 
   case 56: /* arithm_expr: arithm_expr "+" arithm_expr  */
-#line 167 "simple-bison-code.y"
+#line 168 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1670 "simple-bison-code.tab.c"
+#line 1671 "simple-bison-code.tab.c"
     break;
 
   case 57: /* arithm_expr: arithm_expr "-" arithm_expr  */
-#line 168 "simple-bison-code.y"
+#line 169 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1676 "simple-bison-code.tab.c"
+#line 1677 "simple-bison-code.tab.c"
     break;
 
   case 58: /* arithm_expr: arithm_expr "*" arithm_expr  */
-#line 169 "simple-bison-code.y"
+#line 170 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1682 "simple-bison-code.tab.c"
+#line 1683 "simple-bison-code.tab.c"
     break;
 
   case 59: /* arithm_expr: arithm_expr "/" arithm_expr  */
-#line 170 "simple-bison-code.y"
-                                        { (yyval.sval) = strdup(yytext); }
-#line 1688 "simple-bison-code.tab.c"
+#line 171 "simple-bison-code.y"
+                                        { if ((yyvsp[0].sval) == 0) { par_warn++; fprintf(yyout, "[BISON] Line=%d, Warning: Division by zero\n", line-1); } (yyval.sval) = strdup(yytext); }
+#line 1689 "simple-bison-code.tab.c"
     break;
 
   case 60: /* arithm_expr: arithm_expr "%" arithm_expr  */
-#line 171 "simple-bison-code.y"
+#line 172 "simple-bison-code.y"
                                         { (yyval.sval) = strdup(yytext); }
-#line 1694 "simple-bison-code.tab.c"
+#line 1695 "simple-bison-code.tab.c"
     break;
 
   case 61: /* number: INTEGER  */
-#line 175 "simple-bison-code.y"
+#line 176 "simple-bison-code.y"
                     { (yyval.sval) = strdup(yytext); }
-#line 1700 "simple-bison-code.tab.c"
+#line 1701 "simple-bison-code.tab.c"
     break;
 
   case 62: /* number: FLOAT  */
-#line 176 "simple-bison-code.y"
+#line 177 "simple-bison-code.y"
                     { (yyval.sval) = strdup(yytext); }
-#line 1706 "simple-bison-code.tab.c"
+#line 1707 "simple-bison-code.tab.c"
     break;
 
   case 63: /* number: pos_elem  */
-#line 177 "simple-bison-code.y"
+#line 178 "simple-bison-code.y"
                     { (yyval.sval) = strdup(yytext); }
-#line 1712 "simple-bison-code.tab.c"
+#line 1713 "simple-bison-code.tab.c"
     break;
 
   case 64: /* assign: var "=" val  */
-#line 181 "simple-bison-code.y"
+#line 182 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1718 "simple-bison-code.tab.c"
+#line 1719 "simple-bison-code.tab.c"
     break;
 
   case 65: /* assign: var "=" cmp_expr  */
-#line 182 "simple-bison-code.y"
+#line 183 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1724 "simple-bison-code.tab.c"
+#line 1725 "simple-bison-code.tab.c"
     break;
 
   case 66: /* assign: var "=" arithm_expr  */
-#line 183 "simple-bison-code.y"
+#line 184 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1730 "simple-bison-code.tab.c"
+#line 1731 "simple-bison-code.tab.c"
     break;
 
   case 67: /* assign: var "=" merge_arr  */
-#line 184 "simple-bison-code.y"
+#line 185 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1736 "simple-bison-code.tab.c"
+#line 1737 "simple-bison-code.tab.c"
     break;
 
   case 68: /* assign: oper_eq  */
-#line 185 "simple-bison-code.y"
+#line 186 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1742 "simple-bison-code.tab.c"
+#line 1743 "simple-bison-code.tab.c"
     break;
 
   case 69: /* oper_eq: var "++"  */
-#line 189 "simple-bison-code.y"
+#line 190 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1748 "simple-bison-code.tab.c"
+#line 1749 "simple-bison-code.tab.c"
     break;
 
   case 70: /* oper_eq: var "--"  */
-#line 190 "simple-bison-code.y"
+#line 191 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1754 "simple-bison-code.tab.c"
+#line 1755 "simple-bison-code.tab.c"
     break;
 
   case 71: /* oper_eq: "++" var  */
-#line 191 "simple-bison-code.y"
+#line 192 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1760 "simple-bison-code.tab.c"
+#line 1761 "simple-bison-code.tab.c"
     break;
 
   case 72: /* oper_eq: "--" var  */
-#line 192 "simple-bison-code.y"
+#line 193 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1766 "simple-bison-code.tab.c"
+#line 1767 "simple-bison-code.tab.c"
     break;
 
   case 73: /* oper_eq: var "+=" number  */
-#line 193 "simple-bison-code.y"
+#line 194 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1772 "simple-bison-code.tab.c"
+#line 1773 "simple-bison-code.tab.c"
     break;
 
   case 74: /* oper_eq: var "-=" number  */
-#line 194 "simple-bison-code.y"
+#line 195 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1778 "simple-bison-code.tab.c"
+#line 1779 "simple-bison-code.tab.c"
     break;
 
   case 75: /* oper_eq: var "*=" number  */
-#line 195 "simple-bison-code.y"
+#line 196 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1784 "simple-bison-code.tab.c"
+#line 1785 "simple-bison-code.tab.c"
     break;
 
   case 76: /* oper_eq: var "/=" number  */
-#line 196 "simple-bison-code.y"
+#line 197 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1790 "simple-bison-code.tab.c"
+#line 1791 "simple-bison-code.tab.c"
     break;
 
   case 77: /* val: number  */
-#line 200 "simple-bison-code.y"
+#line 201 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1796 "simple-bison-code.tab.c"
+#line 1797 "simple-bison-code.tab.c"
     break;
 
   case 78: /* val: IDENTIFIER  */
-#line 201 "simple-bison-code.y"
+#line 202 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1802 "simple-bison-code.tab.c"
+#line 1803 "simple-bison-code.tab.c"
     break;
 
   case 79: /* val: STRING  */
-#line 202 "simple-bison-code.y"
+#line 203 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1808 "simple-bison-code.tab.c"
+#line 1809 "simple-bison-code.tab.c"
     break;
 
   case 80: /* val: arr_elements  */
-#line 203 "simple-bison-code.y"
+#line 204 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1814 "simple-bison-code.tab.c"
+#line 1815 "simple-bison-code.tab.c"
     break;
 
   case 81: /* val: val "," val  */
-#line 204 "simple-bison-code.y"
+#line 205 "simple-bison-code.y"
                         { (yyval.sval) = strdup(yytext); }
-#line 1820 "simple-bison-code.tab.c"
+#line 1821 "simple-bison-code.tab.c"
     break;
 
   case 82: /* cmp_expr: INTEGER  */
-#line 208 "simple-bison-code.y"
+#line 209 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1826 "simple-bison-code.tab.c"
+#line 1827 "simple-bison-code.tab.c"
     break;
 
   case 83: /* cmp_expr: FLOAT  */
-#line 209 "simple-bison-code.y"
+#line 210 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1832 "simple-bison-code.tab.c"
+#line 1833 "simple-bison-code.tab.c"
     break;
 
   case 84: /* cmp_expr: IDENTIFIER  */
-#line 210 "simple-bison-code.y"
+#line 211 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1838 "simple-bison-code.tab.c"
+#line 1839 "simple-bison-code.tab.c"
     break;
 
   case 85: /* cmp_expr: cmp_expr ">" cmp_expr  */
-#line 211 "simple-bison-code.y"
+#line 212 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1844 "simple-bison-code.tab.c"
+#line 1845 "simple-bison-code.tab.c"
     break;
 
   case 86: /* cmp_expr: cmp_expr "<" cmp_expr  */
-#line 212 "simple-bison-code.y"
+#line 213 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1850 "simple-bison-code.tab.c"
+#line 1851 "simple-bison-code.tab.c"
     break;
 
   case 87: /* cmp_expr: cmp_expr "<=" cmp_expr  */
-#line 213 "simple-bison-code.y"
+#line 214 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1856 "simple-bison-code.tab.c"
+#line 1857 "simple-bison-code.tab.c"
     break;
 
   case 88: /* cmp_expr: cmp_expr ">=" cmp_expr  */
-#line 214 "simple-bison-code.y"
+#line 215 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1862 "simple-bison-code.tab.c"
+#line 1863 "simple-bison-code.tab.c"
     break;
 
   case 89: /* cmp_expr: cmp_expr "==" cmp_expr  */
-#line 215 "simple-bison-code.y"
+#line 216 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1868 "simple-bison-code.tab.c"
+#line 1869 "simple-bison-code.tab.c"
     break;
 
   case 90: /* cmp_expr: cmp_expr "!=" cmp_expr  */
-#line 216 "simple-bison-code.y"
+#line 217 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1874 "simple-bison-code.tab.c"
+#line 1875 "simple-bison-code.tab.c"
     break;
 
   case 91: /* cmp_expr: cmp_expr "||" cmp_expr  */
-#line 217 "simple-bison-code.y"
+#line 218 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1880 "simple-bison-code.tab.c"
+#line 1881 "simple-bison-code.tab.c"
     break;
 
   case 92: /* cmp_expr: cmp_expr "&&" cmp_expr  */
-#line 218 "simple-bison-code.y"
+#line 219 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1886 "simple-bison-code.tab.c"
+#line 1887 "simple-bison-code.tab.c"
     break;
 
   case 93: /* merge_arr: "{" arr_elements "}"  */
-#line 222 "simple-bison-code.y"
+#line 223 "simple-bison-code.y"
                                   { (yyval.sval) = strdup(yytext); }
-#line 1892 "simple-bison-code.tab.c"
+#line 1893 "simple-bison-code.tab.c"
     break;
 
   case 94: /* decl_statements: block_statement ";"  */
-#line 226 "simple-bison-code.y"
+#line 227 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1898 "simple-bison-code.tab.c"
+#line 1899 "simple-bison-code.tab.c"
     break;
 
   case 95: /* decl_statements: decl_statement ";"  */
-#line 227 "simple-bison-code.y"
+#line 228 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1904 "simple-bison-code.tab.c"
+#line 1905 "simple-bison-code.tab.c"
     break;
 
   case 96: /* block_statement: "{" decl_statement "}"  */
-#line 231 "simple-bison-code.y"
+#line 232 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1910 "simple-bison-code.tab.c"
+#line 1911 "simple-bison-code.tab.c"
     break;
 
   case 97: /* decl_statement: type var ";"  */
-#line 235 "simple-bison-code.y"
+#line 236 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1916 "simple-bison-code.tab.c"
+#line 1917 "simple-bison-code.tab.c"
     break;
 
   case 98: /* decl_statement: decl_func  */
-#line 236 "simple-bison-code.y"
+#line 237 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1922 "simple-bison-code.tab.c"
+#line 1923 "simple-bison-code.tab.c"
     break;
 
   case 99: /* decl_statement: assign  */
-#line 237 "simple-bison-code.y"
+#line 238 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1928 "simple-bison-code.tab.c"
+#line 1929 "simple-bison-code.tab.c"
     break;
 
   case 100: /* decl_statement: if_statement  */
-#line 238 "simple-bison-code.y"
+#line 239 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1934 "simple-bison-code.tab.c"
+#line 1935 "simple-bison-code.tab.c"
     break;
 
   case 101: /* decl_statement: condition  */
-#line 239 "simple-bison-code.y"
+#line 240 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1940 "simple-bison-code.tab.c"
+#line 1941 "simple-bison-code.tab.c"
     break;
 
   case 102: /* decl_statement: while_statement  */
-#line 240 "simple-bison-code.y"
+#line 241 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1946 "simple-bison-code.tab.c"
+#line 1947 "simple-bison-code.tab.c"
     break;
 
   case 103: /* decl_statement: for_statement  */
-#line 241 "simple-bison-code.y"
+#line 242 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1952 "simple-bison-code.tab.c"
+#line 1953 "simple-bison-code.tab.c"
     break;
 
   case 104: /* decl_statement: func  */
-#line 242 "simple-bison-code.y"
+#line 243 "simple-bison-code.y"
                                                    { (yyval.sval) = strdup(yytext); }
-#line 1958 "simple-bison-code.tab.c"
+#line 1959 "simple-bison-code.tab.c"
     break;
 
   case 105: /* if_statement: SIF "(" cmp_expr ")" block_statement  */
-#line 247 "simple-bison-code.y"
+#line 248 "simple-bison-code.y"
         {
             (yyval.sval) = strdup(yytext);
         }
-#line 1966 "simple-bison-code.tab.c"
+#line 1967 "simple-bison-code.tab.c"
     break;
 
   case 106: /* if_statement: SIF "(" cmp_expr ")" block_statement SELSE block_statement  */
-#line 251 "simple-bison-code.y"
+#line 252 "simple-bison-code.y"
         {
             (yyval.sval) = strdup(yytext);
         }
-#line 1974 "simple-bison-code.tab.c"
+#line 1975 "simple-bison-code.tab.c"
     break;
 
   case 107: /* condition: SIF "(" cmp_expr ")" block_statement SELSE condition  */
-#line 258 "simple-bison-code.y"
+#line 259 "simple-bison-code.y"
         {
             (yyval.sval) = strdup(yytext);
         }
-#line 1982 "simple-bison-code.tab.c"
+#line 1983 "simple-bison-code.tab.c"
     break;
 
   case 108: /* condition: SIF "(" cmp_expr ")" block_statement SELSE block_statement  */
-#line 262 "simple-bison-code.y"
+#line 263 "simple-bison-code.y"
         {
             (yyval.sval) = strdup(yytext);
         }
-#line 1990 "simple-bison-code.tab.c"
+#line 1991 "simple-bison-code.tab.c"
     break;
 
   case 109: /* while_statement: SWHILE "(" cmp_expr ")" block_statement  */
-#line 269 "simple-bison-code.y"
+#line 270 "simple-bison-code.y"
         {
             (yyval.sval) = strdup(yytext);
         }
-#line 1998 "simple-bison-code.tab.c"
+#line 1999 "simple-bison-code.tab.c"
     break;
 
   case 110: /* for_statement: SFOR "(" assign ";" cmp_expr ";" assign ")" block_statement  */
-#line 276 "simple-bison-code.y"
+#line 277 "simple-bison-code.y"
         {
-            (yyval.sval) = strdup(yytext);
+            (yyval.sval) = strdup(yytext); 
         }
-#line 2006 "simple-bison-code.tab.c"
+#line 2007 "simple-bison-code.tab.c"
     break;
 
   case 111: /* error_stmt: error NEWLINE  */
-#line 282 "simple-bison-code.y"
+#line 283 "simple-bison-code.y"
                         { SyntaxError("Invalid statement"); }
-#line 2012 "simple-bison-code.tab.c"
+#line 2013 "simple-bison-code.tab.c"
     break;
 
   case 112: /* error_stmt: error ";"  */
-#line 283 "simple-bison-code.y"
+#line 284 "simple-bison-code.y"
                         { SyntaxError("Invalid statement"); }
-#line 2018 "simple-bison-code.tab.c"
+#line 2019 "simple-bison-code.tab.c"
     break;
 
 
-#line 2022 "simple-bison-code.tab.c"
+#line 2023 "simple-bison-code.tab.c"
 
       default: break;
     }
@@ -2211,7 +2212,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 286 "simple-bison-code.y"
+#line 287 "simple-bison-code.y"
 
 
 void SyntaxError(const char *s) {

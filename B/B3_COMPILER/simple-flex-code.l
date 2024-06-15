@@ -1,16 +1,10 @@
 /* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
 %option noyywrap
 
-/* Κώδικας C για τον ορισμό των απαιτούμενων header files και των μεταβλητών.
-   Οτιδήποτε ανάμεσα στα %{ και %} μεταφέρεται αυτόματα στο αρχείο C που
-   θα δημιουργήσει το Flex. */
-
 %{
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
 
 /* Αρχείο κεφαλίδας που περιέχει λίστα με όλα τα tokens */
 #include "simple-bison-code.tab.h"
@@ -19,18 +13,16 @@
 extern int line;
 extern int flag;
 
+/* Declare lex_warn */
+int lex_warn = 0;
+
 void prn(const char *token);
 
 %}
 
-
-/* Ονόματα και αντίστοιχοι ορισμοί (υπό μορφή κανονικής έκφρασης).
-   Μετά από αυτό, μπορεί να γίνει χρήση των ονομάτων (αριστερά) αντί των,
-   συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
-
 IDENTIFIER       [a-zA-Z_][a-zA-Z0-9_]{0,31}
 STRING           \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
-INTEGER          ([1-9][0-9]*|0[x|X][0-9A-F]+|0[0-7]+|0)
+INTEGER          ([1-9][0-9]*|0[xX][0-9A-Fa-f]+|0[0-7]+|0)
 FLOAT            (?:[1-9][0-9]*|0)(?:\.(?:[1-9][0-9]*|0*[1-9]+))?(?:[eE](?:-?[1-9][0-9]*|0))?
 COMMENT          (\/\/.*|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 DELIMITER        \;
@@ -38,7 +30,7 @@ WHITESPACE       [ \t]+
 NEWLINE          \n
 UNKNOWN          [^ \t\r\n;]
 UNKNOWN_IDENTIFIER [0-9][a-zA-Z_]+
-/* ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+
 %x UNKNOWN_STATE 
 
 %%
@@ -107,12 +99,17 @@ UNKNOWN_IDENTIFIER [0-9][a-zA-Z_]+
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
 {UNKNOWN_IDENTIFIER} {
+    lex_warn++;
     fprintf(yyout, "\t[FLEX] Line=%d, Warning: Unknown identifier \"%s\"\n", line, yytext);
     yylval.sval = strdup(yytext);
     return UNKNOWN;
 }
-{UNKNOWN}       { BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-<UNKNOWN_STATE>{UNKNOWN}+ { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+{UNKNOWN}       { BEGIN(UNKNOWN_STATE); }
+<UNKNOWN_STATE>{UNKNOWN}+ {
+    prn("UNKNOWN");
+    lex_warn++;
+    BEGIN(INITIAL);
+}
 
 %%
 
@@ -123,6 +120,5 @@ void prn(const char *token)
    } else {
        fprintf(yyout, "\t[FLEX] Line=%d, token=%s, value=\"%s\"\n", line, token, yytext);
    }
-   return;
 }
 

@@ -123,7 +123,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 21 "simple-bison-code.y"
+#line 22 "simple-bison-code.y"
 
     int ival;
     float fval;
