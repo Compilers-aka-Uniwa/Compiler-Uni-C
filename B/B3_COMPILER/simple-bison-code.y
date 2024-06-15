@@ -11,9 +11,14 @@
 	int errflag = 0;
 
 	extern char *yytext;
+        int correct_tokens = 0;
+        int correct_exprs = 0;
+        int fatal_errors = 0; 
+        int par_warnings = 0;
+        int lex_warnings = 0;
 	
-	void yyerror(char *);
-        int yylex(void);
+        int yylex();
+	void yyerror(const char *msg);
 
         /* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
    του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
@@ -67,7 +72,6 @@
 %token DELIMITER ";"
 %token SSCAN SPRINT SLEN SCMP
 %token NEWLINE
-%token UNKNOWN
 
 /* Ορισμός προτεραιοτήτων στα tokens */
 %left ","   
@@ -84,6 +88,10 @@
 
 %type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
 
+/* BUG DECLARATION*/
+%token TOKEN_ERROR 
+
+/* Έναρξη προγραμμάτος*/
 %start program
 
 %%
@@ -93,9 +101,11 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        program decl_statements NEWLINE         { if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
+        program decl_statements NEWLINE         { correct_exprs++; if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
+        | program error NEWLINE                 { fatal_errors++; errflag = 1; yyerrok; }
         |                                       { }                       
         ;
+       
 
 /* ============== [2.1] Δομή Πηγαίου Κώδικα ============== */
 
@@ -110,6 +120,7 @@ type:
         | SDOUBLE        { $$ = strdup(yytext); }
         | SSHORT         { $$ = strdup(yytext); }
         | SLONG          { $$ = strdup(yytext); }
+        | IDENTIFIER     {  }    
         ;
 
 var:
@@ -119,9 +130,10 @@ var:
 
 /* ============== [2.3] Πίνακες ============== */
 pos_elem:
-        IDENTIFIER "[" INTEGER "]"           { $$ = strdup(yytext); }
-        | IDENTIFIER "[" IDENTIFIER "]"      { $$ = strdup(yytext); }
+        IDENTIFIER "[" INTEGER "]"{ $$ = strdup(yytext); }
+        | IDENTIFIER "[" IDENTIFIER "]" { $$ = strdup(yytext); }
         ;
+
 
 arr_elements:
         "[" "]"                         { $$ = strdup(yytext); }
@@ -221,6 +233,7 @@ arithm_expr:
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "%" arithm_expr   { $$ = strdup(yytext); }
+        | arithm_expr "*" "*" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Extra * detected at Line=%d", line); }  
         ;
 
 number:
@@ -332,9 +345,9 @@ for_statement:
 /* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
    από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
    συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
-void yyerror(char *s) {
-        fprintf(stderr, "Error: %s\n", s);
-}
+/*void yyerror(const char *msg) {
+        fprintf(stderr, "Error: %s\n", msg);
+}*/
 
 /* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
    Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
@@ -359,11 +372,21 @@ int main(int argc, char **argv)
 		
 	int parse = yyparse();
 
-	if (errflag == 0 && parse == 0)
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
+        if (errflag == 0 && parse == 0) 
+        {
+                fprintf(yyout, "BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με επιτυχία\n");
+                if (par_warnings > 0)
+                        fprintf(yyout, "\t\t(με %d warnings)\n", par_warnings);
+        }
         else
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
-        
+                fprintf(yyout, "BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία\n");
+       
+        fprintf(yyout, "\t\tΣΩΣΤΕΣ ΛΕΞΕΙΣ: %d\n", correct_tokens);
+        fprintf(yyout, "\t\tΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: %d\n", correct_exprs);
+        fprintf(yyout, "\t\tΛΑΘΟΣ ΛΕΞΕΙΣ: %d\n", lex_warnings);
+        fprintf(yyout, "\t\tΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: %d\n", fatal_errors);
+        fprintf(yyout, "\n");
+
         fclose(yyin);
         fclose(yyout);
 

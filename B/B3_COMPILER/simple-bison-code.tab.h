@@ -114,7 +114,7 @@ extern int yydebug;
     SLEN = 315,                    /* SLEN  */
     SCMP = 316,                    /* SCMP  */
     NEWLINE = 317,                 /* NEWLINE  */
-    UNKNOWN = 318                  /* UNKNOWN  */
+    TOKEN_ERROR = 318              /* TOKEN_ERROR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -123,7 +123,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 25 "simple-bison-code.y"
+#line 30 "simple-bison-code.y"
 
     int ival;
     float fval;
