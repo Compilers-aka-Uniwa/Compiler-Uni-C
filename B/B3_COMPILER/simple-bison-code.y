@@ -283,6 +283,7 @@ cmp_expr:
         | cmp_expr "||" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "&&" cmp_expr  { $$ = strdup(yytext); }
         | "!" cmp_expr            { $$ = strdup(yytext); }
+        /* [1] Warning: Έλεγχος για διπλά σύμβολα σύγκρισης */
         | cmp_expr ">" ">" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double > detected at Line=%d\n", line-1); } 
         | cmp_expr "<" "<" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double < detected at Line=%d\n", line-1); }
         ;
