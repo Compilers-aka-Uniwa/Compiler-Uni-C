@@ -25,8 +25,8 @@ State 117 conflicts: 2 shift/reduce
 State 146 conflicts: 2 reduce/reduce
 State 148 conflicts: 2 reduce/reduce
 State 149 conflicts: 2 reduce/reduce
-State 183 conflicts: 26 reduce/reduce
-State 185 conflicts: 1 reduce/reduce
+State 184 conflicts: 26 reduce/reduce
+State 186 conflicts: 1 reduce/reduce
 
 
 Grammar
@@ -158,37 +158,38 @@ Grammar
    97 merge_arr: arr_elements "+" arr_elements
    98          | arr_elements TOKEN_ERROR arr_elements
    99          | arr_elements "+" TOKEN_ERROR arr_elements
+  100          | arr_elements TOKEN_ERROR "+" arr_elements
 
-  100 decl_statements: decl_statement
-  101                | decl_statements decl_statement
+  101 decl_statements: decl_statement
+  102                | decl_statements decl_statement
 
-  102 decl_statement: if_statement
-  103               | while_statement
-  104               | for_statement
-  105               | decl_var ";"
-  106               | build_func ";"
-  107               | decl_func
-  108               | assign ";"
-  109               | arithm_expr
-  110               | cmp_expr
-  111               | merge_arr
-  112               | block_statement
-  113               | NEWLINE
+  103 decl_statement: if_statement
+  104               | while_statement
+  105               | for_statement
+  106               | decl_var ";"
+  107               | build_func ";"
+  108               | decl_func
+  109               | assign ";"
+  110               | arithm_expr
+  111               | cmp_expr
+  112               | merge_arr
+  113               | block_statement
+  114               | NEWLINE
 
-  114 if_statement: SIF condition decl_statement
+  115 if_statement: SIF condition decl_statement
 
-  115 condition: cmp_expr
-  116          | "(" condition ")"
-  117          | "((" condition ")"
-  118          | "(" condition "))"
-  119          | condition ")"
-  120          | "(" condition
+  116 condition: cmp_expr
+  117          | "(" condition ")"
+  118          | "((" condition ")"
+  119          | "(" condition "))"
+  120          | condition ")"
+  121          | "(" condition
 
-  121 block_statement: "{" decl_statements "}"
+  122 block_statement: "{" decl_statements "}"
 
-  122 while_statement: SWHILE condition decl_statement
+  123 while_statement: SWHILE condition decl_statement
 
-  123 for_statement: SFOR "(" assign ";" cmp_expr ";" oper_eq ")" decl_statement
+  124 for_statement: SFOR "(" assign ";" cmp_expr ";" oper_eq ")" decl_statement
 
 
 Terminals, with rules where they appear
@@ -201,7 +202,7 @@ Terminals, with rules where they appear
     FLOAT <fval> (261) 20 40 52 63 84
     SBREAK <sval> (262)
     SDO <sval> (263)
-    SIF <sval> (264) 114
+    SIF <sval> (264) 115
     SSIZEOF <sval> (265)
     SCASE <sval> (266)
     SDOUBLE <sval> (267) 7
@@ -216,10 +217,10 @@ Terminals, with rules where they appear
     SRETURN <sval> (276)
     SVOID <sval> (277)
     SCONTINUE <sval> (278)
-    SFOR <sval> (279) 123
+    SFOR <sval> (279) 124
     SSHORT <sval> (280) 8
-    SWHILE <sval> (281) 122
-    "+" (282) 53 57 97 99
+    SWHILE <sval> (281) 123
+    "+" (282) 53 57 97 99 100
     "*=" (283) 76
     "--" (284) 71 73
     "-" (285) 54 58
@@ -241,23 +242,23 @@ Terminals, with rules where they appear
     "!=" (301) 91
     "-=" (302) 75
     "++" (303) 70 72
-    "(" (304) 25 26 27 28 29 47 48 116 118 120 123
-    ")" (305) 25 26 27 28 29 47 48 116 117 119 123
+    "(" (304) 25 26 27 28 29 47 48 117 119 121 124
+    ")" (305) 25 26 27 28 29 47 48 117 118 120 124
     "[" (306) 12 13 14 15 16 17
     "]" (307) 12 13 14 15 16 17
-    "{" (308) 121
-    "}" (309) 121
+    "{" (308) 122
+    "}" (309) 122
     "," (310) 11 19 21 23 36 43 50 82
     "\\" (311)
-    ";" (312) 105 106 108 123
+    ";" (312) 106 107 109 124
     SSCAN (313) 25
     SPRINT (314) 28
     SLEN (315) 26
     SCMP (316) 27
-    NEWLINE (317) 1 2 46 113
-    TOKEN_ERROR (318) 98 99
-    "((" (319) 117
-    "))" (320) 118
+    NEWLINE (317) 1 2 46 114
+    TOKEN_ERROR (318) 98 99 100
+    "((" (319) 118
+    "))" (320) 119
 
 
 Nonterminals, with rules where they appear
@@ -269,7 +270,7 @@ Nonterminals, with rules where they appear
         on right: 0 1 2
     decl_var <sval> (68)
         on left: 4
-        on right: 105
+        on right: 106
     type <sval> (69)
         on left: 5 6 7 8 9
         on right: 4 49
@@ -281,7 +282,7 @@ Nonterminals, with rules where they appear
         on right: 42 64
     arr_elements <sval> (72)
         on left: 14 15 16 17
-        on right: 31 81 97 98 99
+        on right: 31 81 97 98 99 100
     integ <sval> (73)
         on left: 18 19
         on right: 15 19
@@ -293,7 +294,7 @@ Nonterminals, with rules where they appear
         on right: 17 23
     build_func <sval> (76)
         on left: 24
-        on right: 106
+        on right: 107
     func <sval> (77)
         on left: 25 26 27 28 29
         on right: 24 41
@@ -311,7 +312,7 @@ Nonterminals, with rules where they appear
         on right: 28 29 43
     decl_func <sval> (82)
         on left: 44
-        on right: 107
+        on right: 108
     name_func <sval> (83)
         on left: 45 46
         on right: 44 46
@@ -326,46 +327,46 @@ Nonterminals, with rules where they appear
         on right: 53 54 55
     arithm_expr <sval> (87)
         on left: 55 56 57 58 59 60 61
-        on right: 57 58 59 60 61 67 95 96 109
+        on right: 57 58 59 60 61 67 95 96 110
     number <sval> (88)
         on left: 62 63 64
         on right: 74 75 76 77 78
     assign <sval> (89)
         on left: 65 66 67 68 69
-        on right: 108 123
+        on right: 109 124
     oper_eq <sval> (90)
         on left: 70 71 72 73 74 75 76 77
-        on right: 69 123
+        on right: 69 124
     val <sval> (91)
         on left: 78 79 80 81 82
         on right: 65 82
     cmp_expr <sval> (92)
         on left: 83 84 85 86 87 88 89 90 91 92 93 94 95 96
-        on right: 66 86 87 88 89 90 91 92 93 94 95 96 110 115 123
+        on right: 66 86 87 88 89 90 91 92 93 94 95 96 111 116 124
     merge_arr <sval> (93)
-        on left: 97 98 99
-        on right: 68 111
+        on left: 97 98 99 100
+        on right: 68 112
     decl_statements <sval> (94)
-        on left: 100 101
-        on right: 1 101 121
+        on left: 101 102
+        on right: 1 102 122
     decl_statement <sval> (95)
-        on left: 102 103 104 105 106 107 108 109 110 111 112 113
-        on right: 44 100 101 114 122 123
+        on left: 103 104 105 106 107 108 109 110 111 112 113 114
+        on right: 44 101 102 115 123 124
     if_statement <sval> (96)
-        on left: 114
-        on right: 102
-    condition <sval> (97)
-        on left: 115 116 117 118 119 120
-        on right: 114 116 117 118 119 120 122
-    block_statement <sval> (98)
-        on left: 121
-        on right: 112
-    while_statement <sval> (99)
-        on left: 122
+        on left: 115
         on right: 103
-    for_statement <sval> (100)
+    condition <sval> (97)
+        on left: 116 117 118 119 120 121
+        on right: 115 117 118 119 120 121 123
+    block_statement <sval> (98)
+        on left: 122
+        on right: 113
+    while_statement <sval> (99)
         on left: 123
         on right: 104
+    for_statement <sval> (100)
+        on left: 124
+        on right: 105
 
 
 State 0
@@ -658,7 +659,7 @@ State 6
 
 State 7
 
-  114 if_statement: SIF • condition decl_statement
+  115 if_statement: SIF • condition decl_statement
 
     IDENTIFIER  shift, and go to state 50
     INTEGER     shift, and go to state 51
@@ -708,7 +709,7 @@ State 12
 
 State 13
 
-  123 for_statement: SFOR • "(" assign ";" cmp_expr ";" oper_eq ")" decl_statement
+  124 for_statement: SFOR • "(" assign ";" cmp_expr ";" oper_eq ")" decl_statement
 
     "("  shift, and go to state 57
 
@@ -722,7 +723,7 @@ State 14
 
 State 15
 
-  122 while_statement: SWHILE • condition decl_statement
+  123 while_statement: SWHILE • condition decl_statement
 
     IDENTIFIER  shift, and go to state 50
     INTEGER     shift, and go to state 51
@@ -808,7 +809,7 @@ State 21
 
 State 22
 
-  121 block_statement: "{" • decl_statements "}"
+  122 block_statement: "{" • decl_statements "}"
 
     IDENTIFIER  shift, and go to state 4
     INTEGER     shift, and go to state 5
@@ -887,14 +888,14 @@ State 26
 
 State 27
 
-  113 decl_statement: NEWLINE •
+  114 decl_statement: NEWLINE •
 
-    $default  reduce using rule 113 (decl_statement)
+    $default  reduce using rule 114 (decl_statement)
 
 
 State 28
 
-  105 decl_statement: decl_var • ";"
+  106 decl_statement: decl_var • ";"
 
     ";"  shift, and go to state 79
 
@@ -937,6 +938,7 @@ State 31
    97 merge_arr: arr_elements • "+" arr_elements
    98          | arr_elements • TOKEN_ERROR arr_elements
    99          | arr_elements • "+" TOKEN_ERROR arr_elements
+  100          | arr_elements • TOKEN_ERROR "+" arr_elements
 
     "+"          shift, and go to state 89
     TOKEN_ERROR  shift, and go to state 90
@@ -944,7 +946,7 @@ State 31
 
 State 32
 
-  106 decl_statement: build_func • ";"
+  107 decl_statement: build_func • ";"
 
     ";"  shift, and go to state 91
 
@@ -958,9 +960,9 @@ State 33
 
 State 34
 
-  107 decl_statement: decl_func •
+  108 decl_statement: decl_func •
 
-    $default  reduce using rule 107 (decl_statement)
+    $default  reduce using rule 108 (decl_statement)
 
 
 State 35
@@ -1028,7 +1030,7 @@ State 37
    59            | arithm_expr • "*" arithm_expr
    60            | arithm_expr • "/" arithm_expr
    61            | arithm_expr • "%" arithm_expr
-  109 decl_statement: arithm_expr •
+  110 decl_statement: arithm_expr •
 
     "+"  shift, and go to state 94
     "-"  shift, and go to state 95
@@ -1036,14 +1038,14 @@ State 37
     "/"  shift, and go to state 97
     "%"  shift, and go to state 98
 
-    "+"       [reduce using rule 109 (decl_statement)]
-    "-"       [reduce using rule 109 (decl_statement)]
-    $default  reduce using rule 109 (decl_statement)
+    "+"       [reduce using rule 110 (decl_statement)]
+    "-"       [reduce using rule 110 (decl_statement)]
+    $default  reduce using rule 110 (decl_statement)
 
 
 State 38
 
-  108 decl_statement: assign • ";"
+  109 decl_statement: assign • ";"
 
     ";"  shift, and go to state 99
 
@@ -1067,7 +1069,7 @@ State 40
    93         | cmp_expr • "&&" cmp_expr
    95         | cmp_expr • ">" ">" arithm_expr
    96         | cmp_expr • "<" "<" arithm_expr
-  110 decl_statement: cmp_expr •
+  111 decl_statement: cmp_expr •
 
     "<"   shift, and go to state 100
     ">"   shift, and go to state 101
@@ -1078,20 +1080,20 @@ State 40
     "=="  shift, and go to state 106
     "!="  shift, and go to state 107
 
-    $default  reduce using rule 110 (decl_statement)
+    $default  reduce using rule 111 (decl_statement)
 
 
 State 41
 
-  111 decl_statement: merge_arr •
+  112 decl_statement: merge_arr •
 
-    $default  reduce using rule 111 (decl_statement)
+    $default  reduce using rule 112 (decl_statement)
 
 
 State 42
 
     1 program: program decl_statements • NEWLINE
-  101 decl_statements: decl_statements • decl_statement
+  102 decl_statements: decl_statements • decl_statement
 
     IDENTIFIER  shift, and go to state 4
     INTEGER     shift, and go to state 5
@@ -1141,37 +1143,37 @@ State 42
 
 State 43
 
-  100 decl_statements: decl_statement •
+  101 decl_statements: decl_statement •
 
-    $default  reduce using rule 100 (decl_statements)
+    $default  reduce using rule 101 (decl_statements)
 
 
 State 44
 
-  102 decl_statement: if_statement •
-
-    $default  reduce using rule 102 (decl_statement)
-
-
-State 45
-
-  112 decl_statement: block_statement •
-
-    $default  reduce using rule 112 (decl_statement)
-
-
-State 46
-
-  103 decl_statement: while_statement •
+  103 decl_statement: if_statement •
 
     $default  reduce using rule 103 (decl_statement)
 
 
-State 47
+State 45
 
-  104 decl_statement: for_statement •
+  113 decl_statement: block_statement •
+
+    $default  reduce using rule 113 (decl_statement)
+
+
+State 46
+
+  104 decl_statement: while_statement •
 
     $default  reduce using rule 104 (decl_statement)
+
+
+State 47
+
+  105 decl_statement: for_statement •
+
+    $default  reduce using rule 105 (decl_statement)
 
 
 State 48
@@ -1222,9 +1224,9 @@ State 52
 
 State 53
 
-  116 condition: "(" • condition ")"
-  118          | "(" • condition "))"
-  120          | "(" • condition
+  117 condition: "(" • condition ")"
+  119          | "(" • condition "))"
+  121          | "(" • condition
 
     IDENTIFIER  shift, and go to state 50
     INTEGER     shift, and go to state 51
@@ -1239,7 +1241,7 @@ State 53
 
 State 54
 
-  117 condition: "((" • condition ")"
+  118 condition: "((" • condition ")"
 
     IDENTIFIER  shift, and go to state 50
     INTEGER     shift, and go to state 51
@@ -1264,7 +1266,7 @@ State 55
    93         | cmp_expr • "&&" cmp_expr
    95         | cmp_expr • ">" ">" arithm_expr
    96         | cmp_expr • "<" "<" arithm_expr
-  115 condition: cmp_expr •
+  116 condition: cmp_expr •
 
     "<"   shift, and go to state 100
     ">"   shift, and go to state 101
@@ -1275,13 +1277,13 @@ State 55
     "=="  shift, and go to state 106
     "!="  shift, and go to state 107
 
-    $default  reduce using rule 115 (condition)
+    $default  reduce using rule 116 (condition)
 
 
 State 56
 
-  114 if_statement: SIF condition • decl_statement
-  119 condition: condition • ")"
+  115 if_statement: SIF condition • decl_statement
+  120 condition: condition • ")"
 
     IDENTIFIER  shift, and go to state 4
     INTEGER     shift, and go to state 5
@@ -1332,7 +1334,7 @@ State 56
 
 State 57
 
-  123 for_statement: SFOR "(" • assign ";" cmp_expr ";" oper_eq ")" decl_statement
+  124 for_statement: SFOR "(" • assign ";" cmp_expr ";" oper_eq ")" decl_statement
 
     IDENTIFIER  shift, and go to state 62
     "--"        shift, and go to state 17
@@ -1345,8 +1347,8 @@ State 57
 
 State 58
 
-  119 condition: condition • ")"
-  122 while_statement: SWHILE condition • decl_statement
+  120 condition: condition • ")"
+  123 while_statement: SWHILE condition • decl_statement
 
     IDENTIFIER  shift, and go to state 4
     INTEGER     shift, and go to state 5
@@ -1524,8 +1526,8 @@ State 73
 
 State 74
 
-  101 decl_statements: decl_statements • decl_statement
-  121 block_statement: "{" decl_statements • "}"
+  102 decl_statements: decl_statements • decl_statement
+  122 block_statement: "{" decl_statements • "}"
 
     IDENTIFIER  shift, and go to state 4
     INTEGER     shift, and go to state 5
@@ -1625,9 +1627,9 @@ State 78
 
 State 79
 
-  105 decl_statement: decl_var ";" •
+  106 decl_statement: decl_var ";" •
 
-    $default  reduce using rule 105 (decl_statement)
+    $default  reduce using rule 106 (decl_statement)
 
 
 State 80
@@ -1751,17 +1753,19 @@ State 89
 State 90
 
    98 merge_arr: arr_elements TOKEN_ERROR • arr_elements
+  100          | arr_elements TOKEN_ERROR • "+" arr_elements
 
+    "+"  shift, and go to state 161
     "["  shift, and go to state 21
 
-    arr_elements  go to state 161
+    arr_elements  go to state 162
 
 
 State 91
 
-  106 decl_statement: build_func ";" •
+  107 decl_statement: build_func ";" •
 
-    $default  reduce using rule 106 (decl_statement)
+    $default  reduce using rule 107 (decl_statement)
 
 
 State 92
@@ -1772,7 +1776,7 @@ State 92
    56 arithm_expr: IDENTIFIER •
    85 cmp_expr: IDENTIFIER •
 
-    "("  shift, and go to state 162
+    "("  shift, and go to state 163
 
     IDENTIFIER  reduce using rule 56 (arithm_expr)
     IDENTIFIER  [reduce using rule 85 (cmp_expr)]
@@ -1842,7 +1846,7 @@ State 92
     NEWLINE     [reduce using rule 85 (cmp_expr)]
     $default    reduce using rule 56 (arithm_expr)
 
-    params  go to state 163
+    params  go to state 164
 
 
 State 93
@@ -1856,21 +1860,7 @@ State 94
 
    57 arithm_expr: arithm_expr "+" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 164
-    INTEGER     shift, and go to state 59
-    FLOAT       shift, and go to state 60
-    "+"         shift, and go to state 16
-    "-"         shift, and go to state 18
-
-    sign         go to state 36
-    arithm_expr  go to state 165
-
-
-State 95
-
-   58 arithm_expr: arithm_expr "-" • arithm_expr
-
-    IDENTIFIER  shift, and go to state 164
+    IDENTIFIER  shift, and go to state 165
     INTEGER     shift, and go to state 59
     FLOAT       shift, and go to state 60
     "+"         shift, and go to state 16
@@ -1880,11 +1870,11 @@ State 95
     arithm_expr  go to state 166
 
 
-State 96
+State 95
 
-   59 arithm_expr: arithm_expr "*" • arithm_expr
+   58 arithm_expr: arithm_expr "-" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 164
+    IDENTIFIER  shift, and go to state 165
     INTEGER     shift, and go to state 59
     FLOAT       shift, and go to state 60
     "+"         shift, and go to state 16
@@ -1894,11 +1884,11 @@ State 96
     arithm_expr  go to state 167
 
 
-State 97
+State 96
 
-   60 arithm_expr: arithm_expr "/" • arithm_expr
+   59 arithm_expr: arithm_expr "*" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 164
+    IDENTIFIER  shift, and go to state 165
     INTEGER     shift, and go to state 59
     FLOAT       shift, and go to state 60
     "+"         shift, and go to state 16
@@ -1908,11 +1898,11 @@ State 97
     arithm_expr  go to state 168
 
 
-State 98
+State 97
 
-   61 arithm_expr: arithm_expr "%" • arithm_expr
+   60 arithm_expr: arithm_expr "/" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 164
+    IDENTIFIER  shift, and go to state 165
     INTEGER     shift, and go to state 59
     FLOAT       shift, and go to state 60
     "+"         shift, and go to state 16
@@ -1922,11 +1912,25 @@ State 98
     arithm_expr  go to state 169
 
 
+State 98
+
+   61 arithm_expr: arithm_expr "%" • arithm_expr
+
+    IDENTIFIER  shift, and go to state 165
+    INTEGER     shift, and go to state 59
+    FLOAT       shift, and go to state 60
+    "+"         shift, and go to state 16
+    "-"         shift, and go to state 18
+
+    sign         go to state 36
+    arithm_expr  go to state 170
+
+
 State 99
 
-  108 decl_statement: assign ";" •
+  109 decl_statement: assign ";" •
 
-    $default  reduce using rule 108 (decl_statement)
+    $default  reduce using rule 109 (decl_statement)
 
 
 State 100
@@ -1937,10 +1941,10 @@ State 100
     IDENTIFIER  shift, and go to state 50
     INTEGER     shift, and go to state 51
     FLOAT       shift, and go to state 52
-    "<"         shift, and go to state 170
+    "<"         shift, and go to state 171
     "!"         shift, and go to state 19
 
-    cmp_expr  go to state 171
+    cmp_expr  go to state 172
 
 
 State 101
@@ -1952,9 +1956,9 @@ State 101
     INTEGER     shift, and go to state 51
     FLOAT       shift, and go to state 52
     "!"         shift, and go to state 19
-    ">"         shift, and go to state 172
+    ">"         shift, and go to state 173
 
-    cmp_expr  go to state 173
+    cmp_expr  go to state 174
 
 
 State 102
@@ -1966,7 +1970,7 @@ State 102
     FLOAT       shift, and go to state 52
     "!"         shift, and go to state 19
 
-    cmp_expr  go to state 174
+    cmp_expr  go to state 175
 
 
 State 103
@@ -1978,7 +1982,7 @@ State 103
     FLOAT       shift, and go to state 52
     "!"         shift, and go to state 19
 
-    cmp_expr  go to state 175
+    cmp_expr  go to state 176
 
 
 State 104
@@ -1990,7 +1994,7 @@ State 104
     FLOAT       shift, and go to state 52
     "!"         shift, and go to state 19
 
-    cmp_expr  go to state 176
+    cmp_expr  go to state 177
 
 
 State 105
@@ -2002,7 +2006,7 @@ State 105
     FLOAT       shift, and go to state 52
     "!"         shift, and go to state 19
 
-    cmp_expr  go to state 177
+    cmp_expr  go to state 178
 
 
 State 106
@@ -2014,7 +2018,7 @@ State 106
     FLOAT       shift, and go to state 52
     "!"         shift, and go to state 19
 
-    cmp_expr  go to state 178
+    cmp_expr  go to state 179
 
 
 State 107
@@ -2026,70 +2030,70 @@ State 107
     FLOAT       shift, and go to state 52
     "!"         shift, and go to state 19
 
-    cmp_expr  go to state 179
+    cmp_expr  go to state 180
 
 
 State 108
 
     1 program: program decl_statements NEWLINE •
-  113 decl_statement: NEWLINE •
+  114 decl_statement: NEWLINE •
 
     IDENTIFIER  reduce using rule 1 (program)
-    IDENTIFIER  [reduce using rule 113 (decl_statement)]
+    IDENTIFIER  [reduce using rule 114 (decl_statement)]
     INTEGER     reduce using rule 1 (program)
-    INTEGER     [reduce using rule 113 (decl_statement)]
+    INTEGER     [reduce using rule 114 (decl_statement)]
     FLOAT       reduce using rule 1 (program)
-    FLOAT       [reduce using rule 113 (decl_statement)]
+    FLOAT       [reduce using rule 114 (decl_statement)]
     SIF         reduce using rule 1 (program)
-    SIF         [reduce using rule 113 (decl_statement)]
+    SIF         [reduce using rule 114 (decl_statement)]
     SDOUBLE     reduce using rule 1 (program)
-    SDOUBLE     [reduce using rule 113 (decl_statement)]
+    SDOUBLE     [reduce using rule 114 (decl_statement)]
     SINT        reduce using rule 1 (program)
-    SINT        [reduce using rule 113 (decl_statement)]
+    SINT        [reduce using rule 114 (decl_statement)]
     SFUNC       reduce using rule 1 (program)
-    SFUNC       [reduce using rule 113 (decl_statement)]
+    SFUNC       [reduce using rule 114 (decl_statement)]
     SLONG       reduce using rule 1 (program)
-    SLONG       [reduce using rule 113 (decl_statement)]
+    SLONG       [reduce using rule 114 (decl_statement)]
     SFLOAT      reduce using rule 1 (program)
-    SFLOAT      [reduce using rule 113 (decl_statement)]
+    SFLOAT      [reduce using rule 114 (decl_statement)]
     SFOR        reduce using rule 1 (program)
-    SFOR        [reduce using rule 113 (decl_statement)]
+    SFOR        [reduce using rule 114 (decl_statement)]
     SSHORT      reduce using rule 1 (program)
-    SSHORT      [reduce using rule 113 (decl_statement)]
+    SSHORT      [reduce using rule 114 (decl_statement)]
     SWHILE      reduce using rule 1 (program)
-    SWHILE      [reduce using rule 113 (decl_statement)]
+    SWHILE      [reduce using rule 114 (decl_statement)]
     "+"         reduce using rule 1 (program)
-    "+"         [reduce using rule 113 (decl_statement)]
+    "+"         [reduce using rule 114 (decl_statement)]
     "--"        reduce using rule 1 (program)
-    "--"        [reduce using rule 113 (decl_statement)]
+    "--"        [reduce using rule 114 (decl_statement)]
     "-"         reduce using rule 1 (program)
-    "-"         [reduce using rule 113 (decl_statement)]
+    "-"         [reduce using rule 114 (decl_statement)]
     "!"         reduce using rule 1 (program)
-    "!"         [reduce using rule 113 (decl_statement)]
+    "!"         [reduce using rule 114 (decl_statement)]
     "++"        reduce using rule 1 (program)
-    "++"        [reduce using rule 113 (decl_statement)]
+    "++"        [reduce using rule 114 (decl_statement)]
     "["         reduce using rule 1 (program)
-    "["         [reduce using rule 113 (decl_statement)]
+    "["         [reduce using rule 114 (decl_statement)]
     "{"         reduce using rule 1 (program)
-    "{"         [reduce using rule 113 (decl_statement)]
+    "{"         [reduce using rule 114 (decl_statement)]
     SSCAN       reduce using rule 1 (program)
-    SSCAN       [reduce using rule 113 (decl_statement)]
+    SSCAN       [reduce using rule 114 (decl_statement)]
     SPRINT      reduce using rule 1 (program)
-    SPRINT      [reduce using rule 113 (decl_statement)]
+    SPRINT      [reduce using rule 114 (decl_statement)]
     SLEN        reduce using rule 1 (program)
-    SLEN        [reduce using rule 113 (decl_statement)]
+    SLEN        [reduce using rule 114 (decl_statement)]
     SCMP        reduce using rule 1 (program)
-    SCMP        [reduce using rule 113 (decl_statement)]
+    SCMP        [reduce using rule 114 (decl_statement)]
     NEWLINE     reduce using rule 1 (program)
-    NEWLINE     [reduce using rule 113 (decl_statement)]
+    NEWLINE     [reduce using rule 114 (decl_statement)]
     $default    reduce using rule 1 (program)
 
 
 State 109
 
-  101 decl_statements: decl_statements decl_statement •
+  102 decl_statements: decl_statements decl_statement •
 
-    $default  reduce using rule 101 (decl_statements)
+    $default  reduce using rule 102 (decl_statements)
 
 
 State 110
@@ -2100,7 +2104,7 @@ State 110
    38 print_params: IDENTIFIER •
 
     "("  shift, and go to state 49
-    "["  shift, and go to state 180
+    "["  shift, and go to state 181
 
     $default  reduce using rule 38 (print_params)
 
@@ -2145,59 +2149,59 @@ State 116
    29 func: IDENTIFIER "(" print_params • ")"
    43 print_params: print_params • "," print_params
 
-    ")"  shift, and go to state 181
-    ","  shift, and go to state 182
+    ")"  shift, and go to state 182
+    ","  shift, and go to state 183
 
 
 State 117
 
-  116 condition: "(" condition • ")"
-  118          | "(" condition • "))"
-  119          | condition • ")"
-  120          | "(" condition •
+  117 condition: "(" condition • ")"
+  119          | "(" condition • "))"
+  120          | condition • ")"
+  121          | "(" condition •
 
-    ")"   shift, and go to state 183
-    "))"  shift, and go to state 184
+    ")"   shift, and go to state 184
+    "))"  shift, and go to state 185
 
-    ")"       [reduce using rule 120 (condition)]
-    "))"      [reduce using rule 120 (condition)]
-    $default  reduce using rule 120 (condition)
+    ")"       [reduce using rule 121 (condition)]
+    "))"      [reduce using rule 121 (condition)]
+    $default  reduce using rule 121 (condition)
 
 
 State 118
 
-  117 condition: "((" condition • ")"
-  119          | condition • ")"
+  118 condition: "((" condition • ")"
+  120          | condition • ")"
 
-    ")"  shift, and go to state 185
+    ")"  shift, and go to state 186
 
 
 State 119
 
-  119 condition: condition ")" •
+  120 condition: condition ")" •
 
-    $default  reduce using rule 119 (condition)
+    $default  reduce using rule 120 (condition)
 
 
 State 120
 
-  114 if_statement: SIF condition decl_statement •
+  115 if_statement: SIF condition decl_statement •
 
-    $default  reduce using rule 114 (if_statement)
+    $default  reduce using rule 115 (if_statement)
 
 
 State 121
 
-  123 for_statement: SFOR "(" assign • ";" cmp_expr ";" oper_eq ")" decl_statement
+  124 for_statement: SFOR "(" assign • ";" cmp_expr ";" oper_eq ")" decl_statement
 
-    ";"  shift, and go to state 186
+    ";"  shift, and go to state 187
 
 
 State 122
 
-  122 while_statement: SWHILE condition decl_statement •
+  123 while_statement: SWHILE condition decl_statement •
 
-    $default  reduce using rule 122 (while_statement)
+    $default  reduce using rule 123 (while_statement)
 
 
 State 123
@@ -2213,7 +2217,7 @@ State 124
 
     INTEGER  shift, and go to state 68
 
-    integ  go to state 187
+    integ  go to state 188
 
 
 State 125
@@ -2229,7 +2233,7 @@ State 126
 
     FLOAT  shift, and go to state 69
 
-    fl  go to state 188
+    fl  go to state 189
 
 
 State 127
@@ -2245,14 +2249,14 @@ State 128
 
     STRING  shift, and go to state 67
 
-    str  go to state 189
+    str  go to state 190
 
 
 State 129
 
-  121 block_statement: "{" decl_statements "}" •
+  122 block_statement: "{" decl_statements "}" •
 
-    $default  reduce using rule 121 (block_statement)
+    $default  reduce using rule 122 (block_statement)
 
 
 State 130
@@ -2266,7 +2270,7 @@ State 131
 
    25 func: SSCAN "(" scan_params • ")"
 
-    ")"  shift, and go to state 190
+    ")"  shift, and go to state 191
 
 
 State 132
@@ -2274,8 +2278,8 @@ State 132
    28 func: SPRINT "(" print_params • ")"
    43 print_params: print_params • "," print_params
 
-    ")"  shift, and go to state 191
-    ","  shift, and go to state 182
+    ")"  shift, and go to state 192
+    ","  shift, and go to state 183
 
 
 State 133
@@ -2303,7 +2307,7 @@ State 136
 
    26 func: SLEN "(" len_params • ")"
 
-    ")"  shift, and go to state 192
+    ")"  shift, and go to state 193
 
 
 State 137
@@ -2325,8 +2329,8 @@ State 139
    27 func: SCMP "(" cmp_params • ")"
    36 cmp_params: cmp_params • "," cmp_params
 
-    ")"  shift, and go to state 193
-    ","  shift, and go to state 194
+    ")"  shift, and go to state 194
+    ","  shift, and go to state 195
 
 
 State 140
@@ -2334,7 +2338,7 @@ State 140
    12 pos_elem: IDENTIFIER • "[" INTEGER "]"
    13         | IDENTIFIER • "[" IDENTIFIER "]"
 
-    "["  shift, and go to state 180
+    "["  shift, and go to state 181
 
 
 State 141
@@ -2380,7 +2384,7 @@ State 146
    79 val: IDENTIFIER •
    85 cmp_expr: IDENTIFIER •
 
-    "["  shift, and go to state 180
+    "["  shift, and go to state 181
 
     "+"       reduce using rule 56 (arithm_expr)
     "-"       reduce using rule 56 (arithm_expr)
@@ -2443,6 +2447,7 @@ State 150
    97 merge_arr: arr_elements • "+" arr_elements
    98          | arr_elements • TOKEN_ERROR arr_elements
    99          | arr_elements • "+" TOKEN_ERROR arr_elements
+  100          | arr_elements • TOKEN_ERROR "+" arr_elements
 
     "+"          shift, and go to state 89
     TOKEN_ERROR  shift, and go to state 90
@@ -2480,7 +2485,7 @@ State 153
    65 assign: var "=" val •
    82 val: val • "," val
 
-    ","  shift, and go to state 195
+    ","  shift, and go to state 196
 
     $default  reduce using rule 65 (assign)
 
@@ -2546,7 +2551,7 @@ State 159
 
     "["  shift, and go to state 21
 
-    arr_elements  go to state 196
+    arr_elements  go to state 197
 
 
 State 160
@@ -2558,12 +2563,21 @@ State 160
 
 State 161
 
+  100 merge_arr: arr_elements TOKEN_ERROR "+" • arr_elements
+
+    "["  shift, and go to state 21
+
+    arr_elements  go to state 198
+
+
+State 162
+
    98 merge_arr: arr_elements TOKEN_ERROR arr_elements •
 
     $default  reduce using rule 98 (merge_arr)
 
 
-State 162
+State 163
 
    29 func: IDENTIFIER "(" • print_params ")"
    47 params: "(" • ")"
@@ -2578,34 +2592,34 @@ State 162
     SLONG       shift, and go to state 11
     SFLOAT      shift, and go to state 12
     SSHORT      shift, and go to state 14
-    ")"         shift, and go to state 197
+    ")"         shift, and go to state 199
     SSCAN       shift, and go to state 23
     SPRINT      shift, and go to state 24
     SLEN        shift, and go to state 25
     SCMP        shift, and go to state 26
 
-    type          go to state 198
+    type          go to state 200
     pos_elem      go to state 114
     func          go to state 115
     print_params  go to state 116
-    type_params   go to state 199
-
-
-State 163
-
-   46 name_func: name_func IDENTIFIER params • NEWLINE
-
-    NEWLINE  shift, and go to state 200
+    type_params   go to state 201
 
 
 State 164
+
+   46 name_func: name_func IDENTIFIER params • NEWLINE
+
+    NEWLINE  shift, and go to state 202
+
+
+State 165
 
    56 arithm_expr: IDENTIFIER •
 
     $default  reduce using rule 56 (arithm_expr)
 
 
-State 165
+State 166
 
    57 arithm_expr: arithm_expr • "+" arithm_expr
    57            | arithm_expr "+" arithm_expr •
@@ -2621,7 +2635,7 @@ State 165
     $default  reduce using rule 57 (arithm_expr)
 
 
-State 166
+State 167
 
    57 arithm_expr: arithm_expr • "+" arithm_expr
    58            | arithm_expr • "-" arithm_expr
@@ -2637,7 +2651,7 @@ State 166
     $default  reduce using rule 58 (arithm_expr)
 
 
-State 167
+State 168
 
    57 arithm_expr: arithm_expr • "+" arithm_expr
    58            | arithm_expr • "-" arithm_expr
@@ -2649,7 +2663,7 @@ State 167
     $default  reduce using rule 59 (arithm_expr)
 
 
-State 168
+State 169
 
    57 arithm_expr: arithm_expr • "+" arithm_expr
    58            | arithm_expr • "-" arithm_expr
@@ -2661,7 +2675,7 @@ State 168
     $default  reduce using rule 60 (arithm_expr)
 
 
-State 169
+State 170
 
    57 arithm_expr: arithm_expr • "+" arithm_expr
    58            | arithm_expr • "-" arithm_expr
@@ -2673,21 +2687,21 @@ State 169
     $default  reduce using rule 61 (arithm_expr)
 
 
-State 170
+State 171
 
    96 cmp_expr: cmp_expr "<" "<" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 164
+    IDENTIFIER  shift, and go to state 165
     INTEGER     shift, and go to state 59
     FLOAT       shift, and go to state 60
     "+"         shift, and go to state 16
     "-"         shift, and go to state 18
 
     sign         go to state 36
-    arithm_expr  go to state 201
+    arithm_expr  go to state 203
 
 
-State 171
+State 172
 
    86 cmp_expr: cmp_expr • ">" cmp_expr
    87         | cmp_expr • "<" cmp_expr
@@ -2704,21 +2718,21 @@ State 171
     $default  reduce using rule 87 (cmp_expr)
 
 
-State 172
+State 173
 
    95 cmp_expr: cmp_expr ">" ">" • arithm_expr
 
-    IDENTIFIER  shift, and go to state 164
+    IDENTIFIER  shift, and go to state 165
     INTEGER     shift, and go to state 59
     FLOAT       shift, and go to state 60
     "+"         shift, and go to state 16
     "-"         shift, and go to state 18
 
     sign         go to state 36
-    arithm_expr  go to state 202
+    arithm_expr  go to state 204
 
 
-State 173
+State 174
 
    86 cmp_expr: cmp_expr • ">" cmp_expr
    86         | cmp_expr ">" cmp_expr •
@@ -2735,7 +2749,7 @@ State 173
     $default  reduce using rule 86 (cmp_expr)
 
 
-State 174
+State 175
 
    86 cmp_expr: cmp_expr • ">" cmp_expr
    87         | cmp_expr • "<" cmp_expr
@@ -2759,7 +2773,7 @@ State 174
     $default  reduce using rule 93 (cmp_expr)
 
 
-State 175
+State 176
 
    86 cmp_expr: cmp_expr • ">" cmp_expr
    87         | cmp_expr • "<" cmp_expr
@@ -2776,7 +2790,7 @@ State 175
     $default  reduce using rule 88 (cmp_expr)
 
 
-State 176
+State 177
 
    86 cmp_expr: cmp_expr • ">" cmp_expr
    87         | cmp_expr • "<" cmp_expr
@@ -2801,7 +2815,7 @@ State 176
     $default  reduce using rule 92 (cmp_expr)
 
 
-State 177
+State 178
 
    86 cmp_expr: cmp_expr • ">" cmp_expr
    87         | cmp_expr • "<" cmp_expr
@@ -2818,7 +2832,7 @@ State 177
     $default  reduce using rule 89 (cmp_expr)
 
 
-State 178
+State 179
 
    86 cmp_expr: cmp_expr • ">" cmp_expr
    87         | cmp_expr • "<" cmp_expr
@@ -2840,7 +2854,7 @@ State 178
     $default  reduce using rule 90 (cmp_expr)
 
 
-State 179
+State 180
 
    86 cmp_expr: cmp_expr • ">" cmp_expr
    87         | cmp_expr • "<" cmp_expr
@@ -2862,23 +2876,23 @@ State 179
     $default  reduce using rule 91 (cmp_expr)
 
 
-State 180
+State 181
 
    12 pos_elem: IDENTIFIER "[" • INTEGER "]"
    13         | IDENTIFIER "[" • IDENTIFIER "]"
 
-    IDENTIFIER  shift, and go to state 203
-    INTEGER     shift, and go to state 204
+    IDENTIFIER  shift, and go to state 205
+    INTEGER     shift, and go to state 206
 
 
-State 181
+State 182
 
    29 func: IDENTIFIER "(" print_params ")" •
 
     $default  reduce using rule 29 (func)
 
 
-State 182
+State 183
 
    43 print_params: print_params "," • print_params
 
@@ -2893,99 +2907,99 @@ State 182
 
     pos_elem      go to state 114
     func          go to state 115
-    print_params  go to state 205
-
-
-State 183
-
-  116 condition: "(" condition ")" •
-  119          | condition ")" •
-
-    IDENTIFIER  reduce using rule 116 (condition)
-    IDENTIFIER  [reduce using rule 119 (condition)]
-    INTEGER     reduce using rule 116 (condition)
-    INTEGER     [reduce using rule 119 (condition)]
-    FLOAT       reduce using rule 116 (condition)
-    FLOAT       [reduce using rule 119 (condition)]
-    SIF         reduce using rule 116 (condition)
-    SIF         [reduce using rule 119 (condition)]
-    SDOUBLE     reduce using rule 116 (condition)
-    SDOUBLE     [reduce using rule 119 (condition)]
-    SINT        reduce using rule 116 (condition)
-    SINT        [reduce using rule 119 (condition)]
-    SFUNC       reduce using rule 116 (condition)
-    SFUNC       [reduce using rule 119 (condition)]
-    SLONG       reduce using rule 116 (condition)
-    SLONG       [reduce using rule 119 (condition)]
-    SFLOAT      reduce using rule 116 (condition)
-    SFLOAT      [reduce using rule 119 (condition)]
-    SFOR        reduce using rule 116 (condition)
-    SFOR        [reduce using rule 119 (condition)]
-    SSHORT      reduce using rule 116 (condition)
-    SSHORT      [reduce using rule 119 (condition)]
-    SWHILE      reduce using rule 116 (condition)
-    SWHILE      [reduce using rule 119 (condition)]
-    "+"         reduce using rule 116 (condition)
-    "+"         [reduce using rule 119 (condition)]
-    "--"        reduce using rule 116 (condition)
-    "--"        [reduce using rule 119 (condition)]
-    "-"         reduce using rule 116 (condition)
-    "-"         [reduce using rule 119 (condition)]
-    "!"         reduce using rule 116 (condition)
-    "!"         [reduce using rule 119 (condition)]
-    "++"        reduce using rule 116 (condition)
-    "++"        [reduce using rule 119 (condition)]
-    ")"         reduce using rule 116 (condition)
-    ")"         [reduce using rule 119 (condition)]
-    "["         reduce using rule 116 (condition)
-    "["         [reduce using rule 119 (condition)]
-    "{"         reduce using rule 116 (condition)
-    "{"         [reduce using rule 119 (condition)]
-    SSCAN       reduce using rule 116 (condition)
-    SSCAN       [reduce using rule 119 (condition)]
-    SPRINT      reduce using rule 116 (condition)
-    SPRINT      [reduce using rule 119 (condition)]
-    SLEN        reduce using rule 116 (condition)
-    SLEN        [reduce using rule 119 (condition)]
-    SCMP        reduce using rule 116 (condition)
-    SCMP        [reduce using rule 119 (condition)]
-    NEWLINE     reduce using rule 116 (condition)
-    NEWLINE     [reduce using rule 119 (condition)]
-    "))"        reduce using rule 116 (condition)
-    "))"        [reduce using rule 119 (condition)]
-    $default    reduce using rule 116 (condition)
+    print_params  go to state 207
 
 
 State 184
 
-  118 condition: "(" condition "))" •
+  117 condition: "(" condition ")" •
+  120          | condition ")" •
 
-    $default  reduce using rule 118 (condition)
+    IDENTIFIER  reduce using rule 117 (condition)
+    IDENTIFIER  [reduce using rule 120 (condition)]
+    INTEGER     reduce using rule 117 (condition)
+    INTEGER     [reduce using rule 120 (condition)]
+    FLOAT       reduce using rule 117 (condition)
+    FLOAT       [reduce using rule 120 (condition)]
+    SIF         reduce using rule 117 (condition)
+    SIF         [reduce using rule 120 (condition)]
+    SDOUBLE     reduce using rule 117 (condition)
+    SDOUBLE     [reduce using rule 120 (condition)]
+    SINT        reduce using rule 117 (condition)
+    SINT        [reduce using rule 120 (condition)]
+    SFUNC       reduce using rule 117 (condition)
+    SFUNC       [reduce using rule 120 (condition)]
+    SLONG       reduce using rule 117 (condition)
+    SLONG       [reduce using rule 120 (condition)]
+    SFLOAT      reduce using rule 117 (condition)
+    SFLOAT      [reduce using rule 120 (condition)]
+    SFOR        reduce using rule 117 (condition)
+    SFOR        [reduce using rule 120 (condition)]
+    SSHORT      reduce using rule 117 (condition)
+    SSHORT      [reduce using rule 120 (condition)]
+    SWHILE      reduce using rule 117 (condition)
+    SWHILE      [reduce using rule 120 (condition)]
+    "+"         reduce using rule 117 (condition)
+    "+"         [reduce using rule 120 (condition)]
+    "--"        reduce using rule 117 (condition)
+    "--"        [reduce using rule 120 (condition)]
+    "-"         reduce using rule 117 (condition)
+    "-"         [reduce using rule 120 (condition)]
+    "!"         reduce using rule 117 (condition)
+    "!"         [reduce using rule 120 (condition)]
+    "++"        reduce using rule 117 (condition)
+    "++"        [reduce using rule 120 (condition)]
+    ")"         reduce using rule 117 (condition)
+    ")"         [reduce using rule 120 (condition)]
+    "["         reduce using rule 117 (condition)
+    "["         [reduce using rule 120 (condition)]
+    "{"         reduce using rule 117 (condition)
+    "{"         [reduce using rule 120 (condition)]
+    SSCAN       reduce using rule 117 (condition)
+    SSCAN       [reduce using rule 120 (condition)]
+    SPRINT      reduce using rule 117 (condition)
+    SPRINT      [reduce using rule 120 (condition)]
+    SLEN        reduce using rule 117 (condition)
+    SLEN        [reduce using rule 120 (condition)]
+    SCMP        reduce using rule 117 (condition)
+    SCMP        [reduce using rule 120 (condition)]
+    NEWLINE     reduce using rule 117 (condition)
+    NEWLINE     [reduce using rule 120 (condition)]
+    "))"        reduce using rule 117 (condition)
+    "))"        [reduce using rule 120 (condition)]
+    $default    reduce using rule 117 (condition)
 
 
 State 185
 
-  117 condition: "((" condition ")" •
-  119          | condition ")" •
+  119 condition: "(" condition "))" •
 
-    ")"       reduce using rule 117 (condition)
-    ")"       [reduce using rule 119 (condition)]
-    $default  reduce using rule 117 (condition)
+    $default  reduce using rule 119 (condition)
 
 
 State 186
 
-  123 for_statement: SFOR "(" assign ";" • cmp_expr ";" oper_eq ")" decl_statement
+  118 condition: "((" condition ")" •
+  120          | condition ")" •
+
+    ")"       reduce using rule 118 (condition)
+    ")"       [reduce using rule 120 (condition)]
+    $default  reduce using rule 118 (condition)
+
+
+State 187
+
+  124 for_statement: SFOR "(" assign ";" • cmp_expr ";" oper_eq ")" decl_statement
 
     IDENTIFIER  shift, and go to state 50
     INTEGER     shift, and go to state 51
     FLOAT       shift, and go to state 52
     "!"         shift, and go to state 19
 
-    cmp_expr  go to state 206
+    cmp_expr  go to state 208
 
 
-State 187
+State 188
 
    19 integ: integ • "," integ
    19      | integ "," integ •
@@ -2993,7 +3007,7 @@ State 187
     $default  reduce using rule 19 (integ)
 
 
-State 188
+State 189
 
    21 fl: fl • "," fl
    21   | fl "," fl •
@@ -3001,7 +3015,7 @@ State 188
     $default  reduce using rule 21 (fl)
 
 
-State 189
+State 190
 
    23 str: str • "," str
    23    | str "," str •
@@ -3009,98 +3023,105 @@ State 189
     $default  reduce using rule 23 (str)
 
 
-State 190
+State 191
 
    25 func: SSCAN "(" scan_params ")" •
 
     $default  reduce using rule 25 (func)
 
 
-State 191
+State 192
 
    28 func: SPRINT "(" print_params ")" •
 
     $default  reduce using rule 28 (func)
 
 
-State 192
+State 193
 
    26 func: SLEN "(" len_params ")" •
 
     $default  reduce using rule 26 (func)
 
 
-State 193
+State 194
 
    27 func: SCMP "(" cmp_params ")" •
 
     $default  reduce using rule 27 (func)
 
 
-State 194
+State 195
 
    36 cmp_params: cmp_params "," • cmp_params
 
     IDENTIFIER  shift, and go to state 137
     STRING      shift, and go to state 138
 
-    cmp_params  go to state 207
+    cmp_params  go to state 209
 
 
-State 195
+State 196
 
    82 val: val "," • val
 
-    IDENTIFIER  shift, and go to state 208
+    IDENTIFIER  shift, and go to state 210
     STRING      shift, and go to state 147
     INTEGER     shift, and go to state 141
     FLOAT       shift, and go to state 142
     "["         shift, and go to state 21
 
     pos_elem      go to state 143
-    arr_elements  go to state 209
+    arr_elements  go to state 211
     number        go to state 152
-    val           go to state 210
+    val           go to state 212
 
 
-State 196
+State 197
 
    99 merge_arr: arr_elements "+" TOKEN_ERROR arr_elements •
 
     $default  reduce using rule 99 (merge_arr)
 
 
-State 197
+State 198
+
+  100 merge_arr: arr_elements TOKEN_ERROR "+" arr_elements •
+
+    $default  reduce using rule 100 (merge_arr)
+
+
+State 199
 
    47 params: "(" ")" •
 
     $default  reduce using rule 47 (params)
 
 
-State 198
+State 200
 
    49 type_params: type • IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 211
+    IDENTIFIER  shift, and go to state 213
 
 
-State 199
+State 201
 
    48 params: "(" type_params • ")"
    50 type_params: type_params • "," type_params
 
-    ")"  shift, and go to state 212
-    ","  shift, and go to state 213
+    ")"  shift, and go to state 214
+    ","  shift, and go to state 215
 
 
-State 200
+State 202
 
    46 name_func: name_func IDENTIFIER params NEWLINE •
 
     $default  reduce using rule 46 (name_func)
 
 
-State 201
+State 203
 
    57 arithm_expr: arithm_expr • "+" arithm_expr
    58            | arithm_expr • "-" arithm_expr
@@ -3118,7 +3139,7 @@ State 201
     $default  reduce using rule 96 (cmp_expr)
 
 
-State 202
+State 204
 
    57 arithm_expr: arithm_expr • "+" arithm_expr
    58            | arithm_expr • "-" arithm_expr
@@ -3136,21 +3157,21 @@ State 202
     $default  reduce using rule 95 (cmp_expr)
 
 
-State 203
+State 205
 
    13 pos_elem: IDENTIFIER "[" IDENTIFIER • "]"
 
-    "]"  shift, and go to state 214
+    "]"  shift, and go to state 216
 
 
-State 204
+State 206
 
    12 pos_elem: IDENTIFIER "[" INTEGER • "]"
 
-    "]"  shift, and go to state 215
+    "]"  shift, and go to state 217
 
 
-State 205
+State 207
 
    43 print_params: print_params • "," print_params
    43             | print_params "," print_params •
@@ -3158,7 +3179,7 @@ State 205
     $default  reduce using rule 43 (print_params)
 
 
-State 206
+State 208
 
    86 cmp_expr: cmp_expr • ">" cmp_expr
    87         | cmp_expr • "<" cmp_expr
@@ -3170,7 +3191,7 @@ State 206
    93         | cmp_expr • "&&" cmp_expr
    95         | cmp_expr • ">" ">" arithm_expr
    96         | cmp_expr • "<" "<" arithm_expr
-  123 for_statement: SFOR "(" assign ";" cmp_expr • ";" oper_eq ")" decl_statement
+  124 for_statement: SFOR "(" assign ";" cmp_expr • ";" oper_eq ")" decl_statement
 
     "<"   shift, and go to state 100
     ">"   shift, and go to state 101
@@ -3180,10 +3201,10 @@ State 206
     ">="  shift, and go to state 105
     "=="  shift, and go to state 106
     "!="  shift, and go to state 107
-    ";"   shift, and go to state 216
+    ";"   shift, and go to state 218
 
 
-State 207
+State 209
 
    36 cmp_params: cmp_params • "," cmp_params
    36           | cmp_params "," cmp_params •
@@ -3191,25 +3212,25 @@ State 207
     $default  reduce using rule 36 (cmp_params)
 
 
-State 208
+State 210
 
    12 pos_elem: IDENTIFIER • "[" INTEGER "]"
    13         | IDENTIFIER • "[" IDENTIFIER "]"
    79 val: IDENTIFIER •
 
-    "["  shift, and go to state 180
+    "["  shift, and go to state 181
 
     $default  reduce using rule 79 (val)
 
 
-State 209
+State 211
 
    81 val: arr_elements •
 
     $default  reduce using rule 81 (val)
 
 
-State 210
+State 212
 
    82 val: val • "," val
    82    | val "," val •
@@ -3217,21 +3238,21 @@ State 210
     $default  reduce using rule 82 (val)
 
 
-State 211
+State 213
 
    49 type_params: type IDENTIFIER •
 
     $default  reduce using rule 49 (type_params)
 
 
-State 212
+State 214
 
    48 params: "(" type_params ")" •
 
     $default  reduce using rule 48 (params)
 
 
-State 213
+State 215
 
    50 type_params: type_params "," • type_params
 
@@ -3241,37 +3262,37 @@ State 213
     SFLOAT   shift, and go to state 12
     SSHORT   shift, and go to state 14
 
-    type         go to state 198
-    type_params  go to state 217
+    type         go to state 200
+    type_params  go to state 219
 
 
-State 214
+State 216
 
    13 pos_elem: IDENTIFIER "[" IDENTIFIER "]" •
 
     $default  reduce using rule 13 (pos_elem)
 
 
-State 215
+State 217
 
    12 pos_elem: IDENTIFIER "[" INTEGER "]" •
 
     $default  reduce using rule 12 (pos_elem)
 
 
-State 216
+State 218
 
-  123 for_statement: SFOR "(" assign ";" cmp_expr ";" • oper_eq ")" decl_statement
+  124 for_statement: SFOR "(" assign ";" cmp_expr ";" • oper_eq ")" decl_statement
 
     IDENTIFIER  shift, and go to state 62
     "--"        shift, and go to state 17
     "++"        shift, and go to state 20
 
-    var      go to state 218
-    oper_eq  go to state 219
+    var      go to state 220
+    oper_eq  go to state 221
 
 
-State 217
+State 219
 
    50 type_params: type_params • "," type_params
    50            | type_params "," type_params •
@@ -3279,7 +3300,7 @@ State 217
     $default  reduce using rule 50 (type_params)
 
 
-State 218
+State 220
 
    11 var: var • "," var
    70 oper_eq: var • "++"
@@ -3298,16 +3319,16 @@ State 218
     ","   shift, and go to state 88
 
 
-State 219
+State 221
 
-  123 for_statement: SFOR "(" assign ";" cmp_expr ";" oper_eq • ")" decl_statement
+  124 for_statement: SFOR "(" assign ";" cmp_expr ";" oper_eq • ")" decl_statement
 
-    ")"  shift, and go to state 220
+    ")"  shift, and go to state 222
 
 
-State 220
+State 222
 
-  123 for_statement: SFOR "(" assign ";" cmp_expr ";" oper_eq ")" • decl_statement
+  124 for_statement: SFOR "(" assign ";" cmp_expr ";" oper_eq ")" • decl_statement
 
     IDENTIFIER  shift, and go to state 4
     INTEGER     shift, and go to state 5
@@ -3348,15 +3369,15 @@ State 220
     oper_eq          go to state 39
     cmp_expr         go to state 40
     merge_arr        go to state 41
-    decl_statement   go to state 221
+    decl_statement   go to state 223
     if_statement     go to state 44
     block_statement  go to state 45
     while_statement  go to state 46
     for_statement    go to state 47
 
 
-State 221
+State 223
 
-  123 for_statement: SFOR "(" assign ";" cmp_expr ";" oper_eq ")" decl_statement •
+  124 for_statement: SFOR "(" assign ";" cmp_expr ";" oper_eq ")" decl_statement •
 
-    $default  reduce using rule 123 (for_statement)
+    $default  reduce using rule 124 (for_statement)

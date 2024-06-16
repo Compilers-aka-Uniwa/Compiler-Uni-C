@@ -291,10 +291,11 @@ cmp_expr:
 /* [2.6.4] Συνένωση Πινάκων */
 merge_arr:
         arr_elements "+" arr_elements { $$ = strdup(yytext); }
-        |arr_elements TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line-1);}
-        |arr_elements "+" TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line-1);}
+        |arr_elements TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
+        |arr_elements "+" TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
+        |arr_elements TOKEN_ERROR "+" arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
         ;
-        
+
         
 /* ============== [2.7] Σύνθετες δηλώσεις ============== */
 decl_statements:
