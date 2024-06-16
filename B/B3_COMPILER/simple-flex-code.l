@@ -41,7 +41,7 @@ COMMENT          (\/\/.*|\/\*[^*]*\*+([^/*][^*]*\*+)*\/)
 DELIMITER        \;
 WHITESPACE       [ \t]+  
 NEWLINE          \n
-TOKEN_ERROR      [^ \t\r\n;]
+TOKEN_ERROR      [^ \t\r\n;] 
 
 %%
 
@@ -111,7 +111,7 @@ TOKEN_ERROR      [^ \t\r\n;]
 
 
 {TOKEN_ERROR}           { lex_warnings++; yyerror("Token error"); BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-<error>{TOKEN_ERROR}+   { BEGIN(0); fprintf(yyout, "\t%d character(s) ignored so far\n", lex_warnings); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+<error>{WHITESPACE}+    { BEGIN(0); fprintf(yyout, "\t%d character(s) ignored so far\n", lex_warnings); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
 <error>.                { lex_warnings++; }
 <error>\n               { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warnings); return NEWLINE;}
 
