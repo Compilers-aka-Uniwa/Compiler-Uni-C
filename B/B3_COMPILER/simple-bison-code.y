@@ -325,8 +325,8 @@ condition:
         //Warning : Έλεγχος για διπλά σύμβολα παρένθεση ή παράλλειψη τους
         | "((" condition ")"    { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double ( detected at Line=%d\n", line-1); }
         | "(" condition "))"    { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double ) detected at Line=%d\n", line-1); }
-        | condition ")"         { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ( detected at Line=%d\n", line-1);}
-        | "(" condition         { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ) detected at Line=%d\n", line-1);}
+        | condition ")"           { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ( detected at Line=%d\n", line-1);}
+        | "(" condition            { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ) detected at Line=%d\n", line-1);}
         ;
 
 block_statement:
