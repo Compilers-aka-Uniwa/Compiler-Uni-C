@@ -1886,25 +1886,25 @@ yyreduce:
 
   case 79: /* oper_eq: var "+-"  */
 #line 263 "simple-bison-code.y"
-                           { fatal_errors++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line+1); }
+                           { fatal_errors++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
 #line 1891 "simple-bison-code.tab.c"
     break;
 
   case 80: /* oper_eq: var "-+"  */
 #line 264 "simple-bison-code.y"
-                           { fatal_errors++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line+1); }
+                           { fatal_errors++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
 #line 1897 "simple-bison-code.tab.c"
     break;
 
   case 81: /* oper_eq: "+-" var  */
 #line 265 "simple-bison-code.y"
-                           { fatal_errors++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line+1); }
+                           { fatal_errors++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
 #line 1903 "simple-bison-code.tab.c"
     break;
 
   case 82: /* oper_eq: "-+" var  */
 #line 266 "simple-bison-code.y"
-                           { fatal_errors++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line+1); }
+                           { fatal_errors++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
 #line 1909 "simple-bison-code.tab.c"
     break;
 
