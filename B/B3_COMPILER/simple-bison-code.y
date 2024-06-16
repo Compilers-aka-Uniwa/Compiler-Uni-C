@@ -202,6 +202,7 @@ decl_func:
 
 name_func: 
         SFUNC                                   { $$ = strdup(yytext); }
+        //Warning: Έλεγχος για την παράλειψη του τύπου επιστροφής
         | SFUNC type                            { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Return type unnecessary at Line=%d\n", line);}
         | name_func IDENTIFIER params NEWLINE   { $$ = strdup(yytext); }
         ;
@@ -284,7 +285,7 @@ cmp_expr:
         | cmp_expr "||" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "&&" cmp_expr  { $$ = strdup(yytext); }
         | "!" cmp_expr            { $$ = strdup(yytext); }
-        /* Warning: Έλεγχος για διπλά σύμβολα σύγκρισης */
+        // Warning: Έλεγχος για διπλά σύμβολα σύγκρισης 
         | cmp_expr ">" ">" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double > detected at Line=%d\n", line-1); } 
         | cmp_expr "<" "<" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double < detected at Line=%d\n", line-1); }
         ;
@@ -292,6 +293,7 @@ cmp_expr:
 /* [2.6.4] Συνένωση Πινάκων */
 merge_arr:
         arr_elements "+" arr_elements { $$ = strdup(yytext); }
+        // Warning: Έλεγχος για λάθος χαρακτήρες στη συνένωση πινάκων
         |arr_elements TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
         |arr_elements "+" TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
         |arr_elements TOKEN_ERROR "+" arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
