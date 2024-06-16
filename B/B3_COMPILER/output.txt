@@ -1,29 +1,31 @@
 	[FLEX] Line=1, token=INTEGER, value="5"
-	[FLEX] Line=1, token=OPERATOR, value="+"
+	[FLEX] Line=1, token=OPERATOR, value=">"
 	[FLEX] Line=1, token=INTEGER, value="3"
-[BISON] Line=1, expression="Αριθμητική έκφραση"
+[BISON] Line=1, expression="Σύγκριση"
 
 	[FLEX] Line=2, token=INTEGER, value="4"
-	[FLEX] Line=2, token=OPERATOR, value="*"
+	[FLEX] Line=2, token=OPERATOR, value="<"
 	[FLEX] Line=2, token=INTEGER, value="5"
-[BISON] Line=2, expression="Αριθμητική έκφραση"
+[BISON] Line=2, expression="Σύγκριση"
 
 	[FLEX] Line=3, token=INTEGER, value="4"
-	[FLEX] Line=3, token=OPERATOR, value="*"
-	[FLEX] Line=3, token=OPERATOR, value="*"
+	[FLEX] Line=3, token=OPERATOR, value="=="
 	[FLEX] Line=3, token=INTEGER, value="5"
-Warning: Extra * detected at Line=3[BISON] Line=3, expression="Αριθμητική έκφραση"
+[BISON] Line=3, expression="Σύγκριση"
 
 	[FLEX] Line=4, token=INTEGER, value="1"
-	[FLEX] Line=4, token=OPERATOR, value="-"
+	[FLEX] Line=4, token=OPERATOR, value=">"
+	[FLEX] Line=4, token=OPERATOR, value=">"
 	[FLEX] Line=4, token=INTEGER, value="3"
-[BISON] Line=4, expression="Αριθμητική έκφραση"
+Warning: Double > detected at Line=4
+[BISON] Line=4, expression="Σύγκριση"
 
 	[FLEX] Line=5, token=IDENTIFIER, value="a"
-	[FLEX] Line=5, token=OPERATOR, value="*"
-	[FLEX] Line=5, token=OPERATOR, value="*"
+	[FLEX] Line=5, token=OPERATOR, value="<"
+	[FLEX] Line=5, token=OPERATOR, value="<"
 	[FLEX] Line=5, token=IDENTIFIER, value="C"
-Warning: Extra * detected at Line=5[BISON] Line=5, expression="Αριθμητική έκφραση"
+Warning: Double < detected at Line=5
+[BISON] Line=5, expression="Σύγκριση"
 
 	[FLEX] Line=6, token=INTEGER, value="5"
 	[FLEX] Line=6, token=INTEGER, value="3"
@@ -31,11 +33,17 @@ Warning: Extra * detected at Line=5[BISON] Line=5, expression="Αριθμητι
 syntax error at Line=6
 
 	[FLEX] Line=7, token=INTEGER, value="5"
-	[FLEX] Line=7, token=OPERATOR, value="-"
+	[FLEX] Line=7, token=OPERATOR, value="%"
 	[FLEX] Line=7, token=INTEGER, value="3"
 [BISON] Line=7, expression="Αριθμητική έκφραση"
 
+
+
+		ΣΤΑΤΙΣΤΙΚΑ ΣΥΝΤΑΚΤΙΚΗΣ ΑΝΑΛΥΣΗΣ
+
 BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία
+		(με 2 warnings)
+
 		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 2
 		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 6
 		ΛΑΘΟΣ ΛΕΞΕΙΣ: 0

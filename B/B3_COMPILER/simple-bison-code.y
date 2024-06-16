@@ -231,8 +231,7 @@ arithm_expr:
         | arithm_expr "-" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "/" arithm_expr   { $$ = strdup(yytext); }
-        | arithm_expr "%" arithm_expr   { $$ = strdup(yytext); }
-        | arithm_expr "*" "*" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Extra * detected at Line=%d", line); }  
+        | arithm_expr "%" arithm_expr   { $$ = strdup(yytext); } 
         ;
 
 number:
@@ -284,6 +283,8 @@ cmp_expr:
         | cmp_expr "||" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "&&" cmp_expr  { $$ = strdup(yytext); }
         | "!" cmp_expr            { $$ = strdup(yytext); }
+        | cmp_expr ">" ">" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double > detected at Line=%d\n", line-1); } 
+        | cmp_expr "<" "<" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double < detected at Line=%d\n", line-1); }
         ;
 
 /* [2.6.4] Συνένωση Πινάκων */
@@ -371,14 +372,17 @@ int main(int argc, char **argv)
 		
 	int parse = yyparse();
 
+        fprintf(yyout, "\n\n\t\tΣΤΑΤΙΣΤΙΚΑ ΣΥΝΤΑΚΤΙΚΗΣ ΑΝΑΛΥΣΗΣ\n\n");
+
         if (errflag == 0 && parse == 0) 
-        {
                 fprintf(yyout, "BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με επιτυχία\n");
-                if (par_warnings > 0)
-                        fprintf(yyout, "\t\t(με %d warnings)\n", par_warnings);
-        }
+
         else
                 fprintf(yyout, "BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία\n");
+        
+        if (par_warnings > 0)
+                fprintf(yyout, "\t\t(με %d warnings)\n\n", par_warnings);
+
        
         fprintf(yyout, "\t\tΣΩΣΤΕΣ ΛΕΞΕΙΣ: %d\n", correct_words);
         fprintf(yyout, "\t\tΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: %d\n", correct_exprs);
