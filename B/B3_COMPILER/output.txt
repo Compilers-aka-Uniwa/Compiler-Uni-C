@@ -78,57 +78,88 @@ Warning: No ( detected at Line=16
 	[FLEX] Line=18, token=SPECIAL, value="}"
 [BISON] Line=18, expression="Δήλωση while"
 
-	[FLEX] Line=20, token=SPECIAL, value="["
-	[FLEX] Line=20, token=INTEGER, value="3"
+	[FLEX] Line=20, token=KEYWORD, value="func"
+	[FLEX] Line=20, token=KEYWORD, value="int"
+Warning: Return type unnecessary at Line=20
+	[FLEX] Line=20, token=IDENTIFIER, value="main"
+	[FLEX] Line=20, token=SPECIAL, value="("
+	[FLEX] Line=20, token=KEYWORD, value="int"
+	[FLEX] Line=20, token=IDENTIFIER, value="parA"
 	[FLEX] Line=20, token=SPECIAL, value=","
-	[FLEX] Line=20, token=INTEGER, value="4"
-	[FLEX] Line=20, token=SPECIAL, value=","
-	[FLEX] Line=20, token=INTEGER, value="6"
-	[FLEX] Line=20, token=SPECIAL, value="]"
-Token error at Line=20
+	[FLEX] Line=20, token=KEYWORD, value="int"
+	[FLEX] Line=20, token=IDENTIFIER, value="parB"
+	[FLEX] Line=20, token=SPECIAL, value=")"
+	[FLEX] Line=21, token=SPECIAL, value="{"
+	[FLEX] Line=23, token=SPECIAL, value="}"
+[BISON] Line=23, expression="Δήλωση συναρτήσεων χρήστη"
+
+	[FLEX] Line=25, token=SPECIAL, value="["
+	[FLEX] Line=25, token=INTEGER, value="3"
+	[FLEX] Line=25, token=SPECIAL, value=","
+	[FLEX] Line=25, token=INTEGER, value="4"
+	[FLEX] Line=25, token=SPECIAL, value=","
+	[FLEX] Line=25, token=INTEGER, value="6"
+	[FLEX] Line=25, token=SPECIAL, value="]"
+Token error at Line=25
 
 	1 character(s) ignored so far
-	[FLEX] Line=20, token=OPERATOR, value="+"
-	[FLEX] Line=20, token=SPECIAL, value="["
-	[FLEX] Line=20, token=INTEGER, value="1"
-	[FLEX] Line=20, token=SPECIAL, value=","
-	[FLEX] Line=20, token=INTEGER, value="5"
-	[FLEX] Line=20, token=SPECIAL, value=","
-	[FLEX] Line=20, token=INTEGER, value="6"
-	[FLEX] Line=20, token=SPECIAL, value="]"
-Warning: Invalid character in array merge detected at Line=21
-[BISON] Line=20, expression="Συνένωση πινάκων"
+	[FLEX] Line=25, token=OPERATOR, value="+"
+	[FLEX] Line=25, token=SPECIAL, value="["
+	[FLEX] Line=25, token=INTEGER, value="1"
+	[FLEX] Line=25, token=SPECIAL, value=","
+	[FLEX] Line=25, token=INTEGER, value="5"
+	[FLEX] Line=25, token=SPECIAL, value=","
+	[FLEX] Line=25, token=INTEGER, value="6"
+	[FLEX] Line=25, token=SPECIAL, value="]"
+Warning: Invalid character in array merge detected at Line=26
+[BISON] Line=25, expression="Συνένωση πινάκων"
 
-	[FLEX] Line=21, token=SPECIAL, value="["
-	[FLEX] Line=21, token=INTEGER, value="1"
-	[FLEX] Line=21, token=SPECIAL, value=","
-	[FLEX] Line=21, token=INTEGER, value="2"
-	[FLEX] Line=21, token=SPECIAL, value=","
-	[FLEX] Line=21, token=INTEGER, value="8"
-	[FLEX] Line=21, token=SPECIAL, value="]"
-	[FLEX] Line=21, token=OPERATOR, value="+"
-Token error at Line=21
+	[FLEX] Line=26, token=SPECIAL, value="["
+	[FLEX] Line=26, token=INTEGER, value="1"
+	[FLEX] Line=26, token=SPECIAL, value=","
+	[FLEX] Line=26, token=INTEGER, value="2"
+	[FLEX] Line=26, token=SPECIAL, value=","
+	[FLEX] Line=26, token=INTEGER, value="8"
+	[FLEX] Line=26, token=SPECIAL, value="]"
+	[FLEX] Line=26, token=OPERATOR, value="+"
+Token error at Line=26
 
 	2 character(s) ignored so far
-	[FLEX] Line=21, token=SPECIAL, value="["
-	[FLEX] Line=21, token=INTEGER, value="7"
-	[FLEX] Line=21, token=SPECIAL, value=","
-	[FLEX] Line=21, token=INTEGER, value="9"
-	[FLEX] Line=21, token=SPECIAL, value=","
-	[FLEX] Line=21, token=INTEGER, value="1"
-	[FLEX] Line=21, token=SPECIAL, value="]"
-Warning: Invalid character in array merge detected at Line=22
-[BISON] Line=21, expression="Συνένωση πινάκων"
+	[FLEX] Line=26, token=SPECIAL, value="["
+	[FLEX] Line=26, token=INTEGER, value="7"
+	[FLEX] Line=26, token=SPECIAL, value=","
+	[FLEX] Line=26, token=INTEGER, value="9"
+	[FLEX] Line=26, token=SPECIAL, value=","
+	[FLEX] Line=26, token=INTEGER, value="1"
+	[FLEX] Line=26, token=SPECIAL, value="]"
+Warning: Invalid character in array merge detected at Line=27
+[BISON] Line=26, expression="Συνένωση πινάκων"
+
+	[FLEX] Line=27, token=SPECIAL, value="["
+	[FLEX] Line=27, token=INTEGER, value="1"
+	[FLEX] Line=27, token=SPECIAL, value=","
+	[FLEX] Line=27, token=INTEGER, value="2"
+	[FLEX] Line=27, token=SPECIAL, value=","
+	[FLEX] Line=27, token=INTEGER, value="6"
+	[FLEX] Line=27, token=SPECIAL, value="]"
+	[FLEX] Line=27, token=OPERATOR, value="++"
+	[FLEX] Line=27, token=SPECIAL, value="["
+	[FLEX] Line=27, token=INTEGER, value="2"
+	[FLEX] Line=27, token=SPECIAL, value=","
+	[FLEX] Line=27, token=INTEGER, value="4"
+	[FLEX] Line=27, token=SPECIAL, value="]"
+Warning: ++ operation in array merge detected at Line=28
+[BISON] Line=27, expression="Συνένωση πινάκων"
 
 
 
 		ΣΤΑΤΙΣΤΙΚΑ ΣΥΝΤΑΚΤΙΚΗΣ ΑΝΑΛΥΣΗΣ
 
 BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με επιτυχία
-		(με 6 warnings)
+		(με 8 warnings)
 
-		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 11
-		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 12
+		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 18
+		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 14
 		ΛΑΘΟΣ ΛΕΞΕΙΣ: 2
 		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 0
 
