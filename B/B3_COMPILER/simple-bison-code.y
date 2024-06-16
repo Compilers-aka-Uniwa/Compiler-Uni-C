@@ -103,6 +103,7 @@
 program:
         program decl_statements NEWLINE         { correct_exprs++; if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
         | program error NEWLINE                 { fatal_errors++; errflag = 1; yyerrok; }
+        | program merge_arr TOKEN_ERROR merge_arr NEWLINE { yyerrok; } 
         |                                       { }                       
         ;
        
@@ -291,10 +292,14 @@ cmp_expr:
 
 /* [2.6.4] Συνένωση Πινάκων */
 merge_arr:
-        arr_elements "+" arr_elements { $$ = strdup(yytext); }
-        |arr_elements TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
-        |arr_elements "+" TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
-        |arr_elements TOKEN_ERROR "+" arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
+        arr_elements { $$ = strdup(yytext); }
+        | merge_arr "+" merge_arr { $$ = strdup(yytext); }
+        | merge_arr TOKEN_ERROR "+" merge_arr {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
+        | merge_arr "+" TOKEN_ERROR merge_arr {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
+        /*arr_elements "+" arr_elements { $$ = strdup(yytext); }
+        | arr_elements "+" TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
+        | arr_elements TOKEN_ERROR "+" arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
+        */
         ;
 
         

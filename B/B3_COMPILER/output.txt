@@ -79,17 +79,36 @@ Warning: No ( detected at Line=16
 [BISON] Line=18, expression="Δήλωση while"
 
 	[FLEX] Line=20, token=SPECIAL, value="["
-	[FLEX] Line=20, token=INTEGER, value="1"
+	[FLEX] Line=20, token=INTEGER, value="3"
 	[FLEX] Line=20, token=SPECIAL, value=","
-	[FLEX] Line=20, token=INTEGER, value="2"
+	[FLEX] Line=20, token=INTEGER, value="4"
 	[FLEX] Line=20, token=SPECIAL, value=","
-	[FLEX] Line=20, token=INTEGER, value="8"
+	[FLEX] Line=20, token=INTEGER, value="6"
 	[FLEX] Line=20, token=SPECIAL, value="]"
-	[FLEX] Line=20, token=OPERATOR, value="+"
 Token error at Line=20
 
 	2 character(s) ignored so far
-syntax error at Line=21
+	[FLEX] Line=20, token=SPECIAL, value="["
+syntax error at Line=20
+
+	[FLEX] Line=20, token=INTEGER, value="1"
+	[FLEX] Line=20, token=SPECIAL, value=","
+	[FLEX] Line=20, token=INTEGER, value="5"
+	[FLEX] Line=20, token=SPECIAL, value=","
+	[FLEX] Line=20, token=INTEGER, value="6"
+	[FLEX] Line=20, token=SPECIAL, value="]"
+	[FLEX] Line=21, token=SPECIAL, value="["
+	[FLEX] Line=21, token=INTEGER, value="1"
+	[FLEX] Line=21, token=SPECIAL, value=","
+	[FLEX] Line=21, token=INTEGER, value="2"
+	[FLEX] Line=21, token=SPECIAL, value=","
+	[FLEX] Line=21, token=INTEGER, value="8"
+	[FLEX] Line=21, token=SPECIAL, value="]"
+	[FLEX] Line=21, token=OPERATOR, value="+"
+Token error at Line=21
+
+	4 character(s) ignored so far
+syntax error at Line=22
 
 
 
@@ -100,6 +119,6 @@ BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με α
 
 		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 11
 		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 9
-		ΛΑΘΟΣ ΛΕΞΕΙΣ: 2
-		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 2
+		ΛΑΘΟΣ ΛΕΞΕΙΣ: 4
+		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 3
 
