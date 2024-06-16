@@ -129,15 +129,30 @@ Token error at Line=28
 	2 character(s) ignored so far
 syntax error at Line=29
 
+	[FLEX] Line=31, token=KEYWORD, value="func"
+	[FLEX] Line=31, token=KEYWORD, value="int"
+Warning: Return type unnecessary at Line=31
+	[FLEX] Line=31, token=IDENTIFIER, value="main"
+	[FLEX] Line=31, token=SPECIAL, value="("
+	[FLEX] Line=31, token=KEYWORD, value="int"
+	[FLEX] Line=31, token=IDENTIFIER, value="parA"
+	[FLEX] Line=31, token=SPECIAL, value=","
+	[FLEX] Line=31, token=KEYWORD, value="float"
+	[FLEX] Line=31, token=IDENTIFIER, value="parB"
+	[FLEX] Line=31, token=SPECIAL, value=")"
+	[FLEX] Line=32, token=SPECIAL, value="{"
+	[FLEX] Line=34, token=SPECIAL, value="}"
+[BISON] Line=34, expression="Δήλωση συναρτήσεων χρήστη"
+
 
 
 		ΣΤΑΤΙΣΤΙΚΑ ΣΥΝΤΑΚΤΙΚΗΣ ΑΝΑΛΥΣΗΣ
 
 BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία
-		(με 5 warnings)
+		(με 6 warnings)
 
-		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 19
-		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 11
+		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 26
+		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 12
 		ΛΑΘΟΣ ΛΕΞΕΙΣ: 2
 		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 3
 

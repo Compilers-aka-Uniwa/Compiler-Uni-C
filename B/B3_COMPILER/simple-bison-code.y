@@ -202,6 +202,7 @@ decl_func:
 
 name_func: 
         SFUNC                                   { $$ = strdup(yytext); }
+        | SFUNC type                            { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Return type unnecessary at Line=%d\n", line);}
         | name_func IDENTIFIER params NEWLINE   { $$ = strdup(yytext); }
         ;
 
