@@ -1,66 +1,55 @@
 	[FLEX] Line=1, token=INTEGER, value="5"
 	[FLEX] Line=1, token=OPERATOR, value=">"
 	[FLEX] Line=1, token=INTEGER, value="3"
-
-[BISON] Line=1, expression="Σύγκριση"
+[BISON] Line=1, expression="Σύγκριση"
 
 	[FLEX] Line=2, token=INTEGER, value="4"
 	[FLEX] Line=2, token=OPERATOR, value="<"
 	[FLEX] Line=2, token=INTEGER, value="5"
-
-[BISON] Line=2, expression="Σύγκριση"
+[BISON] Line=2, expression="Σύγκριση"
 
 	[FLEX] Line=3, token=INTEGER, value="4"
 	[FLEX] Line=3, token=OPERATOR, value="=="
 	[FLEX] Line=3, token=INTEGER, value="5"
-
-[BISON] Line=3, expression="Σύγκριση"
+[BISON] Line=3, expression="Σύγκριση"
 
 	[FLEX] Line=4, token=INTEGER, value="1"
 	[FLEX] Line=4, token=OPERATOR, value=">"
 	[FLEX] Line=4, token=OPERATOR, value=">"
 	[FLEX] Line=4, token=INTEGER, value="3"
-
-Warning: Double > detected at Line=4
+Warning: Double > detected at Line=4
 [BISON] Line=4, expression="Σύγκριση"
 
 	[FLEX] Line=5, token=IDENTIFIER, value="a"
 	[FLEX] Line=5, token=OPERATOR, value="<"
 	[FLEX] Line=5, token=OPERATOR, value="<"
 	[FLEX] Line=5, token=IDENTIFIER, value="C"
-
-Warning: Double < detected at Line=5
+Warning: Double < detected at Line=5
 [BISON] Line=5, expression="Σύγκριση"
 
 	[FLEX] Line=6, token=INTEGER, value="5"
 	[FLEX] Line=6, token=OPERATOR, value="+"
 	[FLEX] Line=6, token=INTEGER, value="3"
-
-[BISON] Line=6, expression="Αριθμητική έκφραση"
+[BISON] Line=6, expression="Αριθμητική έκφραση"
 
 	[FLEX] Line=7, token=INTEGER, value="5"
 	[FLEX] Line=7, token=OPERATOR, value="%"
 	[FLEX] Line=7, token=INTEGER, value="3"
+[BISON] Line=7, expression="Αριθμητική έκφραση"
 
-[BISON] Line=7, expression="Αριθμητική έκφραση"
-
-
-	[FLEX] Line=9, token=KEYWORD, value="if"
+	[FLEX] Line=9, token=KEYWORD, value="if"
 	[FLEX] Line=9, token=SPECIAL, value="("
 	[FLEX] Line=9, token=IDENTIFIER, value="a"
 	[FLEX] Line=9, token=OPERATOR, value="=="
 	[FLEX] Line=9, token=INTEGER, value="5"
 	[FLEX] Line=9, token=SPECIAL, value=")"
-
-	[FLEX] Line=10, token=IDENTIFIER, value="t"
+	[FLEX] Line=10, token=IDENTIFIER, value="t"
 	[FLEX] Line=10, token=OPERATOR, value="="
 	[FLEX] Line=10, token=INTEGER, value="9"
 	[FLEX] Line=10, token=DELIMITER, value=";"
+[BISON] Line=10, expression="Ανάθεση τιμής σε μεταβλητή"
 
-[BISON] Line=10, expression="Ανάθεση τιμής σε μεταβλητή"
-
-
-	[FLEX] Line=12, token=KEYWORD, value="if"
+	[FLEX] Line=12, token=KEYWORD, value="if"
 	[FLEX] Line=12, token=SPECIAL, value="("
 	[FLEX] Line=12, token=INTEGER, value="6"
 	[FLEX] Line=12, token=OPERATOR, value="!="
@@ -69,35 +58,27 @@ Warning: Double < detected at Line=5
 	[FLEX] Line=12, token=SPECIAL, value=")"
 Warning: No ( detected at Line=12
 	[FLEX] Line=12, token=SPECIAL, value="{"
+	[FLEX] Line=13, token=IDENTIFIER, value="printf"
+	[FLEX] Line=14, token=SPECIAL, value="}"
+[BISON] Line=14, expression="Δήλωση if"
 
-	[FLEX] Line=13, token=IDENTIFIER, value="printf"
-
-	[FLEX] Line=14, token=SPECIAL, value="}"
-
-[BISON] Line=14, expression="Δήλωση if"
-
-
-	[FLEX] Line=16, token=KEYWORD, value="while"
+	[FLEX] Line=16, token=KEYWORD, value="while"
 	[FLEX] Line=16, token=IDENTIFIER, value="p"
 	[FLEX] Line=16, token=OPERATOR, value="<"
 	[FLEX] Line=16, token=INTEGER, value="10"
 	[FLEX] Line=16, token=SPECIAL, value=")"
 Warning: No ( detected at Line=16
 	[FLEX] Line=16, token=SPECIAL, value="{"
-
-	[FLEX] Line=17, token=IDENTIFIER, value="a"
+	[FLEX] Line=17, token=IDENTIFIER, value="a"
 	[FLEX] Line=17, token=OPERATOR, value="="
 	[FLEX] Line=17, token=IDENTIFIER, value="a"
 	[FLEX] Line=17, token=OPERATOR, value="-"
 	[FLEX] Line=17, token=INTEGER, value="1"
 	[FLEX] Line=17, token=DELIMITER, value=";"
+	[FLEX] Line=18, token=SPECIAL, value="}"
+[BISON] Line=18, expression="Δήλωση while"
 
-	[FLEX] Line=18, token=SPECIAL, value="}"
-
-[BISON] Line=18, expression="Δήλωση while"
-
-
-	[FLEX] Line=20, token=SPECIAL, value="["
+	[FLEX] Line=20, token=SPECIAL, value="["
 	[FLEX] Line=20, token=INTEGER, value="3"
 	[FLEX] Line=20, token=SPECIAL, value=","
 	[FLEX] Line=20, token=INTEGER, value="4"
@@ -115,8 +96,7 @@ Token error at Line=20
 	[FLEX] Line=20, token=SPECIAL, value=","
 	[FLEX] Line=20, token=INTEGER, value="6"
 	[FLEX] Line=20, token=SPECIAL, value="]"
-
-Warning: Invalid character in array merge detected at Line=21
+Warning: Invalid character in array merge detected at Line=21
 [BISON] Line=20, expression="Συνένωση πινάκων"
 
 	[FLEX] Line=21, token=SPECIAL, value="["
@@ -137,8 +117,7 @@ Token error at Line=21
 	[FLEX] Line=21, token=SPECIAL, value=","
 	[FLEX] Line=21, token=INTEGER, value="1"
 	[FLEX] Line=21, token=SPECIAL, value="]"
-
-Warning: Invalid character in array merge detected at Line=22
+Warning: Invalid character in array merge detected at Line=22
 [BISON] Line=21, expression="Συνένωση πινάκων"
 
 

@@ -2403,7 +2403,6 @@ int main(int argc, char **argv)
 
         if (errflag == 0 && parse == 0) 
                 fprintf(yyout, "BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με επιτυχία\n");
-
         else
                 fprintf(yyout, "BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία\n");
         
