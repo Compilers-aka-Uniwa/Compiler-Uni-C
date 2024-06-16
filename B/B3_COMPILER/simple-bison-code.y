@@ -117,10 +117,15 @@ decl_var:
 
 type: 
         SINT             { $$ = strdup(yytext); }
+        | SINT SINT      {par_warnings; $$ = strdup(yytext); fprintf(yyout, "Warning: Double int detected at Line=%d\n", line); }
         | SFLOAT         { $$ = strdup(yytext); }
+        | SFLOAT SFLOAT  {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double float detected at Line=%d\n", line); }
         | SDOUBLE        { $$ = strdup(yytext); }
+        | SDOUBLE SDOUBLE {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double double detected at Line=%d\n", line); }
         | SSHORT         { $$ = strdup(yytext); }
+        | SSHORT SSHORT  {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double short detected at Line=%d\n", line); }
         | SLONG          { $$ = strdup(yytext); }
+        | SLONG SLONG    {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double long detected at Line=%d\n", line); }
         ;
 
 var:

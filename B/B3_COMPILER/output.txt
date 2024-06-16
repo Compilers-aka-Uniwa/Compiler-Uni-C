@@ -80,8 +80,8 @@ Warning: No ( detected at Line=16
 
 	[FLEX] Line=20, token=KEYWORD, value="func"
 	[FLEX] Line=20, token=KEYWORD, value="int"
-Warning: Return type unnecessary at Line=20
 	[FLEX] Line=20, token=IDENTIFIER, value="main"
+Warning: Return type unnecessary at Line=20
 	[FLEX] Line=20, token=SPECIAL, value="("
 	[FLEX] Line=20, token=KEYWORD, value="int"
 	[FLEX] Line=20, token=IDENTIFIER, value="parA"
@@ -151,15 +151,55 @@ Token error at Line=26
 Warning: ++ operation in array merge detected at Line=28
 [BISON] Line=27, expression="Συνένωση πινάκων"
 
+	[FLEX] Line=29, token=KEYWORD, value="int"
+	[FLEX] Line=29, token=KEYWORD, value="int"
+Warning: Double int detected at Line=29
+	[FLEX] Line=29, token=IDENTIFIER, value="x"
+	[FLEX] Line=29, token=DELIMITER, value=";"
+[BISON] Line=29, expression="Δήλωση μεταβλητής"
+
+	[FLEX] Line=30, token=KEYWORD, value="float"
+	[FLEX] Line=30, token=KEYWORD, value="float"
+Warning: Double float detected at Line=30
+	[FLEX] Line=30, token=IDENTIFIER, value="y"
+	[FLEX] Line=30, token=DELIMITER, value=";"
+[BISON] Line=30, expression="Δήλωση μεταβλητής"
+
+	[FLEX] Line=31, token=KEYWORD, value="int"
+	[FLEX] Line=31, token=KEYWORD, value="float"
+syntax error at Line=31
+
+	[FLEX] Line=31, token=IDENTIFIER, value="l"
+	[FLEX] Line=31, token=DELIMITER, value=";"
+	[FLEX] Line=32, token=KEYWORD, value="long"
+	[FLEX] Line=32, token=KEYWORD, value="double"
+syntax error at Line=32
+
+	[FLEX] Line=32, token=IDENTIFIER, value="y"
+	[FLEX] Line=32, token=DELIMITER, value=";"
+	[FLEX] Line=33, token=KEYWORD, value="double"
+	[FLEX] Line=33, token=KEYWORD, value="double"
+Warning: Double double detected at Line=33
+	[FLEX] Line=33, token=IDENTIFIER, value="far"
+	[FLEX] Line=33, token=DELIMITER, value=";"
+[BISON] Line=33, expression="Δήλωση μεταβλητής"
+
+	[FLEX] Line=34, token=KEYWORD, value="short"
+	[FLEX] Line=34, token=KEYWORD, value="short"
+Warning: Double short detected at Line=34
+	[FLEX] Line=34, token=IDENTIFIER, value="imp"
+	[FLEX] Line=34, token=DELIMITER, value=";"
+[BISON] Line=34, expression="Δήλωση μεταβλητής"
+
 
 
 		ΣΤΑΤΙΣΤΙΚΑ ΣΥΝΤΑΚΤΙΚΗΣ ΑΝΑΛΥΣΗΣ
 
-BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με επιτυχία
-		(με 8 warnings)
+BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία
+		(με 11 warnings)
 
-		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 18
-		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 14
+		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 36
+		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 18
 		ΛΑΘΟΣ ΛΕΞΕΙΣ: 2
-		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 0
+		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 2
 

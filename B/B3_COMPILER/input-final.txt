@@ -28,3 +28,7 @@ func int main(int parA, int parB)
 
 int int x;
 float float y;
+int float l;
+long double y;
+double double far;
+short short imp;
