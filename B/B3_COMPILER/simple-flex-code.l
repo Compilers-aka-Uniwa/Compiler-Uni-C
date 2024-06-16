@@ -119,7 +119,7 @@ TOKEN_ERROR      [^ \t\r\n;]
 
 void yyerror(const char *msg)
 {
-   fprintf(yyout, "%s at Line=%d\n\n", msg, line-1);
+   fprintf(yyout, "%s at Line=%d\n\n", msg, line);
    return;
 }
 

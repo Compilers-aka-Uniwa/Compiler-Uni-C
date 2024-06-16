@@ -17,18 +17,4 @@ while p < 10){
     a = a - 1;
 }
 
-if ((i > 5){
-
-}
-
-for (i = 0; i < 10; i-+)
-{
-    i = i + 1;
-}
-
-[1,2,3] + $ [3,6,9]
-
-func int main(int parA, float parB)
-{
-    
-}
+[1,2,8] + $ [7,9,1]

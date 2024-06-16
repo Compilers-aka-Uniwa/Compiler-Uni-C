@@ -30,7 +30,7 @@
 	[FLEX] Line=6, token=INTEGER, value="5"
 	[FLEX] Line=6, token=INTEGER, value="3"
 	[FLEX] Line=6, token=OPERATOR, value="+"
-syntax error at Line=6
+syntax error at Line=7
 
 	[FLEX] Line=7, token=INTEGER, value="5"
 	[FLEX] Line=7, token=OPERATOR, value="%"
@@ -56,7 +56,7 @@
 	[FLEX] Line=12, token=INTEGER, value="8"
 	[FLEX] Line=12, token=SPECIAL, value=")"
 	[FLEX] Line=12, token=SPECIAL, value=")"
-Warning: No ( detected at Line=11
+Warning: No ( detected at Line=12
 	[FLEX] Line=12, token=SPECIAL, value="{"
 	[FLEX] Line=13, token=IDENTIFIER, value="printf"
 	[FLEX] Line=14, token=SPECIAL, value="}"
@@ -67,7 +67,7 @@ Warning: No ( detected at Line=11
 	[FLEX] Line=16, token=OPERATOR, value="<"
 	[FLEX] Line=16, token=INTEGER, value="10"
 	[FLEX] Line=16, token=SPECIAL, value=")"
-Warning: No ( detected at Line=15
+Warning: No ( detected at Line=16
 	[FLEX] Line=16, token=SPECIAL, value="{"
 	[FLEX] Line=17, token=IDENTIFIER, value="a"
 	[FLEX] Line=17, token=OPERATOR, value="="
@@ -78,81 +78,28 @@ Warning: No ( detected at Line=15
 	[FLEX] Line=18, token=SPECIAL, value="}"
 [BISON] Line=18, expression="Δήλωση while"
 
-	[FLEX] Line=20, token=KEYWORD, value="if"
-	[FLEX] Line=20, token=SPECIAL, value="("
-	[FLEX] Line=20, token=SPECIAL, value="("
-	[FLEX] Line=20, token=IDENTIFIER, value="i"
-	[FLEX] Line=20, token=OPERATOR, value=">"
-	[FLEX] Line=20, token=INTEGER, value="5"
-	[FLEX] Line=20, token=SPECIAL, value=")"
-	[FLEX] Line=20, token=SPECIAL, value="{"
-Warning: No ) detected at Line=19
-	[FLEX] Line=22, token=SPECIAL, value="}"
-[BISON] Line=22, expression="Δήλωση if"
-
-	[FLEX] Line=24, token=KEYWORD, value="for"
-	[FLEX] Line=24, token=SPECIAL, value="("
-	[FLEX] Line=24, token=IDENTIFIER, value="i"
-	[FLEX] Line=24, token=OPERATOR, value="="
-	[FLEX] Line=24, token=INTEGER, value="0"
-	[FLEX] Line=24, token=DELIMITER, value=";"
-	[FLEX] Line=24, token=IDENTIFIER, value="i"
-	[FLEX] Line=24, token=OPERATOR, value="<"
-	[FLEX] Line=24, token=INTEGER, value="10"
-	[FLEX] Line=24, token=DELIMITER, value=";"
-	[FLEX] Line=24, token=IDENTIFIER, value="i"
-	[FLEX] Line=24, token=OPERATOR, value="-"
-syntax error at Line=23
-
-	[FLEX] Line=24, token=OPERATOR, value="+"
-	[FLEX] Line=24, token=SPECIAL, value=")"
-	[FLEX] Line=25, token=SPECIAL, value="{"
-	[FLEX] Line=26, token=IDENTIFIER, value="i"
-	[FLEX] Line=26, token=OPERATOR, value="="
-	[FLEX] Line=26, token=IDENTIFIER, value="i"
-	[FLEX] Line=26, token=OPERATOR, value="+"
-	[FLEX] Line=26, token=INTEGER, value="1"
-	[FLEX] Line=26, token=DELIMITER, value=";"
-	[FLEX] Line=27, token=SPECIAL, value="}"
-[BISON] Line=27, expression="Σύνθετες δηλώσεις"
-
-	[FLEX] Line=29, token=SPECIAL, value="["
-	[FLEX] Line=29, token=INTEGER, value="1"
-	[FLEX] Line=29, token=SPECIAL, value=","
-	[FLEX] Line=29, token=INTEGER, value="2"
-	[FLEX] Line=29, token=SPECIAL, value=","
-	[FLEX] Line=29, token=INTEGER, value="3"
-	[FLEX] Line=29, token=SPECIAL, value="]"
-	[FLEX] Line=29, token=OPERATOR, value="+"
-Token error at Line=28
+	[FLEX] Line=20, token=SPECIAL, value="["
+	[FLEX] Line=20, token=INTEGER, value="1"
+	[FLEX] Line=20, token=SPECIAL, value=","
+	[FLEX] Line=20, token=INTEGER, value="2"
+	[FLEX] Line=20, token=SPECIAL, value=","
+	[FLEX] Line=20, token=INTEGER, value="8"
+	[FLEX] Line=20, token=SPECIAL, value="]"
+	[FLEX] Line=20, token=OPERATOR, value="+"
+Token error at Line=20
 
 	2 character(s) ignored so far
-syntax error at Line=29
-
-	[FLEX] Line=31, token=KEYWORD, value="func"
-	[FLEX] Line=31, token=KEYWORD, value="int"
-Warning: Return type unnecessary at Line=31
-	[FLEX] Line=31, token=IDENTIFIER, value="main"
-	[FLEX] Line=31, token=SPECIAL, value="("
-	[FLEX] Line=31, token=KEYWORD, value="int"
-	[FLEX] Line=31, token=IDENTIFIER, value="parA"
-	[FLEX] Line=31, token=SPECIAL, value=","
-	[FLEX] Line=31, token=KEYWORD, value="float"
-	[FLEX] Line=31, token=IDENTIFIER, value="parB"
-	[FLEX] Line=31, token=SPECIAL, value=")"
-	[FLEX] Line=32, token=SPECIAL, value="{"
-	[FLEX] Line=34, token=SPECIAL, value="}"
-[BISON] Line=34, expression="Δήλωση συναρτήσεων χρήστη"
+syntax error at Line=21
 
 
 
 		ΣΤΑΤΙΣΤΙΚΑ ΣΥΝΤΑΚΤΙΚΗΣ ΑΝΑΛΥΣΗΣ
 
 BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με αποτυχία
-		(με 6 warnings)
+		(με 4 warnings)
 
-		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 26
-		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 12
+		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 11
+		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 9
 		ΛΑΘΟΣ ΛΕΞΕΙΣ: 2
-		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 3
+		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 2
 
