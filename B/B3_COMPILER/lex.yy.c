@@ -1225,7 +1225,7 @@ case YY_STATE_EOF(error):
 case 63:
 YY_RULE_SETUP
 #line 113 "simple-flex-code.l"
-{ lex_warnings++; yyerror("Token eror"); BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+{ lex_warnings++; yyerror("Token error"); BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
 	YY_BREAK
 case 64:
 YY_RULE_SETUP

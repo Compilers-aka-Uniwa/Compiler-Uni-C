@@ -86,7 +86,7 @@
 %left "++" "--"
 
 
-%type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement  for_statement
+%type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement for_statement
 
 /* BUG DECLARATION*/
 %token TOKEN_ERROR 
@@ -119,7 +119,7 @@ type:
         | SFLOAT         { $$ = strdup(yytext); }
         | SDOUBLE        { $$ = strdup(yytext); }
         | SSHORT         { $$ = strdup(yytext); }
-        | SLONG          { $$ = strdup(yytext); }  
+        | SLONG          { $$ = strdup(yytext); }
         ;
 
 var:
@@ -291,6 +291,8 @@ cmp_expr:
 /* [2.6.4] Συνένωση Πινάκων */
 merge_arr:
         arr_elements "+" arr_elements { $$ = strdup(yytext); }
+        |arr_elements TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line-1);}
+        |arr_elements "+" TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line-1);}
         ;
         
 /* ============== [2.7] Σύνθετες δηλώσεις ============== */
