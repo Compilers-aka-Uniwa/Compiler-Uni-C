@@ -259,6 +259,11 @@ oper_eq:
         | var "-=" number         { $$ = strdup(yytext); }
         | var "*=" number         { $$ = strdup(yytext); }
         | var "/=" number         { $$ = strdup(yytext); }
+        // Error: Ανύπαρκτοι τελεστές 
+        | var "+-"         { fatal_errors++; $$ = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
+        | var "-+"         { fatal_errors++; $$ = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
+        | "+-" var         { fatal_errors++; $$ = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
+        | "-+" var         { fatal_errors++; $$ = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
         ;
 
 val: 
@@ -283,7 +288,7 @@ cmp_expr:
         | cmp_expr "||" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "&&" cmp_expr  { $$ = strdup(yytext); }
         | "!" cmp_expr            { $$ = strdup(yytext); }
-        /* [1] Warning: Έλεγχος για διπλά σύμβολα σύγκρισης */
+        /* Warning: Έλεγχος για διπλά σύμβολα σύγκρισης */
         | cmp_expr ">" ">" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double > detected at Line=%d\n", line-1); } 
         | cmp_expr "<" "<" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double < detected at Line=%d\n", line-1); }
         ;
@@ -322,6 +327,11 @@ if_statement:
 condition:
         cmp_expr            { $$ = strdup(yytext); }
         | "(" condition ")" { $$ = strdup(yytext); }
+        //Warning : Έλεγχος για διπλά σύμβολα παρένθεση ή παράλλειψη τους
+        | "((" condition ")"    { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double ( detected at Line=%d\n", line-1); }
+        | "(" condition "))"    { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double ) detected at Line=%d\n", line-1); }
+        | condition ")"           { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ( detected at Line=%d\n", line-1);}
+        | "(" condition            { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ) detected at Line=%d\n", line-1);}
         ;
 
 block_statement:
