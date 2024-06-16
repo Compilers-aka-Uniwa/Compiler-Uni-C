@@ -2132,25 +2132,25 @@ yyreduce:
 
   case 120: /* condition: "((" condition ")"  */
 #line 331 "simple-bison-code.y"
-                                { par_warnings++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Warning: Double ( detected at Line=%d\n", line-1); }
+                                { par_warnings++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Warning: Double ( detected at Line=%d\n", line); }
 #line 2137 "simple-bison-code.tab.c"
     break;
 
   case 121: /* condition: "(" condition "))"  */
 #line 332 "simple-bison-code.y"
-                                { par_warnings++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Warning: Double ) detected at Line=%d\n", line-1); }
+                                { par_warnings++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Warning: Double ) detected at Line=%d\n", line); }
 #line 2143 "simple-bison-code.tab.c"
     break;
 
   case 122: /* condition: condition ")"  */
 #line 333 "simple-bison-code.y"
-                                  { par_warnings++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Warning: No ( detected at Line=%d\n", line-1);}
+                                  { par_warnings++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Warning: No ( detected at Line=%d\n", line);}
 #line 2149 "simple-bison-code.tab.c"
     break;
 
   case 123: /* condition: "(" condition  */
 #line 334 "simple-bison-code.y"
-                                   { par_warnings++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Warning: No ) detected at Line=%d\n", line-1);}
+                                   { par_warnings++; (yyval.sval) = strdup(yytext); fprintf(yyout, "Warning: No ) detected at Line=%d\n", line);}
 #line 2155 "simple-bison-code.tab.c"
     break;
 

@@ -56,7 +56,7 @@
 	[FLEX] Line=12, token=INTEGER, value="8"
 	[FLEX] Line=12, token=SPECIAL, value=")"
 	[FLEX] Line=12, token=SPECIAL, value=")"
-Warning: No ( detected at Line=11
+Warning: No ( detected at Line=12
 	[FLEX] Line=12, token=SPECIAL, value="{"
 	[FLEX] Line=13, token=IDENTIFIER, value="printf"
 	[FLEX] Line=14, token=SPECIAL, value="}"
@@ -67,7 +67,7 @@ Warning: No ( detected at Line=11
 	[FLEX] Line=16, token=OPERATOR, value="<"
 	[FLEX] Line=16, token=INTEGER, value="10"
 	[FLEX] Line=16, token=SPECIAL, value=")"
-Warning: No ( detected at Line=15
+Warning: No ( detected at Line=16
 	[FLEX] Line=16, token=SPECIAL, value="{"
 	[FLEX] Line=17, token=IDENTIFIER, value="a"
 	[FLEX] Line=17, token=OPERATOR, value="="
@@ -86,7 +86,7 @@ Warning: No ( detected at Line=15
 	[FLEX] Line=20, token=INTEGER, value="5"
 	[FLEX] Line=20, token=SPECIAL, value=")"
 	[FLEX] Line=20, token=SPECIAL, value="{"
-Warning: No ) detected at Line=19
+Warning: No ) detected at Line=20
 	[FLEX] Line=22, token=SPECIAL, value="}"
 [BISON] Line=22, expression="Δήλωση if"
 
@@ -114,7 +114,7 @@ syntax error at Line=23
 	[FLEX] Line=26, token=INTEGER, value="1"
 	[FLEX] Line=26, token=DELIMITER, value=";"
 	[FLEX] Line=27, token=SPECIAL, value="}"
-[BISON] Line=27, expression="Σύνθετες δηλώσεις"
+syntax error at Line=26
 
 
 
@@ -124,7 +124,7 @@ BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με α
 		(με 5 warnings)
 
 		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 19
-		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 11
+		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 10
 		ΛΑΘΟΣ ΛΕΞΕΙΣ: 0
 		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 2
 
