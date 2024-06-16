@@ -259,11 +259,6 @@ oper_eq:
         | var "-=" number         { $$ = strdup(yytext); }
         | var "*=" number         { $$ = strdup(yytext); }
         | var "/=" number         { $$ = strdup(yytext); }
-        // Error: Ανύπαρκτοι τελεστές 
-        | var "+-"         { fatal_errors++; $$ = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
-        | var "-+"         { fatal_errors++; $$ = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
-        | "+-" var         { fatal_errors++; $$ = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
-        | "-+" var         { fatal_errors++; $$ = strdup(yytext); fprintf(yyout, "Error: Invalid operator detected at Line=%d\n", line-1); }
         ;
 
 val: 
@@ -330,8 +325,8 @@ condition:
         //Warning : Έλεγχος για διπλά σύμβολα παρένθεση ή παράλλειψη τους
         | "((" condition ")"    { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double ( detected at Line=%d\n", line-1); }
         | "(" condition "))"    { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double ) detected at Line=%d\n", line-1); }
-        | condition ")"           { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ( detected at Line=%d\n", line-1);}
-        | "(" condition            { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ) detected at Line=%d\n", line-1);}
+        | condition ")"         { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ( detected at Line=%d\n", line-1);}
+        | "(" condition         { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ) detected at Line=%d\n", line-1);}
         ;
 
 block_statement:
