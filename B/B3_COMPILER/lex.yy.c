@@ -1191,12 +1191,12 @@ YY_RULE_SETUP
 case 58:
 YY_RULE_SETUP
 #line 105 "simple-flex-code.l"
-{ yylval.ival = atoi(yytext); prn("INTEGER"); return INTEGER; } 
+{ prn("INTEGER"); return INTEGER; } 
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
 #line 106 "simple-flex-code.l"
-{ yylval.fval = atof(yytext); prn("FLOAT"); return FLOAT; }
+{ prn("FLOAT"); return FLOAT; }
 	YY_BREAK
 case 60:
 /* rule 60 can match eol */
@@ -1223,12 +1223,12 @@ case YY_STATE_EOF(error):
 case 63:
 YY_RULE_SETUP
 #line 113 "simple-flex-code.l"
-{ lex_warnings++; yyerror("Token error"); BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+{ lex_warnings++; yyerror("Token error"); BEGIN(error); return TOKEN_ERROR; } 
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
 #line 114 "simple-flex-code.l"
-{ BEGIN(0); fprintf(yyout, "\t%d character(s) ignored so far\n", lex_warnings); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+{ BEGIN(0); fprintf(yyout, "\t%d character(s) ignored so far\n", lex_warnings); } 
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
@@ -2252,9 +2252,12 @@ void yyfree (void * ptr )
 #line 118 "simple-flex-code.l"
 
 
+/* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
+   από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
+   συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
 void yyerror(const char *msg)
 {
-   fprintf(yyout, "%s at Line=%d\n\n", msg, line);
+   fprintf(yyout, "!! %s !! -> at Line=%d\n", msg, line);
    return;
 }
 

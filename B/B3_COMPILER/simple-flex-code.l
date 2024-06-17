@@ -102,24 +102,27 @@ TOKEN_ERROR      [^ \t\r\n;]
 {DELIMITER}     { prn("DELIMITER"); return DELIMITER; }
 {IDENTIFIER}    { correct_words++; prn("IDENTIFIER"); return IDENTIFIER; }
 {STRING}        { correct_words++; prn("STRING"); return STRING; } 
-{INTEGER}       { yylval.ival = atoi(yytext); prn("INTEGER"); return INTEGER; } 
-{FLOAT}         { yylval.fval = atof(yytext); prn("FLOAT"); return FLOAT; }
+{INTEGER}       { prn("INTEGER"); return INTEGER; } 
+{FLOAT}         { prn("FLOAT"); return FLOAT; }
 {COMMENT}       { ECHO; }
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
 
 
-{TOKEN_ERROR}           { lex_warnings++; yyerror("Token error"); BEGIN(error); return TOKEN_ERROR; } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-<error>{WHITESPACE}+    { BEGIN(0); fprintf(yyout, "\t%d character(s) ignored so far\n", lex_warnings); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+{TOKEN_ERROR}           { lex_warnings++; yyerror("Token error"); BEGIN(error); return TOKEN_ERROR; } 
+<error>{WHITESPACE}+    { BEGIN(0); fprintf(yyout, "\t%d character(s) ignored so far\n", lex_warnings); } 
 <error>.                { lex_warnings++; }
 <error>\n               { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warnings); return NEWLINE;}
 
 %%
 
+/* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
+   από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
+   συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
 void yyerror(const char *msg)
 {
-   fprintf(yyout, "%s at Line=%d\n\n", msg, line);
+   fprintf(yyout, "!! %s !! -> at Line=%d\n", msg, line);
    return;
 }
 

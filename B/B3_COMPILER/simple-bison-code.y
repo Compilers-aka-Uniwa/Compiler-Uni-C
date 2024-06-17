@@ -5,6 +5,7 @@
         #include <stdio.h>
         #include <string.h>
 	#include <stdlib.h>
+        #define YYSTYPE char*
         #define YYDEBUG 1
 
 	int line = 1;
@@ -27,18 +28,11 @@
         extern FILE *yyout;
 %}
 
-%union {
-    int ival;
-    float fval;
-    char *sval;
-}
-
-
 /* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
-%token <sval> IDENTIFIER STRING 
-%token <ival> INTEGER 
-%token <fval> FLOAT 
-%token <sval> SBREAK SDO SIF SSIZEOF SCASE SDOUBLE SINT SSTRUCT SFUNC SELSE SLONG SSWITCH SCONST SFLOAT SRETURN SVOID SCONTINUE SFOR SSHORT SWHILE 
+%token  IDENTIFIER STRING 
+%token  INTEGER 
+%token  FLOAT 
+%token  SBREAK SDO SIF SSIZEOF SCASE SDOUBLE SINT SSTRUCT SFUNC SELSE SLONG SSWITCH SCONST SFLOAT SRETURN SVOID SCONTINUE SFOR SSHORT SWHILE 
 %token PLUS "+"
 %token MULEQ "*="
 %token PMINEQ "--"
@@ -85,10 +79,6 @@
 %right "&" "!" 
 %left "++" "--"
 
-
-%type <sval> program oper_eq number block_statement decl_statements decl_var type var pos_elem arr_elements integ fl str build_func func scan_params len_params cmp_params print_params decl_func name_func params type_params  arithm_expr sign assign val cmp_expr merge_arr decl_statement if_statement condition while_statement for_statement
-
-/* BUG DECLARATION*/
 %token TOKEN_ERROR 
 
 /* Έναρξη προγραμμάτος*/
@@ -101,14 +91,12 @@
    αγκύλια. Η αναμενόμενη σύνταξη είναι:
 				όνομα : κανόνας { κώδικας C } */
 program:
-        program decl_statements NEWLINE         { correct_exprs++; if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
-        | program error NEWLINE                 { fatal_errors++; errflag = 1; yyerrok; }
+        program decl_statements NEWLINE                   { correct_exprs++; if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
+        | program error NEWLINE                           { fatal_errors++; errflag = 1; yyerrok; }
         | program merge_arr TOKEN_ERROR merge_arr NEWLINE { yyerrok; } 
-        |                                       { }                       
+        |                                                 { }                       
         ;
        
-
-/* ============== [2.1] Δομή Πηγαίου Κώδικα ============== */
 
 /* ============== [2.2] Δηλώσεις Μεταβλητών ============== */
 decl_var:
@@ -116,16 +104,18 @@ decl_var:
         ;
 
 type: 
-        SINT             { $$ = strdup(yytext); }
-        | SINT SINT      {par_warnings; $$ = strdup(yytext); fprintf(yyout, "Warning: Double int detected at Line=%d\n", line); }
-        | SFLOAT         { $$ = strdup(yytext); }
-        | SFLOAT SFLOAT  {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double float detected at Line=%d\n", line); }
-        | SDOUBLE        { $$ = strdup(yytext); }
-        | SDOUBLE SDOUBLE {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double double detected at Line=%d\n", line); }
-        | SSHORT         { $$ = strdup(yytext); }
-        | SSHORT SSHORT  {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double short detected at Line=%d\n", line); }
-        | SLONG          { $$ = strdup(yytext); }
-        | SLONG SLONG    {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double long detected at Line=%d\n", line); }
+        SINT              { $$ = strdup(yytext); }
+        | SFLOAT          { $$ = strdup(yytext); }
+        | SDOUBLE         { $$ = strdup(yytext); }
+        | SSHORT          { $$ = strdup(yytext); }
+        | SLONG           { $$ = strdup(yytext); }
+        /* ## Warning ## -> Έξτρα keyword στην δήλωση μεταβλητών */
+        | SFLOAT SFLOAT   { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Double float detected at Line=%d\n", line); }
+        | SDOUBLE SDOUBLE { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Double double detected at Line=%d\n", line); }
+        | SINT SINT       { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Double int detected at Line=%d\n", line); }
+        | SLONG SLONG     { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Double long detected at Line=%d\n", line); }
+        | SSHORT SSHORT   { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Double short detected at Line=%d\n", line); }
+        /* ################################################## */
         ;
 
 var:
@@ -135,16 +125,17 @@ var:
 
 /* ============== [2.3] Πίνακες ============== */
 pos_elem:
-        IDENTIFIER "[" INTEGER "]"{ $$ = strdup(yytext); }
+        IDENTIFIER "[" INTEGER "]"      { $$ = strdup(yytext); }
         | IDENTIFIER "[" IDENTIFIER "]" { $$ = strdup(yytext); }
         ;
 
 
 arr_elements:
-        "[" "]"                         { $$ = strdup(yytext); }
-        | "[" integ "]"                 { $$ = strdup(yytext); }
-        | "[" fl "]"                    { $$ = strdup(yytext); }
-        | "[" str "]"                   { $$ = strdup(yytext); }       
+        "[" "]"           { $$ = strdup(yytext); }
+        | "[" integ "]"   { $$ = strdup(yytext); }
+        | "[" fl "]"      { $$ = strdup(yytext); }
+        | "[" str "]"     { $$ = strdup(yytext); }    
+        | "[" var "]"     { $$ = strdup(yytext); }
         ;
 
 integ:
@@ -208,7 +199,9 @@ decl_func:
 
 name_func: 
         SFUNC                                   { $$ = strdup(yytext); }
-        | SFUNC type                            { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Return type unnecessary at Line=%d\n", line);}
+        /* ## Warning ## -> Τύπος επιστροφής στις συναρτήσεις */
+        | SFUNC type                            { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Return type unnecessary at Line=%d\n", line); }
+        /* ################################################## */
         | name_func IDENTIFIER params NEWLINE   { $$ = strdup(yytext); }
         ;
 
@@ -227,13 +220,13 @@ type_params:
 sign:
         INTEGER         { $$ = strdup(yytext); }
         | FLOAT         { $$ = strdup(yytext); }
+        | IDENTIFIER    { $$ = strdup(yytext); }
         | "+" sign      { $$ = strdup(yytext); }
         | "-" sign      { $$ = strdup(yytext); }
         ;
 
 arithm_expr:
         sign                            { $$ = strdup(yytext); }
-        | IDENTIFIER                    { $$ = strdup(yytext); }
         | arithm_expr "+" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "-" arithm_expr   { $$ = strdup(yytext); }
         | arithm_expr "*" arithm_expr   { $$ = strdup(yytext); }
@@ -262,11 +255,16 @@ oper_eq:
         | var "--"                { $$ = strdup(yytext); }
         | "++" var                { $$ = strdup(yytext); }
         | "--" var                { $$ = strdup(yytext); }
-        | var "+=" number         { $$ = strdup(yytext); }
-        | var "-=" number         { $$ = strdup(yytext); }
-        | var "*=" number         { $$ = strdup(yytext); }
-        | var "/=" number         { $$ = strdup(yytext); }
+        | var "+=" val            { $$ = strdup(yytext); }
+        | var "-=" val2           { $$ = strdup(yytext); }
+        | var "*=" val2           { $$ = strdup(yytext); }
+        | var "/=" val2           { $$ = strdup(yytext); }
         ;
+
+val2:
+    number              { $$ = strdup(yytext); }
+    | IDENTIFIER        { $$ = strdup(yytext); }
+    ;
 
 val: 
     number              { $$ = strdup(yytext); }
@@ -290,22 +288,20 @@ cmp_expr:
         | cmp_expr "||" cmp_expr  { $$ = strdup(yytext); }
         | cmp_expr "&&" cmp_expr  { $$ = strdup(yytext); }
         | "!" cmp_expr            { $$ = strdup(yytext); }
-        /* Warning: Έλεγχος για διπλά σύμβολα σύγκρισης */
-        | cmp_expr ">" ">" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double > detected at Line=%d\n", line-1); } 
-        | cmp_expr "<" "<" arithm_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double < detected at Line=%d\n", line-1); }
+        /* ## Warning ## -> Διπλό σύμβολο σύγκρισης */
+        | cmp_expr ">" ">" cmp_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Double > detected at Line=%d\n", line-1); } 
+        | cmp_expr "<" "<" cmp_expr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Double < detected at Line=%d\n", line-1); }
+        /* ################################################## */
         ;
 
 /* [2.6.4] Συνένωση Πινάκων */
 merge_arr:
-        arr_elements { $$ = strdup(yytext); }
-        | merge_arr "+" merge_arr { $$ = strdup(yytext); }
-        | merge_arr TOKEN_ERROR "+" merge_arr {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
-        | merge_arr "+" TOKEN_ERROR merge_arr {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
-        | merge_arr "++" merge_arr {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: ++ operation in array merge detected at Line=%d\n", line);} 
-        /*arr_elements "+" arr_elements { $$ = strdup(yytext); }
-        | arr_elements "+" TOKEN_ERROR arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
-        | arr_elements TOKEN_ERROR "+" arr_elements {par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Invalid character in array merge detected at Line=%d\n", line);}
-        */
+        arr_elements                          { $$ = strdup(yytext); }
+        | merge_arr "+" merge_arr             { $$ = strdup(yytext); }
+        /* ## Warning ## -> Άκυροι χαρακτήρες στη συνένωση πινάκων */ 
+        | merge_arr TOKEN_ERROR "+" merge_arr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Invalid character in array merge detected at Line=%d\n", line); }
+        | merge_arr "+" TOKEN_ERROR merge_arr { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Invalid character in array merge detected at Line=%d\n", line); }
+        /* ################################################## */
         ;
 
         
@@ -336,17 +332,15 @@ if_statement:
         ;
 
 condition:
-        cmp_expr            { $$ = strdup(yytext); }
-        | "(" condition ")" { $$ = strdup(yytext); }
-        //Warning : Έλεγχος για διπλά σύμβολα παρένθεση ή παράλλειψη τους
-        | "((" condition ")"    { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double ( detected at Line=%d\n", line); }
-        | "(" condition "))"    { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: Double ) detected at Line=%d\n", line); }
-        | condition ")"           { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ( detected at Line=%d\n", line);}
-        | "(" condition            { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "Warning: No ) detected at Line=%d\n", line);}
+        cmp_expr               { $$ = strdup(yytext); }
+        | "(" condition ")"    { $$ = strdup(yytext); }
+        /* ## Warning ## -> Έξτρα παρενθέσεις στις if, while δηλώσεις */
+        | "(" "(" condition ")" ")"   { par_warnings++; $$ = strdup(yytext); fprintf(yyout, "## Warning ## -> Double parethensis detected at Line=%d\n", line); }
+        /* ################################################## */
         ;
 
 block_statement:
-        "{" decl_statements "}" {  $$ = strdup(yytext); }
+        "{" decl_statements "}" { $$ = strdup(yytext); }
         ;
 
 /* [2.7.2] Η δήλωση while */
@@ -361,15 +355,6 @@ for_statement:
 
 %%
 
-
-
-
-/* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
-   από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
-   συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
-/*void yyerror(const char *msg) {
-        fprintf(stderr, "Error: %s\n", msg);
-}*/
 
 /* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
    Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison

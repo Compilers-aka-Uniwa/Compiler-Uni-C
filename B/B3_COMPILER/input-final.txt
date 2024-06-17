@@ -13,8 +13,13 @@ if (6 != 8)){
     printf
 }
 
-while p < 10){
+while ((p < 10){
     a = a - 1;
+}
+
+if ((x > 0 ))
+{
+    
 }
 
 func int main(int parA, int parB) 
