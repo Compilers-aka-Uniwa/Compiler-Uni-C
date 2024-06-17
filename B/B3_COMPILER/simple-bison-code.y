@@ -307,8 +307,8 @@ merge_arr:
         
 /* ============== [2.7] Σύνθετες δηλώσεις ============== */
 decl_statements:
-        decl_statement                   { $$ = $1; }
-        | decl_statements decl_statement { $$ = $2; }
+        decl_statement                   { $$ = $1;  }
+        | decl_statements decl_statement { $$ = $2;  if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); }
         ;
 
 decl_statement:

@@ -2068,13 +2068,13 @@ yyreduce:
 
   case 112: /* decl_statements: decl_statement  */
 #line 310 "simple-bison-code.y"
-                                         { yyval = yyvsp[0]; }
+                                         { yyval = yyvsp[0];  }
 #line 2073 "simple-bison-code.tab.c"
     break;
 
   case 113: /* decl_statements: decl_statements decl_statement  */
 #line 311 "simple-bison-code.y"
-                                         { yyval = yyvsp[0]; }
+                                         { yyval = yyvsp[0];  if (yyvsp[0] != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, yyvsp[0]); }
 #line 2079 "simple-bison-code.tab.c"
     break;
 

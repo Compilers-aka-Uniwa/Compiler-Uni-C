@@ -1239,7 +1239,7 @@ case 66:
 /* rule 66 can match eol */
 YY_RULE_SETUP
 #line 116 "simple-flex-code.l"
-{ BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warnings); return NEWLINE;}
+{ line++; BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warnings); return NEWLINE;}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP

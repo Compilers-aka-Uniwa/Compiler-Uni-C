@@ -113,7 +113,7 @@ TOKEN_ERROR      [^ \t\r\n;]
 {TOKEN_ERROR}           { lex_warnings++; yyerror("Token error"); BEGIN(error); return TOKEN_ERROR; } 
 <error>{WHITESPACE}+    { BEGIN(0); fprintf(yyout, "\t%d character(s) ignored so far\n", lex_warnings); } 
 <error>.                { lex_warnings++; }
-<error>\n               { BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warnings); return NEWLINE;}
+<error>\n               { line++; BEGIN(0); fprintf(yyout, "\t\t%d character(s) ignored so far\n", lex_warnings); return NEWLINE;}
 
 %%
 
