@@ -414,804 +414,782 @@
 	[FLEX] Line=80, token=OPERATOR, value="-="
 	[FLEX] Line=80, token=FLOAT, value="4e1"
 	[FLEX] Line=80, token=DELIMITER, value=";"
-	[FLEX] Line=80, token=IDENTIFIER, value="y"
-	[FLEX] Line=80, token=OPERATOR, value="*="
-	[FLEX] Line=80, token=FLOAT, value="6.7"
-	[FLEX] Line=80, token=DELIMITER, value=";"
-[BISON] Line=79, expression="Ανάθεση τιμής σε μεταβλητή"
-
-	[FLEX] Line=80, token=IDENTIFIER, value="c"
-	[FLEX] Line=80, token=OPERATOR, value="/="
-	[FLEX] Line=80, token=IDENTIFIER, value="b"
-	[FLEX] Line=80, token=DELIMITER, value=";"
-[BISON] Line=79, expression="Ανάθεση τιμής σε μεταβλητή"
-
 [BISON] Line=80, expression="Ανάθεση τιμής σε μεταβλητή"
 
-/* --- Test case [#2.6.3] : ARRAY-MERGE --- */	[FLEX] Line=84, token=SPECIAL, value="["
-	[FLEX] Line=84, token=INTEGER, value="1"
-	[FLEX] Line=84, token=SPECIAL, value=","
-	[FLEX] Line=84, token=INTEGER, value="2"
-	[FLEX] Line=84, token=SPECIAL, value=","
-	[FLEX] Line=84, token=INTEGER, value="3"
-	[FLEX] Line=84, token=SPECIAL, value="]"
-	[FLEX] Line=84, token=OPERATOR, value="+"
-	[FLEX] Line=84, token=SPECIAL, value="["
-	[FLEX] Line=84, token=INTEGER, value="4"
-	[FLEX] Line=84, token=SPECIAL, value=","
-	[FLEX] Line=84, token=INTEGER, value="5"
-	[FLEX] Line=84, token=SPECIAL, value=","
-	[FLEX] Line=84, token=INTEGER, value="6"
-	[FLEX] Line=84, token=SPECIAL, value="]"
-[BISON] Line=84, expression="Συνένωση πινάκων"
+	[FLEX] Line=81, token=IDENTIFIER, value="y"
+	[FLEX] Line=81, token=OPERATOR, value="*="
+	[FLEX] Line=81, token=FLOAT, value="6.7"
+	[FLEX] Line=81, token=DELIMITER, value=";"
+[BISON] Line=81, expression="Ανάθεση τιμής σε μεταβλητή"
 
-[BISON] Line=84, expression="Συνένωση πινάκων"
+	[FLEX] Line=82, token=IDENTIFIER, value="c"
+	[FLEX] Line=82, token=OPERATOR, value="/="
+	[FLEX] Line=82, token=IDENTIFIER, value="b"
+	[FLEX] Line=82, token=DELIMITER, value=";"
+[BISON] Line=82, expression="Ανάθεση τιμής σε μεταβλητή"
 
-	[FLEX] Line=85, token=SPECIAL, value="["
-	[FLEX] Line=85, token=INTEGER, value="1"
-	[FLEX] Line=85, token=SPECIAL, value=","
-	[FLEX] Line=85, token=INTEGER, value="3"
-	[FLEX] Line=85, token=SPECIAL, value="]"
-	[FLEX] Line=85, token=OPERATOR, value="+"
-	[FLEX] Line=85, token=SPECIAL, value="["
-	[FLEX] Line=85, token=INTEGER, value="5"
-	[FLEX] Line=85, token=SPECIAL, value=","
-	[FLEX] Line=85, token=INTEGER, value="7"
-	[FLEX] Line=85, token=SPECIAL, value=","
-	[FLEX] Line=85, token=INTEGER, value="9"
-	[FLEX] Line=85, token=SPECIAL, value=","
-	[FLEX] Line=85, token=INTEGER, value="11"
-	[FLEX] Line=85, token=SPECIAL, value="]"
-[BISON] Line=85, expression="Συνένωση πινάκων"
-
-	[FLEX] Line=86, token=SPECIAL, value="["
-	[FLEX] Line=86, token=STRING, value=""What""
+/* --- Test case [#2.6.3] : ARRAY-MERGE --- */	[FLEX] Line=86, token=SPECIAL, value="["
+	[FLEX] Line=86, token=INTEGER, value="1"
 	[FLEX] Line=86, token=SPECIAL, value=","
-	[FLEX] Line=86, token=STRING, value=""a""
+	[FLEX] Line=86, token=INTEGER, value="2"
+	[FLEX] Line=86, token=SPECIAL, value=","
+	[FLEX] Line=86, token=INTEGER, value="3"
 	[FLEX] Line=86, token=SPECIAL, value="]"
 	[FLEX] Line=86, token=OPERATOR, value="+"
 	[FLEX] Line=86, token=SPECIAL, value="["
-	[FLEX] Line=86, token=STRING, value=""Wonderful""
+	[FLEX] Line=86, token=INTEGER, value="4"
 	[FLEX] Line=86, token=SPECIAL, value=","
-	[FLEX] Line=86, token=STRING, value=""World""
+	[FLEX] Line=86, token=INTEGER, value="5"
+	[FLEX] Line=86, token=SPECIAL, value=","
+	[FLEX] Line=86, token=INTEGER, value="6"
 	[FLEX] Line=86, token=SPECIAL, value="]"
 [BISON] Line=86, expression="Συνένωση πινάκων"
 
+[BISON] Line=86, expression="Συνένωση πινάκων"
+
 	[FLEX] Line=87, token=SPECIAL, value="["
-	[FLEX] Line=87, token=FLOAT, value="4.5"
+	[FLEX] Line=87, token=INTEGER, value="1"
 	[FLEX] Line=87, token=SPECIAL, value=","
-	[FLEX] Line=87, token=FLOAT, value="5.6"
-	[FLEX] Line=87, token=SPECIAL, value=","
-	[FLEX] Line=87, token=FLOAT, value="1.1"
+	[FLEX] Line=87, token=INTEGER, value="3"
 	[FLEX] Line=87, token=SPECIAL, value="]"
 	[FLEX] Line=87, token=OPERATOR, value="+"
 	[FLEX] Line=87, token=SPECIAL, value="["
-	[FLEX] Line=87, token=FLOAT, value="0e0"
+	[FLEX] Line=87, token=INTEGER, value="5"
 	[FLEX] Line=87, token=SPECIAL, value=","
-	[FLEX] Line=87, token=FLOAT, value="4.5E-1"
+	[FLEX] Line=87, token=INTEGER, value="7"
 	[FLEX] Line=87, token=SPECIAL, value=","
-	[FLEX] Line=87, token=FLOAT, value="4E0"
+	[FLEX] Line=87, token=INTEGER, value="9"
+	[FLEX] Line=87, token=SPECIAL, value=","
+	[FLEX] Line=87, token=INTEGER, value="11"
 	[FLEX] Line=87, token=SPECIAL, value="]"
 [BISON] Line=87, expression="Συνένωση πινάκων"
 
-/* --- Test case [#2.6.4] : COMPARISONS --- */	[FLEX] Line=91, token=IDENTIFIER, value="x1"
-	[FLEX] Line=91, token=OPERATOR, value=">"
-	[FLEX] Line=91, token=IDENTIFIER, value="x2"
-[BISON] Line=91, expression="Σύγκριση"
+	[FLEX] Line=88, token=SPECIAL, value="["
+	[FLEX] Line=88, token=STRING, value=""What""
+	[FLEX] Line=88, token=SPECIAL, value=","
+	[FLEX] Line=88, token=STRING, value=""a""
+	[FLEX] Line=88, token=SPECIAL, value="]"
+	[FLEX] Line=88, token=OPERATOR, value="+"
+	[FLEX] Line=88, token=SPECIAL, value="["
+	[FLEX] Line=88, token=STRING, value=""Wonderful""
+	[FLEX] Line=88, token=SPECIAL, value=","
+	[FLEX] Line=88, token=STRING, value=""World""
+	[FLEX] Line=88, token=SPECIAL, value="]"
+[BISON] Line=88, expression="Συνένωση πινάκων"
 
-[BISON] Line=91, expression="Σύγκριση"
+	[FLEX] Line=89, token=SPECIAL, value="["
+	[FLEX] Line=89, token=FLOAT, value="4.5"
+	[FLEX] Line=89, token=SPECIAL, value=","
+	[FLEX] Line=89, token=FLOAT, value="5.6"
+	[FLEX] Line=89, token=SPECIAL, value=","
+	[FLEX] Line=89, token=FLOAT, value="1.1"
+	[FLEX] Line=89, token=SPECIAL, value="]"
+	[FLEX] Line=89, token=OPERATOR, value="+"
+	[FLEX] Line=89, token=SPECIAL, value="["
+	[FLEX] Line=89, token=FLOAT, value="0e0"
+	[FLEX] Line=89, token=SPECIAL, value=","
+	[FLEX] Line=89, token=FLOAT, value="4.5E-1"
+	[FLEX] Line=89, token=SPECIAL, value=","
+	[FLEX] Line=89, token=FLOAT, value="4E0"
+	[FLEX] Line=89, token=SPECIAL, value="]"
+[BISON] Line=89, expression="Συνένωση πινάκων"
 
-	[FLEX] Line=92, token=IDENTIFIER, value="a"
-	[FLEX] Line=92, token=OPERATOR, value="<"
-	[FLEX] Line=92, token=IDENTIFIER, value="b"
-[BISON] Line=92, expression="Σύγκριση"
-
-	[FLEX] Line=93, token=IDENTIFIER, value="myvar"
-	[FLEX] Line=93, token=OPERATOR, value=">="
-	[FLEX] Line=93, token=INTEGER, value="52"
+/* --- Test case [#2.6.4] : COMPARISONS --- */	[FLEX] Line=93, token=IDENTIFIER, value="x1"
+	[FLEX] Line=93, token=OPERATOR, value=">"
+	[FLEX] Line=93, token=IDENTIFIER, value="x2"
 [BISON] Line=93, expression="Σύγκριση"
 
-	[FLEX] Line=94, token=IDENTIFIER, value="var1"
-	[FLEX] Line=94, token=OPERATOR, value="<="
-	[FLEX] Line=94, token=IDENTIFIER, value="var2"
+[BISON] Line=93, expression="Σύγκριση"
+
+	[FLEX] Line=94, token=IDENTIFIER, value="a"
+	[FLEX] Line=94, token=OPERATOR, value="<"
+	[FLEX] Line=94, token=IDENTIFIER, value="b"
 [BISON] Line=94, expression="Σύγκριση"
 
-	[FLEX] Line=95, token=IDENTIFIER, value="isEven"
-	[FLEX] Line=95, token=OPERATOR, value="=="
-	[FLEX] Line=95, token=IDENTIFIER, value="isOdd"
+	[FLEX] Line=95, token=IDENTIFIER, value="myvar"
+	[FLEX] Line=95, token=OPERATOR, value=">="
+	[FLEX] Line=95, token=INTEGER, value="52"
 [BISON] Line=95, expression="Σύγκριση"
 
-	[FLEX] Line=96, token=IDENTIFIER, value="a"
-	[FLEX] Line=96, token=OPERATOR, value="!="
-	[FLEX] Line=96, token=IDENTIFIER, value="C"
+	[FLEX] Line=96, token=IDENTIFIER, value="var1"
+	[FLEX] Line=96, token=OPERATOR, value="<="
+	[FLEX] Line=96, token=IDENTIFIER, value="var2"
 [BISON] Line=96, expression="Σύγκριση"
 
-	[FLEX] Line=97, token=IDENTIFIER, value="isTrue1"
-	[FLEX] Line=97, token=OPERATOR, value="||"
-	[FLEX] Line=97, token=IDENTIFIER, value="isTrue2"
+	[FLEX] Line=97, token=IDENTIFIER, value="isEven"
+	[FLEX] Line=97, token=OPERATOR, value="=="
+	[FLEX] Line=97, token=IDENTIFIER, value="isOdd"
 [BISON] Line=97, expression="Σύγκριση"
 
-	[FLEX] Line=98, token=IDENTIFIER, value="isFalse1"
-	[FLEX] Line=98, token=OPERATOR, value="&&"
-	[FLEX] Line=98, token=IDENTIFIER, value="isFalse2"
+	[FLEX] Line=98, token=IDENTIFIER, value="a"
+	[FLEX] Line=98, token=OPERATOR, value="!="
+	[FLEX] Line=98, token=IDENTIFIER, value="C"
 [BISON] Line=98, expression="Σύγκριση"
 
-	[FLEX] Line=99, token=OPERATOR, value="!"
-	[FLEX] Line=99, token=IDENTIFIER, value="not"
+	[FLEX] Line=99, token=IDENTIFIER, value="isTrue1"
+	[FLEX] Line=99, token=OPERATOR, value="||"
+	[FLEX] Line=99, token=IDENTIFIER, value="isTrue2"
 [BISON] Line=99, expression="Σύγκριση"
 
-/*============= Test case [#2.7] : STATEMENTS =============*//* --- Test case [#2.7.1] : IF-STATEMENTS --- */	[FLEX] Line=104, token=KEYWORD, value="if"
-	[FLEX] Line=104, token=SPECIAL, value="("
-	[FLEX] Line=104, token=IDENTIFIER, value="var"
-	[FLEX] Line=104, token=OPERATOR, value="=="
-	[FLEX] Line=104, token=INTEGER, value="100"
-	[FLEX] Line=104, token=SPECIAL, value=")"
-	[FLEX] Line=104, token=FUNCTION, value="print"
-	[FLEX] Line=104, token=SPECIAL, value="("
-	[FLEX] Line=104, token=STRING, value=""Value of expression is 100""
-	[FLEX] Line=104, token=SPECIAL, value=")"
-	[FLEX] Line=104, token=DELIMITER, value=";"
-[BISON] Line=104, expression="Δήλωση if"
+	[FLEX] Line=100, token=IDENTIFIER, value="isFalse1"
+	[FLEX] Line=100, token=OPERATOR, value="&&"
+	[FLEX] Line=100, token=IDENTIFIER, value="isFalse2"
+[BISON] Line=100, expression="Σύγκριση"
 
-	[FLEX] Line=105, token=KEYWORD, value="if"
-	[FLEX] Line=105, token=SPECIAL, value="("
-	[FLEX] Line=105, token=IDENTIFIER, value="x"
-	[FLEX] Line=105, token=OPERATOR, value="<"
-	[FLEX] Line=105, token=IDENTIFIER, value="y"
-	[FLEX] Line=105, token=OPERATOR, value="<"
-	[FLEX] Line=105, token=IDENTIFIER, value="z"
-	[FLEX] Line=105, token=SPECIAL, value=")"
-	[FLEX] Line=105, token=SPECIAL, value="{"
-	[FLEX] Line=105, token=FUNCTION, value="print"
-	[FLEX] Line=105, token=SPECIAL, value="("
-	[FLEX] Line=105, token=IDENTIFIER, value="x"
-	[FLEX] Line=105, token=SPECIAL, value=")"
-	[FLEX] Line=105, token=DELIMITER, value=";"
-	[FLEX] Line=105, token=FUNCTION, value="print"
-	[FLEX] Line=105, token=SPECIAL, value="("
-	[FLEX] Line=105, token=IDENTIFIER, value="y"
-	[FLEX] Line=105, token=SPECIAL, value=")"
-	[FLEX] Line=105, token=DELIMITER, value=";"
-[BISON] Line=104, expression="Κλήση συνάρτησης"
+	[FLEX] Line=101, token=OPERATOR, value="!"
+	[FLEX] Line=101, token=IDENTIFIER, value="not"
+[BISON] Line=101, expression="Σύγκριση"
 
-	[FLEX] Line=105, token=FUNCTION, value="print"
-	[FLEX] Line=105, token=SPECIAL, value="("
-	[FLEX] Line=105, token=IDENTIFIER, value="z"
-	[FLEX] Line=105, token=SPECIAL, value=")"
-	[FLEX] Line=105, token=DELIMITER, value=";"
-[BISON] Line=104, expression="Κλήση συνάρτησης"
+/*============= Test case [#2.7] : STATEMENTS =============*//* --- Test case [#2.7.1] : IF-STATEMENTS --- */	[FLEX] Line=106, token=KEYWORD, value="if"
+	[FLEX] Line=106, token=SPECIAL, value="("
+	[FLEX] Line=106, token=IDENTIFIER, value="var"
+	[FLEX] Line=106, token=OPERATOR, value="=="
+	[FLEX] Line=106, token=INTEGER, value="100"
+	[FLEX] Line=106, token=SPECIAL, value=")"
+	[FLEX] Line=106, token=FUNCTION, value="print"
+	[FLEX] Line=106, token=SPECIAL, value="("
+	[FLEX] Line=106, token=STRING, value=""Value of expression is 100""
+	[FLEX] Line=106, token=SPECIAL, value=")"
+	[FLEX] Line=106, token=DELIMITER, value=";"
+[BISON] Line=106, expression="Δήλωση if"
 
-	[FLEX] Line=105, token=SPECIAL, value="}"
-[BISON] Line=105, expression="Δήλωση if"
-
-	[FLEX] Line=107, token=KEYWORD, value="if"
+	[FLEX] Line=107, token=KEYWORD, value="if"
 	[FLEX] Line=107, token=SPECIAL, value="("
 	[FLEX] Line=107, token=IDENTIFIER, value="x"
-	[FLEX] Line=107, token=OPERATOR, value="=="
-	[FLEX] Line=107, token=INTEGER, value="0"
+	[FLEX] Line=107, token=OPERATOR, value="<"
+	[FLEX] Line=107, token=IDENTIFIER, value="y"
+	[FLEX] Line=107, token=OPERATOR, value="<"
+	[FLEX] Line=107, token=IDENTIFIER, value="z"
 	[FLEX] Line=107, token=SPECIAL, value=")"
+	[FLEX] Line=107, token=SPECIAL, value="{"
+	[FLEX] Line=107, token=FUNCTION, value="print"
+	[FLEX] Line=107, token=SPECIAL, value="("
+	[FLEX] Line=107, token=IDENTIFIER, value="x"
+	[FLEX] Line=107, token=SPECIAL, value=")"
+	[FLEX] Line=107, token=DELIMITER, value=";"
+	[FLEX] Line=107, token=FUNCTION, value="print"
+	[FLEX] Line=107, token=SPECIAL, value="("
+	[FLEX] Line=107, token=IDENTIFIER, value="y"
+	[FLEX] Line=107, token=SPECIAL, value=")"
+	[FLEX] Line=107, token=DELIMITER, value=";"
+[BISON] Line=106, expression="Κλήση συνάρτησης"
+
+	[FLEX] Line=107, token=FUNCTION, value="print"
+	[FLEX] Line=107, token=SPECIAL, value="("
+	[FLEX] Line=107, token=IDENTIFIER, value="z"
+	[FLEX] Line=107, token=SPECIAL, value=")"
+	[FLEX] Line=107, token=DELIMITER, value=";"
+[BISON] Line=106, expression="Κλήση συνάρτησης"
+
+	[FLEX] Line=107, token=SPECIAL, value="}"
 [BISON] Line=107, expression="Δήλωση if"
 
-	[FLEX] Line=108, token=SPECIAL, value="{"
-	[FLEX] Line=109, token=KEYWORD, value="int"
-	[FLEX] Line=109, token=IDENTIFIER, value="i"
-	[FLEX] Line=109, token=DELIMITER, value=";"
-[BISON] Line=108, expression="Δήλωση μεταβλητής"
+	[FLEX] Line=109, token=KEYWORD, value="if"
+	[FLEX] Line=109, token=SPECIAL, value="("
+	[FLEX] Line=109, token=IDENTIFIER, value="x"
+	[FLEX] Line=109, token=OPERATOR, value="=="
+	[FLEX] Line=109, token=INTEGER, value="0"
+	[FLEX] Line=109, token=SPECIAL, value=")"
+[BISON] Line=109, expression="Δήλωση if"
 
-	[FLEX] Line=110, token=IDENTIFIER, value="i"
-	[FLEX] Line=110, token=OPERATOR, value="="
-	[FLEX] Line=110, token=INTEGER, value="1"
-	[FLEX] Line=110, token=DELIMITER, value=";"
-[BISON] Line=109, expression="Ανάθεση τιμής σε μεταβλητή"
-
-	[FLEX] Line=111, token=KEYWORD, value="if"
-	[FLEX] Line=111, token=SPECIAL, value="("
+	[FLEX] Line=110, token=SPECIAL, value="{"
+	[FLEX] Line=111, token=KEYWORD, value="int"
 	[FLEX] Line=111, token=IDENTIFIER, value="i"
-	[FLEX] Line=111, token=OPERATOR, value=">"
-	[FLEX] Line=111, token=INTEGER, value="1"
-	[FLEX] Line=111, token=SPECIAL, value=")"
-[BISON] Line=111, expression="Δήλωση if"
+	[FLEX] Line=111, token=DELIMITER, value=";"
+[BISON] Line=110, expression="Δήλωση μεταβλητής"
 
-	[FLEX] Line=112, token=FUNCTION, value="print"
-	[FLEX] Line=112, token=SPECIAL, value="("
-	[FLEX] Line=112, token=STRING, value=""i is greater than 1""
-	[FLEX] Line=112, token=SPECIAL, value=")"
+	[FLEX] Line=112, token=IDENTIFIER, value="i"
+	[FLEX] Line=112, token=OPERATOR, value="="
+	[FLEX] Line=112, token=INTEGER, value="1"
 	[FLEX] Line=112, token=DELIMITER, value=";"
-[BISON] Line=111, expression="Κλήση συνάρτησης"
+[BISON] Line=111, expression="Ανάθεση τιμής σε μεταβλητή"
 
-	[FLEX] Line=113, token=SPECIAL, value="}"
-[BISON] Line=112, expression="Σύνθετες δηλώσεις"
+	[FLEX] Line=113, token=KEYWORD, value="if"
+	[FLEX] Line=113, token=SPECIAL, value="("
+	[FLEX] Line=113, token=IDENTIFIER, value="i"
+	[FLEX] Line=113, token=OPERATOR, value=">"
+	[FLEX] Line=113, token=INTEGER, value="1"
+	[FLEX] Line=113, token=SPECIAL, value=")"
+[BISON] Line=113, expression="Δήλωση if"
 
-[BISON] Line=113, expression="Σύνθετες δηλώσεις"
+	[FLEX] Line=114, token=FUNCTION, value="print"
+	[FLEX] Line=114, token=SPECIAL, value="("
+	[FLEX] Line=114, token=STRING, value=""i is greater than 1""
+	[FLEX] Line=114, token=SPECIAL, value=")"
+	[FLEX] Line=114, token=DELIMITER, value=";"
+[BISON] Line=113, expression="Κλήση συνάρτησης"
 
-/* --- Test case [#2.7.2] : WHILE-STATEMENTS --- */	[FLEX] Line=116, token=KEYWORD, value="while"
-	[FLEX] Line=116, token=SPECIAL, value="("
-	[FLEX] Line=116, token=IDENTIFIER, value="i"
-	[FLEX] Line=116, token=OPERATOR, value="<"
-	[FLEX] Line=116, token=INTEGER, value="10"
-	[FLEX] Line=116, token=SPECIAL, value=")"
-	[FLEX] Line=117, token=SPECIAL, value="{"
-	[FLEX] Line=118, token=FUNCTION, value="print"
+	[FLEX] Line=115, token=SPECIAL, value="}"
+[BISON] Line=114, expression="Σύνθετες δηλώσεις"
+
+[BISON] Line=115, expression="Σύνθετες δηλώσεις"
+
+/* --- Test case [#2.7.2] : WHILE-STATEMENTS --- */	[FLEX] Line=118, token=KEYWORD, value="while"
 	[FLEX] Line=118, token=SPECIAL, value="("
-	[FLEX] Line=118, token=STRING, value=""i is: ""
-	[FLEX] Line=118, token=SPECIAL, value=","
 	[FLEX] Line=118, token=IDENTIFIER, value="i"
+	[FLEX] Line=118, token=OPERATOR, value="<"
+	[FLEX] Line=118, token=INTEGER, value="10"
 	[FLEX] Line=118, token=SPECIAL, value=")"
-	[FLEX] Line=118, token=DELIMITER, value=";"
-[BISON] Line=117, expression="Κλήση συνάρτησης"
+	[FLEX] Line=119, token=SPECIAL, value="{"
+	[FLEX] Line=120, token=FUNCTION, value="print"
+	[FLEX] Line=120, token=SPECIAL, value="("
+	[FLEX] Line=120, token=STRING, value=""i is: ""
+	[FLEX] Line=120, token=SPECIAL, value=","
+	[FLEX] Line=120, token=IDENTIFIER, value="i"
+	[FLEX] Line=120, token=SPECIAL, value=")"
+	[FLEX] Line=120, token=DELIMITER, value=";"
+[BISON] Line=119, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=119, token=SPECIAL, value="}"
-[BISON] Line=118, expression="Σύνθετες δηλώσεις"
+	[FLEX] Line=121, token=SPECIAL, value="}"
+[BISON] Line=120, expression="Σύνθετες δηλώσεις"
 
-[BISON] Line=119, expression="Σύνθετες δηλώσεις"
+[BISON] Line=121, expression="Σύνθετες δηλώσεις"
 
-/* --- Test case [#2.7.3] : FOR-STATEMENTS --- */	[FLEX] Line=122, token=KEYWORD, value="for"
-	[FLEX] Line=122, token=SPECIAL, value="("
-	[FLEX] Line=122, token=IDENTIFIER, value="i"
-	[FLEX] Line=122, token=OPERATOR, value="="
-	[FLEX] Line=122, token=INTEGER, value="0"
-	[FLEX] Line=122, token=DELIMITER, value=";"
-	[FLEX] Line=122, token=IDENTIFIER, value="i"
-	[FLEX] Line=122, token=OPERATOR, value="<"
-	[FLEX] Line=122, token=INTEGER, value="10"
-	[FLEX] Line=122, token=DELIMITER, value=";"
-	[FLEX] Line=122, token=IDENTIFIER, value="i"
-	[FLEX] Line=122, token=OPERATOR, value="++"
-	[FLEX] Line=122, token=SPECIAL, value=")"
-	[FLEX] Line=123, token=SPECIAL, value="{"
-	[FLEX] Line=124, token=FUNCTION, value="print"
+/* --- Test case [#2.7.3] : FOR-STATEMENTS --- */	[FLEX] Line=124, token=KEYWORD, value="for"
 	[FLEX] Line=124, token=SPECIAL, value="("
-	[FLEX] Line=124, token=STRING, value=""i = ""
-	[FLEX] Line=124, token=SPECIAL, value=","
 	[FLEX] Line=124, token=IDENTIFIER, value="i"
-	[FLEX] Line=124, token=SPECIAL, value=")"
+	[FLEX] Line=124, token=OPERATOR, value="="
+	[FLEX] Line=124, token=INTEGER, value="0"
 	[FLEX] Line=124, token=DELIMITER, value=";"
-[BISON] Line=123, expression="Κλήση συνάρτησης"
+	[FLEX] Line=124, token=IDENTIFIER, value="i"
+	[FLEX] Line=124, token=OPERATOR, value="<"
+	[FLEX] Line=124, token=INTEGER, value="10"
+	[FLEX] Line=124, token=DELIMITER, value=";"
+	[FLEX] Line=124, token=IDENTIFIER, value="i"
+	[FLEX] Line=124, token=OPERATOR, value="++"
+	[FLEX] Line=124, token=SPECIAL, value=")"
+	[FLEX] Line=125, token=SPECIAL, value="{"
+	[FLEX] Line=126, token=FUNCTION, value="print"
+	[FLEX] Line=126, token=SPECIAL, value="("
+	[FLEX] Line=126, token=STRING, value=""i = ""
+	[FLEX] Line=126, token=SPECIAL, value=","
+	[FLEX] Line=126, token=IDENTIFIER, value="i"
+	[FLEX] Line=126, token=SPECIAL, value=")"
+	[FLEX] Line=126, token=DELIMITER, value=";"
+[BISON] Line=125, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=125, token=SPECIAL, value="}"
-[BISON] Line=124, expression="Σύνθετες δηλώσεις"
+	[FLEX] Line=127, token=SPECIAL, value="}"
+[BISON] Line=126, expression="Σύνθετες δηλώσεις"
 
-[BISON] Line=125, expression="Σύνθετες δηλώσεις"
+[BISON] Line=127, expression="Σύνθετες δηλώσεις"
 
-/*============= Test case [#2.8] : WARNINGS =============*//* --- Test case [#2.8.1] : DOUBLE COMPARE --- */	[FLEX] Line=130, token=IDENTIFIER, value="x"
-	[FLEX] Line=130, token=OPERATOR, value=">"
-	[FLEX] Line=130, token=OPERATOR, value=">"
-	[FLEX] Line=130, token=IDENTIFIER, value="y"
-## Warning ## -> Double > detected at Line=129
-[BISON] Line=130, expression="Σύγκριση"
+/*============= Test case [#2.8] : WARNINGS =============*//* --- Test case [#2.8.1] : DOUBLE COMPARE --- */	[FLEX] Line=132, token=IDENTIFIER, value="x"
+	[FLEX] Line=132, token=OPERATOR, value=">"
+	[FLEX] Line=132, token=OPERATOR, value=">"
+	[FLEX] Line=132, token=IDENTIFIER, value="y"
+## Warning ## -> Double > detected at Line=131
+[BISON] Line=132, expression="Σύγκριση"
 
-	[FLEX] Line=131, token=IDENTIFIER, value="x"
-	[FLEX] Line=131, token=OPERATOR, value="<"
-	[FLEX] Line=131, token=OPERATOR, value="<"
-	[FLEX] Line=131, token=IDENTIFIER, value="y"
-## Warning ## -> Double < detected at Line=130
-[BISON] Line=131, expression="Σύγκριση"
+	[FLEX] Line=133, token=IDENTIFIER, value="x"
+	[FLEX] Line=133, token=OPERATOR, value="<"
+	[FLEX] Line=133, token=OPERATOR, value="<"
+	[FLEX] Line=133, token=IDENTIFIER, value="y"
+## Warning ## -> Double < detected at Line=132
+[BISON] Line=133, expression="Σύγκριση"
 
-/* --- Test case [#2.8.2] : DOUBLE PARENTHESIS --- */	[FLEX] Line=135, token=KEYWORD, value="if"
-	[FLEX] Line=135, token=SPECIAL, value="("
-	[FLEX] Line=135, token=SPECIAL, value="("
-	[FLEX] Line=135, token=IDENTIFIER, value="x"
-	[FLEX] Line=135, token=OPERATOR, value="=="
-	[FLEX] Line=135, token=INTEGER, value="0"
-	[FLEX] Line=135, token=SPECIAL, value=")"
-	[FLEX] Line=135, token=SPECIAL, value=")"
-## Warning ## -> Double parethensis detected at Line=135
-[BISON] Line=135, expression="Δήλωση if"
+/* --- Test case [#2.8.2] : DOUBLE PARENTHESIS --- */	[FLEX] Line=137, token=KEYWORD, value="if"
+	[FLEX] Line=137, token=SPECIAL, value="("
+	[FLEX] Line=137, token=SPECIAL, value="("
+	[FLEX] Line=137, token=IDENTIFIER, value="x"
+	[FLEX] Line=137, token=OPERATOR, value="=="
+	[FLEX] Line=137, token=INTEGER, value="0"
+	[FLEX] Line=137, token=SPECIAL, value=")"
+	[FLEX] Line=137, token=SPECIAL, value=")"
+## Warning ## -> Double parethensis detected at Line=137
+[BISON] Line=137, expression="Δήλωση if"
 
-	[FLEX] Line=136, token=SPECIAL, value="{"
-	[FLEX] Line=137, token=SPECIAL, value="}"
-[BISON] Line=136, expression="Σύνθετες δηλώσεις"
+	[FLEX] Line=138, token=SPECIAL, value="{"
+	[FLEX] Line=139, token=SPECIAL, value="}"
+[BISON] Line=138, expression="Σύνθετες δηλώσεις"
 
-[BISON] Line=137, expression="Σύνθετες δηλώσεις"
+[BISON] Line=139, expression="Σύνθετες δηλώσεις"
 
-	[FLEX] Line=138, token=KEYWORD, value="while"
-	[FLEX] Line=138, token=SPECIAL, value="("
-	[FLEX] Line=138, token=SPECIAL, value="("
-	[FLEX] Line=138, token=IDENTIFIER, value="y"
-	[FLEX] Line=138, token=OPERATOR, value="=="
-	[FLEX] Line=138, token=INTEGER, value="0"
-	[FLEX] Line=138, token=SPECIAL, value=")"
-	[FLEX] Line=138, token=SPECIAL, value=")"
-## Warning ## -> Double parethensis detected at Line=138
-	[FLEX] Line=139, token=SPECIAL, value="{"
-	[FLEX] Line=140, token=SPECIAL, value="}"
-[BISON] Line=139, expression="Σύνθετες δηλώσεις"
+	[FLEX] Line=140, token=KEYWORD, value="while"
+	[FLEX] Line=140, token=SPECIAL, value="("
+	[FLEX] Line=140, token=SPECIAL, value="("
+	[FLEX] Line=140, token=IDENTIFIER, value="y"
+	[FLEX] Line=140, token=OPERATOR, value="=="
+	[FLEX] Line=140, token=INTEGER, value="0"
+	[FLEX] Line=140, token=SPECIAL, value=")"
+	[FLEX] Line=140, token=SPECIAL, value=")"
+## Warning ## -> Double parethensis detected at Line=140
+	[FLEX] Line=141, token=SPECIAL, value="{"
+	[FLEX] Line=142, token=SPECIAL, value="}"
+[BISON] Line=141, expression="Σύνθετες δηλώσεις"
 
-[BISON] Line=140, expression="Σύνθετες δηλώσεις"
+[BISON] Line=142, expression="Σύνθετες δηλώσεις"
 
-/* --- Test case [#2.8.3] : RETURN TYPE IN FUNCTIONS --- */	[FLEX] Line=144, token=KEYWORD, value="func"
-	[FLEX] Line=144, token=KEYWORD, value="int"
-	[FLEX] Line=144, token=IDENTIFIER, value="main"
-## Warning ## -> Return type unnecessary at Line=144
-	[FLEX] Line=144, token=SPECIAL, value="("
-	[FLEX] Line=144, token=SPECIAL, value=")"
-	[FLEX] Line=145, token=SPECIAL, value="{"
-	[FLEX] Line=146, token=SPECIAL, value="}"
-[BISON] Line=145, expression="Δήλωση συναρτήσεων χρήστη"
+/* --- Test case [#2.8.3] : RETURN TYPE IN FUNCTIONS --- */	[FLEX] Line=146, token=KEYWORD, value="func"
+	[FLEX] Line=146, token=KEYWORD, value="int"
+	[FLEX] Line=146, token=IDENTIFIER, value="main"
+## Warning ## -> Return type unnecessary at Line=146
+	[FLEX] Line=146, token=SPECIAL, value="("
+	[FLEX] Line=146, token=SPECIAL, value=")"
+	[FLEX] Line=147, token=SPECIAL, value="{"
+	[FLEX] Line=148, token=SPECIAL, value="}"
+[BISON] Line=147, expression="Δήλωση συναρτήσεων χρήστη"
 
-[BISON] Line=146, expression="Δήλωση συναρτήσεων χρήστη"
+[BISON] Line=148, expression="Δήλωση συναρτήσεων χρήστη"
 
-	[FLEX] Line=147, token=KEYWORD, value="func"
-	[FLEX] Line=147, token=KEYWORD, value="float"
-	[FLEX] Line=147, token=IDENTIFIER, value="avg"
-## Warning ## -> Return type unnecessary at Line=147
-	[FLEX] Line=147, token=SPECIAL, value="("
-	[FLEX] Line=147, token=KEYWORD, value="int"
-	[FLEX] Line=147, token=IDENTIFIER, value="parA"
-	[FLEX] Line=147, token=SPECIAL, value=","
-	[FLEX] Line=147, token=KEYWORD, value="int"
-	[FLEX] Line=147, token=IDENTIFIER, value="parB"
-	[FLEX] Line=147, token=SPECIAL, value=")"
-	[FLEX] Line=148, token=SPECIAL, value="{"
-	[FLEX] Line=149, token=IDENTIFIER, value="calc_avg"
+	[FLEX] Line=149, token=KEYWORD, value="func"
+	[FLEX] Line=149, token=KEYWORD, value="float"
+	[FLEX] Line=149, token=IDENTIFIER, value="avg"
+## Warning ## -> Return type unnecessary at Line=149
 	[FLEX] Line=149, token=SPECIAL, value="("
+	[FLEX] Line=149, token=KEYWORD, value="int"
 	[FLEX] Line=149, token=IDENTIFIER, value="parA"
 	[FLEX] Line=149, token=SPECIAL, value=","
+	[FLEX] Line=149, token=KEYWORD, value="int"
 	[FLEX] Line=149, token=IDENTIFIER, value="parB"
 	[FLEX] Line=149, token=SPECIAL, value=")"
-	[FLEX] Line=149, token=DELIMITER, value=";"
-[BISON] Line=148, expression="Κλήση συνάρτησης"
-
-	[FLEX] Line=150, token=SPECIAL, value="}"
-[BISON] Line=150, expression="Δήλωση συναρτήσεων χρήστη"
-
-	[FLEX] Line=151, token=KEYWORD, value="func"
-	[FLEX] Line=151, token=KEYWORD, value="double"
-	[FLEX] Line=151, token=IDENTIFIER, value="pi"
-## Warning ## -> Return type unnecessary at Line=151
+	[FLEX] Line=150, token=SPECIAL, value="{"
+	[FLEX] Line=151, token=IDENTIFIER, value="calc_avg"
 	[FLEX] Line=151, token=SPECIAL, value="("
+	[FLEX] Line=151, token=IDENTIFIER, value="parA"
+	[FLEX] Line=151, token=SPECIAL, value=","
+	[FLEX] Line=151, token=IDENTIFIER, value="parB"
 	[FLEX] Line=151, token=SPECIAL, value=")"
-	[FLEX] Line=152, token=SPECIAL, value="{"
-	[FLEX] Line=153, token=FUNCTION, value="print"
+	[FLEX] Line=151, token=DELIMITER, value=";"
+[BISON] Line=150, expression="Κλήση συνάρτησης"
+
+	[FLEX] Line=152, token=SPECIAL, value="}"
+[BISON] Line=152, expression="Δήλωση συναρτήσεων χρήστη"
+
+	[FLEX] Line=153, token=KEYWORD, value="func"
+	[FLEX] Line=153, token=KEYWORD, value="double"
+	[FLEX] Line=153, token=IDENTIFIER, value="pi"
+## Warning ## -> Return type unnecessary at Line=153
 	[FLEX] Line=153, token=SPECIAL, value="("
-	[FLEX] Line=153, token=STRING, value=""3.14""
 	[FLEX] Line=153, token=SPECIAL, value=")"
-	[FLEX] Line=153, token=DELIMITER, value=";"
-[BISON] Line=152, expression="Κλήση συνάρτησης"
+	[FLEX] Line=154, token=SPECIAL, value="{"
+	[FLEX] Line=155, token=FUNCTION, value="print"
+	[FLEX] Line=155, token=SPECIAL, value="("
+	[FLEX] Line=155, token=STRING, value=""3.14""
+	[FLEX] Line=155, token=SPECIAL, value=")"
+	[FLEX] Line=155, token=DELIMITER, value=";"
+[BISON] Line=154, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=154, token=SPECIAL, value="}"
-[BISON] Line=154, expression="Δήλωση συναρτήσεων χρήστη"
+	[FLEX] Line=156, token=SPECIAL, value="}"
+[BISON] Line=156, expression="Δήλωση συναρτήσεων χρήστη"
 
-/* --- Test case [#2.8.4] : INVALID INPUT IN MERGE ARRAYS --- */	[FLEX] Line=158, token=SPECIAL, value="["
-	[FLEX] Line=158, token=INTEGER, value="3"
-	[FLEX] Line=158, token=SPECIAL, value=","
-	[FLEX] Line=158, token=INTEGER, value="4"
-	[FLEX] Line=158, token=SPECIAL, value=","
-	[FLEX] Line=158, token=INTEGER, value="6"
-	[FLEX] Line=158, token=SPECIAL, value="]"
-!! Token error !! -> at Line=158
+/* --- Test case [#2.8.4] : INVALID INPUT IN MERGE ARRAYS --- */	[FLEX] Line=160, token=SPECIAL, value="["
+	[FLEX] Line=160, token=INTEGER, value="3"
+	[FLEX] Line=160, token=SPECIAL, value=","
+	[FLEX] Line=160, token=INTEGER, value="4"
+	[FLEX] Line=160, token=SPECIAL, value=","
+	[FLEX] Line=160, token=INTEGER, value="6"
+	[FLEX] Line=160, token=SPECIAL, value="]"
+!! Token error !! -> at Line=160
 	1 character(s) ignored so far
-	[FLEX] Line=158, token=OPERATOR, value="+"
-	[FLEX] Line=158, token=SPECIAL, value="["
-	[FLEX] Line=158, token=INTEGER, value="1"
-	[FLEX] Line=158, token=SPECIAL, value=","
-	[FLEX] Line=158, token=INTEGER, value="5"
-	[FLEX] Line=158, token=SPECIAL, value=","
-	[FLEX] Line=158, token=INTEGER, value="6"
-	[FLEX] Line=158, token=SPECIAL, value="]"
-## Warning ## -> Invalid character in array merge detected at Line=159
-[BISON] Line=158, expression="Συνένωση πινάκων"
+	[FLEX] Line=160, token=OPERATOR, value="+"
+	[FLEX] Line=160, token=SPECIAL, value="["
+	[FLEX] Line=160, token=INTEGER, value="1"
+	[FLEX] Line=160, token=SPECIAL, value=","
+	[FLEX] Line=160, token=INTEGER, value="5"
+	[FLEX] Line=160, token=SPECIAL, value=","
+	[FLEX] Line=160, token=INTEGER, value="6"
+	[FLEX] Line=160, token=SPECIAL, value="]"
+## Warning ## -> Invalid character in array merge detected at Line=161
+[BISON] Line=160, expression="Συνένωση πινάκων"
 
-[BISON] Line=158, expression="Συνένωση πινάκων"
+[BISON] Line=160, expression="Συνένωση πινάκων"
 
-	[FLEX] Line=159, token=SPECIAL, value="["
-	[FLEX] Line=159, token=INTEGER, value="1"
-	[FLEX] Line=159, token=SPECIAL, value=","
-	[FLEX] Line=159, token=INTEGER, value="2"
-	[FLEX] Line=159, token=SPECIAL, value=","
-	[FLEX] Line=159, token=INTEGER, value="8"
-	[FLEX] Line=159, token=SPECIAL, value="]"
-	[FLEX] Line=159, token=OPERATOR, value="+"
-!! Token error !! -> at Line=159
+	[FLEX] Line=161, token=SPECIAL, value="["
+	[FLEX] Line=161, token=INTEGER, value="1"
+	[FLEX] Line=161, token=SPECIAL, value=","
+	[FLEX] Line=161, token=INTEGER, value="2"
+	[FLEX] Line=161, token=SPECIAL, value=","
+	[FLEX] Line=161, token=INTEGER, value="8"
+	[FLEX] Line=161, token=SPECIAL, value="]"
+	[FLEX] Line=161, token=OPERATOR, value="+"
+!! Token error !! -> at Line=161
 	2 character(s) ignored so far
-	[FLEX] Line=159, token=SPECIAL, value="["
-	[FLEX] Line=159, token=INTEGER, value="7"
-	[FLEX] Line=159, token=SPECIAL, value=","
-	[FLEX] Line=159, token=INTEGER, value="9"
-	[FLEX] Line=159, token=SPECIAL, value=","
-	[FLEX] Line=159, token=INTEGER, value="1"
-	[FLEX] Line=159, token=SPECIAL, value="]"
-## Warning ## -> Invalid character in array merge detected at Line=160
-[BISON] Line=159, expression="Συνένωση πινάκων"
+	[FLEX] Line=161, token=SPECIAL, value="["
+	[FLEX] Line=161, token=INTEGER, value="7"
+	[FLEX] Line=161, token=SPECIAL, value=","
+	[FLEX] Line=161, token=INTEGER, value="9"
+	[FLEX] Line=161, token=SPECIAL, value=","
+	[FLEX] Line=161, token=INTEGER, value="1"
+	[FLEX] Line=161, token=SPECIAL, value="]"
+## Warning ## -> Invalid character in array merge detected at Line=162
+[BISON] Line=161, expression="Συνένωση πινάκων"
 
-/* --- Test case [#2.8.5] : DOUBLE USE OF KEYWORD IN DELCARATION --- */	[FLEX] Line=163, token=KEYWORD, value="int"
-	[FLEX] Line=163, token=KEYWORD, value="int"
-## Warning ## -> Double int detected at Line=163
-	[FLEX] Line=163, token=IDENTIFIER, value="x"
-	[FLEX] Line=163, token=DELIMITER, value=";"
-[BISON] Line=162, expression="Δήλωση μεταβλητής"
-
-[BISON] Line=163, expression="Δήλωση μεταβλητής"
-
-	[FLEX] Line=164, token=KEYWORD, value="float"
-	[FLEX] Line=164, token=KEYWORD, value="float"
-## Warning ## -> Double float detected at Line=164
-	[FLEX] Line=164, token=IDENTIFIER, value="y"
-	[FLEX] Line=164, token=DELIMITER, value=";"
-[BISON] Line=164, expression="Δήλωση μεταβλητής"
-
-	[FLEX] Line=165, token=KEYWORD, value="double"
-	[FLEX] Line=165, token=KEYWORD, value="double"
-## Warning ## -> Double double detected at Line=165
-	[FLEX] Line=165, token=IDENTIFIER, value="far"
+/* --- Test case [#2.8.5] : DOUBLE USE OF KEYWORD IN DELCARATION --- */	[FLEX] Line=165, token=KEYWORD, value="int"
+	[FLEX] Line=165, token=KEYWORD, value="int"
+## Warning ## -> Double int detected at Line=165
+	[FLEX] Line=165, token=IDENTIFIER, value="x"
 	[FLEX] Line=165, token=DELIMITER, value=";"
+[BISON] Line=164, expression="Δήλωση μεταβλητής"
+
 [BISON] Line=165, expression="Δήλωση μεταβλητής"
 
-	[FLEX] Line=166, token=KEYWORD, value="short"
-	[FLEX] Line=166, token=KEYWORD, value="short"
-## Warning ## -> Double short detected at Line=166
-	[FLEX] Line=166, token=IDENTIFIER, value="imp"
+	[FLEX] Line=166, token=KEYWORD, value="float"
+	[FLEX] Line=166, token=KEYWORD, value="float"
+## Warning ## -> Double float detected at Line=166
+	[FLEX] Line=166, token=IDENTIFIER, value="y"
 	[FLEX] Line=166, token=DELIMITER, value=";"
 [BISON] Line=166, expression="Δήλωση μεταβλητής"
 
-/*============= Test case [#2.9] : ERRORS =============*/	[FLEX] Line=170, token=IDENTIFIER, value="intx"
-	[FLEX] Line=170, token=IDENTIFIER, value="a"
-[BISON] Line=169, expression="Αριθμητική έκφραση"
+	[FLEX] Line=167, token=KEYWORD, value="double"
+	[FLEX] Line=167, token=KEYWORD, value="double"
+## Warning ## -> Double double detected at Line=167
+	[FLEX] Line=167, token=IDENTIFIER, value="far"
+	[FLEX] Line=167, token=DELIMITER, value=";"
+[BISON] Line=167, expression="Δήλωση μεταβλητής"
 
-	[FLEX] Line=170, token=DELIMITER, value=";"
-[BISON] Line=169, expression="Αριθμητική έκφραση"
+	[FLEX] Line=168, token=KEYWORD, value="short"
+	[FLEX] Line=168, token=KEYWORD, value="short"
+## Warning ## -> Double short detected at Line=168
+	[FLEX] Line=168, token=IDENTIFIER, value="imp"
+	[FLEX] Line=168, token=DELIMITER, value=";"
+[BISON] Line=168, expression="Δήλωση μεταβλητής"
 
-!! syntax error !! -> at Line=170
-	[FLEX] Line=171, token=IDENTIFIER, value="pin1"
-	[FLEX] Line=171, token=OPERATOR, value="="
-	[FLEX] Line=171, token=SPECIAL, value="["
-	[FLEX] Line=171, token=INTEGER, value="1"
-	[FLEX] Line=171, token=SPECIAL, value=","
-	[FLEX] Line=171, token=INTEGER, value="3"
-	[FLEX] Line=171, token=SPECIAL, value=","
-	[FLEX] Line=171, token=STRING, value=""Hello""
-!! syntax error !! -> at Line=171
-	[FLEX] Line=171, token=SPECIAL, value=","
-	[FLEX] Line=171, token=INTEGER, value="4"
-	[FLEX] Line=171, token=SPECIAL, value=","
-	[FLEX] Line=171, token=INTEGER, value="5"
-	[FLEX] Line=171, token=SPECIAL, value="]"
-	[FLEX] Line=171, token=DELIMITER, value=";"
-	[FLEX] Line=172, token=FUNCTION, value="scan"
-	[FLEX] Line=172, token=SPECIAL, value="("
-	[FLEX] Line=172, token=OPERATOR, value="&"
-!! syntax error !! -> at Line=172
-	[FLEX] Line=172, token=IDENTIFIER, value="x"
-	[FLEX] Line=172, token=SPECIAL, value=")"
+/*============= Test case [#2.9] : ERRORS =============*/	[FLEX] Line=172, token=IDENTIFIER, value="intx"
+	[FLEX] Line=172, token=IDENTIFIER, value="a"
+[BISON] Line=171, expression="Αριθμητική έκφραση"
+
 	[FLEX] Line=172, token=DELIMITER, value=";"
-	[FLEX] Line=173, token=FUNCTION, value="len"
-	[FLEX] Line=173, token=SPECIAL, value="("
+[BISON] Line=171, expression="Αριθμητική έκφραση"
+
+!! syntax error !! -> at Line=172
+	[FLEX] Line=173, token=IDENTIFIER, value="pin1"
+	[FLEX] Line=173, token=OPERATOR, value="="
+	[FLEX] Line=173, token=SPECIAL, value="["
 	[FLEX] Line=173, token=INTEGER, value="1"
+	[FLEX] Line=173, token=SPECIAL, value=","
+	[FLEX] Line=173, token=INTEGER, value="3"
+	[FLEX] Line=173, token=SPECIAL, value=","
+	[FLEX] Line=173, token=STRING, value=""Hello""
 !! syntax error !! -> at Line=173
-	[FLEX] Line=173, token=IDENTIFIER, value="variable"
-	[FLEX] Line=173, token=SPECIAL, value=")"
+	[FLEX] Line=173, token=SPECIAL, value=","
+	[FLEX] Line=173, token=INTEGER, value="4"
+	[FLEX] Line=173, token=SPECIAL, value=","
+	[FLEX] Line=173, token=INTEGER, value="5"
+	[FLEX] Line=173, token=SPECIAL, value="]"
 	[FLEX] Line=173, token=DELIMITER, value=";"
-	[FLEX] Line=174, token=FUNCTION, value="cmp"
+	[FLEX] Line=174, token=FUNCTION, value="scan"
 	[FLEX] Line=174, token=SPECIAL, value="("
-	[FLEX] Line=174, token=IDENTIFIER, value="x"
-	[FLEX] Line=174, token=SPECIAL, value=","
-	[FLEX] Line=174, token=INTEGER, value="5"
+	[FLEX] Line=174, token=OPERATOR, value="&"
 !! syntax error !! -> at Line=174
+	[FLEX] Line=174, token=IDENTIFIER, value="x"
 	[FLEX] Line=174, token=SPECIAL, value=")"
 	[FLEX] Line=174, token=DELIMITER, value=";"
-	[FLEX] Line=175, token=IDENTIFIER, value="printf"
+	[FLEX] Line=175, token=FUNCTION, value="len"
 	[FLEX] Line=175, token=SPECIAL, value="("
-	[FLEX] Line=175, token=STRING, value=""Avg is %f""
-	[FLEX] Line=175, token=SPECIAL, value=","
-	[FLEX] Line=175, token=IDENTIFIER, value="avg"
+	[FLEX] Line=175, token=INTEGER, value="1"
+!! syntax error !! -> at Line=175
+	[FLEX] Line=175, token=IDENTIFIER, value="variable"
 	[FLEX] Line=175, token=SPECIAL, value=")"
 	[FLEX] Line=175, token=DELIMITER, value=";"
-[BISON] Line=175, expression="Κλήση συνάρτησης"
-
-	[FLEX] Line=176, token=KEYWORD, value="func"
-	[FLEX] Line=176, token=IDENTIFIER, value="myFunc"
+	[FLEX] Line=176, token=FUNCTION, value="cmp"
 	[FLEX] Line=176, token=SPECIAL, value="("
-	[FLEX] Line=176, token=KEYWORD, value="long"
 	[FLEX] Line=176, token=IDENTIFIER, value="x"
 	[FLEX] Line=176, token=SPECIAL, value=","
-	[FLEX] Line=176, token=KEYWORD, value="short"
-	[FLEX] Line=176, token=IDENTIFIER, value="y"
-	[FLEX] Line=176, token=SPECIAL, value=")"
-	[FLEX] Line=176, token=SPECIAL, value="{"
+	[FLEX] Line=176, token=INTEGER, value="5"
 !! syntax error !! -> at Line=176
-	[FLEX] Line=177, token=KEYWORD, value="int"
-	[FLEX] Line=177, token=IDENTIFIER, value="c"
+	[FLEX] Line=176, token=SPECIAL, value=")"
+	[FLEX] Line=176, token=DELIMITER, value=";"
+	[FLEX] Line=177, token=IDENTIFIER, value="printf"
+	[FLEX] Line=177, token=SPECIAL, value="("
+	[FLEX] Line=177, token=STRING, value=""Avg is %f""
+	[FLEX] Line=177, token=SPECIAL, value=","
+	[FLEX] Line=177, token=IDENTIFIER, value="avg"
+	[FLEX] Line=177, token=SPECIAL, value=")"
 	[FLEX] Line=177, token=DELIMITER, value=";"
-[BISON] Line=177, expression="Δήλωση μεταβλητής"
+[BISON] Line=177, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=178, token=IDENTIFIER, value="c"
-	[FLEX] Line=178, token=OPERATOR, value="="
+	[FLEX] Line=178, token=KEYWORD, value="func"
+	[FLEX] Line=178, token=IDENTIFIER, value="myFunc"
+	[FLEX] Line=178, token=SPECIAL, value="("
+	[FLEX] Line=178, token=KEYWORD, value="long"
 	[FLEX] Line=178, token=IDENTIFIER, value="x"
-	[FLEX] Line=178, token=OPERATOR, value="/"
+	[FLEX] Line=178, token=SPECIAL, value=","
+	[FLEX] Line=178, token=KEYWORD, value="short"
 	[FLEX] Line=178, token=IDENTIFIER, value="y"
-	[FLEX] Line=178, token=DELIMITER, value=";"
-[BISON] Line=178, expression="Ανάθεση τιμής σε μεταβλητή"
-
-	[FLEX] Line=179, token=KEYWORD, value="return"
-!! syntax error !! -> at Line=179
+	[FLEX] Line=178, token=SPECIAL, value=")"
+	[FLEX] Line=178, token=SPECIAL, value="{"
+!! syntax error !! -> at Line=178
+	[FLEX] Line=179, token=KEYWORD, value="int"
 	[FLEX] Line=179, token=IDENTIFIER, value="c"
 	[FLEX] Line=179, token=DELIMITER, value=";"
-	[FLEX] Line=180, token=SPECIAL, value="}"
-!! syntax error !! -> at Line=180
-	[FLEX] Line=181, token=IDENTIFIER, value="myFunc"
-	[FLEX] Line=181, token=SPECIAL, value="("
-	[FLEX] Line=181, token=IDENTIFIER, value="x"
-	[FLEX] Line=181, token=SPECIAL, value=","
-	[FLEX] Line=181, token=IDENTIFIER, value="y"
-	[FLEX] Line=181, token=SPECIAL, value=","
-	[FLEX] Line=181, token=INTEGER, value="10"
-	[FLEX] Line=181, token=SPECIAL, value=")"
+[BISON] Line=179, expression="Δήλωση μεταβλητής"
+
+	[FLEX] Line=180, token=IDENTIFIER, value="c"
+	[FLEX] Line=180, token=OPERATOR, value="="
+	[FLEX] Line=180, token=IDENTIFIER, value="x"
+	[FLEX] Line=180, token=OPERATOR, value="/"
+	[FLEX] Line=180, token=IDENTIFIER, value="y"
+	[FLEX] Line=180, token=DELIMITER, value=";"
+[BISON] Line=180, expression="Ανάθεση τιμής σε μεταβλητή"
+
+	[FLEX] Line=181, token=KEYWORD, value="return"
+!! syntax error !! -> at Line=181
+	[FLEX] Line=181, token=IDENTIFIER, value="c"
 	[FLEX] Line=181, token=DELIMITER, value=";"
-[BISON] Line=181, expression="Κλήση συνάρτησης"
-
-	[FLEX] Line=182, token=INTEGER, value="5"
-	[FLEX] Line=182, token=OPERATOR, value="++"
-	[FLEX] Line=182, token=DELIMITER, value=";"
+	[FLEX] Line=182, token=SPECIAL, value="}"
 !! syntax error !! -> at Line=182
-	[FLEX] Line=183, token=IDENTIFIER, value="x"
-	[FLEX] Line=183, token=OPERATOR, value="-="
-	[FLEX] Line=183, token=STRING, value=""Hello""
-!! syntax error !! -> at Line=183
+	[FLEX] Line=183, token=IDENTIFIER, value="myFunc"
+	[FLEX] Line=183, token=SPECIAL, value="("
+	[FLEX] Line=183, token=IDENTIFIER, value="x"
+	[FLEX] Line=183, token=SPECIAL, value=","
+	[FLEX] Line=183, token=IDENTIFIER, value="y"
+	[FLEX] Line=183, token=SPECIAL, value=","
+	[FLEX] Line=183, token=INTEGER, value="10"
+	[FLEX] Line=183, token=SPECIAL, value=")"
 	[FLEX] Line=183, token=DELIMITER, value=";"
-	[FLEX] Line=184, token=IDENTIFIER, value="y"
-	[FLEX] Line=184, token=OPERATOR, value="*="
-	[FLEX] Line=184, token=SPECIAL, value="["
-!! syntax error !! -> at Line=184
-	[FLEX] Line=184, token=IDENTIFIER, value="h"
-	[FLEX] Line=184, token=SPECIAL, value=","
-	[FLEX] Line=184, token=IDENTIFIER, value="e"
-	[FLEX] Line=184, token=SPECIAL, value=","
-	[FLEX] Line=184, token=IDENTIFIER, value="l"
-	[FLEX] Line=184, token=SPECIAL, value=","
-	[FLEX] Line=184, token=IDENTIFIER, value="l"
-	[FLEX] Line=184, token=SPECIAL, value=","
-	[FLEX] Line=184, token=IDENTIFIER, value="o"
-	[FLEX] Line=184, token=SPECIAL, value="]"
-	[FLEX] Line=184, token=DELIMITER, value=";"
-	[FLEX] Line=185, token=INTEGER, value="50"
-	[FLEX] Line=185, token=OPERATOR, value="="
-!! syntax error !! -> at Line=185
-	[FLEX] Line=185, token=IDENTIFIER, value="x"
-	[FLEX] Line=185, token=DELIMITER, value=";"
-	[FLEX] Line=186, token=IDENTIFIER, value="list1"
-	[FLEX] Line=186, token=SPECIAL, value=","
-	[FLEX] Line=186, token=IDENTIFIER, value="list2"
-	[FLEX] Line=186, token=OPERATOR, value="="
-	[FLEX] Line=186, token=SPECIAL, value="["
-	[FLEX] Line=186, token=IDENTIFIER, value="x"
-	[FLEX] Line=186, token=SPECIAL, value=","
-	[FLEX] Line=186, token=IDENTIFIER, value="b"
-	[FLEX] Line=186, token=SPECIAL, value=","
-	[FLEX] Line=186, token=IDENTIFIER, value="c"
-	[FLEX] Line=186, token=SPECIAL, value="]"
-	[FLEX] Line=186, token=SPECIAL, value=","
-	[FLEX] Line=186, token=INTEGER, value="5"
-	[FLEX] Line=186, token=DELIMITER, value=";"
-[BISON] Line=186, expression="Ανάθεση τιμής σε μεταβλητή"
+[BISON] Line=183, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=187, token=IDENTIFIER, value="x1"
-	[FLEX] Line=187, token=OPERATOR, value="=="
+	[FLEX] Line=184, token=INTEGER, value="5"
+	[FLEX] Line=184, token=OPERATOR, value="++"
+	[FLEX] Line=184, token=DELIMITER, value=";"
+!! syntax error !! -> at Line=184
+	[FLEX] Line=185, token=IDENTIFIER, value="x"
+	[FLEX] Line=185, token=OPERATOR, value="-="
+	[FLEX] Line=185, token=STRING, value=""Hello""
+!! syntax error !! -> at Line=185
+	[FLEX] Line=185, token=DELIMITER, value=";"
+	[FLEX] Line=186, token=IDENTIFIER, value="y"
+	[FLEX] Line=186, token=OPERATOR, value="*="
+	[FLEX] Line=186, token=SPECIAL, value="["
+!! syntax error !! -> at Line=186
+	[FLEX] Line=186, token=IDENTIFIER, value="h"
+	[FLEX] Line=186, token=SPECIAL, value=","
+	[FLEX] Line=186, token=IDENTIFIER, value="e"
+	[FLEX] Line=186, token=SPECIAL, value=","
+	[FLEX] Line=186, token=IDENTIFIER, value="l"
+	[FLEX] Line=186, token=SPECIAL, value=","
+	[FLEX] Line=186, token=IDENTIFIER, value="l"
+	[FLEX] Line=186, token=SPECIAL, value=","
+	[FLEX] Line=186, token=IDENTIFIER, value="o"
+	[FLEX] Line=186, token=SPECIAL, value="]"
+	[FLEX] Line=186, token=DELIMITER, value=";"
+	[FLEX] Line=187, token=INTEGER, value="50"
 	[FLEX] Line=187, token=OPERATOR, value="="
 !! syntax error !! -> at Line=187
-	[FLEX] Line=187, token=IDENTIFIER, value="x2"
+	[FLEX] Line=187, token=IDENTIFIER, value="x"
 	[FLEX] Line=187, token=DELIMITER, value=";"
-	[FLEX] Line=188, token=IDENTIFIER, value="array"
-	[FLEX] Line=188, token=OPERATOR, value="+="
+	[FLEX] Line=188, token=IDENTIFIER, value="list1"
+	[FLEX] Line=188, token=SPECIAL, value=","
+	[FLEX] Line=188, token=IDENTIFIER, value="list2"
+	[FLEX] Line=188, token=OPERATOR, value="="
 	[FLEX] Line=188, token=SPECIAL, value="["
-	[FLEX] Line=188, token=INTEGER, value="1"
+	[FLEX] Line=188, token=IDENTIFIER, value="x"
 	[FLEX] Line=188, token=SPECIAL, value=","
-	[FLEX] Line=188, token=INTEGER, value="3"
+	[FLEX] Line=188, token=IDENTIFIER, value="b"
 	[FLEX] Line=188, token=SPECIAL, value=","
-	[FLEX] Line=188, token=INTEGER, value="4"
+	[FLEX] Line=188, token=IDENTIFIER, value="c"
 	[FLEX] Line=188, token=SPECIAL, value="]"
+	[FLEX] Line=188, token=SPECIAL, value=","
+	[FLEX] Line=188, token=INTEGER, value="5"
 	[FLEX] Line=188, token=DELIMITER, value=";"
 [BISON] Line=188, expression="Ανάθεση τιμής σε μεταβλητή"
 
-	[FLEX] Line=189, token=SPECIAL, value="["
-	[FLEX] Line=189, token=INTEGER, value="1"
-	[FLEX] Line=189, token=SPECIAL, value=","
-	[FLEX] Line=189, token=INTEGER, value="3"
-	[FLEX] Line=189, token=SPECIAL, value=","
-	[FLEX] Line=189, token=INTEGER, value="5"
-	[FLEX] Line=189, token=SPECIAL, value="]"
-	[FLEX] Line=189, token=OPERATOR, value="++"
-	[FLEX] Line=189, token=SPECIAL, value="["
+	[FLEX] Line=189, token=IDENTIFIER, value="x1"
+	[FLEX] Line=189, token=OPERATOR, value="=="
+	[FLEX] Line=189, token=OPERATOR, value="="
 !! syntax error !! -> at Line=189
-	[FLEX] Line=189, token=INTEGER, value="1"
-	[FLEX] Line=189, token=SPECIAL, value=","
-	[FLEX] Line=189, token=INTEGER, value="2"
-	[FLEX] Line=189, token=SPECIAL, value="]"
+	[FLEX] Line=189, token=IDENTIFIER, value="x2"
 	[FLEX] Line=189, token=DELIMITER, value=";"
-	[FLEX] Line=190, token=KEYWORD, value="if"
-	[FLEX] Line=190, token=IDENTIFIER, value="var"
-	[FLEX] Line=190, token=OPERATOR, value="=="
-	[FLEX] Line=190, token=INTEGER, value="100"
-!! Token error !! -> at Line=190
-!! syntax error !! -> at Line=190
-		4 character(s) ignored so far
-	[FLEX] Line=191, token=FUNCTION, value="print"
-	[FLEX] Line=191, token=SPECIAL, value="("
-	[FLEX] Line=191, token=STRING, value=""var""
+	[FLEX] Line=190, token=IDENTIFIER, value="array"
+	[FLEX] Line=190, token=OPERATOR, value="+="
+	[FLEX] Line=190, token=SPECIAL, value="["
+	[FLEX] Line=190, token=INTEGER, value="1"
+	[FLEX] Line=190, token=SPECIAL, value=","
+	[FLEX] Line=190, token=INTEGER, value="3"
+	[FLEX] Line=190, token=SPECIAL, value=","
+	[FLEX] Line=190, token=INTEGER, value="4"
+	[FLEX] Line=190, token=SPECIAL, value="]"
+	[FLEX] Line=190, token=DELIMITER, value=";"
+[BISON] Line=190, expression="Ανάθεση τιμής σε μεταβλητή"
+
+	[FLEX] Line=191, token=SPECIAL, value="["
+	[FLEX] Line=191, token=INTEGER, value="1"
 	[FLEX] Line=191, token=SPECIAL, value=","
-	[FLEX] Line=191, token=STRING, value=""is""
+	[FLEX] Line=191, token=INTEGER, value="3"
 	[FLEX] Line=191, token=SPECIAL, value=","
-	[FLEX] Line=191, token=IDENTIFIER, value="var"
-	[FLEX] Line=191, token=SPECIAL, value=")"
+	[FLEX] Line=191, token=INTEGER, value="5"
+	[FLEX] Line=191, token=SPECIAL, value="]"
+	[FLEX] Line=191, token=OPERATOR, value="++"
+	[FLEX] Line=191, token=SPECIAL, value="["
+!! syntax error !! -> at Line=191
+	[FLEX] Line=191, token=INTEGER, value="1"
+	[FLEX] Line=191, token=SPECIAL, value=","
+	[FLEX] Line=191, token=INTEGER, value="2"
+	[FLEX] Line=191, token=SPECIAL, value="]"
 	[FLEX] Line=191, token=DELIMITER, value=";"
-[BISON] Line=191, expression="Κλήση συνάρτησης"
+	[FLEX] Line=192, token=KEYWORD, value="if"
+	[FLEX] Line=192, token=IDENTIFIER, value="var"
+	[FLEX] Line=192, token=OPERATOR, value="=="
+	[FLEX] Line=192, token=INTEGER, value="100"
+!! Token error !! -> at Line=192
+!! syntax error !! -> at Line=192
+		4 character(s) ignored so far
+	[FLEX] Line=193, token=FUNCTION, value="print"
+	[FLEX] Line=193, token=SPECIAL, value="("
+	[FLEX] Line=193, token=STRING, value=""var""
+	[FLEX] Line=193, token=SPECIAL, value=","
+	[FLEX] Line=193, token=STRING, value=""is""
+	[FLEX] Line=193, token=SPECIAL, value=","
+	[FLEX] Line=193, token=IDENTIFIER, value="var"
+	[FLEX] Line=193, token=SPECIAL, value=")"
+	[FLEX] Line=193, token=DELIMITER, value=";"
+[BISON] Line=193, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=192, token=KEYWORD, value="while"
-	[FLEX] Line=192, token=SPECIAL, value="("
-	[FLEX] Line=192, token=INTEGER, value="1"
-	[FLEX] Line=192, token=SPECIAL, value=")"
-	[FLEX] Line=193, token=SPECIAL, value="{"
-	[FLEX] Line=194, token=FUNCTION, value="print"
+	[FLEX] Line=194, token=KEYWORD, value="while"
 	[FLEX] Line=194, token=SPECIAL, value="("
-	[FLEX] Line=194, token=STRING, value=""Hello Wolrld\n""
+	[FLEX] Line=194, token=INTEGER, value="1"
 	[FLEX] Line=194, token=SPECIAL, value=")"
-	[FLEX] Line=194, token=DELIMITER, value=";"
-[BISON] Line=193, expression="Κλήση συνάρτησης"
-
-	[FLEX] Line=195, token=SPECIAL, value="}"
-[BISON] Line=194, expression="Σύνθετες δηλώσεις"
-
-[BISON] Line=195, expression="Σύνθετες δηλώσεις"
-
-	[FLEX] Line=196, token=KEYWORD, value="for"
+	[FLEX] Line=195, token=SPECIAL, value="{"
+	[FLEX] Line=196, token=FUNCTION, value="print"
 	[FLEX] Line=196, token=SPECIAL, value="("
-	[FLEX] Line=196, token=DELIMITER, value=";"
-!! syntax error !! -> at Line=196
-	[FLEX] Line=196, token=DELIMITER, value=";"
+	[FLEX] Line=196, token=STRING, value=""Hello Wolrld\n""
 	[FLEX] Line=196, token=SPECIAL, value=")"
-	[FLEX] Line=197, token=SPECIAL, value="{"
-	[FLEX] Line=198, token=FUNCTION, value="print"
+	[FLEX] Line=196, token=DELIMITER, value=";"
+[BISON] Line=195, expression="Κλήση συνάρτησης"
+
+	[FLEX] Line=197, token=SPECIAL, value="}"
+[BISON] Line=196, expression="Σύνθετες δηλώσεις"
+
+[BISON] Line=197, expression="Σύνθετες δηλώσεις"
+
+	[FLEX] Line=198, token=KEYWORD, value="for"
 	[FLEX] Line=198, token=SPECIAL, value="("
-	[FLEX] Line=198, token=STRING, value=""Hello World\n""
-	[FLEX] Line=198, token=SPECIAL, value=")"
 	[FLEX] Line=198, token=DELIMITER, value=";"
-[BISON] Line=197, expression="Κλήση συνάρτησης"
+!! syntax error !! -> at Line=198
+	[FLEX] Line=198, token=DELIMITER, value=";"
+	[FLEX] Line=198, token=SPECIAL, value=")"
+	[FLEX] Line=199, token=SPECIAL, value="{"
+	[FLEX] Line=200, token=FUNCTION, value="print"
+	[FLEX] Line=200, token=SPECIAL, value="("
+	[FLEX] Line=200, token=STRING, value=""Hello World\n""
+	[FLEX] Line=200, token=SPECIAL, value=")"
+	[FLEX] Line=200, token=DELIMITER, value=";"
+[BISON] Line=199, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=199, token=SPECIAL, value="}"
-[BISON] Line=199, expression="Σύνθετες δηλώσεις"
+	[FLEX] Line=201, token=SPECIAL, value="}"
+[BISON] Line=201, expression="Σύνθετες δηλώσεις"
 
-/*============= Test case [#2.10] : FINAL =============*/	[FLEX] Line=202, token=KEYWORD, value="func"
-	[FLEX] Line=202, token=IDENTIFIER, value="myAdd"
-	[FLEX] Line=202, token=SPECIAL, value="("
-	[FLEX] Line=202, token=KEYWORD, value="int"
-	[FLEX] Line=202, token=IDENTIFIER, value="num1"
-	[FLEX] Line=202, token=SPECIAL, value=","
-	[FLEX] Line=202, token=KEYWORD, value="int"
-	[FLEX] Line=202, token=IDENTIFIER, value="num2"
-	[FLEX] Line=202, token=SPECIAL, value=")"
-	[FLEX] Line=203, token=SPECIAL, value="{"
-	[FLEX] Line=204, token=KEYWORD, value="int"
-	[FLEX] Line=204, token=IDENTIFIER, value="sum"
-	[FLEX] Line=204, token=DELIMITER, value=";"
-[BISON] Line=203, expression="Δήλωση μεταβλητής"
-
-	[FLEX] Line=205, token=IDENTIFIER, value="sum"
-	[FLEX] Line=205, token=OPERATOR, value="="
-	[FLEX] Line=205, token=IDENTIFIER, value="a"
-	[FLEX] Line=205, token=OPERATOR, value="+"
-	[FLEX] Line=205, token=IDENTIFIER, value="b"
-	[FLEX] Line=205, token=DELIMITER, value=";"
-[BISON] Line=204, expression="Ανάθεση τιμής σε μεταβλητή"
-
-	[FLEX] Line=206, token=FUNCTION, value="print"
-	[FLEX] Line=206, token=SPECIAL, value="("
-	[FLEX] Line=206, token=STRING, value=""Sum is: ""
-	[FLEX] Line=206, token=SPECIAL, value=","
+/*============= Test case [#2.10] : FINAL =============*/	[FLEX] Line=204, token=KEYWORD, value="func"
+	[FLEX] Line=204, token=IDENTIFIER, value="myAdd"
+	[FLEX] Line=204, token=SPECIAL, value="("
+	[FLEX] Line=204, token=KEYWORD, value="int"
+	[FLEX] Line=204, token=IDENTIFIER, value="num1"
+	[FLEX] Line=204, token=SPECIAL, value=","
+	[FLEX] Line=204, token=KEYWORD, value="int"
+	[FLEX] Line=204, token=IDENTIFIER, value="num2"
+	[FLEX] Line=204, token=SPECIAL, value=")"
+	[FLEX] Line=205, token=SPECIAL, value="{"
+	[FLEX] Line=206, token=KEYWORD, value="int"
 	[FLEX] Line=206, token=IDENTIFIER, value="sum"
-	[FLEX] Line=206, token=SPECIAL, value=")"
 	[FLEX] Line=206, token=DELIMITER, value=";"
-[BISON] Line=205, expression="Κλήση συνάρτησης"
+[BISON] Line=205, expression="Δήλωση μεταβλητής"
 
-	[FLEX] Line=207, token=SPECIAL, value="}"
-[BISON] Line=207, expression="Δήλωση συναρτήσεων χρήστη"
+	[FLEX] Line=207, token=IDENTIFIER, value="sum"
+	[FLEX] Line=207, token=OPERATOR, value="="
+	[FLEX] Line=207, token=IDENTIFIER, value="a"
+	[FLEX] Line=207, token=OPERATOR, value="+"
+	[FLEX] Line=207, token=IDENTIFIER, value="b"
+	[FLEX] Line=207, token=DELIMITER, value=";"
+[BISON] Line=206, expression="Ανάθεση τιμής σε μεταβλητή"
 
-	[FLEX] Line=209, token=KEYWORD, value="func"
-	[FLEX] Line=209, token=IDENTIFIER, value="main"
-	[FLEX] Line=209, token=SPECIAL, value="("
-	[FLEX] Line=209, token=SPECIAL, value=")"
-	[FLEX] Line=210, token=SPECIAL, value="{"
-	[FLEX] Line=211, token=KEYWORD, value="int"
-	[FLEX] Line=211, token=IDENTIFIER, value="a"
-	[FLEX] Line=211, token=DELIMITER, value=";"
-[BISON] Line=210, expression="Δήλωση μεταβλητής"
+	[FLEX] Line=208, token=FUNCTION, value="print"
+	[FLEX] Line=208, token=SPECIAL, value="("
+	[FLEX] Line=208, token=STRING, value=""Sum is: ""
+	[FLEX] Line=208, token=SPECIAL, value=","
+	[FLEX] Line=208, token=IDENTIFIER, value="sum"
+	[FLEX] Line=208, token=SPECIAL, value=")"
+	[FLEX] Line=208, token=DELIMITER, value=";"
+[BISON] Line=207, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=212, token=KEYWORD, value="int"
-	[FLEX] Line=212, token=IDENTIFIER, value="b"
-	[FLEX] Line=212, token=DELIMITER, value=";"
-[BISON] Line=211, expression="Δήλωση μεταβλητής"
+	[FLEX] Line=209, token=SPECIAL, value="}"
+[BISON] Line=209, expression="Δήλωση συναρτήσεων χρήστη"
 
-	[FLEX] Line=213, token=FUNCTION, value="scan"
-	[FLEX] Line=213, token=SPECIAL, value="("
+	[FLEX] Line=211, token=KEYWORD, value="func"
+	[FLEX] Line=211, token=IDENTIFIER, value="main"
+	[FLEX] Line=211, token=SPECIAL, value="("
+	[FLEX] Line=211, token=SPECIAL, value=")"
+	[FLEX] Line=212, token=SPECIAL, value="{"
+	[FLEX] Line=213, token=KEYWORD, value="int"
 	[FLEX] Line=213, token=IDENTIFIER, value="a"
-	[FLEX] Line=213, token=SPECIAL, value=")"
 	[FLEX] Line=213, token=DELIMITER, value=";"
-[BISON] Line=212, expression="Κλήση συνάρτησης"
+[BISON] Line=212, expression="Δήλωση μεταβλητής"
 
-	[FLEX] Line=214, token=FUNCTION, value="scan"
-	[FLEX] Line=214, token=SPECIAL, value="("
+	[FLEX] Line=214, token=KEYWORD, value="int"
 	[FLEX] Line=214, token=IDENTIFIER, value="b"
-	[FLEX] Line=214, token=SPECIAL, value=")"
 	[FLEX] Line=214, token=DELIMITER, value=";"
-[BISON] Line=213, expression="Κλήση συνάρτησης"
+[BISON] Line=213, expression="Δήλωση μεταβλητής"
 
-	[FLEX] Line=215, token=IDENTIFIER, value="myAdd"
+	[FLEX] Line=215, token=FUNCTION, value="scan"
 	[FLEX] Line=215, token=SPECIAL, value="("
 	[FLEX] Line=215, token=IDENTIFIER, value="a"
-	[FLEX] Line=215, token=SPECIAL, value=","
-	[FLEX] Line=215, token=IDENTIFIER, value="b"
 	[FLEX] Line=215, token=SPECIAL, value=")"
 	[FLEX] Line=215, token=DELIMITER, value=";"
 [BISON] Line=214, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=216, token=SPECIAL, value="}"
-[BISON] Line=215, expression="Δήλωση συναρτήσεων χρήστη"
+	[FLEX] Line=216, token=FUNCTION, value="scan"
+	[FLEX] Line=216, token=SPECIAL, value="("
+	[FLEX] Line=216, token=IDENTIFIER, value="b"
+	[FLEX] Line=216, token=SPECIAL, value=")"
+	[FLEX] Line=216, token=DELIMITER, value=";"
+[BISON] Line=215, expression="Κλήση συνάρτησης"
 
-[BISON] Line=216, expression="Δήλωση συναρτήσεων χρήστη"
+	[FLEX] Line=217, token=IDENTIFIER, value="myAdd"
+	[FLEX] Line=217, token=SPECIAL, value="("
+	[FLEX] Line=217, token=IDENTIFIER, value="a"
+	[FLEX] Line=217, token=SPECIAL, value=","
+	[FLEX] Line=217, token=IDENTIFIER, value="b"
+	[FLEX] Line=217, token=SPECIAL, value=")"
+	[FLEX] Line=217, token=DELIMITER, value=";"
+[BISON] Line=216, expression="Κλήση συνάρτησης"
 
-	[FLEX] Line=218, token=KEYWORD, value="func"
-	[FLEX] Line=218, token=IDENTIFIER, value="errorHandling"
-	[FLEX] Line=218, token=SPECIAL, value="("
-	[FLEX] Line=218, token=SPECIAL, value=")"
-	[FLEX] Line=219, token=SPECIAL, value="{"
-	[FLEX] Line=220, token=KEYWORD, value="long"
-	[FLEX] Line=220, token=IDENTIFIER, value="a"
-	[FLEX] Line=220, token=SPECIAL, value=","
-	[FLEX] Line=220, token=IDENTIFIER, value="b"
-	[FLEX] Line=220, token=SPECIAL, value=","
-	[FLEX] Line=220, token=IDENTIFIER, value="c"
-	[FLEX] Line=220, token=SPECIAL, value=","
-	[FLEX] Line=220, token=IDENTIFIER, value="d"
-	[FLEX] Line=220, token=SPECIAL, value=","
-	[FLEX] Line=220, token=IDENTIFIER, value="e"
-	[FLEX] Line=220, token=DELIMITER, value=";"
-[BISON] Line=219, expression="Δήλωση μεταβλητής"
+	[FLEX] Line=218, token=SPECIAL, value="}"
+[BISON] Line=217, expression="Δήλωση συναρτήσεων χρήστη"
 
-	[FLEX] Line=221, token=KEYWORD, value="int"
-	[FLEX] Line=221, token=IDENTIFIER, value="i"
-	[FLEX] Line=221, token=DELIMITER, value=";"
-[BISON] Line=220, expression="Δήλωση μεταβλητής"
+[BISON] Line=218, expression="Δήλωση συναρτήσεων χρήστη"
 
-	[FLEX] Line=222, token=KEYWORD, value="int"
-	[FLEX] Line=222, token=IDENTIFIER, value="x"
+	[FLEX] Line=220, token=KEYWORD, value="func"
+	[FLEX] Line=220, token=IDENTIFIER, value="errorHandling"
+	[FLEX] Line=220, token=SPECIAL, value="("
+	[FLEX] Line=220, token=SPECIAL, value=")"
+	[FLEX] Line=221, token=SPECIAL, value="{"
+	[FLEX] Line=222, token=KEYWORD, value="long"
+	[FLEX] Line=222, token=IDENTIFIER, value="a"
+	[FLEX] Line=222, token=SPECIAL, value=","
+	[FLEX] Line=222, token=IDENTIFIER, value="b"
+	[FLEX] Line=222, token=SPECIAL, value=","
+	[FLEX] Line=222, token=IDENTIFIER, value="c"
+	[FLEX] Line=222, token=SPECIAL, value=","
+	[FLEX] Line=222, token=IDENTIFIER, value="d"
+	[FLEX] Line=222, token=SPECIAL, value=","
+	[FLEX] Line=222, token=IDENTIFIER, value="e"
 	[FLEX] Line=222, token=DELIMITER, value=";"
 [BISON] Line=221, expression="Δήλωση μεταβλητής"
 
-	[FLEX] Line=224, token=FUNCTION, value="scan"
-	[FLEX] Line=224, token=SPECIAL, value="("
-	[FLEX] Line=224, token=IDENTIFIER, value="a"
-	[FLEX] Line=224, token=SPECIAL, value=","
-!! syntax error !! -> at Line=224
-	[FLEX] Line=224, token=IDENTIFIER, value="b"
-	[FLEX] Line=224, token=SPECIAL, value=","
-	[FLEX] Line=224, token=IDENTIFIER, value="c"
-	[FLEX] Line=224, token=SPECIAL, value=","
-	[FLEX] Line=224, token=IDENTIFIER, value="d"
-	[FLEX] Line=224, token=SPECIAL, value=","
-	[FLEX] Line=224, token=IDENTIFIER, value="e"
-	[FLEX] Line=224, token=SPECIAL, value=")"
-	[FLEX] Line=224, token=DELIMITER, value=";"
-	[FLEX] Line=225, token=IDENTIFIER, value="pin1"
-	[FLEX] Line=225, token=OPERATOR, value="="
-	[FLEX] Line=225, token=SPECIAL, value="["
-	[FLEX] Line=225, token=IDENTIFIER, value="a"
-	[FLEX] Line=225, token=SPECIAL, value=","
-	[FLEX] Line=225, token=IDENTIFIER, value="b"
-	[FLEX] Line=225, token=SPECIAL, value=","
-	[FLEX] Line=225, token=IDENTIFIER, value="c"
-	[FLEX] Line=225, token=SPECIAL, value="]"
-	[FLEX] Line=225, token=DELIMITER, value=";"
-[BISON] Line=225, expression="Ανάθεση τιμής σε μεταβλητή"
+	[FLEX] Line=223, token=KEYWORD, value="int"
+	[FLEX] Line=223, token=IDENTIFIER, value="i"
+	[FLEX] Line=223, token=DELIMITER, value=";"
+[BISON] Line=222, expression="Δήλωση μεταβλητής"
 
-	[FLEX] Line=226, token=IDENTIFIER, value="pin2"
-	[FLEX] Line=226, token=OPERATOR, value="="
-	[FLEX] Line=226, token=SPECIAL, value="["
+	[FLEX] Line=224, token=KEYWORD, value="int"
+	[FLEX] Line=224, token=IDENTIFIER, value="x"
+	[FLEX] Line=224, token=DELIMITER, value=";"
+[BISON] Line=223, expression="Δήλωση μεταβλητής"
+
+	[FLEX] Line=226, token=FUNCTION, value="scan"
+	[FLEX] Line=226, token=SPECIAL, value="("
+	[FLEX] Line=226, token=IDENTIFIER, value="a"
+	[FLEX] Line=226, token=SPECIAL, value=","
+!! syntax error !! -> at Line=226
+	[FLEX] Line=226, token=IDENTIFIER, value="b"
+	[FLEX] Line=226, token=SPECIAL, value=","
+	[FLEX] Line=226, token=IDENTIFIER, value="c"
+	[FLEX] Line=226, token=SPECIAL, value=","
 	[FLEX] Line=226, token=IDENTIFIER, value="d"
 	[FLEX] Line=226, token=SPECIAL, value=","
 	[FLEX] Line=226, token=IDENTIFIER, value="e"
-	[FLEX] Line=226, token=SPECIAL, value="]"
+	[FLEX] Line=226, token=SPECIAL, value=")"
 	[FLEX] Line=226, token=DELIMITER, value=";"
-[BISON] Line=226, expression="Ανάθεση τιμής σε μεταβλητή"
-
-	[FLEX] Line=227, token=IDENTIFIER, value="pinFinal"
+	[FLEX] Line=227, token=IDENTIFIER, value="pin1"
 	[FLEX] Line=227, token=OPERATOR, value="="
 	[FLEX] Line=227, token=SPECIAL, value="["
 	[FLEX] Line=227, token=IDENTIFIER, value="a"
@@ -1220,72 +1198,94 @@
 	[FLEX] Line=227, token=SPECIAL, value=","
 	[FLEX] Line=227, token=IDENTIFIER, value="c"
 	[FLEX] Line=227, token=SPECIAL, value="]"
-	[FLEX] Line=227, token=OPERATOR, value="+"
-!! Token error !! -> at Line=227
-	8 character(s) ignored so far
-	[FLEX] Line=227, token=IDENTIFIER, value="e"
-!! syntax error !! -> at Line=227
-	[FLEX] Line=227, token=SPECIAL, value="]"
 	[FLEX] Line=227, token=DELIMITER, value=";"
-	[FLEX] Line=229, token=KEYWORD, value="for"
-	[FLEX] Line=229, token=SPECIAL, value="("
-	[FLEX] Line=229, token=IDENTIFIER, value="i"
-	[FLEX] Line=229, token=OPERATOR, value="="
-	[FLEX] Line=229, token=INTEGER, value="0"
-	[FLEX] Line=229, token=DELIMITER, value=";"
-	[FLEX] Line=229, token=IDENTIFIER, value="i"
-	[FLEX] Line=229, token=OPERATOR, value="<"
+[BISON] Line=227, expression="Ανάθεση τιμής σε μεταβλητή"
+
+	[FLEX] Line=228, token=IDENTIFIER, value="pin2"
+	[FLEX] Line=228, token=OPERATOR, value="="
+	[FLEX] Line=228, token=SPECIAL, value="["
+	[FLEX] Line=228, token=IDENTIFIER, value="d"
+	[FLEX] Line=228, token=SPECIAL, value=","
+	[FLEX] Line=228, token=IDENTIFIER, value="e"
+	[FLEX] Line=228, token=SPECIAL, value="]"
+	[FLEX] Line=228, token=DELIMITER, value=";"
+[BISON] Line=228, expression="Ανάθεση τιμής σε μεταβλητή"
+
 	[FLEX] Line=229, token=IDENTIFIER, value="pinFinal"
+	[FLEX] Line=229, token=OPERATOR, value="="
+	[FLEX] Line=229, token=SPECIAL, value="["
+	[FLEX] Line=229, token=IDENTIFIER, value="a"
+	[FLEX] Line=229, token=SPECIAL, value=","
+	[FLEX] Line=229, token=IDENTIFIER, value="b"
+	[FLEX] Line=229, token=SPECIAL, value=","
+	[FLEX] Line=229, token=IDENTIFIER, value="c"
+	[FLEX] Line=229, token=SPECIAL, value="]"
+	[FLEX] Line=229, token=OPERATOR, value="+"
 !! Token error !! -> at Line=229
+	8 character(s) ignored so far
+	[FLEX] Line=229, token=IDENTIFIER, value="e"
 !! syntax error !! -> at Line=229
-	11 character(s) ignored so far
-	[FLEX] Line=229, token=IDENTIFIER, value="i"
-	[FLEX] Line=229, token=OPERATOR, value="++"
-	[FLEX] Line=229, token=SPECIAL, value=")"
-	[FLEX] Line=230, token=SPECIAL, value="{"
-	[FLEX] Line=231, token=IDENTIFIER, value="x"
-	[FLEX] Line=231, token=OPERATOR, value="="
-	[FLEX] Line=231, token=IDENTIFIER, value="pinFinal"
-	[FLEX] Line=231, token=SPECIAL, value="["
+	[FLEX] Line=229, token=SPECIAL, value="]"
+	[FLEX] Line=229, token=DELIMITER, value=";"
+	[FLEX] Line=231, token=KEYWORD, value="for"
+	[FLEX] Line=231, token=SPECIAL, value="("
 	[FLEX] Line=231, token=IDENTIFIER, value="i"
-	[FLEX] Line=231, token=SPECIAL, value="]"
+	[FLEX] Line=231, token=OPERATOR, value="="
+	[FLEX] Line=231, token=INTEGER, value="0"
 	[FLEX] Line=231, token=DELIMITER, value=";"
-[BISON] Line=230, expression="Ανάθεση τιμής σε μεταβλητή"
+	[FLEX] Line=231, token=IDENTIFIER, value="i"
+	[FLEX] Line=231, token=OPERATOR, value="<"
+	[FLEX] Line=231, token=IDENTIFIER, value="pinFinal"
+!! Token error !! -> at Line=231
+!! syntax error !! -> at Line=231
+	11 character(s) ignored so far
+	[FLEX] Line=231, token=IDENTIFIER, value="i"
+	[FLEX] Line=231, token=OPERATOR, value="++"
+	[FLEX] Line=231, token=SPECIAL, value=")"
+	[FLEX] Line=232, token=SPECIAL, value="{"
+	[FLEX] Line=233, token=IDENTIFIER, value="x"
+	[FLEX] Line=233, token=OPERATOR, value="="
+	[FLEX] Line=233, token=IDENTIFIER, value="pinFinal"
+	[FLEX] Line=233, token=SPECIAL, value="["
+	[FLEX] Line=233, token=IDENTIFIER, value="i"
+	[FLEX] Line=233, token=SPECIAL, value="]"
+	[FLEX] Line=233, token=DELIMITER, value=";"
+[BISON] Line=232, expression="Ανάθεση τιμής σε μεταβλητή"
 
-	[FLEX] Line=232, token=IDENTIFIER, value="x"
-	[FLEX] Line=232, token=OPERATOR, value="/="
-	[FLEX] Line=232, token=INTEGER, value="2"
-	[FLEX] Line=232, token=DELIMITER, value=";"
-[BISON] Line=231, expression="Ανάθεση τιμής σε μεταβλητή"
-
-	[FLEX] Line=233, token=KEYWORD, value="if"
-	[FLEX] Line=233, token=SPECIAL, value="("
-	[FLEX] Line=233, token=SPECIAL, value="("
-	[FLEX] Line=233, token=IDENTIFIER, value="x"
-	[FLEX] Line=233, token=OPERATOR, value="=="
-	[FLEX] Line=233, token=INTEGER, value="0"
-	[FLEX] Line=233, token=SPECIAL, value=")"
-	[FLEX] Line=233, token=SPECIAL, value=")"
-## Warning ## -> Double parethensis detected at Line=233
-[BISON] Line=233, expression="Δήλωση if"
-
-	[FLEX] Line=234, token=FUNCTION, value="print"
-	[FLEX] Line=234, token=SPECIAL, value="("
-	[FLEX] Line=234, token=STRING, value=""%d is Even\n""
-	[FLEX] Line=234, token=SPECIAL, value=","
-	[FLEX] Line=234, token=IDENTIFIER, value="pinFinal"
-	[FLEX] Line=234, token=SPECIAL, value="["
-	[FLEX] Line=234, token=IDENTIFIER, value="i"
-	[FLEX] Line=234, token=SPECIAL, value="]"
-	[FLEX] Line=234, token=SPECIAL, value=")"
+	[FLEX] Line=234, token=IDENTIFIER, value="x"
+	[FLEX] Line=234, token=OPERATOR, value="/="
+	[FLEX] Line=234, token=INTEGER, value="2"
 	[FLEX] Line=234, token=DELIMITER, value=";"
-[BISON] Line=233, expression="Κλήση συνάρτησης"
+[BISON] Line=233, expression="Ανάθεση τιμής σε μεταβλητή"
 
-	[FLEX] Line=235, token=SPECIAL, value="}"
-[BISON] Line=235, expression="Σύνθετες δηλώσεις"
+	[FLEX] Line=235, token=KEYWORD, value="if"
+	[FLEX] Line=235, token=SPECIAL, value="("
+	[FLEX] Line=235, token=SPECIAL, value="("
+	[FLEX] Line=235, token=IDENTIFIER, value="x"
+	[FLEX] Line=235, token=OPERATOR, value="=="
+	[FLEX] Line=235, token=INTEGER, value="0"
+	[FLEX] Line=235, token=SPECIAL, value=")"
+	[FLEX] Line=235, token=SPECIAL, value=")"
+## Warning ## -> Double parethensis detected at Line=235
+[BISON] Line=235, expression="Δήλωση if"
 
-	[FLEX] Line=236, token=SPECIAL, value="}"
-!! syntax error !! -> at Line=236
+	[FLEX] Line=236, token=FUNCTION, value="print"
+	[FLEX] Line=236, token=SPECIAL, value="("
+	[FLEX] Line=236, token=STRING, value=""%d is Even\n""
+	[FLEX] Line=236, token=SPECIAL, value=","
+	[FLEX] Line=236, token=IDENTIFIER, value="pinFinal"
+	[FLEX] Line=236, token=SPECIAL, value="["
+	[FLEX] Line=236, token=IDENTIFIER, value="i"
+	[FLEX] Line=236, token=SPECIAL, value="]"
+	[FLEX] Line=236, token=SPECIAL, value=")"
+	[FLEX] Line=236, token=DELIMITER, value=";"
+[BISON] Line=235, expression="Κλήση συνάρτησης"
+
+	[FLEX] Line=237, token=SPECIAL, value="}"
+[BISON] Line=237, expression="Σύνθετες δηλώσεις"
+
+	[FLEX] Line=238, token=SPECIAL, value="}"
+!! syntax error !! -> at Line=238
 
 
 		ΣΤΑΤΙΣΤΙΚΑ ΣΥΝΤΑΚΤΙΚΗΣ ΑΝΑΛΥΣΗΣ
@@ -1294,7 +1294,7 @@ BISON -> Η συντακτική ανάλυση ολοκλήρωθηκε με α
 		(με 14 warnings)
 
 		ΣΩΣΤΕΣ ΛΕΞΕΙΣ: 329
-		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 114
+		ΣΩΣΤΕΣ ΕΚΦΡΑΣΕΙΣ: 116
 		ΛΑΘΟΣ ΛΕΞΕΙΣ: 11
 		ΛΑΘΟΣ ΕΚΦΡΑΣΕΙΣ: 20
 
