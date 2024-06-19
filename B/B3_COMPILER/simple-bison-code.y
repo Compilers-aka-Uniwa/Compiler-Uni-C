@@ -66,6 +66,7 @@
 %token DELIMITER ";"
 %token SSCAN SPRINT SLEN SCMP
 %token NEWLINE
+%token TOKEN_ERROR
 
 /* Ορισμός προτεραιοτήτων στα tokens */
 %left ","   
@@ -79,8 +80,7 @@
 %right "&" "!" 
 %left "++" "--"
 
-%token TOKEN_ERROR 
-
+ 
 /* Έναρξη προγραμμάτος*/
 %start program
 

@@ -20,7 +20,7 @@
 extern int line;
 extern int flag;
 
-extern int correct_words; //Correct words counter
+extern int correct_words; 
 extern int lex_warnings;
 
 void yyerror (const char *msg);
