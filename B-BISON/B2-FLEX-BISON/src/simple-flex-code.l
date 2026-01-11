@@ -1,9 +1,9 @@
-/* Η ανάγνωση περιορίζεται σε ένα μόνο αρχείο και τερματίζεται στο πρώτο EOF */
+/* Reading is limited to a single file and terminates at the first EOF */
 %option noyywrap
 
-/* Κώδικας C για τον ορισμό των απαιτούμενων header files και των μεταβλητών.
-   Οτιδήποτε ανάμεσα στα %{ και %} μεταφέρεται αυτόματα στο αρχείο C που
-   θα δημιουργήσει το Flex. */
+/* C code for defining the required header files and variables.
+   Anything between %{ and %} is automatically transferred to the C file that
+   Flex will create. */
 
 %{
 
@@ -12,10 +12,10 @@
 #include <stdlib.h>
 
 
-/* Αρχείο κεφαλίδας που περιέχει λίστα με όλα τα tokens */
+/* Header file containing a list of all tokens */
 #include "simple-bison-code.tab.h"
 
-/* Ορισμός μετρητή τρέχουσας γραμμής */
+/* Definition of current line counter */
 extern int line;
 extern int flag;
 
@@ -24,9 +24,9 @@ void prn(const char *token);
 %}
 
 
-/* Ονόματα και αντίστοιχοι ορισμοί (υπό μορφή κανονικής έκφρασης).
-   Μετά από αυτό, μπορεί να γίνει χρήση των ονομάτων (αριστερά) αντί των,
-   συνεπώς ιδιαίτερα μακροσκελών και δυσνόητων, κανονικών εκφράσεων */
+/* Names and corresponding definitions (in the form of regular expressions).
+   After this, the names (on the left) can be used instead of,
+   consequently particularly lengthy and obscure, regular expressions */
 
 IDENTIFIER       [a-zA-Z_][a-zA-Z0-9_]{0,31}
 STRING           \"([^"\\]*(\\[\\n"][^"\\]*)*)\"
@@ -37,7 +37,7 @@ DELIMITER        \;
 WHITESPACE       [ \t]+  
 NEWLINE          \n
 UNKNOWN          [^ \t\r\n;] 
-/* ΚΑΤΑΣΤΑΣΗ UNKNOWN */
+/* STATE UNKNOWN */
 %x UNKNOWN_STATE 
 
 %%
@@ -105,8 +105,8 @@ UNKNOWN          [^ \t\r\n;]
 {WHITESPACE}    { }
 {NEWLINE}       { line++; return NEWLINE; }
 <<EOF>>         { return EOF; }
-{UNKNOWN}       { BEGIN(UNKNOWN_STATE); } /* ΕΤΣΙ ΚΑΙ ΒΡΕΙΣ ΑΓΝΩΣΤΟ ΧΑΡΑΚΤΗΡΑ ΜΠΕΣ ΣΤΗΝ ΚΑΤΑΣΤΑΣΗ UNKNOWN */
-<UNKNOWN_STATE>{UNKNOWN}+ { prn("UNKNOWN"); BEGIN(INITIAL); } /* ΑΝΑΓΝΩΡΙΣΕ ΤΗΝ ΑΓΝΩΣΤΗ ΣΥΜΒΟΛΟΣΕΙΡΑ */
+{UNKNOWN}       { BEGIN(UNKNOWN_STATE); } /* IF AN UNKNOWN CHARACTER IS FOUND, ENTER THE UNKNOWN STATE */
+<UNKNOWN_STATE>{UNKNOWN}+ { prn("UNKNOWN"); BEGIN(INITIAL); } /* RECOGNIZED THE UNKNOWN SYMBOL SEQUENCE */
 
 %%
 

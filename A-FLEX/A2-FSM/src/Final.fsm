@@ -1,0 +1,164 @@
+START = SZ             
+
+// ================== 0_Initial State ==================
+
+SZ:                    // --- [State Z] Token recognition state ---
+    A-Z -> SMCH             // 1_Identifiers
+    _   -> SMCH             // 1_Identifiers
+    a-z -> SMCH             // 1_Identifiers
+
+    "   -> SOST             // 2_Strings
+
+    0   -> S0               // 3_Integers or 4_Floating-point numbers
+    1-9 -> SDEC             // 3_Integers or 4_Floating-point numbers
+                       
+    /   -> SOCO             // 5_Comments
+
+    \t  -> SWH              // 6_White_spaces characters
+    \s  -> SWH              // 6_White_spaces characters
+
+    EOF -> GOOD             // End of file
+
+    *   -> BAD              // Invalid character
+
+// ================== 1_Identifiers ==================
+
+SMCH:                   // --- [State Mid Characters] State for identifier characters ---
+    A-Z a-z -> SMCH         // Lowercase or uppercase Latin letters
+    _       -> SMCH         // Underscore
+    0-9     -> SMCH         // Digits
+    \n      -> SZ           // Identifier is valid and reading continues
+    EOF     -> GOOD         // Identifier is valid and reading terminates
+    *       -> BAD          // Identifier is invalid
+
+// ================== 2_Strings ==================
+
+SOST:                   // --- [State Open String] State for string literal content ---
+    "   -> SCST            // String closes with double quote
+    \\  -> SOSEQ           // Escape sequence follows
+    *   -> SOST            // Any other character follows
+
+SOSEQ:                  // --- [State Open Sequence] State for escape sequence characters ---
+    \\  -> SCSEQ           // Backslash character (\)
+    "   -> SCSEQ           // Double quote
+    n   -> SCSEQ           // 'n' for newline
+    *   -> BAD             // String literal is invalid
+
+SCSEQ:                  // --- [State Close Sequence] State after escape sequence ---
+    "   -> SCST            // String closes with double quote
+    \\  -> SOSEQ           // Return to escape sequence state
+    *   -> SCSEQ           // Any other character follows
+
+SCST:                   // --- [State Close String] State for closing a string literal ---
+    \n  -> SZ              // String literal is valid and reading continues
+    EOF -> GOOD            // String literal is valid and reading terminates
+    *   -> BAD             // String literal is invalid
+
+// ================== 3_Integers & 4_Floating-point Numbers ==================
+
+S0:                     // --- [State 0] State for 0 as the integer part ---
+    0-7 -> SOCT             // Octal integer
+    x X -> SHEX             // Hexadecimal integer
+    .   -> SDOT             // Integer part is 0 and a decimal point follows
+    E e -> SPOW             // Base is 0 and scientific exponent follows
+    \n  -> SZ               // Integer 0 is valid and reading continues
+    EOF -> GOOD             // Integer 0 is valid and reading terminates
+    *   -> BAD              // Integer is invalid
+
+SDEC:                   // --- [State Decimal] State for positive decimal integer ---
+    0-9 -> SDEC             // More digits from 0-9 follow
+    .   -> SDOT             // Decimal point follows
+    E e -> SPOW             // Scientific exponent follows
+    \n  -> SZ               // Decimal integer is valid and reading continues
+    EOF -> GOOD             // Decimal integer is valid and reading terminates
+    *   -> BAD              // Integer is invalid
+
+SHEX:                   // --- [State Hexadecimal] State for hexadecimal integer ---
+    0-9 A-F -> SHEX         // More digits (0-9, A-F) follow
+    \n      -> SZ           // Hexadecimal integer is valid and reading continues
+    EOF     -> GOOD         // Hexadecimal integer is valid and reading terminates
+    *       -> BAD          // Integer is invalid
+
+SOCT:                   // --- [State Octal] State for octal integer ---
+    0-7 -> SOCT             // More digits from 0-7 follow
+    \n  -> SZ               // Octal integer is valid and reading continues
+    EOF -> GOOD             // Octal integer is valid and reading terminates
+    *   -> BAD              // Integer is invalid
+
+// ================== 4_Floating-point Numbers ==================
+
+SDOT:                    // --- [State Dot] State for decimal point ---
+    0   -> SDOT             // Digit 0 follows
+    1-9 -> SFL              // Digits 1-9 follow for the fractional part
+    *   -> BAD              // Number is invalid
+
+SFL:                     // --- [State Float] State for fractional part ---
+    0-9 -> SFL              // More digits from 0-9 follow
+    E e -> SPOW             // Scientific exponent follows
+    \n  -> SZ               // Number is valid and reading continues
+    EOF -> GOOD             // Number is valid and reading terminates
+    *   -> BAD              // Number is invalid
+
+SPOW:                    // --- [State Power] State for exponent ---
+    -   -> SNE              // Negative sign for exponent follows
+    0   -> SE0              // Exponent is 0
+    1-9 -> SPE              // Positive exponent follows
+    *   -> BAD              // Number is invalid
+
+SNE:                     // --- [State Negative Exponential] State for negative exponent ---
+    1-9 -> SPE              // Digits 1-9 follow for negative exponent
+    *   -> BAD              // Number is invalid
+
+SPE:                     // --- [State Positive Exponential] State for positive exponent ---
+    0-9 -> SPE              // More digits follow for positive exponent
+    \n  -> SZ               // Number is valid and reading continues
+    EOF -> GOOD             // Number is valid and reading terminates
+    *   -> BAD              // Number is invalid
+
+SE0:                     // --- [State Exponential 0] State for exponent digit 0 ---
+    \n  -> SZ               // Number is valid and reading continues
+    EOF -> GOOD             // Number is valid and reading terminates
+    *   -> BAD              // Number is invalid
+
+// ================== 5_Comments ==================
+
+SOCO:                   // --- [State Open Comment] State of opened comment ---
+    /  -> SCSL              // Opens a single-line comment
+    \* -> SOML              // Opens a multi-line comment
+    *  -> BAD               // Comment is invalid
+
+SOML:                   // --- [State Open Multiple Line (Comment)] State for multi-line comment ---
+    \*  -> SMML             // Intent to close the comment
+    *   -> SOML             // Comment content
+    EOF -> BAD              // Comment is invalid
+
+SMML:                   // --- [State Mid Multiple Line (Comment)] State inside multi-line comment ---
+    /   -> SCML             // Closes the multi-line comment
+    *   -> SOML             // Return to comment content state
+    EOF -> BAD              // Comment is invalid
+
+SCML:                   // --- [State Close Multiple Line (Comment)] State of valid multi-line comment ---
+    \n  -> SZ               // Comment is valid and reading continues
+    EOF -> GOOD             // Comment is valid and reading terminates
+    *   -> BAD              // Comment is invalid
+
+SCSL:                   // --- [State Close Single Line (Comment)] State of valid single-line comment ---
+    \n  -> SZ               // Comment is valid and reading continues
+    EOF -> GOOD             // Comment is valid and reading terminates
+    *   -> SCSL             // Continue single-line comment content
+
+// ================== 6_White_spaces ==================
+
+SWH:                   // --- [State Whitespace] State for reading whitespace characters ---
+    *     -> SZ           // Any other character read, return to initial state
+    \n    -> GOOD         // Ends with whitespace followed by newline
+    \s \t -> SWH          // Another whitespace character follows, stay in same state
+
+// ================== Exit State: NO ==================
+
+BAD:
+    * -> BAD
+
+// ================== Exit State: YES ==================
+
+GOOD(OK):

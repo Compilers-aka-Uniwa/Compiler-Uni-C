@@ -10,7 +10,7 @@
 const int EOFCHAR=128, ALLCHAR=129, NOINPUT=0;
 
 // Comments_1:
-// eksigeiste ti simainoun ta diafora fields tou struct state
+// Explain what the different fields of the struct state mean
 typedef struct { 
 	char * name;						
 	int number;							
@@ -26,7 +26,7 @@ typedef struct entry {
 	state * contents;
 } tableEntry;
 
-tableEntry * table = NULL;	//Comments_2:  Se ti xrisimeuei auto?
+tableEntry * table = NULL;	// Comments_2:  What is this used for?
 
 char line[MAXLINE]; 
 char filename[300];
@@ -35,10 +35,10 @@ char symbol[110];
 FILE *fin;
 
 //////////////////// LOOKUP //////////////////////////////
-// Comments_3: Ti apotelesma exei auti i sunartisi?
+// Comments_3: What is the result of this function?
 state *lookup(char *name) { 
 
-	//Comments_4:  Ti akribws kanei auto to loop?
+	// Comments_4:  What exactly does this loop do?
 	if (table != NULL) {
 		tableEntry *runner = table;
 		while (runner != NULL) {
@@ -49,8 +49,8 @@ state *lookup(char *name) {
 	}
 		
 
-	// Comments_5: Pote ekteleitai o parakatw kwdikas (mexri to telos tis sunartisis)
-	// kai ti apotelesmata/synepeies exei?
+	// Comments_5: When is the code below executed (until the end of the function)
+	// and what results/consequences does it have?
 	state *p= (state*) malloc(1*sizeof(state));
 	p->name=strdup(name);						 
 	numstates+=1;								
@@ -82,7 +82,7 @@ state *lookup(char *name) {
 
 /////////////////// LOWER ///////////////////////////////
 
-// Comments_7: Perigrapste ti apotelesma exei i ektelesi autis tis sunartisis
+// Comments_7: Describe the effect/result of executing this function
 
 void lower(char *s) { 
 	int i;
@@ -132,7 +132,7 @@ char *charstring(int c) {
 
 ///////////////////// VALIDSTATE ///////////////////////////
 
-// Comments_8: Ti apotelesma exei auti i sunartisi?
+// Comments_8: What is the result of this function?
 
 int validstate(char *s) { 
 	int i;
@@ -150,7 +150,7 @@ int validstate(char *s) {
 
 /////////////////////// SNEAKCH ////////////////////////////
 
-// Comments_9: Poios einai o skopos autis tis sunartisis. Ti epistrefei?
+// Comments_9: What is the purpose of this function? What does it return?
 
 char sneakch() { 
 	char c=line[pos];
@@ -164,7 +164,7 @@ char sneakch() {
 } 
 
 /////////////////////// GETSYM //////////////////////////////
-// Comments_10: Poios einai o skopos autis tis sunartisis. 
+// Comments_10: What is the purpose of this function?
 
 void getsym() { 
 	int len=0;
@@ -253,7 +253,7 @@ void getsym() {
 
 //////////////////// PARSEARGS //////////////////////////////////
 
-// Comments_11: Poios einai o skopos autis tis sunartisis?
+// Comments_11: What is the purpose of this function?
 
 void parseargs(int argc, char *argv[]) {
 	filename[0]=0;
@@ -305,7 +305,7 @@ int main (int argc, char *argv[]) {
 	}
 	states[0]=s0;
 
-	// Comments_12: Perigrapste se 2-3 grammes to skopo autou tou while loop.
+	// Comments_12: Describe in 2-3 lines the purpose of this while loop.
 	while (1) { 
 		char *s=fgets(line, MAXLINE, fin);   
 		pos=0;
@@ -317,7 +317,7 @@ int main (int argc, char *argv[]) {
 			continue;
 		len=strlen(symbol);
 		c=sneakch();				
-		if (c==':') { 	// Comments_13: Perigrapste to skopo autou tou if (c==':')				
+		if (c==':') { 	// Comments_13: Describe the purpose of this if (c==':')				
 			lower(symbol);				
 			if (!validstate(symbol)) { 
 				fprintf(stderr, "fsm: Line %d of %s, '%s' is not a valid state name\n", linenum, filename, symbol);
@@ -329,7 +329,7 @@ int main (int argc, char *argv[]) {
 			if (symbol[0]=='\n')
 				continue; 
 		}
-    	else if (c=='=') { 	// Comments_14: Perigrapste to skopo autou tou else if (c=='=')			
+    	else if (c=='=') { 	// Comments_14: Describe the purpose of this else if (c=='=')		
 			if (strcasecmp(symbol, "START")==0) { 
 				getsym();
 				getsym();
@@ -355,7 +355,7 @@ int main (int argc, char *argv[]) {
       		fprintf(stderr, "fsm: Line %d of %s, '%s=...' is not permitted\n", linenum, filename, symbol);
       		exit(1); 
 		}
-    	else if (c=='(') { // Comments_15: Perigrapste to skopo autou tou else if (c=='(')
+    	else if (c=='(') { // Comments_15: Describe the purpose of this else if (c=='(')
 			getsym();
 			getsym();
 			int ok=strcasecmp(symbol, "OK")==0;
@@ -408,7 +408,7 @@ int main (int argc, char *argv[]) {
 				fprintf(stderr, "fsm: Line %d of %s, no inputs allowed after stating NONE\n", linenum, filename);
 				exit(1); 
 			} 
-		} // Comments_16: Perigrapste se 2-3 grammes to skopo autou tou while loop.
+		} // Comments_16: Describe in 2-3 lines the purpose of this while loop.
 		while (strcmp(symbol, "->")!=0 && symbol[0]!='\n') { 
 			char in1[300], in2[300];
 			strcpy(in1, symbol);
@@ -543,7 +543,7 @@ int main (int argc, char *argv[]) {
 	while (1) { 
 		currstate=states[startstate];  // start at the start state
 		int inc=0;
-		// Comments_17: Perigrapste se 3-4 grammes ti leitourgia autou tou loop.
+		// Comments_17: Describe in 3-4 lines the functionality of this loop.
 		while (1) { 	
 			int nsn=currstate->nextstate[NOINPUT];
 			if (nsn!=0) { 

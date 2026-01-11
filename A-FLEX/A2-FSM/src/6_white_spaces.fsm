@@ -1,0 +1,18 @@
+// ================== 6_White_spaces ==================
+
+START = SZ             // ==== The initial state is SZ ====
+
+SZ:                    // --- [State Z] State for reading a whitespace character ---
+    \s \t -> SWH          // Recognizes a whitespace character
+    *     -> SZ           // Recognizes any other character read
+    \n    -> BAD          // No whitespace character was read at the end of the file except newline
+
+SWH:                   // --- [State Whitespace] State for reading whitespace characters ---
+    *     -> SZ           // Any other character is read, return to the initial state
+    \n    -> GOOD         // Ends with whitespace characters followed by a newline
+    \s \t -> SWH          // A whitespace character follows, stay in the same state
+
+BAD:                   // ==== Exit state: NO ====
+    * -> BAD
+
+GOOD(OK):              // ==== Exit state: YES ====

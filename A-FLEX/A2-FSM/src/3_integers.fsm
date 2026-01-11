@@ -1,0 +1,34 @@
+// ================== 3_Integers ==================
+
+START = SZ              // ==== Initial state is SZ ====
+
+SZ:                     // --- [State Z] State for integers ---
+    0   -> S0               // Integer that starts with 0
+    1-9 -> SDEC             // Positive decimal integer
+    *   -> BAD              // The integer is invalid
+
+S0:                     // --- [State 0] State for integers that start with 0 ---
+    0-7 -> SOCT             // Octal integer
+    x X -> SHEX             // Hexadecimal integer
+    \n  -> GOOD             // Valid integer 0
+    *   -> BAD              // The integer is invalid
+
+SDEC:                   // --- [State Decimal] State of a positive decimal integer ---
+    0-9 -> SDEC             // More digits from 0-9 follow
+    \n  -> GOOD             // The integer is valid
+    *   -> BAD              // The integer is invalid
+
+SHEX:                   // --- [State Hexadecimal] State of a hexadecimal integer ---
+    0-9 A-F -> SHEX         // More digits from 0-9 and letters from A-F follow
+    \n      -> GOOD         // The integer is valid
+    *       -> BAD          // The integer is invalid
+
+SOCT:                   // --- [State Octal] State of an octal integer ---
+    0-7 -> SOCT             // More digits from 0-7 follow
+    \n  -> GOOD             // The integer is valid
+    *   -> BAD              // The integer is invalid
+
+BAD:                    // ==== Exit state: NO ====
+    * -> BAD
+
+GOOD(OK):               // ==== Exit state: YES ====

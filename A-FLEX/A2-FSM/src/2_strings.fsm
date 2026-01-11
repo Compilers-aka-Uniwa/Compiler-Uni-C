@@ -1,0 +1,32 @@
+// ================== 2_String Literals ==================
+
+START = SZ              // ==== Initial state is SZ ====
+
+SZ:                     // --- [State Z] State for opening a string literal ---
+    "  -> SOST          // String literal opens with a double quote
+    *  -> BAD           // Anything else is invalid
+
+SOST:                   // --- [State Open String] State for the string content ---
+    "   -> SCST         // Closing double quote ends the string
+    \\  -> SOSEQ        // Escape sequence follows
+    *   -> SOST         // Any other character continues the string
+
+SOSEQ:                  // --- [State Open Sequence] State for escape sequence ---
+    \\  -> SCSEQ        // Backslash character
+    "   -> SCSEQ        // Double quote escape
+    n   -> SCSEQ        // Newline escape (\n)
+    *   -> BAD          // Any other sequence is invalid
+
+SCSEQ:                  // --- [State Close Sequence] State after an escape character ---
+    "   -> SCST         // Closing double quote ends the string
+    \\  -> SOSEQ        // Back to escape sequence state
+    *   -> SCSEQ        // Any other character continues the string
+
+SCST:                   // --- [State Close String] State for closing the string literal ---
+    \n -> GOOD          // String is valid
+    *  -> BAD           // Otherwise, invalid
+
+BAD:                    // ==== Output state: NO (invalid) ====
+    * -> BAD
+
+GOOD(OK):               // ==== Output state: YES (valid) ====

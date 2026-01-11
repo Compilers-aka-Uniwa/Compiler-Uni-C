@@ -69,8 +69,8 @@
 /* First part of user prologue.  */
 #line 1 "simple-bison-code.y"
 
-/* Ορισμοί και δηλώσεις γλώσσας C. Οτιδήποτε έχει να κάνει με ορισμό ή αρχικοποίηση
-   μεταβλητών & συναρτήσεων, αρχεία header και δηλώσεις #define μπαίνει σε αυτό το σημείο */
+/* C language definitions and declarations. Anything related to defining or initializing
+   variables & functions, header files, and #define declarations goes here */
         
         #include <stdio.h>
         #include <string.h>
@@ -85,8 +85,8 @@
 	void yyerror(char *);
         int yylex(void);
 
-        /* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
-   του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
+        /* The yyin pointer is the one that "points" to the input file. If yyin is not used,
+ then input is taken exclusively from standard input (keyboard). */
 
         extern FILE *yyin;
         extern FILE *yyout;
@@ -2262,16 +2262,16 @@ yyreturnlab:
 
 
 
-/* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
-   από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
-   συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
+/* The yyerror function is used to report errors. Specifically, it is called
+   by yyparse when there is a syntax error. In the following case, the
+   function essentially prints an error message on the screen. */
 void yyerror(char *s) {
         fprintf(stderr, "Error: %s\n", s);
 }
 
-/* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
-   Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
-   για να ξεκινήσει η συντακτική ανάλυση. */
+/* The main function, which is also the starting point of the program.
+   In this case, it simply calls Bison's yyparse function
+   to start the syntactic analysis. */
 int main(int argc, char **argv)  
 {       
         yydebug = 0;
@@ -2293,9 +2293,9 @@ int main(int argc, char **argv)
 	int parse = yyparse();
 
 	if (errflag == 0 && parse == 0)
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
+    fprintf(yyout, "\nINPUT FILE     : ANALYSIS SUCCESSFUL.\nSTATUS CODE : %d\n", parse);
         else
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
+    fprintf(yyout, "\nINPUT FILE     : PARSING FAILED.\nSTATUS CODE : %d\n", parse);
         
         fclose(yyin);
         fclose(yyout);

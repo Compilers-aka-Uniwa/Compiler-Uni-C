@@ -1,0 +1,35 @@
+// ================== 5_Comments ==================
+
+START = SZ          // ==== The initial state is SZ ====
+
+SZ:                 // --- [State Z] State for opening a comment ---
+    / ->  SOCO          // Opens a comment
+    * ->  BAD           // The comment is invalid
+
+SOCO:               // --- [State Open Comment] State of an opened comment ---
+    /  -> SCSL          // Opens a single-line comment
+    \* -> SOML          // Opens a multi-line comment
+    *  -> BAD           // The comment is invalid
+
+SOML:               // --- [State Open Multiple Line (Comment)] State of a multi-line comment ---
+    \*  -> SMML         // Intent to close the comment
+    *   -> SOML         // Comment content
+    EOF -> BAD          // The comment is invalid
+
+SMML:               // --- [State Mid Multiple Line (Comment)] State inside a multi-line comment ---
+    /   -> SCML         // Closes the multi-line comment
+    *   -> SOML         // Return to comment content state
+    EOF -> BAD          // The comment is invalid
+
+SCML:               // --- [State Close Multiple Line (Comment)] State of a valid multi-line comment ---
+    \n  -> GOOD         // The comment is valid
+    *   -> BAD          // The comment is invalid
+
+SCSL:               // --- [State Close Single Line (Comment)] State of a valid single-line comment ---
+    \n  -> GOOD         // The comment is valid
+    *   -> SCSL         // Continue single-line comment content
+
+BAD:                // ==== Exit state: NO ====
+    * -> BAD
+
+GOOD(OK):           // ==== Exit state: YES ====

@@ -1,0 +1,54 @@
+// ================== 4_Floating-Point Numbers ==================
+
+START = SZ               // ==== The initial state is SZ ====
+
+SZ:                      // --- [State Z] State for the integer part ---
+    0   -> S0               // The integer part is 0
+    1-9 -> SDEC             // The integer part starts with 1-9
+    *   -> BAD              // The number is invalid
+
+S0:                      // --- [State 0] State for 0 as the integer part ---
+    .   -> SDOT             // The integer part is 0 and a decimal point follows for the fractional part
+    E e -> SPOW             // The base of the power is 0 and the scientific exponent form follows
+    *   -> BAD              // The number is invalid
+
+SDEC:                    // --- [State Decimal] State for the integer part ---
+    .   -> SDOT             // A decimal point follows for the fractional part
+    0-9 -> SDEC             // More digits follow in the integer part from 0-9
+    E e -> SPOW             // The scientific exponent form follows
+    *   -> BAD              // The number is invalid
+
+SDOT:                    // --- [State Dot] State for the decimal point ---
+    0   -> SDOT             // The digit 0 follows
+    1-9 -> SFL              // Digits from 1-9 follow for the fractional part
+    *   -> BAD              // The number is invalid
+
+SFL:                     // --- [State Float] State for the fractional part ---
+    0-9 -> SFL              // More digits follow for the fractional part from 0-9
+    E e -> SPOW             // The scientific exponent form follows
+    \n  -> GOOD             // The number is valid
+    *   -> BAD              // The number is invalid
+
+SPOW:                    // --- [State Power] State for exponents ---
+    -   -> SNE              // A negative sign follows for the exponent
+    0   -> SE0              // The exponent is 0
+    1-9 -> SPE              // A positive exponent follows
+    *   -> BAD              // The number is invalid
+
+SNE:                     // --- [State Negative Exponential] State for a negative exponent ---
+    1-9 -> SPE              // Digits from 1-9 follow for the negative exponent
+    *   -> BAD              // The number is invalid
+
+SPE:                     // --- [State Positive Exponential] State for a positive exponent ---
+    0-9 -> SPE              // More digits follow for the positive exponent
+    \n  -> GOOD             // The number is valid
+    *   -> BAD              // The number is invalid
+
+SE0:                     // --- [State Exponential 0] State for exponent digit 0 ---
+    \n  -> GOOD             // The number is valid
+    *   -> BAD              // The number is invalid
+
+BAD:                     // ==== Exit state: NO ====
+    * -> BAD
+
+GOOD(OK):                // ==== Exit state: YES ====

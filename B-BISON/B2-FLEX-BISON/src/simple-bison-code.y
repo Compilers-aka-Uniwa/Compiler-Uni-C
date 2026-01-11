@@ -1,6 +1,6 @@
 %{
-/* Ορισμοί και δηλώσεις γλώσσας C. Οτιδήποτε έχει να κάνει με ορισμό ή αρχικοποίηση
-   μεταβλητών & συναρτήσεων, αρχεία header και δηλώσεις #define μπαίνει σε αυτό το σημείο */
+/* C language definitions and declarations. Anything related to defining or initializing
+   variables & functions, header files, and #define declarations goes here */
         
         #include <stdio.h>
         #include <string.h>
@@ -15,8 +15,8 @@
 	void yyerror(char *);
         int yylex(void);
 
-        /* Ο δείκτης yyin είναι αυτός που "δείχνει" στο αρχείο εισόδου. Εάν δεν γίνει χρήση
-   του yyin, τότε η είσοδος γίνεται αποκλειστικά από το standard input (πληκτρολόγιο) */
+        /* The yyin pointer is the one that "points" to the input file. If yyin is not used,
+ then input is taken exclusively from standard input (keyboard). */
 
         extern FILE *yyin;
         extern FILE *yyout;
@@ -29,7 +29,7 @@
 }
 
 
-/* Ορισμός των αναγνωρίσιμων λεκτικών μονάδων. */
+/* Definition of recognizable lexical units. */
 %token <sval> IDENTIFIER STRING 
 %token <ival> INTEGER 
 %token <fval> FLOAT 
@@ -69,7 +69,7 @@
 %token NEWLINE
 %token UNKNOWN
 
-/* Ορισμός προτεραιοτήτων στα tokens */
+/* Definition of token precedences */
 %left ","   
 %right "*=" "/=" "+=" "-=" "="
 %left "||" 
@@ -88,18 +88,18 @@
 
 %%
 
-/* Ορισμός των γραμματικών κανόνων. Κάθε φορά που αντιστοιχίζεται ένας γραμματικός
-   κανόνας με τα δεδομένα εισόδου, εκτελείται ο κώδικας C που βρίσκεται ανάμεσα στα
-   αγκύλια. Η αναμενόμενη σύνταξη είναι:
-				όνομα : κανόνας { κώδικας C } */
+/* Definition of grammar rules. Each time a grammar
+   rule matches the input data, the C code between the
+   braces is executed. The expected syntax is:
+				name : rule { C code } */
 program:
         program decl_statements NEWLINE         { if ($2 != "\n") fprintf(yyout, "[BISON] Line=%d, expression=%s\n\n", line-1, $2); } 
         |                                       { }                       
         ;
 
-/* ============== [2.1] Δομή Πηγαίου Κώδικα ============== */
+/* ============== [2.1] Structure of Source Code ============== */
 
-/* ============== [2.2] Δηλώσεις Μεταβλητών ============== */
+/* ============== [2.2] Variable Declarations ============== */
 decl_var:
         type var { $$ = strdup(yytext); }
         ;
@@ -117,7 +117,7 @@ var:
         | var "," var  { $$ = strdup(yytext); }
         ;
 
-/* ============== [2.3] Πίνακες ============== */
+/* ============== [2.3] Arrays ============== */
 pos_elem:
         IDENTIFIER "[" INTEGER "]"           { $$ = strdup(yytext); }
         | IDENTIFIER "[" IDENTIFIER "]"      { $$ = strdup(yytext); }
@@ -145,7 +145,7 @@ str:
         | str "," str           { $$ = strdup(yytext); }
         ;
 
-/* ============== [2.4] Ενσωματωμένες απλές συναρτήσεις ============== */
+/* ============== [2.4] Built-in simple functions ============== */
 build_func:
 	func  { $$ = strdup(yytext); }
 	;
@@ -184,7 +184,7 @@ print_params:
         | print_params "," print_params { $$ = strdup(yytext); }
         ;
 
-/* ============== [2.5] Δήλωση συναρτήσεων χρήστη ============== */
+/* ============== [2.5] User function declarations ============== */
 decl_func:
         name_func decl_statement { $$ = strdup(yytext); }
 	;
@@ -204,8 +204,8 @@ type_params:
         | type_params "," type_params   { $$ = strdup(yytext); }
         ;
 
-/* ============== [2.6] Δηλώσεις απλών εκφράσεων ============== */
-/* [2.6.1] Αριθμητικές εκφράσεις */
+/* ============== [2.6] Simple expression declarations ============== */
+/* [2.6.1] Arithmetic expressions */
 sign:
         INTEGER         { $$ = strdup(yytext); }
         | FLOAT         { $$ = strdup(yytext); }
@@ -230,7 +230,7 @@ number:
         ;
 
 
-/* [2.6.2] Αναθέσεις τιμών σε μεταβλητή */
+/* [2.6.2] Assignments to variables */
 assign:
         var "=" val               { $$ = strdup(yytext); } 
         | var "=" cmp_expr        { $$ = strdup(yytext); }
@@ -258,7 +258,7 @@ val:
     | val "," val       { $$ = strdup(yytext); }
     ;
 
-/* [2.6.3] Συγκρίσεις */
+/* [2.6.3] Comparisons */
 cmp_expr:
 	INTEGER   		  { $$ = strdup(yytext); }
         | FLOAT                   { $$ = strdup(yytext); }
@@ -274,33 +274,33 @@ cmp_expr:
         | "!" cmp_expr            { $$ = strdup(yytext); }
         ;
 
-/* [2.6.4] Συνένωση Πινάκων */
+/* [2.6.4] Array merging */
 merge_arr:
         arr_elements "+" arr_elements { $$ = strdup(yytext); }
         ;
         
-/* ============== [2.7] Σύνθετες δηλώσεις ============== */
+/* ============== [2.7] Complex statements ============== */
 decl_statements:
         decl_statement                   { $$ = $1; }
         | decl_statements decl_statement { $$ = $2; }
         ;
 
 decl_statement:
-        if_statement                     { $$ = "\"Δήλωση if\""; }
-        | while_statement                { $$ = "\"Δήλωση while\""; }
-        | for_statement                  { $$ = "\"Δήλωση for\""; }
-        | decl_var ";"                   { $$ = "\"Δήλωση μεταβλητής\""; }
-        | build_func ";"                 { $$ = "\"Κλήση συνάρτησης\""; }
-        | decl_func                      { $$ = "\"Δήλωση συναρτήσεων χρήστη\""; }
-        | assign ";"                     { $$ = "\"Ανάθεση τιμής σε μεταβλητή\""; }
-        | arithm_expr                    { $$ = "\"Αριθμητική έκφραση\""; }
-        | cmp_expr                       { $$ = "\"Σύγκριση\""; }
-        | merge_arr                      { $$ = "\"Συνένωση πινάκων\""; }
-        | block_statement                { $$ = "\"Σύνθετες δηλώσεις\""; } 
+        if_statement                     { $$ = "\"State if\""; }
+        | while_statement                { $$ = "\"State while\""; }
+        | for_statement                  { $$ = "\"State for\""; }
+        | decl_var ";"                   { $$ = "\"Variable declaration\""; }
+        | build_func ";"                 { $$ = "\"Function call\""; }
+        | decl_func                      { $$ = "\"User function declaration\""; }
+        | assign ";"                     { $$ = "\"Variable assignment\""; }
+        | arithm_expr                    { $$ = "\"Arithmetic expression\""; }
+        | cmp_expr                       { $$ = "\"Comparison\""; }
+        | merge_arr                      { $$ = "\"Array merging\""; }
+        | block_statement                { $$ = "\"Complex statements\""; } 
         | NEWLINE                        { $$ = "\n"; }
         ;
 
-/* [2.7.1] Η δήλωση if */
+/* [2.7.1] The if statement */
 if_statement:
         SIF condition decl_statement     { $$ = strdup(yytext); }
         ;
@@ -314,12 +314,12 @@ block_statement:
         "{" decl_statements "}" {  $$ = strdup(yytext); }
         ;
 
-/* [2.7.2] Η δήλωση while */
+/* [2.7.2] The while statement */
 while_statement:
         SWHILE condition decl_statement { $$ = strdup(yytext); }
         ;
 
-/* [2.7.3] Η δήλωση for */
+/* [2.7.3] The for statement */
 for_statement:
         SFOR "(" assign ";" cmp_expr ";" oper_eq ")" decl_statement { $$ = strdup(yytext); }
         ;
@@ -329,16 +329,16 @@ for_statement:
 
 
 
-/* Η συνάρτηση yyerror χρησιμοποιείται για την αναφορά σφαλμάτων. Συγκεκριμένα καλείται
-   από την yyparse όταν υπάρξει κάποιο συντακτικό λάθος. Στην παρακάτω περίπτωση η
-   συνάρτηση επί της ουσίας τυπώνει μήνυμα λάθους στην οθόνη. */
+/* The yyerror function is used for reporting errors. Specifically, it is called
+   by yyparse when a syntax error occurs. In the following case, the
+   function essentially prints an error message to the screen. */
 void yyerror(char *s) {
         fprintf(stderr, "Error: %s\n", s);
 }
 
-/* Η συνάρτηση main που αποτελεί και το σημείο εκκίνησης του προγράμματος.
-   Στην συγκεκριμένη περίπτωση απλά καλεί τη συνάρτηση yyparse του Bison
-   για να ξεκινήσει η συντακτική ανάλυση. */
+/* The main function which serves as the entry point of the program.
+   In this specific case, it simply calls the Bison function yyparse
+   to start the syntactic analysis. */
 int main(int argc, char **argv)  
 {       
         yydebug = 0;
@@ -360,9 +360,9 @@ int main(int argc, char **argv)
 	int parse = yyparse();
 
 	if (errflag == 0 && parse == 0)
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΕΠΙΤΥΧΘΗΚΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
+		fprintf(yyout, "\nINPUT FILE     : PARSING SUCCEEDED.\nSTATUS CODE    : %d\n", parse);
         else
-		fprintf(yyout, "\nΑΡΧΕΙΟ ΕΙΣΟΔΟΥ     : Η ΑΝΑΛΥΣΗ ΑΠΕΤΥΧΕ.\nΚΩΔΙΚΟΣ ΚΑΤΑΣΤΑΣΗΣ : %d\n", parse);
+		fprintf(yyout, "\nINPUT FILE     : PARSING FAILED.\nSTATUS CODE    : %d\n", parse);
         
         fclose(yyin);
         fclose(yyout);
