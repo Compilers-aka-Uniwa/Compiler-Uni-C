@@ -273,6 +273,14 @@ gcc fsm.c -o fsm
 
 ---
 
+## Open the Documentation
+1. Navigate to the `A-FLEX/A2-FSM/docs/` directory
+2. Open the report corresponding to your preferred language:
+    - English: `Finite-State-Machines.pdf`
+    - Greek: `Πεπερασμένα-Αυτόματα.pdf`
+
+---
+
 # A3 – FLEX (Lexical Analyzer)
 
 **Directory**
@@ -306,6 +314,14 @@ gcc lex.yy.c -o flex_app
 ```text
 output.txt
 ```
+
+---
+
+## Open the Documentation
+1. Navigate to the `A-FLEX/A3-FLEX/docs/` directory
+2. Open the report corresponding to your preferred language:
+    - English: `Flex-Code.pdf`
+    - Greek: `Κώδικας-Flex.pdf`
 
 ---
 
@@ -343,6 +359,14 @@ gcc simple-bison-code.tab.c lex.yy.c -o bison_app
 ```text
 output.txt
 ```
+
+---
+
+## Open the Documentation
+1. Navigate to the `B-BISON/B3-COMPILE/docs/` directory
+2. Open the report corresponding to your preferred language:
+    - English: `Bison-Code.pdf`
+    - Greek: `Κώδικας-Bison.pdf`
 
 ---
 
@@ -417,3 +441,5 @@ make clean
 
 * **Unexpected output**
   Verify the correct input file is used and matches the grammar rules.
+
+
