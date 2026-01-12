@@ -81,7 +81,7 @@
 
 ---
 
-## Project Overview
+# Project Overview
 
 This project involves the development of a **compiler for Uni-C**, a subset of the C programming language. The implementation was completed in **three distinct phases**, covering the fundamental stages of compiler construction:
 
@@ -195,20 +195,20 @@ The **BISON** parser generator is used to define and enforce grammar rules for U
 
 ---
 
-## Installation & Run Guide
+# Installation & Run Guide
 
-### Prerequisites
+## Prerequisites
 
 Before compiling, ensure the required tools are installed.
 
-### Required Packages
+## Required Packages
 
 ```bash
 sudo apt update
 sudo apt install gcc flex bison make
 ```
 
-### Verify Installation
+## Verify Installation
 
 ```bash
 gcc --version
@@ -218,7 +218,7 @@ bison --version
 
 ---
 
-### Install
+## Install
 
 Clone the repository
 ```bash
@@ -245,7 +245,7 @@ cd Compiler-Uni-C/B-BISON/B2-FLEX-BISON/src
 
 ---
 
-## A2 – Finite State Machines (FSM)
+# A2 – Finite State Machines (FSM)
 
 **Directory**
 
@@ -253,27 +253,27 @@ cd Compiler-Uni-C/B-BISON/B2-FLEX-BISON/src
 A2-FSM/src
 ```
 
-### Compile
+## Compile
 
 ```bash
 cd A2-FSM/src
 gcc fsm.c -o fsm
 ```
 
-### Run
+## Run
 
 ```bash
 ./fsm
 ```
 
-### Notes
+## Notes
 
 * FSM definitions are loaded from `.fsm` files (e.g. `1_identifiers.fsm`, `Final.fsm`).
 * Transition tables are documented in the accompanying PDF and Excel files.
 
 ---
 
-## A3 – FLEX (Lexical Analyzer)
+# A3 – FLEX (Lexical Analyzer)
 
 **Directory**
 
@@ -281,27 +281,27 @@ gcc fsm.c -o fsm
 A3-FLEX/src
 ```
 
-### Compile (using Makefile)
+## Compile (using Makefile)
 
 ```bash
 cd A3-FLEX/src
 make
 ```
 
-### Compile (manual)
+## Compile (manual)
 
 ```bash
 flex simple-flex-code.l
 gcc lex.yy.c -o flex_app
 ```
 
-### Run
+## Run
 
 ```bash
 ./flex_app < input.txt
 ```
 
-### Output
+## Output
 
 ```text
 output.txt
@@ -309,7 +309,7 @@ output.txt
 
 ---
 
-## B3 – BISON (Syntax Analyzer)
+# B3 – BISON (Syntax Analyzer)
 
 **Directory**
 
@@ -317,14 +317,14 @@ output.txt
 B3-COMPILER/src
 ```
 
-### Compile (using Makefile)
+## Compile (using Makefile)
 
 ```bash
 cd B3-COMPILER/src
 make
 ```
 
-### Compile (manual)
+## Compile (manual)
 
 ```bash
 bison -d simple-bison-code.y
@@ -332,13 +332,13 @@ flex simple-flex-code.l
 gcc simple-bison-code.tab.c lex.yy.c -o bison_app
 ```
 
-### Run
+## Run
 
 ```bash
 ./bison_app < input.txt
 ```
 
-### Output
+## Output
 
 ```text
 output.txt
@@ -346,7 +346,7 @@ output.txt
 
 ---
 
-## B2 – FLEX + BISON (Complete Compiler Pipeline)
+# B2 – FLEX + BISON (Complete Compiler Pipeline)
 
 **Directory**
 
@@ -354,14 +354,14 @@ output.txt
 B2-FLEX-BISON/src
 ```
 
-### Compile (using Makefile)
+## Compile (using Makefile)
 
 ```bash
 cd B2-FLEX-BISON/src
 make
 ```
 
-### Compile (manual)
+## Compile (manual)
 
 ```bash
 bison -d simple-bison-code.y
@@ -369,19 +369,19 @@ flex simple-flex-code.l
 gcc simple-bison-code.tab.c lex.yy.c -o compiler
 ```
 
-### Run (test input)
+## Run (test input)
 
 ```bash
 ./compiler < input-test.txt
 ```
 
-### Run (final input)
+## Run (final input)
 
 ```bash
 ./compiler < input-final.txt
 ```
 
-### Output
+## Output
 
 ```text
 output.txt
@@ -389,7 +389,7 @@ output.txt
 
 ---
 
-## General Notes
+# General Notes
 
 * Each module provides its own `Makefile` for convenience.
 * If execution permission is missing:
@@ -407,7 +407,7 @@ make clean
 
 ---
 
-## Troubleshooting
+# Troubleshooting
 
 * **`command not found: flex / bison`**
   Ensure the required packages are installed.
