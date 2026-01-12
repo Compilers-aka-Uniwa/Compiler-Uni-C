@@ -21,19 +21,50 @@
 <p align="center">
   <strong>Vasileios Evangelos Athanasiou</strong><br>
   Student ID: 19390005
-  <br>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Ath21" target="_blank">GitHub</a> ·
+  <a href="https://www.linkedin.com/in/vasilis-athanasiou-7036b53a4/" target="_blank">LinkedIn</a>
+</p>
+
+<p align="center">
   <strong>Georgios Theocharis</strong><br>
   Student ID: 19390283
-  <br>
+</p>
+
+<p align="center">
+  <a href="https://github.com/geotheo01" target="_blank">GitHub</a>
+</p>
+
+<p align="center">
   <strong>Ioannis Iliou</strong><br>
   Student ID: 19390066
-  <br>
+</p>
+
+<p align="center">
+  <a href="https://github.com/lardgr" target="_blank">GitHub</a> ·
+  <a href="https://www.linkedin.com/in/giannis-iliou-57a167350/" target="_blank">LinkedIn</a>
+</p>
+
+
+<p align="center">
   <strong>Pantelis Tatsis</strong><br>
   Student ID: 20390226
-  <br>
+</p>
+
+<p align="center">
+  <a href="https://github.com/PanthegrammerPRO" target="_blank">GitHub</a> ·
+  <a href="https://www.linkedin.com/in/pantelis-tatsis-8287852a2/" target="_blank">LinkedIn</a>
+</p>
+
+<p align="center">
   <strong>Vasileios Dominaris</strong><br>
   Student ID: 21390055
-  <br>
+</p>
+
+<p align="center">
+  <a href="https://github.com/BillDomi" target="_blank">GitHub</a>
 </p>
 
 <p align="center">
@@ -41,9 +72,14 @@
 </p>
 
 <p align="center">
+  <a href="https://scholar.google.com/citations?user=LiVuwVEAAAAJ&hl=en" target="_blank">UNIWA Profile</a>
+</p>
+
+<p align="center">
   Athens, May 2024
 </p>
 
+---
 
 ## Project Overview
 
