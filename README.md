@@ -68,7 +68,7 @@
 </p>
 
 <p align="center">
-  Supervisor: Michael Iordanakis, Special Technical Laboratory Staff
+  Supervisor: Michalis Iordanakis, Special Technical Laboratory Staff
 </p>
 
 <p align="center">
